@@ -27,9 +27,11 @@
     },
     "scripts": {
         "test": "phpunit tests --testdox",
-        "lint": "php-cs-fixer fix --dry-run --diff --verbose",
-        "fix": "php-cs-fixer fix",
+        "cs-lint": "php-cs-fixer fix --dry-run --diff --verbose",
+        "cs-fix": "php-cs-fixer fix",
         "phpstan": "phpstan analyse",
-        "rector": "rector"
+        "rector": "rector",
+        "lint": "composer cs-lint && composer phpstan && composer test && composer rector",
+        "lint:fix": "composer cs-fix && composer rector"
     }
 }
