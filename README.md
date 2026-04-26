@@ -22,7 +22,15 @@ Lancer les tests
 
 Workflow CI
 -
-Un workflow GitHub Actions est fourni dans `.github/workflows/phpunit.yml`. Il installe PHP (8.2/8.3/8.4), installe les dépendances via Composer et exécute `composer test` sur chaque push et pull request vers `main` / `master`.
+- ![Lint](https://img.shields.io/github/actions/workflow/status/PhilDaiguille/twig-a11y-rules/lint.yml?branch=main)
+- ![Tests](https://img.shields.io/github/actions/workflow/status/PhilDaiguille/twig-a11y-rules/tests.yml?branch=main)
+- [![Coverage Status](https://codecov.io/gh/PhilDaiguille/twig-a11y-rules/branch/main/graph/badge.svg?token=)](https://codecov.io/gh/PhilDaiguille/twig-a11y-rules)
+
+CI workflows
+- Lint workflow: `.github/workflows/lint.yml` — executes PHPStan, php-cs-fixer and rector (dry-run) across PHP 8.2/8.3/8.4.
+- Tests workflow: `.github/workflows/tests.yml` — runs PHPUnit with coverage and uploads coverage to Codecov across PHP 8.2/8.3/8.4.
+
+Note: The Codecov badge will work automatically for public repositories. For private repositories you may need to set a CODECOV_TOKEN secret in your repository settings.
 
 Contribuer
 -
