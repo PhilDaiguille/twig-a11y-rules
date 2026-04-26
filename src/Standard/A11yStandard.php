@@ -23,8 +23,7 @@ final class A11yStandard implements StandardInterface
     public function getRules(): array
     {
         return [
-            // Keep these unitary rules here. Do NOT include AllInOneRule to
-            // avoid duplicated checks when users also enable individual rules.
+            // Keep these unitary rules here.
             new ImgAltRule(),
             new BannedTagsRule(),
             new HeadingOrderRule(),
