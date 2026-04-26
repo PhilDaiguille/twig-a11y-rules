@@ -3,3 +3,23 @@ vendor
 .php-cs-fixer.cache
 .phpunit.result.cache
 AGENT.md
+
+.idea/
+.DS_Store
+
+## Composer
+composer.lock
+/vendor/
+
+## Phpunit
+.coverage/
+.phpunit.xml
+.phpunit.cache
+
+## Infection
+infection.log
+infection.html
+
+## Box
+bin/twig-cs-fixer.phar
+.twig-cs-fixer.cache
