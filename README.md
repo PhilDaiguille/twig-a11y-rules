@@ -5,7 +5,7 @@
 [![PHP Version](https://poser.pugx.org/phildaiguille/twig-a11y-rules/require/php)](https://packagist.org/packages/phildaiguille/twig-a11y-rules)
 [![Latest Stable Version](https://poser.pugx.org/phildaiguille/twig-a11y-rules/v)](https://github.com/PhilDaiguille/twig-a11y-rules/releases/latest)
 [![License](https://poser.pugx.org/phildaiguille/twig-a11y-rules/license)](https://github.com/PhilDaiguille/twig-a11y-rules/blob/main/LICENCE)
-[![CI](https://github.com/PhilDaiguille/twig-a11y-rules/workflows/Test/badge.svg)](https://github.com/PhilDaiguille/twig-a11y-rules/actions?query=workflow%3ATest)
+[![CI](https://github.com/PhilDaiguille/twig-a11y-rules/workflows/Tests/badge.svg)](https://github.com/PhilDaiguille/twig-a11y-rules/actions?query=workflow%3ATests)
 
 ---
 

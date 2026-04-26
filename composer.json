@@ -3,6 +3,11 @@
     "description": "Accessibility linting rules for Twig templates",
     "type": "library",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Phildaiguille"
+        }
+    ],
     "require": {
         "php": ">=8.2",
         "vincentlanglet/twig-cs-fixer": "^3.14.0"
