@@ -87,11 +87,96 @@ final class AllInOneRule extends AbstractA11yRule
             // present.
             if (method_exists($delegate, 'process')) {
                 $ref = new \ReflectionMethod($delegate, 'process');
-                // setAccessible(true) is deprecated on recent PHP versions and
-                // has no effect since PHP 8.1. We therefore invoke the method
-                // directly; tests run under PHP 8.5 and this avoids deprecation
-                // notices while preserving behavior.
-                $ref->invoke($delegate, $tokenIndex, $tokens);
+
+                // Create a Closure from the delegate's protected method and
+                // rebind its $this to the current AllInOneRule instance so
+                // that calls to $this->addError/addWarning inside the
+                // delegate are routed through AllInOneRule. This preserves
+                // the AllInOne.* identifiers expected by callers.
+                // Ensure the delegate has the same report context so its
+                // addError/addWarning calls actually emit into the current
+                // report. The RuleTrait defines private properties on the
+                // delegate that we need to copy across.
+                $thisReflection = new \ReflectionObject($this);
+                $reportVal = null;
+                $ignoredVal = [];
+                if ($thisReflection->hasProperty('report')) {
+                    $p = $thisReflection->getProperty('report');
+                    $p->setAccessible(true);
+                    $reportVal = $p->getValue($this);
+                }
+                if ($thisReflection->hasProperty('ignoredViolations')) {
+                    $p = $thisReflection->getProperty('ignoredViolations');
+                    $p->setAccessible(true);
+                    $ignoredVal = $p->getValue($this);
+                }
+
+                    $delegateReflection = new \ReflectionObject($delegate);
+
+                    // Find property in class hierarchy (may be declared on a
+                    // parent class where the trait is applied).
+                    $propClass = $delegateReflection;
+                    while ($propClass && !$propClass->hasProperty('report')) {
+                        $propClass = $propClass->getParentClass();
+                    }
+                    if ($propClass && $propClass->hasProperty('report')) {
+                        $p = $propClass->getProperty('report');
+                        $p->setAccessible(true);
+                        $p->setValue($delegate, $reportVal);
+                        error_log('AllInOneRule: set delegate report');
+                    } else {
+                        error_log('AllInOneRule: delegate report property not found in hierarchy');
+                    }
+
+                    $propClass = $delegateReflection;
+                    while ($propClass && !$propClass->hasProperty('ignoredViolations')) {
+                        $propClass = $propClass->getParentClass();
+                    }
+                    if ($propClass && $propClass->hasProperty('ignoredViolations')) {
+                        $p = $propClass->getProperty('ignoredViolations');
+                        $p->setAccessible(true);
+                        $p->setValue($delegate, $ignoredVal);
+                        error_log('AllInOneRule: set delegate ignoredViolations');
+                    } else {
+                        error_log('AllInOneRule: delegate ignoredViolations property not found in hierarchy');
+                    }
+
+                // Attempt to obtain a Closure for the non-public method.
+                // Calling setAccessible() is deprecated on some PHP versions
+                // so suppress the deprecation warning when necessary.
+                if (!$ref->isPublic()) {
+                    // @ operator hides deprecation warnings about setAccessible
+                    @\Closure::fromCallable(function (): void {});
+                    @$ref->setAccessible(true);
+                }
+
+                $closure = $ref->getClosure($delegate);
+                if (null === $closure) {
+                    // As a last resort, invoke directly on the delegate. This
+                    // will cause messages to be reported under the delegate
+                    // rule name rather than AllInOne, but ensures we don't
+                    // lose violations when reflection cannot produce a
+                    // callable.
+                    $ref->invoke($delegate, $tokenIndex, $tokens);
+
+                    continue;
+                }
+
+                $bound = @\Closure::bind($closure, $this, \get_class($delegate));
+                    if (is_callable($bound)) {
+                        error_log('AllInOneRule: invoking bound closure for '.get_class($delegate));
+                        $bound($tokenIndex, $tokens);
+                        error_log('AllInOneRule: bound closure invoked');
+                    } else {
+                        // Fallback: invoke directly if we couldn't obtain a
+                        // callable bound closure. Log for diagnosis and report
+                        // counts before/after.
+                        error_log('AllInOneRule: invoking process directly on '.get_class($delegate));
+                        $before = $reportVal instanceof \TwigCsFixer\Report\Report ? $reportVal->getTotalErrors() : -1;
+                        $ref->invoke($delegate, $tokenIndex, $tokens);
+                        $after = $reportVal instanceof \TwigCsFixer\Report\Report ? $reportVal->getTotalErrors() : -1;
+                        error_log('AllInOneRule: direct invoke completed for '.get_class($delegate)." (errors before={$before}, after={$after})");
+                    }
             }
         }
     }
