@@ -1,15 +1,20 @@
+/vendor/
+/var/
+/.phpunit.result.cache
+/.php-cs-fixer.cache
+.idea/
+/.opcache
+
 vendor
 .agents
 .php-cs-fixer.cache
 .phpunit.result.cache
 AGENT.md
 
-.idea/
 .DS_Store
 
 ## Composer
 composer.lock
-/vendor/
 
 ## Phpunit
 .coverage/
