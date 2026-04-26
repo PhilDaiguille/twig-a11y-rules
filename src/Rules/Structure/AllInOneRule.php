@@ -31,7 +31,19 @@ use TwigCsFixer\Token\Tokens;
 final class AllInOneRule extends AbstractA11yRule
 {
     /** @var null|array<object> */
-    private ?array $delegates = null;
+    protected ?array $delegates = null;
+
+    /**
+     * Setter used by tests to inject delegates without reflection.
+     * Keep public so external consumers (tests) can provide custom
+     * delegate lists when needed.
+     *
+     * @param array<object> $delegates
+     */
+    public function setDelegates(array $delegates): void
+    {
+        $this->delegates = $delegates;
+    }
 
     protected function process(int $tokenIndex, Tokens $tokens): void
     {
@@ -95,55 +107,20 @@ final class AllInOneRule extends AbstractA11yRule
                 // the AllInOne.* identifiers expected by callers.
                 // Ensure the delegate has the same report context so its
                 // addError/addWarning calls actually emit into the current
-                // report. The RuleTrait defines private properties on the
-                // delegate that we need to copy across.
-                $thisReflection = new \ReflectionObject($this);
-                $reportVal = null;
-                $ignoredVal = [];
-                if ($thisReflection->hasProperty('report')) {
-                    $p = $thisReflection->getProperty('report');
-                    $p->setAccessible(true);
-                    $reportVal = $p->getValue($this);
+                // report. We can obtain the report and ignored violations
+                // directly from $this (RuleTrait properties are available
+                // in this class) and initialize the delegate via its
+                // protected init() method. Calling init keeps the report
+                // wiring consistent without poking private properties.
+                $reportVal = $this->report ?? null;
+                $ignoredVal = $this->ignoredViolations ?? [];
+
+                if (method_exists($delegate, 'init')) {
+                    $initRef = new \ReflectionMethod($delegate, 'init');
+                    $initRef->invoke($delegate, $reportVal, $ignoredVal);
                 }
-                if ($thisReflection->hasProperty('ignoredViolations')) {
-                    $p = $thisReflection->getProperty('ignoredViolations');
-                    $p->setAccessible(true);
-                    $ignoredVal = $p->getValue($this);
-                }
-
-                    $delegateReflection = new \ReflectionObject($delegate);
-
-                    // Find property in class hierarchy (may be declared on a
-                    // parent class where the trait is applied).
-                    $propClass = $delegateReflection;
-                    while ($propClass && !$propClass->hasProperty('report')) {
-                        $propClass = $propClass->getParentClass();
-                    }
-                    if ($propClass && $propClass->hasProperty('report')) {
-                        $p = $propClass->getProperty('report');
-                        $p->setAccessible(true);
-                        $p->setValue($delegate, $reportVal);
-                    }
-
-                    $propClass = $delegateReflection;
-                    while ($propClass && !$propClass->hasProperty('ignoredViolations')) {
-                        $propClass = $propClass->getParentClass();
-                    }
-                    if ($propClass && $propClass->hasProperty('ignoredViolations')) {
-                        $p = $propClass->getProperty('ignoredViolations');
-                        $p->setAccessible(true);
-                        $p->setValue($delegate, $ignoredVal);
-                    }
 
                 // Attempt to obtain a Closure for the non-public method.
-                // Calling setAccessible() is deprecated on some PHP versions
-                // so suppress the deprecation warning when necessary.
-                if (!$ref->isPublic()) {
-                    // @ operator hides deprecation warnings about setAccessible
-                    @\Closure::fromCallable(function (): void {});
-                    @$ref->setAccessible(true);
-                }
-
                 $closure = $ref->getClosure($delegate);
                 if (null === $closure) {
                     // As a last resort, invoke directly on the delegate. This

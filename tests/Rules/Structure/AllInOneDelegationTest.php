@@ -41,9 +41,9 @@ final class AllInOneDelegationTest extends AbstractRuleTestCase
             }
         };
 
-        $rp = new \ReflectionProperty($rule, 'delegates');
-        $rp->setAccessible(true);
-        $rp->setValue($rule, [$evalDelegate, $procDelegate]);
+        // Prefer the public setter to avoid reflection-based deprecations
+        // in newer PHP versions used by CI.
+        $rule->setDelegates([$evalDelegate, $procDelegate]);
 
         $env = new StubbedEnvironment();
         $tokenizer = new Tokenizer($env);
