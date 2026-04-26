@@ -22,7 +22,7 @@ final class ObjectAltRule extends AbstractA11yRule
             return;
         }
 
-        $tag = $this->collectUntil($tokenIndex, $tokens, '/>');
+        $tag = $this->collectUntil($tokenIndex, $tokens, '>');
         if (!preg_match('/\btitle\s*=|\baria-label\s*=|\balt\s*=|>.*?<param\s+name="alt"/i', $tag)) {
             $this->addError('Object element should have alternative text.', $token, 'ObjectAlt.Missing');
         }

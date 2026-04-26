@@ -14,7 +14,9 @@ AGENT.md
 .DS_Store
 
 ## Composer
-composer.lock
+# composer.lock should be committed for libraries to ensure reproducible installs
+
+# Keep composer.lock in the repo (it was generated locally). Remove the ignore entry.
 
 ## Phpunit
 .coverage/

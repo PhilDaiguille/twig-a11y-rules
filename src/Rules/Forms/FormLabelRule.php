@@ -23,7 +23,7 @@ final class FormLabelRule extends AbstractA11yRule
             return;
         }
 
-        $opening = $this->collectUntil($tokenIndex, $tokens, '/>/');
+        $opening = $this->collectUntil($tokenIndex, $tokens, '>');
 
         // Check for for attribute
         if (preg_match('/\bfor\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $opening)) {
