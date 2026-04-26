@@ -23,9 +23,20 @@ abstract class AbstractA11yRule extends AbstractRule
             $t = $tokens->get($i);
             $v = $t->getValue();
             $s .= $v;
-            if (preg_match($endPattern, $s)) {
-                break;
+            // Support both regular-expression patterns (e.g. '/<\/a>/i') and
+            // simple literal terminators (e.g. '>'). If the provided
+            // $endPattern starts with a '/' we treat it as a regex and call
+            // preg_match; otherwise use a fast string search.
+            if (str_starts_with($endPattern, '/')) {
+                if (@preg_match($endPattern, $s)) {
+                    break;
+                }
+            } else {
+                if (str_contains($s, $endPattern)) {
+                    break;
+                }
             }
+
             ++$i;
         }
 
