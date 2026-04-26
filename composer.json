@@ -1,0 +1,32 @@
+{
+    "name": "phildaiguille/twig-a11y-rules",
+    "description": "Accessibility linting rules for Twig templates",
+    "type": "library",
+    "license": "MIT",
+    "version": "1.0.0",
+    "require": {
+        "php": "^8.2",
+        "vincentlanglet/twig-cs-fixer": "^3.14.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^13.1.7",
+        "friendsofphp/php-cs-fixer": "^3.95",
+        "rector/rector": "^2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "TwigA11y\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TwigA11y\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit tests --testdox",
+        "lint": "php-cs-fixer fix --dry-run --diff --verbose",
+        "fix": "php-cs-fixer fix",
+        "rector": "rector src"
+    }
+}

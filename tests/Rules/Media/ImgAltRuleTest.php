@@ -1,0 +1,54 @@
+<?php
+
+declare(strict_types=1);
+
+namespace TwigA11y\Tests\Rules\Media;
+
+use TwigA11y\Rules\Media\ImgAltRule;
+use TwigCsFixer\Test\AbstractRuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
+final class ImgAltRuleTest extends AbstractRuleTestCase
+{
+    /**
+     * @param array<string, string> $expectedErrors
+     */
+    #[DataProvider('provideFixtures')]
+    public function testRule(string $fixture, array $expectedErrors): void
+    {
+        $this->checkRule(new ImgAltRule(), $expectedErrors, $fixture);
+    }
+
+    public static function provideFixtures(): iterable
+    {
+        yield 'img with alt' => [
+            __DIR__.'/Fixtures/valid/img_with_alt.html.twig',
+            [],
+        ];
+
+        yield 'img decorative empty alt' => [
+            __DIR__.'/Fixtures/valid/img_with_empty_alt_decorative.html.twig',
+            [],
+        ];
+
+        yield 'img with variable alt' => [
+            __DIR__.'/Fixtures/valid/img_with_variable_alt.html.twig',
+            [],
+        ];
+
+        yield 'img without alt' => [
+            __DIR__.'/Fixtures/invalid/img_no_alt.html.twig',
+            ['ImgAlt.ImgAlt.MissingAlt:2:1' => 'Missing alt attribute on <img> tag.'],
+        ];
+
+        yield 'img with empty alt without role' => [
+            __DIR__.'/Fixtures/invalid/img_empty_alt.html.twig',
+            ['ImgAlt.ImgAlt.EmptyAlt:2:1' => 'Empty alt on <img> requires role="presentation" or role="none".'],
+        ];
+    }
+}
