@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace TwigA11y\Rules\Structure;
 
-use TwigCsFixer\Rules\AbstractRule;
-use TwigCsFixer\Token\Token;
+use TwigA11y\Rules\AbstractA11yRule;
 use TwigCsFixer\Token\Tokens;
 
-final class HeadingEmptyRule extends AbstractRule
+final class HeadingEmptyRule extends AbstractA11yRule
 {
     protected function process(int $tokenIndex, Tokens $tokens): void
     {
-        $token = $tokens->get($tokenIndex);
-        if (!$token->isMatching(Token::TEXT_TYPE)) {
+        // Only run once per file to avoid repeated full-file scans
+        if (0 !== $tokenIndex) {
             return;
         }
 
+        $token = $tokens->get($tokenIndex);
+
+        // Build full content once
         $full = '';
         foreach ($tokens->toArray() as $t) {
             $full .= $t->getValue();

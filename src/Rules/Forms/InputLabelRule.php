@@ -23,7 +23,8 @@ final class InputLabelRule extends AbstractA11yRule
             return;
         }
 
-        $opening = $this->collectUntil($tokenIndex, $tokens, '/>', 50);
+        // Use a simple literal terminator to avoid malformed regex patterns
+        $opening = $this->collectUntil($tokenIndex, $tokens, '>', 50);
 
         // Has aria-label? then OK
         if (preg_match('/\baria-label\s*=\s*("|\')/i', $opening)) {

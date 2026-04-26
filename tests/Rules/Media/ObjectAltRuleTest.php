@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Media;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Media\ObjectAltRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
+#[CoversNothing]
+/** @internal */
 final class ObjectAltRuleTest extends AbstractRuleTestCase
 {
     /** @param array<null|string> $expectedErrors */

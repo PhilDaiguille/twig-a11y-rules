@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Forms;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Forms\TextareaLabelRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
+#[CoversNothing]
+/** @internal */
 final class TextareaLabelRuleTest extends AbstractRuleTestCase
 {
     /** @param array<null|string> $expectedErrors */

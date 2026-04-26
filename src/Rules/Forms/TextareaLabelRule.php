@@ -23,7 +23,7 @@ final class TextareaLabelRule extends AbstractA11yRule
         }
 
         // Collect opening tag
-        $opening = $this->collectUntil($tokenIndex, $tokens, '/>/');
+        $opening = $this->collectUntil($tokenIndex, $tokens, '>');
 
         $id = null;
         if (preg_match('/\bid\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $opening, $m)) {

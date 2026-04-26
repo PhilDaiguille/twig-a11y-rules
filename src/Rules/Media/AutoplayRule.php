@@ -22,7 +22,7 @@ final class AutoplayRule extends AbstractA11yRule
             return;
         }
 
-        $tag = $this->collectUntil($tokenIndex, $tokens, '/>');
+        $tag = $this->collectUntil($tokenIndex, $tokens, '>');
 
         if (preg_match('/autoplay\b/i', $tag) && !preg_match('/\bmuted\b/i', $tag)) {
             $this->addError('Autoplaying media should be muted.', $token, 'Autoplay.NotMuted');

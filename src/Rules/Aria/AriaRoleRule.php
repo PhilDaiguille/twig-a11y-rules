@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace TwigA11y\Rules\Aria;
 
-use TwigCsFixer\Rules\AbstractRule;
+use TwigA11y\Rules\AbstractA11yRule;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
-final class AriaRoleRule extends AbstractRule
+final class AriaRoleRule extends AbstractA11yRule
 {
     protected function process(int $tokenIndex, Tokens $tokens): void
     {
@@ -43,7 +43,8 @@ final class AriaRoleRule extends AbstractRule
                     $tokenRef = $tokens->get(0);
                     $this->addError(sprintf('Invalid ARIA role "%s".', $role), $tokenRef, 'AriaRole.InvalidRole');
 
-                    break; // one error per file for tests
+                    // stop after first invalid role for determinism in tests
+                    return;
                 }
             }
         }

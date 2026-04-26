@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Structure;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Structure\HeadingOrderRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
+#[CoversNothing]
+/** @internal */
 final class HeadingOrderRuleTest extends AbstractRuleTestCase
 {
     /** @param array<null|string> $expectedErrors */

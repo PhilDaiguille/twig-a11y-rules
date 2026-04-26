@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace TwigA11y\Rules\Structure;
 
-use TwigCsFixer\Rules\AbstractRule;
+use TwigA11y\Rules\AbstractA11yRule;
 use TwigCsFixer\Token\Tokens;
 
-final class HeadingOrderRule extends AbstractRule
+final class HeadingOrderRule extends AbstractA11yRule
 {
     protected function process(int $tokenIndex, Tokens $tokens): void
     {

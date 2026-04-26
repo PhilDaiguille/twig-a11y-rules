@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Structure;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Structure\AllInOneRule;
 use TwigCsFixer\Environment\StubbedEnvironment;
@@ -12,11 +13,8 @@ use TwigCsFixer\Runner\Linter;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 use TwigCsFixer\Token\Tokenizer;
 
-/**
- * @internal
- *
- * @coversNothing
- */
+#[CoversNothing]
+/** @internal */
 final class AllInOneRuleTest extends AbstractRuleTestCase
 {
     /** @param array<null|string> $expectedErrors */

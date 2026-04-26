@@ -16,6 +16,8 @@ AGENT.md
 ## Composer
 composer.lock
 
+# Keep composer.lock in the repo (it was generated locally). Remove the ignore entry.
+
 ## Phpunit
 .coverage/
 .phpunit.xml

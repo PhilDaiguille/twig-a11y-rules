@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace TwigA11y\Rules\Aria;
 
-use TwigCsFixer\Rules\AbstractRule;
+use TwigA11y\Rules\AbstractA11yRule;
 use TwigCsFixer\Token\Tokens;
 
-final class AriaRequiredAttrRule extends AbstractRule
+final class AriaRequiredAttrRule extends AbstractA11yRule
 {
     protected function process(int $tokenIndex, Tokens $tokens): void
     {
@@ -48,7 +48,8 @@ final class AriaRequiredAttrRule extends AbstractRule
                                 $tokenRef = $tokens->get(0);
                                 $this->addError(sprintf('Role "%s" requires attribute "%s".', $role, $attr), $tokenRef, 'AriaRequired.Missing');
 
-                                break 2; // one error per file for tests
+                                // stop after first missing attribute found for test determinism
+                                return;
                             }
                         }
                     }

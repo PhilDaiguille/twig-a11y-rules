@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Standard;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\TestCase;
 use TwigA11y\Rules\Aria\AriaHiddenFocusRule;
 use TwigA11y\Rules\Aria\AriaLabelRule;
@@ -31,11 +32,8 @@ use TwigA11y\Standard\A11yStandard;
 use TwigA11y\Standard\A11yStrict;
 use TwigCsFixer\Rules\RuleInterface;
 
-/**
- * @internal
- *
- * @coversNothing
- */
+#[CoversNothing]
+/** @internal */
 final class A11yStandardTest extends TestCase
 {
     public function testBasicStandardProvidesRules(): void
