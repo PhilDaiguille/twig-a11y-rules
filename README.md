@@ -1,94 +1,128 @@
-Twig A11y Rules
-================
+# twig-a11y-rules
 
-Accessibilité pour les templates Twig — ensemble de règles (rules) pour être utilisées avec `vincentlanglet/twig-cs-fixer`.
+> Accessibility linting rules for Twig templates, built on top of [`vincentlanglet/twig-cs-fixer`](https://github.com/VincentLanglet/Twig-CS-Fixer).
 
 [![PHP Version](https://poser.pugx.org/phildaiguille/twig-a11y-rules/require/php)](https://packagist.org/packages/phildaiguille/twig-a11y-rules)
 [![Latest Stable Version](https://poser.pugx.org/phildaiguille/twig-a11y-rules/v)](https://github.com/PhilDaiguille/twig-a11y-rules/releases/latest)
 [![License](https://poser.pugx.org/phildaiguille/twig-a11y-rules/license)](https://github.com/PhilDaiguille/twig-a11y-rules/blob/main/LICENCE)
-[![Actions Status](https://github.com/PhilDaiguille/twig-a11y-rules/workflows/Test/badge.svg)](https://github.com/PhilDaiguille/twig-a11y-rules/actions?query=workflow%3ATest)
+[![CI](https://github.com/PhilDaiguille/twig-a11y-rules/workflows/Test/badge.svg)](https://github.com/PhilDaiguille/twig-a11y-rules/actions?query=workflow%3ATest)
 
-Installation
-------------
+---
 
-### Depuis Composer (recommandé)
+## What is this?
 
-Ajouter la librairie et `twig-cs-fixer` en tant que dépendances de développement :
+`twig-a11y-rules` is a standalone package of accessibility rules for Twig templates. It integrates with `twig-cs-fixer` and statically checks your templates for known accessibility issues — missing `alt` attributes, empty buttons, invalid ARIA roles, and more.
+
+> **Note:** Static analysis cannot guarantee full accessibility. Manual testing remains essential.
+
+Inspired by [Deque's Axe Linter](https://axe-linter.deque.com/) and built as a modern successor to the unmaintained [`nielsdeblaauw/twigcs-a11y`](https://github.com/nielsdeblaauw/twigcs-a11y).
+
+---
+
+## Requirements
+
+- PHP >= 8.2
+- [`vincentlanglet/twig-cs-fixer`](https://packagist.org/packages/vincentlanglet/twig-cs-fixer) >= 3.0
+
+---
+
+## Installation
 
 ```bash
 composer require --dev phildaiguille/twig-a11y-rules vincentlanglet/twig-cs-fixer
 ```
 
-Ensuite vous pouvez réutiliser le binaire fourni par `twig-cs-fixer` :
+This package provides rules only — it does not expose its own binary. Use the `twig-cs-fixer` binary to run linting.
 
-```bash
-vendor/bin/twig-cs-fixer lint /chemin/vers/templates
-vendor/bin/twig-cs-fixer fix  /chemin/vers/templates
-```
+---
 
-Note : ce paquet n'expose pas de binaire propre (`bin`) — il fournit des règles pour `twig-cs-fixer`. Installez `vincentlanglet/twig-cs-fixer` et activez les règles via une configuration (voir ci-dessous).
+## Usage
 
-### En PHAR
-
-Il est possible d'utiliser `twig-cs-fixer` en PHAR (voir la documentation du projet `vincentlanglet/twig-cs-fixer`). Ces règles étant un package PHP, l'approche PHAR demandera d'autoloader ce package ou d'inclure son autoload.
-
-Usage
------
-
-Deux façons courantes d'utiliser ces règles :
-
-1) Intégrer les règles dans la configuration de `twig-cs-fixer` (recommandé)
-
-Créez un fichier de configuration PHP pour `twig-cs-fixer` qui retourne un `Ruleset` et y enregistrez les règles que vous voulez activer. Exemple minimal :
+Create a `.twig-cs-fixer.php` configuration file at the root of your project:
 
 ```php
 <?php
+
+use TwigCsFixer\Config\Config;
 use TwigCsFixer\Ruleset\Ruleset;
-use TwigA11y\Rules\Structure\BannedTagsRule;
 use TwigA11y\Rules\Media\ImgAltRule;
+use TwigA11y\Rules\Structure\BannedTagsRule;
 
 $ruleset = new Ruleset();
-$ruleset->addRule(new BannedTagsRule());
 $ruleset->addRule(new ImgAltRule());
+$ruleset->addRule(new BannedTagsRule());
 
-return $ruleset;
+$config = new Config();
+$config->setRuleset($ruleset);
+
+return $config;
 ```
 
-Après cela, lancez `vendor/bin/twig-cs-fixer lint` ou `fix` et les règles d'accessibilité seront prises en compte.
+Then run:
 
-2) Utiliser le linter programmatique
+```bash
+# Check for violations
+vendor/bin/twig-cs-fixer lint /path/to/templates
 
-Si vous préférez exécuter la vérification depuis un script PHP (ou intégrer dans un outil), vous pouvez créer un script qui assemble un `Ruleset` et utilise le `Linter` de `twig-cs-fixer`. Les tests du projet montrent des exemples (voir `tests/Rules/*/*RuleTest.php`).
+# Auto-fix where possible
+vendor/bin/twig-cs-fixer fix /path/to/templates
+```
 
-Exemples de règles disponibles
------------------------------
+---
 
-Les règles couvrent plusieurs domaines (Structure, Forms, Aria, Media, ...). Voir `src/Rules/` pour la liste complète. Le roadmap (`roadmap.md`) donne un aperçu de l'état d'implémentation et de priorité.
+## Available rules
 
-Tests et développement
-----------------------
+See [`src/Rules/`](src/Rules/) for the full list. The [roadmap](ROADMAP.md) tracks implementation status and priorities.
 
-Pré-requis : PHP >= 8.2 et Composer
+| Rule | Category | Description |
+|---|---|---|
+| `ImgAltRule` | Media | `<img>` missing `alt` or empty `alt` without `role="presentation"` |
+| `AutoplayRule` | Media | `<video>`/`<audio>` with `autoplay` but without `muted` |
+| `ObjectAltRule` | Media | `<object>` without alternative text |
+| `BannedTagsRule` | Structure | Disallows `<marquee>` and `<blink>` |
+| `ButtonContentRule` | Structure | `<button>` with no text content or `aria-label` |
+| `AnchorContentRule` | Structure | `<a>` with no text, `aria-label`, or `title` |
+| `HeadingOrderRule` | Structure | Heading levels that skip (e.g. h1 → h3) |
+| `HeadingEmptyRule` | Structure | Empty heading elements |
+| `LangAttributeRule` | Structure | `<html>` missing `lang` attribute |
+| `IframeTitleRule` | Structure | `<iframe>` without `title` attribute |
+| `MetaViewportRule` | Structure | `<meta viewport>` with `user-scalable=no` |
+| `TabIndexRule` | Aria | `tabindex` value greater than 0 |
+| `AriaRoleRule` | Aria | Invalid ARIA `role` value |
+| `AriaLabelRule` | Aria | Landmark missing non-empty `aria-label` |
+| `AriaHiddenFocusRule` | Aria | Focusable element with `aria-hidden="true"` |
+| `AriaRequiredAttrRule` | Aria | Missing required attributes for a given ARIA role |
+| `FormLabelRule` | Forms | `<label>` without `for` or non-empty content |
+| `InputLabelRule` | Forms | `<input>` without associated `<label>` or `aria-label` |
+| `SelectLabelRule` | Forms | `<select>` without associated `<label>` |
+| `TextareaLabelRule` | Forms | `<textarea>` without associated `<label>` |
+---
 
-Installer les dépendances :
+## Contributing
+
+Contributions are welcome — whether it's a new rule, a bug fix, or an improvement to existing ones.
+
+1. Fork the repository and create a branch
+2. Follow the TDD workflow described in [`CONTRIBUTING.md`](CONTRIBUTING.md)
+3. Open a pull request with a clear description
+
+### Running the test suite locally
 
 ```bash
 composer install
-```
-
-Lancer les tests :
-
-```bash
 composer test
 ```
 
-Checks & lint:
+### Adding a new rule
 
-```bash
-composer lint
-```
+Each rule lives in `src/Rules/{Category}/` and must have:
+- A test class in `tests/Rules/{Category}/`
+- Valid and invalid `.html.twig` fixtures in `tests/Rules/{Category}/Fixtures/`
 
-Contribuer
----------
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full conventions.
 
-Les contributions sont les bienvenues : ouvrez une issue ou une PR. Voir `CONTRIBUTING.md` pour les conventions d'ajout d'une règle et des tests.
+---
+
+## License
+
+MIT — see [`LICENCE`](LICENCE).
