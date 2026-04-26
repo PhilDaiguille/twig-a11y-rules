@@ -2,9 +2,7 @@
 
 > Accessibility linting rules for Twig templates, built on top of [`vincentlanglet/twig-cs-fixer`](https://github.com/VincentLanglet/Twig-CS-Fixer).
 
-[![PHP Version](https://poser.pugx.org/phildaiguille/twig-a11y-rules/require/php)](https://packagist.org/packages/phildaiguille/twig-a11y-rules)
-[![Latest Stable Version](https://poser.pugx.org/phildaiguille/twig-a11y-rules/v)](https://github.com/PhilDaiguille/twig-a11y-rules/releases/latest)
-[![License](https://poser.pugx.org/phildaiguille/twig-a11y-rules/license)](https://github.com/PhilDaiguille/twig-a11y-rules/blob/main/LICENCE)
+[![Latest Stable Version](http://poser.pugx.org/phildaiguille/twig-a11y-rules/v)](https://packagist.org/packages/phildaiguille/twig-a11y-rules) [![Total Downloads](http://poser.pugx.org/phildaiguille/twig-a11y-rules/downloads)](https://packagist.org/packages/phildaiguille/twig-a11y-rules) [![Latest Unstable Version](http://poser.pugx.org/phildaiguille/twig-a11y-rules/v/unstable)](https://packagist.org/packages/phildaiguille/twig-a11y-rules) [![License](http://poser.pugx.org/phildaiguille/twig-a11y-rules/license)](https://packagist.org/packages/phildaiguille/twig-a11y-rules) [![PHP Version Require](http://poser.pugx.org/phildaiguille/twig-a11y-rules/require/php)](https://packagist.org/packages/phildaiguille/twig-a11y-rules)
 [![CI](https://github.com/PhilDaiguille/twig-a11y-rules/workflows/Tests/badge.svg)](https://github.com/PhilDaiguille/twig-a11y-rules/actions?query=workflow%3ATests)
 
 ---
