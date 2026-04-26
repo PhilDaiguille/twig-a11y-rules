@@ -34,6 +34,7 @@ final class TableHeaderRule extends AbstractA11yRule
             if (!preg_match('/\bscope\b\s*=\s*(?:"|\')/i', $attrs)) {
                 $token = $tokens->get(0);
                 $this->addError('Table header <th> elements should include a scope attribute.', $token, 'TableHeader.MissingScope');
+
                 return;
             }
         }

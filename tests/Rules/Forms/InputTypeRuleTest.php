@@ -13,12 +13,14 @@ use TwigCsFixer\Test\AbstractRuleTestCase;
 /** @internal */
 final class InputTypeRuleTest extends AbstractRuleTestCase
 {
+    /** @param array<null|string> $expectedErrors */
     #[DataProvider('provideFixtures')]
     public function testRule(string $fixture, array $expectedErrors): void
     {
         $this->checkRule(new InputTypeRule(), $expectedErrors, $fixture);
     }
 
+    /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
         yield 'with autocomplete' => [__DIR__.'/Fixtures/valid/input_with_autocomplete.html.twig', []];

@@ -42,6 +42,7 @@ final class DuplicateIdRule extends AbstractA11yRule
                 // Report first token as location (use token 0)
                 $token = $tokens->get(0);
                 $this->addError(sprintf('Duplicate id "%s" found in document.', $id), $token, 'DuplicateId.Duplicate');
+
                 // stop after first duplicate for determinism
                 return;
             }

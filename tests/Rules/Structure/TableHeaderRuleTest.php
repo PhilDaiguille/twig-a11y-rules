@@ -13,12 +13,14 @@ use TwigCsFixer\Test\AbstractRuleTestCase;
 /** @internal */
 final class TableHeaderRuleTest extends AbstractRuleTestCase
 {
+    /** @param array<null|string> $expectedErrors */
     #[DataProvider('provideFixtures')]
     public function testRule(string $fixture, array $expectedErrors): void
     {
         $this->checkRule(new TableHeaderRule(), $expectedErrors, $fixture);
     }
 
+    /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
         yield 'valid table' => [__DIR__.'/Fixtures/valid/table_with_th_scope.html.twig', []];

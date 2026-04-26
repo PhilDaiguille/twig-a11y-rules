@@ -38,6 +38,7 @@ final class InputTypeRule extends AbstractA11yRule
             if (!preg_match('/\bautocomplete\b\s*=\s*(?:"|\')/i', $attrs)) {
                 $token = $tokens->get(0);
                 $this->addError('Input of type "email" should include an autocomplete attribute.', $token, 'InputType.MissingAutocomplete');
+
                 return;
             }
         }

@@ -13,12 +13,14 @@ use TwigCsFixer\Test\AbstractRuleTestCase;
 /** @internal */
 final class VideoTrackRuleTest extends AbstractRuleTestCase
 {
+    /** @param array<null|string> $expectedErrors */
     #[DataProvider('provideFixtures')]
     public function testRule(string $fixture, array $expectedErrors): void
     {
         $this->checkRule(new VideoTrackRule(), $expectedErrors, $fixture);
     }
 
+    /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
         yield 'video with captions' => [__DIR__.'/Fixtures/valid/video_with_captions.html.twig', []];
