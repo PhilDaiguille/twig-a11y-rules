@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace TwigA11y\Rules\Forms;
 
-use TwigCsFixer\Rules\AbstractRule;
+use TwigA11y\Rules\AbstractA11yRule;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
-final class InputLabelRule extends AbstractRule
+final class InputLabelRule extends AbstractA11yRule
 {
     protected function process(int $tokenIndex, Tokens $tokens): void
     {
