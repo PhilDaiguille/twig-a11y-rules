@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Aria;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Aria\TabIndexRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversNothing]
+#[CoversNothing]
 /** @internal */
 final class TabIndexRuleTest extends AbstractRuleTestCase
 {

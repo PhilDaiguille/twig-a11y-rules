@@ -14,7 +14,7 @@ AGENT.md
 .DS_Store
 
 ## Composer
-# composer.lock should be committed for libraries to ensure reproducible installs
+composer.lock
 
 # Keep composer.lock in the repo (it was generated locally). Remove the ignore entry.
 

@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Media;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Media\ImgAltRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversNothing]
+#[CoversNothing]
 /** @internal */
 final class ImgAltRuleTest extends AbstractRuleTestCase
 {
