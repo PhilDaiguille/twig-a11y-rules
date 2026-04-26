@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace TwigA11y\Rules\Structure;
 
-use TwigCsFixer\Rules\AbstractRule;
+use TwigA11y\Rules\AbstractA11yRule;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
-final class AnchorContentRule extends AbstractRule
+final class AnchorContentRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
@@ -28,7 +28,8 @@ final class AnchorContentRule extends AbstractRule
             return;
         }
 
-        $full = $this->collectUntil($tokenIndex, $tokens, '/<\/a>/i');
+        // anchor bodies can be large; allow a larger search window
+        $full = $this->collectUntil($tokenIndex, $tokens, '/<\/a>/i', 200);
 
         if (preg_match('/<a[^>]*>(.*?)<\/a>/is', $full, $m)) {
             $inner = $m[1];
@@ -63,22 +64,5 @@ final class AnchorContentRule extends AbstractRule
         $this->evaluate($tokens, $tokenIndex, $emit);
     }
 
-    private function collectUntil(int $tokenIndex, Tokens $tokens, string $endPattern): string
-    {
-        $s = '';
-        $i = $tokenIndex;
-        $limit = $tokenIndex + 200;
-        while ($i <= $limit && $tokens->has($i)) {
-            // Use get only for indexes that exist (we check has() in the loop condition)
-            $t = $tokens->get($i);
-            $v = $t->getValue();
-            $s .= $v;
-            if (preg_match($endPattern, $s)) {
-                break;
-            }
-            ++$i;
-        }
-
-        return $s;
-    }
+    // collectUntil provided by parent
 }

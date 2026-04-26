@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace TwigA11y\Rules\Aria;
 
-use TwigCsFixer\Rules\AbstractRule;
+use TwigA11y\Rules\AbstractA11yRule;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
-final class TabIndexRule extends AbstractRule
+final class TabIndexRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
@@ -23,7 +23,7 @@ final class TabIndexRule extends AbstractRule
             return;
         }
 
-        $tag = $this->collectUntil($tokenIndex, $tokens, '/>/');
+        $tag = $this->collectUntil($tokenIndex, $tokens, '/>', 50);
 
         if (preg_match('/tabindex\s*=\s*(?:"|\')?([\-0-9]+)(?:"|\')?/i', $tag, $m)) {
             $num = (int) $m[1];
@@ -42,21 +42,5 @@ final class TabIndexRule extends AbstractRule
         $this->evaluate($tokens, $tokenIndex, $emit);
     }
 
-    private function collectUntil(int $tokenIndex, Tokens $tokens, string $endPattern): string
-    {
-        $s = '';
-        $i = $tokenIndex;
-        $end = $tokenIndex + 50;
-        while ($i < $end) {
-            $t = $tokens->get($i);
-            $v = $t->getValue();
-            $s .= $v;
-            if (preg_match($endPattern, $s)) {
-                break;
-            }
-            ++$i;
-        }
-
-        return $s;
-    }
+    // collectUntil provided by parent
 }

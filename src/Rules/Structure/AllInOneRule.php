@@ -23,7 +23,7 @@ use TwigCsFixer\Token\Tokens;
 final class AllInOneRule extends AbstractRule
 {
     /** @var null|array<object> */
-    private static ?array $delegates = null;
+    private ?array $delegates = null;
 
     protected function process(int $tokenIndex, Tokens $tokens): void
     {
@@ -33,9 +33,9 @@ final class AllInOneRule extends AbstractRule
             return;
         }
 
-        if (null === self::$delegates) {
-            // instantiate once to save allocations
-            self::$delegates = [
+        if (null === $this->delegates) {
+            // instantiate delegates per instance to avoid shared mutable state
+            $this->delegates = [
                 new BannedTagsRule(),
                 new ImgAltRule(),
                 new LangAttributeRule(),
@@ -45,7 +45,7 @@ final class AllInOneRule extends AbstractRule
             ];
         }
 
-        foreach (self::$delegates as $delegate) {
+        foreach ($this->delegates as $delegate) {
             // Each delegate provides an evaluate(Tokens,int,callable) method that
             // will call the provided $emit callable for each finding. The callable
             // should accept (string $message, Token $token, ?string $id).

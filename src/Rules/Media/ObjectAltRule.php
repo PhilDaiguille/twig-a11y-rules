@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace TwigA11y\Rules\Media;
 
-use TwigCsFixer\Rules\AbstractRule;
+use TwigA11y\Rules\AbstractA11yRule;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
-final class ObjectAltRule extends AbstractRule
+final class ObjectAltRule extends AbstractA11yRule
 {
     protected function process(int $tokenIndex, Tokens $tokens): void
     {
@@ -22,27 +22,11 @@ final class ObjectAltRule extends AbstractRule
             return;
         }
 
-        $tag = $this->collectUntil($tokenIndex, $tokens, '/>/');
+        $tag = $this->collectUntil($tokenIndex, $tokens, '/>');
         if (!preg_match('/\btitle\s*=|\baria-label\s*=|\balt\s*=|>.*?<param\s+name="alt"/i', $tag)) {
             $this->addError('Object element should have alternative text.', $token, 'ObjectAlt.Missing');
         }
     }
 
-    private function collectUntil(int $tokenIndex, Tokens $tokens, string $endPattern): string
-    {
-        $s = '';
-        $i = $tokenIndex;
-        $end = $tokenIndex + 50;
-        while ($i < $end) {
-            $t = $tokens->get($i);
-            $v = $t->getValue();
-            $s .= $v;
-            if (preg_match($endPattern, $s)) {
-                break;
-            }
-            ++$i;
-        }
-
-        return $s;
-    }
+    // collectUntil provided by parent
 }

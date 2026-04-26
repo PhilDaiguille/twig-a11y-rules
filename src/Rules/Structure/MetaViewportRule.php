@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace TwigA11y\Rules\Structure;
 
-use TwigCsFixer\Rules\AbstractRule;
+use TwigA11y\Rules\AbstractA11yRule;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
-final class MetaViewportRule extends AbstractRule
+final class MetaViewportRule extends AbstractA11yRule
 {
-    private bool $scanned = false;
-
     protected function process(int $tokenIndex, Tokens $tokens): void
     {
-        if ($this->scanned) {
+        // Guard so we only perform the full-file scan once by running on the
+        // first token index. Using an instance-scoped scanned flag caused the
+        // rule to silently skip later files when the same instance was reused.
+        if (0 !== $tokenIndex) {
             return;
         }
-        $this->scanned = true;
 
         $token = $tokens->get($tokenIndex);
         if (!$token->isMatching(Token::TEXT_TYPE)) {
