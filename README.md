@@ -92,33 +92,53 @@ vendor/bin/twig-cs-fixer fix /path/to/templates
 
 ---
 
-## Available rules
 
-See [`src/Rules/`](src/Rules/) for the full list. The [roadmap](ROADMAP.md) tracks implementation status and priorities.
+## Rules
 
-| Rule                   | Category  | Description                                                        |
-|------------------------|-----------|--------------------------------------------------------------------|
-| `ImgAltRule`           | Media     | `<img>` missing `alt` or empty `alt` without `role="presentation"` |
-| `AutoplayRule`         | Media     | `<video>`/`<audio>` with `autoplay` but without `muted`            |
-| `ObjectAltRule`        | Media     | `<object>` without alternative text                                |
-| `BannedTagsRule`       | Structure | Disallows `<marquee>` and `<blink>`                                |
-| `ButtonContentRule`    | Structure | `<button>` with no text content or `aria-label`                    |
-| `AnchorContentRule`    | Structure | `<a>` with no text, `aria-label`, or `title`                       |
-| `HeadingOrderRule`     | Structure | Heading levels that skip (e.g. h1 → h3)                            |
-| `HeadingEmptyRule`     | Structure | Empty heading elements                                             |
-| `LangAttributeRule`    | Structure | `<html>` missing `lang` attribute                                  |
-| `IframeTitleRule`      | Structure | `<iframe>` without `title` attribute                               |
-| `MetaViewportRule`     | Structure | `<meta viewport>` with `user-scalable=no`                          |
-| `TabIndexRule`         | Aria      | `tabindex` value greater than 0                                    |
-| `AriaRoleRule`         | Aria      | Invalid ARIA `role` value                                          |
-| `AriaLabelRule`        | Aria      | Landmark missing non-empty `aria-label`                            |
-| `AriaHiddenFocusRule`  | Aria      | Focusable element with `aria-hidden="true"`                        |
-| `AriaRequiredAttrRule` | Aria      | Missing required attributes for a given ARIA role                  |
-| `FormLabelRule`        | Forms     | `<label>` without `for` or non-empty content                       |
-| `InputLabelRule`       | Forms     | `<input>` without associated `<label>` or `aria-label`             |
-| `SelectLabelRule`      | Forms     | `<select>` without associated `<label>`                            |
-| `TextareaLabelRule`    | Forms     | `<textarea>` without associated `<label>`                          |
----
+See [`src/Rules/`](src/Rules/) for the full list.
+
+This ruleset includes automated accessibility checks for common issues in Twig templates.
+Rules are grouped by category for easier discovery.
+
+### Media
+
+| Rule            | Description                                                         |
+|-----------------|---------------------------------------------------------------------|
+| `ImgAltRule`    | `<img>` missing `alt`, or empty `alt` without `role="presentation"` |
+| `AutoplayRule`  | `<video>` or `<audio>` with `autoplay` but without `muted`          |
+| `ObjectAltRule` | `<object>` without alternative text                                 |
+
+### Structure
+
+| Rule                | Description                                        |
+|---------------------|----------------------------------------------------|
+| `BannedTagsRule`    | Disallows `<marquee>` and `<blink>`                |
+| `ButtonContentRule` | `<button>` with no text content or `aria-label`    |
+| `AnchorContentRule` | `<a>` with no text, `aria-label`, or `title`       |
+| `HeadingOrderRule`  | Heading levels that skip, for example `h1` to `h3` |
+| `HeadingEmptyRule`  | Empty heading elements                             |
+| `LangAttributeRule` | `<html>` missing `lang` attribute                  |
+| `IframeTitleRule`   | `<iframe>` without `title` attribute               |
+| `MetaViewportRule`  | `<meta name="viewport">` with `user-scalable=no`   |
+
+### ARIA
+
+| Rule                   | Description                                       |
+|------------------------|---------------------------------------------------|
+| `TabIndexRule`         | `tabindex` value greater than `0`                 |
+| `AriaRoleRule`         | Invalid ARIA `role` value                         |
+| `AriaLabelRule`        | Landmark missing a non-empty `aria-label`         |
+| `AriaHiddenFocusRule`  | Focusable element with `aria-hidden="true"`       |
+| `AriaRequiredAttrRule` | Missing required attributes for a given ARIA role |
+
+### Forms
+
+| Rule                | Description                                               |
+|---------------------|-----------------------------------------------------------|
+| `FormLabelRule`     | `<label>` without `for` or without non-empty content      |
+| `InputLabelRule`    | `<input>` without an associated `<label>` or `aria-label` |
+| `SelectLabelRule`   | `<select>` without an associated `<label>`                |
+| `TextareaLabelRule` | `<textarea>` without an associated `<label>`              |
 
 ## Contributing
 
