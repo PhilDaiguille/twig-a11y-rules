@@ -8,17 +8,19 @@ use TwigCsFixer\Rules\AbstractRule;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
-final class AriaHiddenFocusRule extends AbstractRule
-{
-    private bool $scanned = false;
+use TwigA11y\Rules\AbstractA11yRule;
 
+final class AriaHiddenFocusRule extends AbstractA11yRule
+{
     protected function process(int $tokenIndex, Tokens $tokens): void
     {
-        // Scan the entire file once to avoid missing split tokens
-        if ($this->scanned) {
+        // Only run the full-file scan once per file: guard on tokenIndex 0 which
+        // is the first token in the stream. Using an instance property caused
+        // the rule to skip subsequent files when the same rule instance was
+        // reused.
+        if (0 !== $tokenIndex) {
             return;
         }
-        $this->scanned = true;
 
         $full = '';
         foreach ($tokens->toArray() as $t) {

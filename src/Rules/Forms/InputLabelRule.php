@@ -23,7 +23,7 @@ final class InputLabelRule extends AbstractRule
             return;
         }
 
-        $opening = $this->collectUntil($tokenIndex, $tokens, '/>/');
+        $opening = $this->collectUntil($tokenIndex, $tokens, '/>', 50);
 
         // Has aria-label? then OK
         if (preg_match('/\baria-label\s*=\s*("|\')/i', $opening)) {
@@ -61,21 +61,5 @@ final class InputLabelRule extends AbstractRule
         );
     }
 
-    private function collectUntil(int $tokenIndex, Tokens $tokens, string $endPattern): string
-    {
-        $s = '';
-        $i = $tokenIndex;
-        $end = $tokenIndex + 50;
-        while ($i < $end) {
-            $t = $tokens->get($i);
-            $v = $t->getValue();
-            $s .= $v;
-            if (preg_match($endPattern, $s)) {
-                break;
-            }
-            ++$i;
-        }
-
-        return $s;
-    }
+    // collectUntil provided by parent
 }

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace TwigA11y\Rules\Aria;
 
-use TwigCsFixer\Rules\AbstractRule;
+use TwigA11y\Rules\AbstractA11yRule;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
-final class AriaLabelRule extends AbstractRule
+final class AriaLabelRule extends AbstractA11yRule
 {
     protected function process(int $tokenIndex, Tokens $tokens): void
     {
@@ -24,7 +24,7 @@ final class AriaLabelRule extends AbstractRule
             return;
         }
 
-        $tag = $this->collectUntil($tokenIndex, $tokens, '/>/');
+        $tag = $this->collectUntil($tokenIndex, $tokens, '/>');
 
         // If aria-label present and non-empty - OK
         if (preg_match('/aria-label\s*=\s*(?:"|\')([^"\']*)(?:"|\')/i', $tag, $m)) {
@@ -40,21 +40,5 @@ final class AriaLabelRule extends AbstractRule
         );
     }
 
-    private function collectUntil(int $tokenIndex, Tokens $tokens, string $endPattern): string
-    {
-        $s = '';
-        $i = $tokenIndex;
-        $end = $tokenIndex + 50;
-        while ($i < $end) {
-            $t = $tokens->get($i);
-            $v = $t->getValue();
-            $s .= $v;
-            if (preg_match($endPattern, $s)) {
-                break;
-            }
-            ++$i;
-        }
-
-        return $s;
-    }
+    // collectUntil provided by parent
 }

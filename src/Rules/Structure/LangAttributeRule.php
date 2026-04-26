@@ -8,7 +8,7 @@ use TwigCsFixer\Rules\AbstractRule;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
-final class LangAttributeRule extends AbstractRule
+final class LangAttributeRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
@@ -23,7 +23,7 @@ final class LangAttributeRule extends AbstractRule
             return;
         }
 
-        $opening = $this->collectUntil($tokenIndex, $tokens, '/>/');
+        $opening = $this->collectUntil($tokenIndex, $tokens, '/>');
 
         if (!preg_match('/\blang\s*=\s*("|\')/i', $opening)) {
             $emit('The <html> element should have a lang attribute.', $token, 'LangAttribute.MissingLang');
@@ -39,21 +39,5 @@ final class LangAttributeRule extends AbstractRule
         $this->evaluate($tokens, $tokenIndex, $emit);
     }
 
-    private function collectUntil(int $tokenIndex, Tokens $tokens, string $endPattern): string
-    {
-        $s = '';
-        $i = $tokenIndex;
-        $end = $tokenIndex + 50;
-        while ($i < $end) {
-            $t = $tokens->get($i);
-            $v = $t->getValue();
-            $s .= $v;
-            if (preg_match($endPattern, $s)) {
-                break;
-            }
-            ++$i;
-        }
-
-        return $s;
-    }
+    // collectUntil provided by parent
 }

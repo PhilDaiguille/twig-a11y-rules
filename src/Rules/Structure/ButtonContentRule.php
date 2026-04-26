@@ -8,7 +8,7 @@ use TwigCsFixer\Rules\AbstractRule;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
-final class ButtonContentRule extends AbstractRule
+final class ButtonContentRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
@@ -23,7 +23,7 @@ final class ButtonContentRule extends AbstractRule
             return;
         }
 
-        $full = $this->collectUntil($tokenIndex, $tokens, '/<\/button>/i');
+        $full = $this->collectUntil($tokenIndex, $tokens, '/<\/button>/i', 200);
 
         // If inner text stripped from tags is empty and no aria-label attribute
         if (preg_match('/<button[^>]*>(.*?)<\/button>/is', $full, $m)) {
@@ -50,21 +50,5 @@ final class ButtonContentRule extends AbstractRule
         $this->evaluate($tokens, $tokenIndex, $emit);
     }
 
-    private function collectUntil(int $tokenIndex, Tokens $tokens, string $endPattern): string
-    {
-        $s = '';
-        $i = $tokenIndex;
-        $end = $tokenIndex + 200;
-        while ($i < $end) {
-            $t = $tokens->get($i);
-            $v = $t->getValue();
-            $s .= $v;
-            if (preg_match($endPattern, $s)) {
-                break;
-            }
-            ++$i;
-        }
-
-        return $s;
-    }
+    // collectUntil provided by parent
 }
