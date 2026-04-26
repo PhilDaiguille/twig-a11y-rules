@@ -11,13 +11,13 @@
 
 ## Priorité moyenne — un peu plus complexes
 
-- [ ] `AriaRoleRule` — valeur de `role` invalide (liste ARIA valide)
-- [ ] `AriaLabelRule` — `aria-label` vide ou manquant sur les landmarks
-- [ ] `FormLabelRule` — `<label>` sans `for` ou sans contenu
-- [ ] `HeadingOrderRule` — hiérarchie de headings cassée (h1 → h3 sans h2)
-- [ ] `BannedTagsRule` — `<marquee>`, `<blink>`
-- [ ] `SelectLabelRule` — `<select>` sans `<label>` associé
-- [ ] `TextareaLabelRule` — `<textarea>` sans `<label>` associé
+- [x] `AriaRoleRule` — valeur de `role` invalide (liste ARIA valide)
+- [x] `AriaLabelRule` — `aria-label` vide ou manquant sur les landmarks
+- [x] `FormLabelRule` — `<label>` sans `for` ou sans contenu
+- [x] `HeadingOrderRule` — hiérarchie de headings cassée (h1 → h3 sans h2)
+- [x] `BannedTagsRule` — `<marquee>`, `<blink>`
+- [x] `SelectLabelRule` — `<select>` sans `<label>` associé
+- [x] `TextareaLabelRule` — `<textarea>` sans `<label>` associé
 
 ## Priorité basse — complexes à analyser statiquement
 
