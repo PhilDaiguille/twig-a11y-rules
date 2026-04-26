@@ -123,9 +123,6 @@ final class AllInOneRule extends AbstractA11yRule
                         $p = $propClass->getProperty('report');
                         $p->setAccessible(true);
                         $p->setValue($delegate, $reportVal);
-                        error_log('AllInOneRule: set delegate report');
-                    } else {
-                        error_log('AllInOneRule: delegate report property not found in hierarchy');
                     }
 
                     $propClass = $delegateReflection;
@@ -136,9 +133,6 @@ final class AllInOneRule extends AbstractA11yRule
                         $p = $propClass->getProperty('ignoredViolations');
                         $p->setAccessible(true);
                         $p->setValue($delegate, $ignoredVal);
-                        error_log('AllInOneRule: set delegate ignoredViolations');
-                    } else {
-                        error_log('AllInOneRule: delegate ignoredViolations property not found in hierarchy');
                     }
 
                 // Attempt to obtain a Closure for the non-public method.
@@ -163,20 +157,13 @@ final class AllInOneRule extends AbstractA11yRule
                 }
 
                 $bound = @\Closure::bind($closure, $this, \get_class($delegate));
-                    if (is_callable($bound)) {
-                        error_log('AllInOneRule: invoking bound closure for '.get_class($delegate));
-                        $bound($tokenIndex, $tokens);
-                        error_log('AllInOneRule: bound closure invoked');
-                    } else {
-                        // Fallback: invoke directly if we couldn't obtain a
-                        // callable bound closure. Log for diagnosis and report
-                        // counts before/after.
-                        error_log('AllInOneRule: invoking process directly on '.get_class($delegate));
-                        $before = $reportVal instanceof \TwigCsFixer\Report\Report ? $reportVal->getTotalErrors() : -1;
-                        $ref->invoke($delegate, $tokenIndex, $tokens);
-                        $after = $reportVal instanceof \TwigCsFixer\Report\Report ? $reportVal->getTotalErrors() : -1;
-                        error_log('AllInOneRule: direct invoke completed for '.get_class($delegate)." (errors before={$before}, after={$after})");
-                    }
+                if (is_callable($bound)) {
+                    $bound($tokenIndex, $tokens);
+                } else {
+                    // Fallback: invoke directly if we couldn't obtain a
+                    // callable bound closure.
+                    $ref->invoke($delegate, $tokenIndex, $tokens);
+                }
             }
         }
     }

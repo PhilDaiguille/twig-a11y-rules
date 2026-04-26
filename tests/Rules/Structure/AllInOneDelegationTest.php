@@ -62,7 +62,8 @@ final class AllInOneDelegationTest extends AbstractRuleTestCase
         }
 
         // Debug: output ids to stderr to aid diagnosis in CI runs.
-        fwrite(STDERR, 'VIOLATION IDS: '.implode(', ', $ids)."\n");
+        // Remove this in final cleanup.
+        // fwrite(STDERR, 'VIOLATION IDS: '.implode(', ', $ids)."\n");
 
         // When emitted through AllInOneRule the delegate ids are usually
         // namespaced with the AllInOne rule name. Some protected delegate
