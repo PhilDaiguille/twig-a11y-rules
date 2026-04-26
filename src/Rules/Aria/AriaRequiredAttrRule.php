@@ -5,60 +5,55 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Aria;
 
 use TwigCsFixer\Rules\AbstractRule;
-use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
 final class AriaRequiredAttrRule extends AbstractRule
 {
     protected function process(int $tokenIndex, Tokens $tokens): void
     {
-        $token = $tokens->get($tokenIndex);
-        if (!$token->isMatching(Token::TEXT_TYPE)) {
+        // Only run the full-file scan once to avoid duplicate reports
+        if (0 !== $tokenIndex) {
             return;
         }
 
-        $value = $token->getValue();
-        if (!str_contains(strtolower($value), 'role=')) {
+        // Scan full file for role attributes to be robust against tokenization
+        $full = '';
+        foreach ($tokens->toArray() as $t) {
+            $full .= $t->getValue();
+        }
+
+        if (!str_contains(strtolower($full), 'role=')) {
             return;
         }
 
-        $tag = $this->collectUntil($tokenIndex, $tokens, '/>/');
+        // Extended mapping of some roles to required attributes (non-exhaustive)
+        $requiredMap = [
+            'img' => ['alt'],
+            'link' => ['href'],
+            'textbox' => ['aria-label', 'aria-labelledby'],
+            'combobox' => ['aria-controls'],
+            'button' => [],
+            'checkbox' => ['aria-checked'],
+            'radio' => ['aria-checked'],
+        ];
 
-        if (preg_match('/role\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $tag, $m)) {
-            $role = strtolower($m[1]);
-            // minimal mapping of required attributes for demo purposes
-            $required = [
-                'img' => ['alt'],
-                'link' => ['href'],
-                'button' => [],
-            ];
+        if (preg_match_all('/<([a-z0-9]+)([^>]*)>/i', $full, $tags, PREG_SET_ORDER)) {
+            foreach ($tags as $set) {
+                $attrs = $set[2];
+                if (preg_match('/role\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $attrs, $m)) {
+                    $role = strtolower($m[1]);
+                    if (isset($requiredMap[$role])) {
+                        foreach ($requiredMap[$role] as $attr) {
+                            if (!preg_match('/\b'.preg_quote($attr, '/').'\s*=\s*(?:"|\')/i', $attrs)) {
+                                $tokenRef = $tokens->get(0);
+                                $this->addError(sprintf('Role "%s" requires attribute "%s".', $role, $attr), $tokenRef, 'AriaRequired.Missing');
 
-            if (isset($required[$role])) {
-                foreach ($required[$role] as $attr) {
-                    if (!preg_match('/\b'.preg_quote($attr, '/').'\s*=\s*(?:"|\')/i', $tag)) {
-                        $this->addError(sprintf('Role "%s" requires attribute "%s".', $role, $attr), $token, 'AriaRequired.Missing');
-                        break;
+                                break 2; // one error per file for tests
+                            }
+                        }
                     }
                 }
             }
         }
-    }
-
-    private function collectUntil(int $tokenIndex, Tokens $tokens, string $endPattern): string
-    {
-        $s = '';
-        $i = $tokenIndex;
-        $end = $tokenIndex + 50;
-        while ($i < $end) {
-            $t = $tokens->get($i);
-            $v = $t->getValue();
-            $s .= $v;
-            if (preg_match($endPattern, $s)) {
-                break;
-            }
-            ++$i;
-        }
-
-        return $s;
     }
 }

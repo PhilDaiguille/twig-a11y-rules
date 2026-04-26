@@ -8,19 +8,25 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Structure\MetaViewportRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 final class MetaViewportRuleTest extends AbstractRuleTestCase
 {
-    /** @param array<string|null> $expectedErrors */
+    /** @param array<null|string> $expectedErrors */
     #[DataProvider('provideFixtures')]
     public function testRule(string $fixture, array $expectedErrors): void
     {
         $this->checkRule(new MetaViewportRule(), $expectedErrors, $fixture);
     }
 
-    /** @return iterable<string, array{0:string,1:array<string|null>}> */
+    /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
         yield 'bad viewport' => [__DIR__.'/Fixtures/invalid/meta_viewport_bad.html.twig', ['MetaViewport.MetaViewport.UserScalable:1:1' => 'Avoid using user-scalable=no in the viewport meta.']];
+
         yield 'ok' => [__DIR__.'/Fixtures/valid/no_banned.html.twig', []];
     }
 }

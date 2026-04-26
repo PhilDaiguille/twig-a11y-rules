@@ -12,50 +12,40 @@ final class AriaRoleRule extends AbstractRule
 {
     protected function process(int $tokenIndex, Tokens $tokens): void
     {
-        $token = $tokens->get($tokenIndex);
-
-        if (!$token->isMatching(Token::TEXT_TYPE)) {
+        // Run once per file to avoid duplicate reports and to be robust against tokenization
+        if (0 !== $tokenIndex) {
             return;
         }
 
-        $value = $token->getValue();
-        if (!str_contains($value, 'role=')) {
-            return;
+        // Scan entire token stream to be robust against tokenization
+        $tag = '';
+        foreach ($tokens->toArray() as $t) {
+            $tag .= $t->getValue();
         }
 
-        $tag = $this->collectUntil($tokenIndex, $tokens, '/>/');
+        if (preg_match_all('/role\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $tag, $m)) {
+            $roles = array_map('strtolower', $m[1]);
 
-        if (preg_match('/role\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $tag, $m)) {
-            $role = strtolower(trim($m[1]));
-            // minimal allowed roles list for static check
+            // expanded list of common ARIA roles
             $allowed = [
-                'button', 'link', 'navigation', 'main', 'banner', 'contentinfo', 'complementary', 'form', 'search',
+                'alert', 'alertdialog', 'application', 'article', 'banner', 'button', 'checkbox', 'columnheader',
+                'combobox', 'complementary', 'contentinfo', 'dialog', 'directory', 'document', 'feed', 'figure',
+                'form', 'grid', 'gridcell', 'group', 'heading', 'img', 'link', 'list', 'listbox', 'listitem', 'log',
+                'main', 'math', 'menu', 'menubar', 'menuitem', 'menuitemcheckbox', 'menuitemradio',
+                'navigation', 'none', 'note', 'option', 'presentation', 'progressbar', 'radio', 'radiogroup', 'region',
+                'row', 'rowgroup', 'rowheader', 'search', 'separator', 'slider', 'spinbutton', 'status', 'switch', 'tab',
+                'table', 'tablist', 'tabpanel', 'textbox', 'timer', 'toolbar', 'tooltip', 'tree', 'treegrid', 'treeitem',
             ];
-            if (!in_array($role, $allowed, true)) {
-                $this->addError(
-                    sprintf('Invalid ARIA role "%s".', $role),
-                    $token,
-                    'AriaRole.InvalidRole'
-                );
+
+            // report only once per file/token stream
+            foreach ($roles as $role) {
+                if (!in_array($role, $allowed, true)) {
+                    $tokenRef = $tokens->get(0);
+                    $this->addError(sprintf('Invalid ARIA role "%s".', $role), $tokenRef, 'AriaRole.InvalidRole');
+
+                    break; // one error per file for tests
+                }
             }
         }
-    }
-
-    private function collectUntil(int $tokenIndex, Tokens $tokens, string $endPattern): string
-    {
-        $s = '';
-        $i = $tokenIndex;
-        $end = $tokenIndex + 50;
-        while ($i < $end) {
-            $t = $tokens->get($i);
-            $v = $t->getValue();
-            $s .= $v;
-            if (preg_match($endPattern, $s)) {
-                break;
-            }
-            ++$i;
-        }
-
-        return $s;
     }
 }

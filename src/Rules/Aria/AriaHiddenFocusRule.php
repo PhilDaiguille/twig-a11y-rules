@@ -36,7 +36,7 @@ final class AriaHiddenFocusRule extends AbstractRule
                 $attrs = $set[2];
                 if (preg_match('/aria-hidden\s*=\s*(?:"|\')true(?:"|\')/i', $attrs)) {
                     // Focusable detection: element tag or attributes indicating focusability
-                    $focusableTags = ['button','input','select','textarea','a'];
+                    $focusableTags = ['button', 'input', 'select', 'textarea', 'a'];
                     $isFocusable = in_array($tagName, $focusableTags, true)
                         || preg_match('/href\s*=|tabindex\s*=/i', $attrs);
 
@@ -44,6 +44,7 @@ final class AriaHiddenFocusRule extends AbstractRule
                         // add a generic token (first text token) for location
                         $token = $tokens->get(0);
                         $this->addError('Focusable element should not be aria-hidden.', $token, 'AriaHiddenFocus.HiddenFocusable');
+
                         // one error is enough for the test fixtures
                         return;
                     }

@@ -25,8 +25,9 @@ final class HeadingEmptyRule extends AbstractRule
         preg_match_all('/<(h[1-6])[^>]*>(.*?)<\/\1>/is', $full, $m, PREG_SET_ORDER);
         foreach ($m as $set) {
             $content = trim(strip_tags($set[2]));
-            if ($content === '') {
+            if ('' === $content) {
                 $this->addError('Heading element should not be empty.', $token, 'HeadingEmpty.Empty');
+
                 return;
             }
         }
