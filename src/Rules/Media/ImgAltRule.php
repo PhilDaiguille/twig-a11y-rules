@@ -10,7 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class ImgAltRule extends AbstractRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
 
@@ -30,11 +30,7 @@ final class ImgAltRule extends AbstractRule
         }
 
         if (!preg_match('/\balt\s*=/i', $fullTag)) {
-            $this->addError(
-                'Missing alt attribute on <img> tag.',
-                $token,
-                'ImgAlt.MissingAlt',
-            );
+            $emit('Missing alt attribute on <img> tag.', $token, 'ImgAlt.MissingAlt');
 
             return;
         }
@@ -45,13 +41,18 @@ final class ImgAltRule extends AbstractRule
                 $fullTag
             );
             if (!$hasDecorativeRole) {
-                $this->addError(
-                    'Empty alt on <img> requires role="presentation" or role="none".',
-                    $token,
-                    'ImgAlt.EmptyAlt',
-                );
+                $emit('Empty alt on <img> requires role="presentation" or role="none".', $token, 'ImgAlt.EmptyAlt');
             }
         }
+    }
+
+    protected function process(int $tokenIndex, Tokens $tokens): void
+    {
+        $emit = function (string $message, Token $token, ?string $id = null): void {
+            $this->addError($message, $token, $id);
+        };
+
+        $this->evaluate($tokens, $tokenIndex, $emit);
     }
 
     private function collectTag(int $tokenIndex, Tokens $tokens): string

@@ -11,5 +11,8 @@ $ruleset = new Ruleset();
 $ruleset->addRule(new BannedTagsRule());
 $ruleset->addRule(new ImgAltRule());
 $ruleset->addRule(new LangAttributeRule());
+// All-in-one convenience rule
+use TwigA11y\Rules\Structure\AllInOneRule;
+$ruleset->addRule(new AllInOneRule());
 
 return $ruleset;

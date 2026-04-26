@@ -10,7 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class AnchorContentRule extends AbstractRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
 
@@ -39,13 +39,23 @@ final class AnchorContentRule extends AbstractRule
                 && !preg_match('/\btitle\s*=\s*("|\')/i', $opening)
             ) {
                 // Axe-core rule reference: link-name
-                $this->addWarning(
-                    'Anchor element without accessible name (axe-core: link-name) should have an aria-label or title.',
-                    $token,
-                    'AnchorContent.Warning.LinkName'
-                );
+                $emit('Anchor element without accessible name (axe-core: link-name) should have an aria-label or title.', $token, 'AnchorContent.Warning.LinkName');
             }
         }
+    }
+
+    protected function process(int $tokenIndex, Tokens $tokens): void
+    {
+        $emit = function (string $message, Token $token, ?string $id = null): void {
+            // preserve warning semantics
+            if (null === $id) {
+                $this->addWarning($message, $token);
+            } else {
+                $this->addWarning($message, $token, $id);
+            }
+        };
+
+        $this->evaluate($tokens, $tokenIndex, $emit);
     }
 
     private function collectUntil(int $tokenIndex, Tokens $tokens, string $endPattern): string

@@ -10,7 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class TabIndexRule extends AbstractRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
 
@@ -28,13 +28,18 @@ final class TabIndexRule extends AbstractRule
         if (preg_match('/tabindex\s*=\s*(?:"|\')?([\-0-9]+)(?:"|\')?/i', $tag, $m)) {
             $num = (int) $m[1];
             if ($num > 0) {
-                $this->addError(
-                    'Avoid positive tabindex values — use 0 or manage focus order differently.',
-                    $token,
-                    'TabIndex.PositiveTabindex'
-                );
+                $emit('Avoid positive tabindex values — use 0 or manage focus order differently.', $token, 'TabIndex.PositiveTabindex');
             }
         }
+    }
+
+    protected function process(int $tokenIndex, Tokens $tokens): void
+    {
+        $emit = function (string $message, Token $token, ?string $id = null): void {
+            $this->addError($message, $token, $id);
+        };
+
+        $this->evaluate($tokens, $tokenIndex, $emit);
     }
 
     private function collectUntil(int $tokenIndex, Tokens $tokens, string $endPattern): string

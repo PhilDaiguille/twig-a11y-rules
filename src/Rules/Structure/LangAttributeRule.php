@@ -10,7 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class LangAttributeRule extends AbstractRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
 
@@ -26,12 +26,17 @@ final class LangAttributeRule extends AbstractRule
         $opening = $this->collectUntil($tokenIndex, $tokens, '/>/');
 
         if (!preg_match('/\blang\s*=\s*("|\')/i', $opening)) {
-            $this->addError(
-                'The <html> element should have a lang attribute.',
-                $token,
-                'LangAttribute.MissingLang'
-            );
+            $emit('The <html> element should have a lang attribute.', $token, 'LangAttribute.MissingLang');
         }
+    }
+
+    protected function process(int $tokenIndex, Tokens $tokens): void
+    {
+        $emit = function (string $message, Token $token, ?string $id = null): void {
+            $this->addError($message, $token, $id);
+        };
+
+        $this->evaluate($tokens, $tokenIndex, $emit);
     }
 
     private function collectUntil(int $tokenIndex, Tokens $tokens, string $endPattern): string

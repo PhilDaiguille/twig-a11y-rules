@@ -10,7 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class BannedTagsRule extends AbstractRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
         if (!$token->isMatching(Token::TEXT_TYPE)) {
@@ -19,11 +19,16 @@ final class BannedTagsRule extends AbstractRule
 
         $value = strtolower($token->getValue());
         if (str_contains($value, '<marquee') || str_contains($value, '<blink')) {
-            $this->addError(
-                'Banned tag used (e.g. <marquee> or <blink>).',
-                $token,
-                'BannedTags.Used'
-            );
+            $emit('Banned tag used (e.g. <marquee> or <blink>).', $token, 'BannedTags.Used');
         }
+    }
+
+    protected function process(int $tokenIndex, Tokens $tokens): void
+    {
+        $emit = function (string $message, Token $token, ?string $id = null): void {
+            $this->addError($message, $token, $id);
+        };
+
+        $this->evaluate($tokens, $tokenIndex, $emit);
     }
 }
