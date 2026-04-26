@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+namespace TwigA11y\Tests\Rules\Media;
+
+use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\DataProvider;
+use TwigA11y\Rules\Media\VideoTrackRule;
+use TwigCsFixer\Test\AbstractRuleTestCase;
+
+#[CoversNothing]
+/** @internal */
+final class VideoTrackRuleTest extends AbstractRuleTestCase
+{
+    #[DataProvider('provideFixtures')]
+    public function testRule(string $fixture, array $expectedErrors): void
+    {
+        $this->checkRule(new VideoTrackRule(), $expectedErrors, $fixture);
+    }
+
+    public static function provideFixtures(): iterable
+    {
+        yield 'video with captions' => [__DIR__.'/Fixtures/valid/video_with_captions.html.twig', []];
+
+        yield 'video without captions' => [
+            __DIR__.'/Fixtures/invalid/video_no_captions.html.twig',
+            ['VideoTrack.VideoTrack.MissingCaptions:1:1' => 'Video should have captions (track kind="captions").'],
+        ];
+    }
+}
