@@ -12,11 +12,8 @@ use TwigCsFixer\Runner\Linter;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 use TwigCsFixer\Token\Tokenizer;
 
-/**
- * @internal
- *
- * @coversNothing
- */
+#[\PHPUnit\Framework\Attributes\CoversNothing]
+/** @internal */
 final class AllInOneRuleTest extends AbstractRuleTestCase
 {
     /** @param array<null|string> $expectedErrors */

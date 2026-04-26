@@ -8,11 +8,8 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Structure\IframeTitleRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
+#[\PHPUnit\Framework\Attributes\CoversNothing]
+/** @internal */
 final class IframeTitleRuleTest extends AbstractRuleTestCase
 {
     /** @param array<null|string> $expectedErrors */

@@ -31,11 +31,8 @@ use TwigA11y\Standard\A11yStandard;
 use TwigA11y\Standard\A11yStrict;
 use TwigCsFixer\Rules\RuleInterface;
 
-/**
- * @internal
- *
- * @coversNothing
- */
+#[\PHPUnit\Framework\Attributes\CoversNothing]
+/** @internal */
 final class A11yStandardTest extends TestCase
 {
     public function testBasicStandardProvidesRules(): void

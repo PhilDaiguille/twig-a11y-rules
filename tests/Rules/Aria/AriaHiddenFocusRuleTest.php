@@ -8,11 +8,8 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Aria\AriaHiddenFocusRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
+#[\PHPUnit\Framework\Attributes\CoversNothing]
+/** @internal */
 final class AriaHiddenFocusRuleTest extends AbstractRuleTestCase
 {
     /** @param array<null|string> $expectedErrors */
