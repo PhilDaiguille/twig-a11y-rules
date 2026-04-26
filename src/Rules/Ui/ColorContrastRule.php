@@ -12,9 +12,6 @@ final class ColorContrastRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        // Perform a single document-level scan to find inline style attributes
-        // and evaluate contrast where both color and background-color are
-        // specified.
         if (0 !== $tokenIndex) {
             return;
         }
@@ -41,7 +38,6 @@ final class ColorContrastRule extends AbstractA11yRule
             if ($ratio < 4.5) {
                 $emit('Insufficient color contrast', $firstToken, 'ColorContrast.Insufficient');
 
-                // emit only once per document
                 return;
             }
         }
@@ -56,19 +52,22 @@ final class ColorContrastRule extends AbstractA11yRule
         $this->evaluate($tokens, $tokenIndex, $emit);
     }
 
+    /**
+     * @return null|array{int, int, int}
+     */
     private function extractColor(string $style, string $prop): ?array
     {
-        if (!preg_match('/'.preg_quote($prop).'\s*:\s*([^;]+)(?:;|$)/i', $style, $m)) {
+        // Fix: pass '/' as the delimiter argument to preg_quote
+        if (!preg_match('/'.preg_quote($prop, '/').'\s*:\s*([^;]+)(?:;|$)/i', $style, $m)) {
             return null;
         }
 
         $c = trim($m[1]);
-        // hex
-        if (preg_match('/^#([0-9a-f]{3}|[0-9a-f]{6})$/i', $c, $mm)) {
+
+        if (preg_match('/^#([0-9a-f]{3}|[0-9a-f]{6})$/i', $c)) {
             return $this->hexToRgb($c);
         }
 
-        // rgb(a)
         if (preg_match('/rgb\s*\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)/i', $c, $mm)) {
             return [(int) $mm[1], (int) $mm[2], (int) $mm[3]];
         }
@@ -76,6 +75,9 @@ final class ColorContrastRule extends AbstractA11yRule
         return null;
     }
 
+    /**
+     * @return array{int, int, int}
+     */
     private function hexToRgb(string $hex): array
     {
         $hex = ltrim($hex, '#');
@@ -83,17 +85,31 @@ final class ColorContrastRule extends AbstractA11yRule
             $hex = $hex[0].$hex[0].$hex[1].$hex[1].$hex[2].$hex[2];
         }
 
-        return [hexdec(substr($hex, 0, 2)), hexdec(substr($hex, 2, 2)), hexdec(substr($hex, 4, 2))];
+        return [
+            (int) hexdec(substr($hex, 0, 2)),
+            (int) hexdec(substr($hex, 2, 2)),
+            (int) hexdec(substr($hex, 4, 2)),
+        ];
     }
 
+    /**
+     * @param array{int, int, int} $rgb
+     */
     private function lum(array $rgb): float
     {
-        [$r, $g, $b] = array_map(fn ($v): float => $v / 255.0, $rgb);
-        $f = fn ($c): float|int|object => $c <= 0.03928 ? $c / 12.92 : pow(($c + 0.055) / 1.055, 2.4);
+        // Fix: explicitly cast to float so PHPStan knows the array values are numeric
+        [$r, $g, $b] = array_map(fn (int $v): float => (float) $v / 255.0, $rgb);
+
+        // Fix: narrow the return type to float only — the ternary always returns float
+        $f = fn (float $c): float => $c <= 0.03928 ? $c / 12.92 : pow(($c + 0.055) / 1.055, 2.4);
 
         return 0.2126 * $f($r) + 0.7152 * $f($g) + 0.0722 * $f($b);
     }
 
+    /**
+     * @param array{int, int, int} $fg
+     * @param array{int, int, int} $bg
+     */
     private function contrastRatio(array $fg, array $bg): float
     {
         $l1 = $this->lum($fg);
