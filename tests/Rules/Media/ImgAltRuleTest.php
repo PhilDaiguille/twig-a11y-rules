@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Media;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Media\ImgAltRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * @internal
@@ -24,6 +24,11 @@ final class ImgAltRuleTest extends AbstractRuleTestCase
         $this->checkRule(new ImgAltRule(), $expectedErrors, $fixture);
     }
 
+    /**
+     * Data provider for fixtures.
+     *
+     * @return iterable<string, array{0:string,1:array<string,string>}>
+     */
     public static function provideFixtures(): iterable
     {
         yield 'img with alt' => [

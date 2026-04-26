@@ -35,12 +35,13 @@ final class ImgAltRule extends AbstractRule
                 $token,
                 'ImgAlt.MissingAlt',
             );
+
             return;
         }
 
-        if (preg_match('/\balt\s*=\s*(["\'])\\1/i', $fullTag)) {
+        if (preg_match('/\balt\s*=\s*(["\'])\1/i', $fullTag)) {
             $hasDecorativeRole = preg_match(
-                '/\brole\s*=\s*(["\'])(?:presentation|none)\\1/i',
+                '/\brole\s*=\s*(["\'])(?:presentation|none)\1/i',
                 $fullTag
             );
             if (!$hasDecorativeRole) {
@@ -59,13 +60,15 @@ final class ImgAltRule extends AbstractRule
         $i = $tokenIndex;
         $maxLookAhead = 50;
 
-        while ($i < $tokenIndex + $maxLookAhead) {
+        // Tokens::get() always returns a Token instance from the library we use,
+        // so avoid nullable checks that PHPStan will flag. Coerce values to string
+        // when concatenating to avoid unnecessary null-coalescing.
+        $end = $tokenIndex + $maxLookAhead;
+        while ($i < $end) {
             $t = $tokens->get($i);
-            if (null === $t) {
-                break;
-            }
-            $tag .= $t->getValue() ?? '';
-            if ($t->isMatching(Token::TEXT_TYPE) && str_contains($t->getValue(), '>') && $i !== $tokenIndex) {
+            $value = $t->getValue();
+            $tag .= $value;
+            if ($t->isMatching(Token::TEXT_TYPE) && str_contains($value, '>') && $i !== $tokenIndex) {
                 break;
             }
             ++$i;

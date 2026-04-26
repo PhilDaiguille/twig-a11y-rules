@@ -39,5 +39,14 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
+      - name: Run PHPStan
+        run: composer phpstan -- --no-progress
+
+      - name: Run php-cs-fixer (lint)
+        run: composer lint
+
+      - name: Run rector (dry-run)
+        run: composer rector -- --dry-run
+
       - name: Run tests
         run: composer test
