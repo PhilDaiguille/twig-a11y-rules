@@ -15,12 +15,18 @@ use TwigCsFixer\Test\AbstractRuleTestCase;
  */
 final class TabIndexRuleTest extends AbstractRuleTestCase
 {
+    /**
+     * @param array<null|string> $expectedErrors
+     */
     #[DataProvider('provideFixtures')]
     public function testRule(string $fixture, array $expectedErrors): void
     {
         $this->checkRule(new TabIndexRule(), $expectedErrors, $fixture);
     }
 
+    /**
+     * @return iterable<string, array{0:string,1:array<null|string>}>
+     */
     public static function provideFixtures(): iterable
     {
         yield 'tabindex zero' => [

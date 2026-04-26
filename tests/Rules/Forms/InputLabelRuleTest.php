@@ -15,12 +15,18 @@ use TwigCsFixer\Test\AbstractRuleTestCase;
  */
 final class InputLabelRuleTest extends AbstractRuleTestCase
 {
+    /**
+     * @param array<null|string> $expectedErrors
+     */
     #[DataProvider('provideFixtures')]
     public function testRule(string $fixture, array $expectedErrors): void
     {
         $this->checkRule(new InputLabelRule(), $expectedErrors, $fixture);
     }
 
+    /**
+     * @return iterable<string, array{0:string,1:array<null|string>}>
+     */
     public static function provideFixtures(): iterable
     {
         yield 'input with label for' => [
