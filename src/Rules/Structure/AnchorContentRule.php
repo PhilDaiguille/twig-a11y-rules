@@ -12,6 +12,11 @@ final class AnchorContentRule extends AbstractRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
+        // Guard against out-of-range token indexes using the Tokens API.
+        if (!$tokens->has($tokenIndex)) {
+            return;
+        }
+
         $token = $tokens->get($tokenIndex);
 
         if (!$token->isMatching(Token::TEXT_TYPE)) {
@@ -62,8 +67,9 @@ final class AnchorContentRule extends AbstractRule
     {
         $s = '';
         $i = $tokenIndex;
-        $end = $tokenIndex + 200;
-        while ($i < $end) {
+        $limit = $tokenIndex + 200;
+        while ($i <= $limit && $tokens->has($i)) {
+            // Use get only for indexes that exist (we check has() in the loop condition)
             $t = $tokens->get($i);
             $v = $t->getValue();
             $s .= $v;
