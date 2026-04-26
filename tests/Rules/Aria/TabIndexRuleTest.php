@@ -1,0 +1,36 @@
+<?php
+
+declare(strict_types=1);
+
+namespace TwigA11y\Tests\Rules\Aria;
+
+use PHPUnit\Framework\Attributes\DataProvider;
+use TwigA11y\Rules\Aria\TabIndexRule;
+use TwigCsFixer\Test\AbstractRuleTestCase;
+
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
+final class TabIndexRuleTest extends AbstractRuleTestCase
+{
+    #[DataProvider('provideFixtures')]
+    public function testRule(string $fixture, array $expectedErrors): void
+    {
+        $this->checkRule(new TabIndexRule(), $expectedErrors, $fixture);
+    }
+
+    public static function provideFixtures(): iterable
+    {
+        yield 'tabindex zero' => [
+            __DIR__.'/Fixtures/valid/tabindex_zero.html.twig',
+            [],
+        ];
+
+        yield 'tabindex positive' => [
+            __DIR__.'/Fixtures/invalid/tabindex_positive.html.twig',
+            ['TabIndex.TabIndex.PositiveTabindex:3:6' => 'Avoid positive tabindex values — use 0 or manage focus order differently.'],
+        ];
+    }
+}

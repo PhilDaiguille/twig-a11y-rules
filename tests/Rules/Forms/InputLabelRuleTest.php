@@ -1,0 +1,36 @@
+<?php
+
+declare(strict_types=1);
+
+namespace TwigA11y\Tests\Rules\Forms;
+
+use PHPUnit\Framework\Attributes\DataProvider;
+use TwigA11y\Rules\Forms\InputLabelRule;
+use TwigCsFixer\Test\AbstractRuleTestCase;
+
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
+final class InputLabelRuleTest extends AbstractRuleTestCase
+{
+    #[DataProvider('provideFixtures')]
+    public function testRule(string $fixture, array $expectedErrors): void
+    {
+        $this->checkRule(new InputLabelRule(), $expectedErrors, $fixture);
+    }
+
+    public static function provideFixtures(): iterable
+    {
+        yield 'input with label for' => [
+            __DIR__.'/Fixtures/valid/input_with_label.html.twig',
+            [],
+        ];
+
+        yield 'input without label or aria' => [
+            __DIR__.'/Fixtures/invalid/input_no_label.html.twig',
+            ['InputLabel.InputLabel.MissingLabel:3:1' => 'Input element must have an associated <label> or an aria-label.'],
+        ];
+    }
+}
