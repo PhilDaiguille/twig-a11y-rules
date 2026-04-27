@@ -77,8 +77,12 @@ $config->allowNonFixableRules(true);
 return $config;
 ```
 
-There are also `A11yBasicStandard` and `A11yRecommendedStandard` if you want lighter
-or opinionated presets.
+There are four presets with increasing coverage:
+
+- `A11yBasicStandard`: lowest-noise checks for core HTML issues.
+- `A11yRecommendedStandard`: broader structural, media, and form coverage.
+- `A11yStandard`: the default balanced preset for most projects.
+- `A11yStrict`: every stable rule shipped by this package.
 
 Then run:
 
@@ -107,6 +111,7 @@ Rules are grouped by category for easier discovery.
 | `ImgAltRule`    | `<img>` missing `alt`, or empty `alt` without `role="presentation"` |
 | `AutoplayRule`  | `<video>` or `<audio>` with `autoplay` but without `muted`          |
 | `ObjectAltRule` | `<object>` without alternative text                                 |
+| `VideoTrackRule`| `<video>` without captions track                                    |
 
 ### Structure
 
@@ -119,7 +124,11 @@ Rules are grouped by category for easier discovery.
 | `HeadingEmptyRule`  | Empty heading elements                             |
 | `LangAttributeRule` | `<html>` missing `lang` attribute                  |
 | `IframeTitleRule`   | `<iframe>` without `title` attribute               |
+| `DuplicateIdRule`   | Duplicate `id` values in the same document         |
+| `LandmarkRule`      | Missing main landmark                              |
 | `MetaViewportRule`  | `<meta name="viewport">` with `user-scalable=no`   |
+| `SkipLinkRule`      | Missing skip link to main content                  |
+| `TableHeaderRule`   | `<th>` without `scope` attribute                   |
 
 ### ARIA
 
@@ -139,6 +148,13 @@ Rules are grouped by category for easier discovery.
 | `InputLabelRule`    | `<input>` without an associated `<label>` or `aria-label` |
 | `SelectLabelRule`   | `<select>` without an associated `<label>`                |
 | `TextareaLabelRule` | `<textarea>` without an associated `<label>`              |
+| `InputTypeRule`     | `<input type="email">` without `autocomplete`             |
+
+### UI
+
+| Rule                | Description                                |
+|---------------------|--------------------------------------------|
+| `ColorContrastRule` | Insufficient inline text/background contrast |
 
 ## Contributing
 
