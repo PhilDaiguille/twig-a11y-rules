@@ -50,19 +50,8 @@ final class AnchorContentRule extends AbstractA11yRule
         }
     }
 
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    protected function emitsWarnings(): bool
     {
-        $emit = function (string $message, Token $token, ?string $id = null): void {
-            // preserve warning semantics
-            if (null === $id) {
-                $this->addWarning($message, $token);
-            } else {
-                $this->addWarning($message, $token, $id);
-            }
-        };
-
-        $this->evaluate($tokens, $tokenIndex, $emit);
+        return true;
     }
-
-    // collectUntil provided by parent
 }

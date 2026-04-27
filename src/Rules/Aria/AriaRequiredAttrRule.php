@@ -9,7 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class AriaRequiredAttrRule extends AbstractA11yRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Only run the full-file scan once to avoid duplicate reports
         if (0 !== $tokenIndex) {
@@ -17,10 +17,7 @@ final class AriaRequiredAttrRule extends AbstractA11yRule
         }
 
         // Scan full file for role attributes to be robust against tokenization
-        $full = '';
-        foreach ($tokens->toArray() as $t) {
-            $full .= $t->getValue();
-        }
+        $full = $this->getFullContent($tokens);
 
         if (!str_contains(strtolower($full), 'role=')) {
             return;
@@ -46,7 +43,7 @@ final class AriaRequiredAttrRule extends AbstractA11yRule
                         foreach ($requiredMap[$role] as $attr) {
                             if (!preg_match('/\b'.preg_quote($attr, '/').'\s*=\s*(?:"|\')/i', $attrs)) {
                                 $tokenRef = $tokens->get(0);
-                                $this->addError(sprintf('Role "%s" requires attribute "%s".', $role, $attr), $tokenRef, 'AriaRequired.Missing');
+                                $emit(sprintf('Role "%s" requires attribute "%s".', $role, $attr), $tokenRef, 'AriaRequired.Missing');
 
                                 // stop after first missing attribute found for test determinism
                                 return;

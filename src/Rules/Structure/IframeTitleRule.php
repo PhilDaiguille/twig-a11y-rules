@@ -10,7 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class IframeTitleRule extends AbstractA11yRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
         if (!$token->isMatching(Token::TEXT_TYPE)) {
@@ -25,9 +25,7 @@ final class IframeTitleRule extends AbstractA11yRule
         $tag = $this->collectUntil($tokenIndex, $tokens, '>');
         if (!preg_match('/title\s*=\s*(?:"|\')([^"\']*)(?:"|\')/i', $tag, $m) || '' === trim($m[1])) {
             // Keep the original message expected by tests (non-empty check retained)
-            $this->addError('Iframe must have a title attribute.', $token, 'IframeTitle.Missing');
+            $emit('Iframe must have a title attribute.', $token, 'IframeTitle.Missing');
         }
     }
-
-    // collectUntil provided by parent
 }

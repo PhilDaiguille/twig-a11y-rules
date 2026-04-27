@@ -9,17 +9,14 @@ use TwigCsFixer\Token\Tokens;
 
 final class VideoTrackRule extends AbstractA11yRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Only run once per file
         if (0 !== $tokenIndex) {
             return;
         }
 
-        $full = '';
-        foreach ($tokens->toArray() as $t) {
-            $full .= $t->getValue();
-        }
+        $full = $this->getFullContent($tokens);
 
         if (!str_contains($full, '<video')) {
             return;
@@ -41,7 +38,7 @@ final class VideoTrackRule extends AbstractA11yRule
 
             // No captions found — report error at token 0 for determinism
             $token = $tokens->get(0);
-            $this->addError('Video should have captions (track kind="captions").', $token, 'VideoTrack.MissingCaptions');
+            $emit('Video should have captions (track kind="captions").', $token, 'VideoTrack.MissingCaptions');
 
             return;
         }

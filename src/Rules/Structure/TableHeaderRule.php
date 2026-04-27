@@ -9,16 +9,13 @@ use TwigCsFixer\Token\Tokens;
 
 final class TableHeaderRule extends AbstractA11yRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         if (0 !== $tokenIndex) {
             return;
         }
 
-        $full = '';
-        foreach ($tokens->toArray() as $t) {
-            $full .= $t->getValue();
-        }
+        $full = $this->getFullContent($tokens);
 
         if (!str_contains($full, '<table')) {
             return;
@@ -33,7 +30,7 @@ final class TableHeaderRule extends AbstractA11yRule
             $attrs = $set[1];
             if (!preg_match('/\bscope\b\s*=\s*(?:"|\')/i', $attrs)) {
                 $token = $tokens->get(0);
-                $this->addError('Table header <th> elements should include a scope attribute.', $token, 'TableHeader.MissingScope');
+                $emit('Table header <th> elements should include a scope attribute.', $token, 'TableHeader.MissingScope');
 
                 return;
             }

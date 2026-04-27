@@ -8,25 +8,15 @@ Write a rule
 - Implement a minimal process() method that inspects token stream and calls $this->addError(message, $token, 'RuleNamespace.Code') when appropriate.
 - Keep rules small and well-scoped. Add a clear identifier code (e.g. `FormLabel.InvalidLabel`).
 
-Evaluate API (optional, recommended for delegable rules)
-- If your rule's logic should be reusable by a meta-rule (like AllInOneRule), implement a public method with the signature:
+Evaluate API
+- Rules should implement `TwigA11y\Rules\EvaluatableRuleInterface` and expose a public method with the signature:
 
   public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
 
-  - This method should perform the same analysis as process() but emit findings via the $emit callable instead of calling $this->addError directly.
+  - This method should perform the rule analysis and emit findings via the $emit callable instead of calling `$this->addError()` directly.
   - The $emit callable will be invoked as $emit(string $message, Token $token, ?string $identifier).
-  - Keep process() for compatibility; it should call evaluate() and forward emissions to $this->addError / $this->addWarning. Example:
-
-  protected function process(int $tokenIndex, Tokens $tokens): void
-  {
-      $emit = function (string $message, Token $token, ?string $id = null) {
-          $this->addError($message, $token, $id);
-      };
-
-      $this->evaluate($tokens, $tokenIndex, $emit);
-  }
-
-  This pattern allows a meta-rule to instantiate your rule and call evaluate() to aggregate multiple rules without duplicating logic.
+  - `AbstractA11yRule` already forwards `process()` to `evaluate()`, so new rules only need to implement `evaluate()`.
+  - Override `emitsWarnings()` when the rule should report warnings instead of errors.
 
 Write tests
 - Add a test under tests/Rules/<Domain>/YourRuleTest.php following the existing pattern.

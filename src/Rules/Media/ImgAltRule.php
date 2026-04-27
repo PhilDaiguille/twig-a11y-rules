@@ -45,36 +45,4 @@ final class ImgAltRule extends AbstractA11yRule
             }
         }
     }
-
-    protected function process(int $tokenIndex, Tokens $tokens): void
-    {
-        $emit = function (string $message, Token $token, ?string $id = null): void {
-            $this->addError($message, $token, $id);
-        };
-
-        $this->evaluate($tokens, $tokenIndex, $emit);
-    }
-
-    private function collectTag(int $tokenIndex, Tokens $tokens): string
-    {
-        $tag = '';
-        $i = $tokenIndex;
-        $maxLookAhead = 50;
-
-        // Tokens::get() always returns a Token instance from the library we use,
-        // so avoid nullable checks that PHPStan will flag. Coerce values to string
-        // when concatenating to avoid unnecessary null-coalescing.
-        $end = $tokenIndex + $maxLookAhead;
-        while ($i < $end) {
-            $t = $tokens->get($i);
-            $value = $t->getValue();
-            $tag .= $value;
-            if ($t->isMatching(Token::TEXT_TYPE) && str_contains($value, '>') && $i !== $tokenIndex) {
-                break;
-            }
-            ++$i;
-        }
-
-        return $tag;
-    }
 }

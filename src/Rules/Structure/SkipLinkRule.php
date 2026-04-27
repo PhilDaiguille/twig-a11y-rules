@@ -25,10 +25,7 @@ final class SkipLinkRule extends AbstractA11yRule
             return;
         }
 
-        $content = '';
-        foreach ($tokens->toArray() as $t) {
-            $content .= (string) $t->getValue();
-        }
+        $content = $this->getFullContent($tokens);
 
         if (preg_match('/href\s*=\s*["\"]#([^"\']+)["\"][^>]*>.*?skip/i', $content)) {
             return;
@@ -39,14 +36,5 @@ final class SkipLinkRule extends AbstractA11yRule
         }
 
         $emit('Page should include a skip link to bypass navigation', $token, 'SkipLink.Missing');
-    }
-
-    protected function process(int $tokenIndex, Tokens $tokens): void
-    {
-        $emit = function (string $message, Token $token, ?string $id = null): void {
-            $this->addError($message, $token, $id);
-        };
-
-        $this->evaluate($tokens, $tokenIndex, $emit);
     }
 }

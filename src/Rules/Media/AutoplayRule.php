@@ -10,7 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class AutoplayRule extends AbstractA11yRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
         if (!$token->isMatching(Token::TEXT_TYPE)) {
@@ -25,9 +25,7 @@ final class AutoplayRule extends AbstractA11yRule
         $tag = $this->collectUntil($tokenIndex, $tokens, '>');
 
         if (preg_match('/autoplay\b/i', $tag) && !preg_match('/\bmuted\b/i', $tag)) {
-            $this->addError('Autoplaying media should be muted.', $token, 'Autoplay.NotMuted');
+            $emit('Autoplaying media should be muted.', $token, 'Autoplay.NotMuted');
         }
     }
-
-    // collectUntil provided by parent
 }

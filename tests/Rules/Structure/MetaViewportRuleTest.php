@@ -27,4 +27,12 @@ final class MetaViewportRuleTest extends AbstractRuleTestCase
 
         yield 'ok' => [__DIR__.'/Fixtures/valid/no_banned.html.twig', []];
     }
+
+    public function testRuleWorksWhenTheSameInstanceIsReusedAcrossFiles(): void
+    {
+        $rule = new MetaViewportRule();
+
+        $this->checkRule($rule, [], __DIR__.'/Fixtures/valid/no_banned.html.twig');
+        $this->checkRule($rule, ['MetaViewport.MetaViewport.UserScalable:1:1' => 'Avoid using user-scalable=no in the viewport meta.'], __DIR__.'/Fixtures/invalid/meta_viewport_bad.html.twig');
+    }
 }

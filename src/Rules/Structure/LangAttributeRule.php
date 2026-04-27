@@ -29,15 +29,4 @@ final class LangAttributeRule extends AbstractA11yRule
             $emit('The <html> element should have a lang attribute.', $token, 'LangAttribute.MissingLang');
         }
     }
-
-    protected function process(int $tokenIndex, Tokens $tokens): void
-    {
-        $emit = function (string $message, Token $token, ?string $id = null): void {
-            $this->addError($message, $token, $id);
-        };
-
-        $this->evaluate($tokens, $tokenIndex, $emit);
-    }
-
-    // collectUntil provided by parent
 }

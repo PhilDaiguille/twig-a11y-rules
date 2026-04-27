@@ -10,17 +10,14 @@ use TwigCsFixer\Token\Tokens;
 
 final class DuplicateIdRule extends AbstractA11yRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Only run once per file
         if (0 !== $tokenIndex) {
             return;
         }
 
-        $full = '';
-        foreach ($tokens->toArray() as $t) {
-            $full .= $t->getValue();
-        }
+        $full = $this->getFullContent($tokens);
 
         if (!str_contains($full, 'id=')) {
             return;
@@ -41,7 +38,7 @@ final class DuplicateIdRule extends AbstractA11yRule
             if ($cnt > 1) {
                 // Report first token as location (use token 0)
                 $token = $tokens->get(0);
-                $this->addError(sprintf('Duplicate id "%s" found in document.', $id), $token, 'DuplicateId.Duplicate');
+                $emit(sprintf('Duplicate id "%s" found in document.', $id), $token, 'DuplicateId.Duplicate');
 
                 // stop after first duplicate for determinism
                 return;

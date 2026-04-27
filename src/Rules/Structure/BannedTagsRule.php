@@ -22,13 +22,4 @@ final class BannedTagsRule extends AbstractA11yRule
             $emit('Banned tag used (e.g. <marquee> or <blink>).', $token, 'BannedTags.Used');
         }
     }
-
-    protected function process(int $tokenIndex, Tokens $tokens): void
-    {
-        $emit = function (string $message, Token $token, ?string $id = null): void {
-            $this->addError($message, $token, $id);
-        };
-
-        $this->evaluate($tokens, $tokenIndex, $emit);
-    }
 }
