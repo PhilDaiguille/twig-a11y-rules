@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 // Example configuration file for twig-cs-fixer that enables some accessibility rules.
 //
 // IMPORTANT: This file must return a TwigCsFixer\Config\Config instance.

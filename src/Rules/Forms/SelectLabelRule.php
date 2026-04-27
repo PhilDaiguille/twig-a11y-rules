@@ -10,7 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class SelectLabelRule extends AbstractA11yRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
         if (!$token->isMatching(Token::TEXT_TYPE)) {
@@ -30,10 +30,7 @@ final class SelectLabelRule extends AbstractA11yRule
             $id = $m[1];
         }
 
-        $full = '';
-        foreach ($tokens->toArray() as $t) {
-            $full .= $t->getValue();
-        }
+        $full = $this->getFullContent($tokens);
 
         if (null !== $id) {
             if (preg_match('/<label[^>]*for\s*=\s*["\']'.preg_quote($id, '/').'["\']/i', $full)) {
@@ -45,8 +42,6 @@ final class SelectLabelRule extends AbstractA11yRule
             return;
         }
 
-        $this->addError('Select element must have an associated <label>.', $token, 'SelectLabel.Missing');
+        $emit('Select element must have an associated <label>.', $token, 'SelectLabel.Missing');
     }
-
-    // collectUntil provided by parent
 }

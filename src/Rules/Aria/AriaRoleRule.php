@@ -10,7 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class AriaRoleRule extends AbstractA11yRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Run once per file to avoid duplicate reports and to be robust against tokenization
         if (0 !== $tokenIndex) {
@@ -18,10 +18,7 @@ final class AriaRoleRule extends AbstractA11yRule
         }
 
         // Scan entire token stream to be robust against tokenization
-        $tag = '';
-        foreach ($tokens->toArray() as $t) {
-            $tag .= $t->getValue();
-        }
+        $tag = $this->getFullContent($tokens);
 
         if (preg_match_all('/role\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $tag, $m)) {
             $roles = array_map('strtolower', $m[1]);
@@ -41,7 +38,7 @@ final class AriaRoleRule extends AbstractA11yRule
             foreach ($roles as $role) {
                 if (!in_array($role, $allowed, true)) {
                     $tokenRef = $tokens->get(0);
-                    $this->addError(sprintf('Invalid ARIA role "%s".', $role), $tokenRef, 'AriaRole.InvalidRole');
+                    $emit(sprintf('Invalid ARIA role "%s".', $role), $tokenRef, 'AriaRole.InvalidRole');
 
                     // stop after first invalid role for determinism in tests
                     return;

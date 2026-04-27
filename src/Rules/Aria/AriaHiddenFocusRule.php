@@ -10,7 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class AriaHiddenFocusRule extends AbstractA11yRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Only run the full-file scan once per file: guard on tokenIndex 0 which
         // is the first token in the stream. Using an instance property caused
@@ -20,10 +20,7 @@ final class AriaHiddenFocusRule extends AbstractA11yRule
             return;
         }
 
-        $full = '';
-        foreach ($tokens->toArray() as $t) {
-            $full .= $t->getValue();
-        }
+        $full = $this->getFullContent($tokens);
 
         if (!str_contains(strtolower($full), 'aria-hidden')) {
             return;
@@ -43,7 +40,7 @@ final class AriaHiddenFocusRule extends AbstractA11yRule
                     if ($isFocusable) {
                         // add a generic token (first text token) for location
                         $token = $tokens->get(0);
-                        $this->addError('Focusable element should not be aria-hidden.', $token, 'AriaHiddenFocus.HiddenFocusable');
+                        $emit('Focusable element should not be aria-hidden.', $token, 'AriaHiddenFocus.HiddenFocusable');
 
                         // one error is enough for the test fixtures
                         return;
@@ -52,5 +49,4 @@ final class AriaHiddenFocusRule extends AbstractA11yRule
             }
         }
     }
-    // collectUntil removed; scanning uses full file concatenation
 }

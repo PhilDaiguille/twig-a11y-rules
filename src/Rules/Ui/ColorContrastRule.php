@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Ui;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
 final class ColorContrastRule extends AbstractA11yRule
@@ -16,10 +15,7 @@ final class ColorContrastRule extends AbstractA11yRule
             return;
         }
 
-        $content = '';
-        foreach ($tokens->toArray() as $t) {
-            $content .= (string) $t->getValue();
-        }
+        $content = $this->getFullContent($tokens);
 
         if (!preg_match_all('/style\s*=\s*["\']([^"\']+)["\']/i', $content, $matches)) {
             return;
@@ -41,15 +37,6 @@ final class ColorContrastRule extends AbstractA11yRule
                 return;
             }
         }
-    }
-
-    protected function process(int $tokenIndex, Tokens $tokens): void
-    {
-        $emit = function (string $message, Token $token, ?string $id = null): void {
-            $this->addError($message, $token, $id);
-        };
-
-        $this->evaluate($tokens, $tokenIndex, $emit);
     }
 
     /**

@@ -12,16 +12,13 @@ final class InputTypeRule extends AbstractA11yRule
     /**
      * Check inputs with certain types have an autocomplete attribute.
      */
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         if (0 !== $tokenIndex) {
             return;
         }
 
-        $full = '';
-        foreach ($tokens->toArray() as $t) {
-            $full .= $t->getValue();
-        }
+        $full = $this->getFullContent($tokens);
 
         // quick bail
         if (!str_contains($full, '<input')) {
@@ -37,7 +34,7 @@ final class InputTypeRule extends AbstractA11yRule
             $attrs = $set[1];
             if (!preg_match('/\bautocomplete\b\s*=\s*(?:"|\')/i', $attrs)) {
                 $token = $tokens->get(0);
-                $this->addError('Input of type "email" should include an autocomplete attribute.', $token, 'InputType.MissingAutocomplete');
+                $emit('Input of type "email" should include an autocomplete attribute.', $token, 'InputType.MissingAutocomplete');
 
                 return;
             }

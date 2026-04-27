@@ -40,15 +40,4 @@ final class ButtonContentRule extends AbstractA11yRule
             }
         }
     }
-
-    protected function process(int $tokenIndex, Tokens $tokens): void
-    {
-        $emit = function (string $message, Token $token, ?string $id = null): void {
-            $this->addError($message, $token, $id);
-        };
-
-        $this->evaluate($tokens, $tokenIndex, $emit);
-    }
-
-    // collectUntil provided by parent
 }

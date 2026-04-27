@@ -9,7 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class HeadingOrderRule extends AbstractA11yRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Only run once per file to avoid duplicate errors (process is called for many tokens)
         if (0 !== $tokenIndex) {
@@ -17,11 +17,7 @@ final class HeadingOrderRule extends AbstractA11yRule
         }
         $token = $tokens->get($tokenIndex);
 
-        // Build full content once
-        $full = '';
-        foreach ($tokens->toArray() as $t) {
-            $full .= $t->getValue();
-        }
+        $full = $this->getFullContent($tokens);
 
         if (!str_contains($full, '<h')) {
             return;
@@ -38,7 +34,7 @@ final class HeadingOrderRule extends AbstractA11yRule
         $prev = 0;
         foreach ($levels as $lvl) {
             if (0 !== $prev && $lvl > $prev + 1) {
-                $this->addError(
+                $emit(
                     sprintf('Heading level jumped from h%d to h%d.', $prev, $lvl),
                     $token,
                     'HeadingOrder.Invalid'

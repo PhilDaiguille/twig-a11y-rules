@@ -10,7 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class InputLabelRule extends AbstractA11yRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
 
@@ -37,12 +37,7 @@ final class InputLabelRule extends AbstractA11yRule
             $id = $m[1];
         }
 
-        // Build full template to search for label[for]
-        // Concatenate all token values to search for <label for="id"> or wrapping <label>
-        $full = '';
-        foreach ($tokens->toArray() as $t) {
-            $full .= $t->getValue();
-        }
+        $full = $this->getFullContent($tokens);
 
         if (null !== $id) {
             if (preg_match('/<label[^>]*for\s*=\s*["\']'.preg_quote($id, '/').'["\']/i', $full)) {
@@ -55,12 +50,10 @@ final class InputLabelRule extends AbstractA11yRule
             return;
         }
 
-        $this->addError(
+        $emit(
             'Input element must have an associated <label> or an aria-label.',
             $token,
             'InputLabel.MissingLabel'
         );
     }
-
-    // collectUntil provided by parent
 }

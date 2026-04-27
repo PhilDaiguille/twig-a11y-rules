@@ -10,7 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class ObjectAltRule extends AbstractA11yRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
         if (!$token->isMatching(Token::TEXT_TYPE)) {
@@ -24,9 +24,7 @@ final class ObjectAltRule extends AbstractA11yRule
 
         $tag = $this->collectUntil($tokenIndex, $tokens, '>');
         if (!preg_match('/\btitle\s*=|\baria-label\s*=|\balt\s*=|>.*?<param\s+name="alt"/i', $tag)) {
-            $this->addError('Object element should have alternative text.', $token, 'ObjectAlt.Missing');
+            $emit('Object element should have alternative text.', $token, 'ObjectAlt.Missing');
         }
     }
-
-    // collectUntil provided by parent
 }

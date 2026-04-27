@@ -10,7 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class MetaViewportRule extends AbstractA11yRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Guard so we only perform the full-file scan once by running on the
         // first token index. Using an instance-scoped scanned flag caused the
@@ -24,11 +24,7 @@ final class MetaViewportRule extends AbstractA11yRule
             return;
         }
 
-        // Scan full file content to avoid token split issues
-        $full = '';
-        foreach ($tokens->toArray() as $t) {
-            $full .= $t->getValue();
-        }
+        $full = $this->getFullContent($tokens);
 
         $fullLower = strtolower($full);
         if (!str_contains($fullLower, 'name="viewport"') && !str_contains($fullLower, "name='viewport'")) {
@@ -37,7 +33,7 @@ final class MetaViewportRule extends AbstractA11yRule
 
         if (preg_match('/user-scalable\s*=\s*no/i', $fullLower)) {
             $token = $tokens->get(0);
-            $this->addError('Avoid using user-scalable=no in the viewport meta.', $token, 'MetaViewport.UserScalable');
+            $emit('Avoid using user-scalable=no in the viewport meta.', $token, 'MetaViewport.UserScalable');
         }
     }
 }

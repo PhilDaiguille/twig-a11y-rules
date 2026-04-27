@@ -10,7 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class FormLabelRule extends AbstractA11yRule
 {
-    protected function process(int $tokenIndex, Tokens $tokens): void
+    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
 
@@ -24,36 +24,25 @@ final class FormLabelRule extends AbstractA11yRule
         }
 
         $opening = $this->collectUntil($tokenIndex, $tokens, '>');
+        $full = $this->getFullContent($tokens);
 
         // Check for for attribute
         if (preg_match('/\bfor\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $opening)) {
             // also ensure there's content (closing tag with some content)
-            if (preg_match('/<label[^>]*>\s*[^<]+\s*<\/label>/i', $this->getFull($tokens))) {
+            if (preg_match('/<label[^>]*>\s*[^<]+\s*<\/label>/i', $full)) {
                 return;
             }
         }
 
         // If label wraps content and contains input/select/textarea
-        if (preg_match('/<label[^>]*>\s*<input|<select|<textarea/i', $this->getFull($tokens))) {
+        if (preg_match('/<label[^>]*>\s*<input|<select|<textarea/i', $full)) {
             return;
         }
 
-        $this->addError(
+        $emit(
             '<label> must have a for attribute or non-empty content.',
             $token,
             'FormLabel.InvalidLabel'
         );
-    }
-
-    // collectUntil provided by parent
-
-    private function getFull(Tokens $tokens): string
-    {
-        $s = '';
-        foreach ($tokens->toArray() as $t) {
-            $s .= $t->getValue();
-        }
-
-        return $s;
     }
 }
