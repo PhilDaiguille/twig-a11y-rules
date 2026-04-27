@@ -12,8 +12,27 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
 {
     use TokenCollectorTrait;
 
+    // By default rules apply to all template kinds. Rules that should be
+    // limited to specific kinds can override supportedKinds().
+    protected function supportedKinds(): array
+    {
+        return \TwigA11y\Template\TemplateKind::cases();
+    }
+
     final protected function process(int $tokenIndex, Tokens $tokens): void
     {
+        // On the first token, determine the template kind and bail out if
+        // this rule does not support that kind.
+        if (0 === $tokenIndex) {
+            $kind = \TwigA11y\Template\TemplateClassifier::classify(
+                $this->getFullContent($tokens)
+            );
+
+            if (!in_array($kind, $this->supportedKinds(), true)) {
+                return;
+            }
+        }
+
         $this->evaluate($tokens, $tokenIndex, $this->createEmitter());
     }
 

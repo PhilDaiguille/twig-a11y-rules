@@ -23,7 +23,9 @@ final class MetaViewportRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'bad viewport' => [__DIR__.'/Fixtures/invalid/meta_viewport_bad.html.twig', ['MetaViewport.MetaViewport.UserScalable:1:1' => 'Avoid using user-scalable=no in the viewport meta.']];
+        // This fixture is a fragment (no <html>/<body>) — rule is page-level
+        // and should not emit on partials.
+        yield 'bad viewport' => [__DIR__.'/Fixtures/invalid/meta_viewport_bad.html.twig', []];
 
         yield 'ok' => [__DIR__.'/Fixtures/valid/no_banned.html.twig', []];
     }
@@ -33,6 +35,7 @@ final class MetaViewportRuleTest extends AbstractRuleTestCase
         $rule = new MetaViewportRule();
 
         $this->checkRule($rule, [], __DIR__.'/Fixtures/valid/no_banned.html.twig');
-        $this->checkRule($rule, ['MetaViewport.MetaViewport.UserScalable:1:1' => 'Avoid using user-scalable=no in the viewport meta.'], __DIR__.'/Fixtures/invalid/meta_viewport_bad.html.twig');
+        // fragment should still not trigger when same instance is reused
+        $this->checkRule($rule, [], __DIR__.'/Fixtures/invalid/meta_viewport_bad.html.twig');
     }
 }

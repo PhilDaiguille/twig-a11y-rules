@@ -10,6 +10,11 @@ use TwigCsFixer\Token\Tokens;
 
 final class MetaViewportRule extends AbstractA11yRule
 {
+    protected function supportedKinds(): array
+    {
+        return [\TwigA11y\Template\TemplateKind::FullPage];
+    }
+
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Guard so we only perform the full-file scan once by running on the
