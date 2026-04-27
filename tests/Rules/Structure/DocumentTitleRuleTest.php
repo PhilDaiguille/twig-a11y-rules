@@ -13,12 +13,18 @@ use TwigCsFixer\Test\AbstractRuleTestCase;
 /** @internal */
 final class DocumentTitleRuleTest extends AbstractRuleTestCase
 {
+    /**
+     * @param array<string, string> $expectedErrors
+     */
     #[DataProvider('provideFixtures')]
     public function testRule(string $fixture, array $expectedErrors): void
     {
         $this->checkRule(new DocumentTitleRule(), $expectedErrors, $fixture);
     }
 
+    /**
+     * @return \Iterator<array<int, (array<mixed>|string)>>
+     */
     public static function provideFixtures(): iterable
     {
         yield 'with title' => [

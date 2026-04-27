@@ -63,10 +63,11 @@ final class ImgAltRule extends AbstractA11yRule
         // Deduplicate by hashing the normalized tag text. Many tokens may
         // contain fragments of the same tag; we only want a single report.
         $normalized = preg_replace('/\s+/', ' ', trim($fullTag));
-        $tagKey = md5($normalized);
+        $tagKey = md5((string) $normalized);
         if (isset($this->seenTagHashes[$tagKey])) {
             return;
         }
+
         $this->seenTagHashes[$tagKey] = true;
 
         if (!preg_match('/\balt\s*=/i', $fullTag)) {
@@ -77,7 +78,14 @@ final class ImgAltRule extends AbstractA11yRule
 
         // Extract alt attribute value if present.
         if (preg_match('/\balt\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))/is', $fullTag, $matches)) {
-            $attrValue = $matches[1] ?? $matches[2] ?? ($matches[3] ?? '');
+            $attrValue = '';
+            if (isset($matches[1]) && $matches[1] !== '') {
+                $attrValue = $matches[1];
+            } elseif (isset($matches[2]) && $matches[2] !== '') {
+                $attrValue = $matches[2];
+            } elseif (isset($matches[3]) && $matches[3] !== '') {
+                $attrValue = $matches[3];
+            }
 
             if ($this->containsTwigExpressions($attrValue)) {
                 // Can't decide statically. Emit a warning to prompt manual check.

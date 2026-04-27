@@ -13,12 +13,18 @@ use TwigCsFixer\Test\AbstractRuleTestCase;
 /** @internal */
 final class AnchorAccessibleNameRuleTest extends AbstractRuleTestCase
 {
+    /**
+     * @param array<string, string> $expectedErrors
+     */
     #[DataProvider('provideFixtures')]
     public function testRule(string $fixture, array $expectedErrors): void
     {
         $this->checkRule(new AnchorAccessibleNameRule(), $expectedErrors, $fixture);
     }
 
+    /**
+     * @return \Iterator<array<int, (array<mixed>|string)>>
+     */
     public static function provideFixtures(): iterable
     {
         yield 'link with image alt' => [

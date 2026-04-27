@@ -12,7 +12,6 @@ final class AnchorAccessibleNameRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        // run across tokens; tokens processed sequentially — check TEXT_TYPE tokens
         $token = $tokens->get($tokenIndex);
         if (!$token->isMatching(Token::TEXT_TYPE)) {
             return;
@@ -23,10 +22,8 @@ final class AnchorAccessibleNameRule extends AbstractA11yRule
             return;
         }
 
-        // collect the full tag and a chunk after it to detect nested content
         $full = $this->collectTag($tokenIndex, $tokens, 200);
         if (!str_contains($full, '>')) {
-            // try to append more
             $collected = $full;
             $i = $tokenIndex + 1;
             $limit = $tokenIndex + 200;
@@ -39,16 +36,21 @@ final class AnchorAccessibleNameRule extends AbstractA11yRule
         }
 
         if (!preg_match('/<\s*a\b([^>]*)>(.*?)<\s*\/\s*a\s*>/is', $full, $m)) {
-            // either not a full anchor or no closing tag in collected range
             return;
         }
 
-        $attrs = $m[1];
-        $inner = strip_tags($m[2]);
+        $attrs = $m[1] ?? '';
+        $inner = isset($m[2]) ? strip_tags($m[2]) : '';
 
-        // Determine accessible name: aria-label, aria-labelledby, title, inner text, image alt
+        // aria-label
         if (preg_match('/aria-label\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $attrs, $mm)) {
-            $name = $mm[1] ?? $mm[2] ?? '';
+            $name = '';
+            if (isset($mm[1]) && $mm[1] !== '') {
+                $name = $mm[1];
+            } elseif (isset($mm[2]) && $mm[2] !== '') {
+                $name = $mm[2];
+            }
+
             if (trim($name) === '') {
                 $emit('Anchor has empty aria-label.', $token, 'Anchor.AccessibleNameEmpty');
             }
@@ -56,45 +58,67 @@ final class AnchorAccessibleNameRule extends AbstractA11yRule
             return;
         }
 
+        // title
         if (preg_match('/title\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $attrs, $mm)) {
-            $title = $mm[1] ?? $mm[2] ?? '';
+            $title = '';
+            if (isset($mm[1]) && $mm[1] !== '') {
+                $title = $mm[1];
+            } elseif (isset($mm[2]) && $mm[2] !== '') {
+                $title = $mm[2];
+            }
+
             if (trim($title) !== '') {
-                return; // title supplies a name
+                return;
             }
         }
 
-        // aria-labelledby references: try to resolve simple cases where the id
-        // target is present literally inside the collected area
+        // aria-labelledby
         if (preg_match('/aria-labelledby\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $attrs, $mm)) {
-            $ids = trim($mm[1] ?? $mm[2] ?? '');
-            foreach (preg_split('/\s+/', $ids) as $id) {
+            $ids = '';
+            if (isset($mm[1]) && $mm[1] !== '') {
+                $ids = $mm[1];
+            } elseif (isset($mm[2]) && $mm[2] !== '') {
+                $ids = $mm[2];
+            }
+
+            $parts = preg_split('/\s+/', $ids);
+            if (!is_array($parts)) {
+                $parts = [];
+            }
+
+            $doc = $this->getFullContent($tokens);
+            foreach ($parts as $id) {
                 if ($id === '') {
                     continue;
                 }
 
-                // look for element with that id in the larger document
-                $doc = $this->getFullContent($tokens);
                 if (preg_match('/id\s*=\s*(?:"' . preg_quote($id, '/') . '"|\'' . preg_quote($id, '/') . '\')/i', $doc)) {
-                    // presence is good enough for this static check
                     return;
                 }
             }
         }
 
-        // If inner text or inner textual content exists, accept it as a name
+        // inner text
         if (trim($inner) !== '') {
             return;
         }
 
-        // If anchor contains an <img> with alt text, that provides a name
-        if (preg_match('/<\s*img\b[^>]*alt\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))/is', $m[2], $imgM)) {
-            $alt = $imgM[1] ?? $imgM[2] ?? ($imgM[3] ?? '');
+        // img alt inside anchor
+        if (isset($m[2]) && preg_match('/<\s*img\b[^>]*alt\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))/is', $m[2], $imgM)) {
+            $alt = '';
+            if (isset($imgM[1]) && $imgM[1] !== '') {
+                $alt = $imgM[1];
+            } elseif (isset($imgM[2]) && $imgM[2] !== '') {
+                $alt = $imgM[2];
+            } elseif (isset($imgM[3]) && $imgM[3] !== '') {
+                $alt = $imgM[3];
+            }
+
             if (trim($alt) !== '') {
                 return;
             }
         }
 
-        // If none of the above supplied a name, report.
         $emit('Anchor element without accessible name (axe-core: link-name).', $token, 'Anchor.AccessibleName');
     }
 }

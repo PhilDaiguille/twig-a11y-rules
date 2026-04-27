@@ -16,11 +16,12 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
 
     /** Cached decision for the currently-processed file when rules are reused */
     private ?bool $skipThisFile = null;
+
     /**
      * Shared cache of TemplateKind decisions keyed by content hash to avoid
      * repeatedly classifying the same file across multiple rule instances.
      *
-     * @var array<string, \TwigA11y\Template\TemplateKind>
+     * @var array<string, TemplateKind>
      */
     private static array $kindCache = [];
 

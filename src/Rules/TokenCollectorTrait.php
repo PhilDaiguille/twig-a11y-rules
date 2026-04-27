@@ -51,11 +51,11 @@ trait TokenCollectorTrait
     {
         try {
             $res = preg_match($pattern, $subject);
-        } catch (\Throwable $e) {
+        } catch (\Throwable) {
             return false;
         }
 
-        if ($res === false) {
+        if (false === $res) {
             return false;
         }
 

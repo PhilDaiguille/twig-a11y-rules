@@ -5,21 +5,11 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigCsFixer\Token\Token;
+use TwigA11y\Template\TemplateKind;
 use TwigCsFixer\Token\Tokens;
 
 final class PageHeadingOneRule extends AbstractA11yRule
 {
-    protected function evaluateOncePerFile(): bool
-    {
-        return true;
-    }
-
-    protected function supportedKinds(): array
-    {
-        return [\TwigA11y\Template\TemplateKind::FullPage];
-    }
-
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $content = $this->getFullContent($tokens);
@@ -29,5 +19,18 @@ final class PageHeadingOneRule extends AbstractA11yRule
             $tokenRef = $tokens->get(0);
             $emit('Document should include at least one non-empty <h1> heading.', $tokenRef, 'PageHeadingOne.Missing');
         }
+    }
+
+    protected function evaluateOncePerFile(): bool
+    {
+        return true;
+    }
+
+    /**
+     * @return TemplateKind[]
+     */
+    protected function supportedKinds(): array
+    {
+        return [TemplateKind::FullPage];
     }
 }

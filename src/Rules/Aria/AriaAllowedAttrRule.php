@@ -20,10 +20,10 @@ final class AriaAllowedAttrRule extends AbstractA11yRule
         $content = $this->getFullContent($tokens);
 
         foreach (RoleCatalog::getCatalog() as $role => $info) {
-            if (preg_match_all('/role\s*=\s*(?:"|\')' . preg_quote($role, '/') . '(?:"|\')/i', $content, $m)) {
+            if (preg_match_all('/role\s*=\s*(?:"|\')'.preg_quote($role, '/').'(?:"|\')/i', $content, $m)) {
                 // For simplicity, ensure at least one child-like token exists for roles that require children
                 foreach ($info['required_children'] as $childRole) {
-                    if (!preg_match('/role\s*=\s*(?:"|\')' . preg_quote($childRole, '/') . '(?:"|\')/i', $content)) {
+                    if (!preg_match('/role\s*=\s*(?:"|\')'.preg_quote($childRole, '/').'(?:"|\')/i', $content)) {
                         $tokenRef = $tokens->get(0);
                         $emit(sprintf('Role "%s" should include children with role "%s".', $role, $childRole), $tokenRef, 'AriaRequired.ChildrenMissing');
 

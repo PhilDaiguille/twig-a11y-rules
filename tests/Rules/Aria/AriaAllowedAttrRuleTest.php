@@ -13,12 +13,18 @@ use TwigCsFixer\Test\AbstractRuleTestCase;
 /** @internal */
 final class AriaAllowedAttrRuleTest extends AbstractRuleTestCase
 {
+    /**
+     * @param array<string, string> $expectedErrors
+     */
     #[DataProvider('provideFixtures')]
     public function testRule(string $fixture, array $expectedErrors): void
     {
         $this->checkRule(new AriaAllowedAttrRule(), $expectedErrors, $fixture);
     }
 
+    /**
+     * @return \Iterator<(array<int, array<string, string>>|array<int, string>)>
+     */
     public static function provideFixtures(): iterable
     {
         yield 'table without row children' => [
