@@ -69,4 +69,23 @@ trait TokenCollectorTrait
     {
         return (bool) preg_match('/\{\{.*?\}\}|\{%.+?%\}/s', $s);
     }
+
+    /**
+     * Return the first non-empty capture from $matches for given indexes.
+     *
+     * @param array<int, mixed> $matches
+     */
+    protected function firstMatch(array $matches, int ...$indexes): string
+    {
+        foreach ($indexes as $i) {
+            if (array_key_exists($i, $matches)) {
+                $value = $matches[$i];
+                if (is_string($value) && '' !== $value) {
+                    return $value;
+                }
+            }
+        }
+
+        return '';
+    }
 }

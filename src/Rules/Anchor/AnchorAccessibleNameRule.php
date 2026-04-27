@@ -10,6 +10,8 @@ use TwigCsFixer\Token\Tokens;
 
 final class AnchorAccessibleNameRule extends AbstractA11yRule
 {
+    // reuses TokenCollectorTrait::firstMatch via $this->firstMatch
+
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -39,19 +41,14 @@ final class AnchorAccessibleNameRule extends AbstractA11yRule
             return;
         }
 
-        $attrs = $m[1] ?? '';
-        $inner = isset($m[2]) ? strip_tags($m[2]) : '';
+        $attrs = $m[1];
+        $inner = strip_tags($m[2]);
 
         // aria-label
         if (preg_match('/aria-label\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $attrs, $mm)) {
-            $name = '';
-            if (isset($mm[1]) && $mm[1] !== '') {
-                $name = $mm[1];
-            } elseif (isset($mm[2]) && $mm[2] !== '') {
-                $name = $mm[2];
-            }
+            $name = $this->firstMatch($mm, 1, 2);
 
-            if (trim($name) === '') {
+            if ('' === trim($name)) {
                 $emit('Anchor has empty aria-label.', $token, 'Anchor.AccessibleNameEmpty');
             }
 
@@ -60,26 +57,16 @@ final class AnchorAccessibleNameRule extends AbstractA11yRule
 
         // title
         if (preg_match('/title\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $attrs, $mm)) {
-            $title = '';
-            if (isset($mm[1]) && $mm[1] !== '') {
-                $title = $mm[1];
-            } elseif (isset($mm[2]) && $mm[2] !== '') {
-                $title = $mm[2];
-            }
+            $title = $this->firstMatch($mm, 1, 2);
 
-            if (trim($title) !== '') {
+            if ('' !== trim($title)) {
                 return;
             }
         }
 
         // aria-labelledby
         if (preg_match('/aria-labelledby\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $attrs, $mm)) {
-            $ids = '';
-            if (isset($mm[1]) && $mm[1] !== '') {
-                $ids = $mm[1];
-            } elseif (isset($mm[2]) && $mm[2] !== '') {
-                $ids = $mm[2];
-            }
+            $ids = $this->firstMatch($mm, 1, 2);
 
             $parts = preg_split('/\s+/', $ids);
             if (!is_array($parts)) {
@@ -88,33 +75,26 @@ final class AnchorAccessibleNameRule extends AbstractA11yRule
 
             $doc = $this->getFullContent($tokens);
             foreach ($parts as $id) {
-                if ($id === '') {
+                if ('' === $id) {
                     continue;
                 }
 
-                if (preg_match('/id\s*=\s*(?:"' . preg_quote($id, '/') . '"|\'' . preg_quote($id, '/') . '\')/i', $doc)) {
+                if (preg_match('/id\s*=\s*(?:"'.preg_quote($id, '/').'"|\''.preg_quote($id, '/')."')/i", $doc)) {
                     return;
                 }
             }
         }
 
         // inner text
-        if (trim($inner) !== '') {
+        if ('' !== trim($inner)) {
             return;
         }
 
         // img alt inside anchor
-        if (isset($m[2]) && preg_match('/<\s*img\b[^>]*alt\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))/is', $m[2], $imgM)) {
-            $alt = '';
-            if (isset($imgM[1]) && $imgM[1] !== '') {
-                $alt = $imgM[1];
-            } elseif (isset($imgM[2]) && $imgM[2] !== '') {
-                $alt = $imgM[2];
-            } elseif (isset($imgM[3]) && $imgM[3] !== '') {
-                $alt = $imgM[3];
-            }
+        if (preg_match('/<\s*img\b[^>]*alt\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))/is', $m[2], $imgM)) {
+            $alt = $this->firstMatch($imgM, 1, 2, 3);
 
-            if (trim($alt) !== '') {
+            if ('' !== trim($alt)) {
                 return;
             }
         }

@@ -78,20 +78,9 @@ final class ImgAltRule extends AbstractA11yRule
 
         // Extract alt attribute value if present.
         if (preg_match('/\balt\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))/is', $fullTag, $matches)) {
-            $attrValue = '';
-            if (isset($matches[1]) && $matches[1] !== '') {
-                $attrValue = $matches[1];
-            } elseif (isset($matches[2]) && $matches[2] !== '') {
-                $attrValue = $matches[2];
-            } elseif (isset($matches[3]) && $matches[3] !== '') {
-                $attrValue = $matches[3];
-            }
+            $attrValue = $this->firstMatch($matches, 1, 2, 3);
 
             if ($this->containsTwigExpressions($attrValue)) {
-                // Can't decide statically. Emit a warning to prompt manual check.
-                // Use warnings (non-fatal) by emitting via the emitter — for that
-                // we make this rule declare it emits warnings by overriding
-                // emitsWarnings() (below).
                 $emit('Alt attribute contains template expression; verify it is non-empty at runtime.', $token, 'ImgAlt.DynamicAlt');
 
                 return;
