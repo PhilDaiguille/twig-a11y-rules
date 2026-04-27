@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Template\TemplateKind;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
@@ -18,13 +19,9 @@ final class SkipLinkRule extends AbstractA11yRule
             return;
         }
 
-        // Page-level rule: only run once (tokenIndex 0) and only for full
-        // pages (containing <body> or <!DOCTYPE). This avoids reporting on
-        // partials/components.
-        if (0 !== $tokenIndex) {
-            return;
-        }
-
+        // Only perform the page-level checks once per file; AbstractA11yRule
+        // will enforce the evaluateOncePerFile behaviour if needed. Here we
+        // simply run the detection logic and emit on the current token.
         $content = $this->getFullContent($tokens);
 
         if (!str_contains($content, '<body') && !str_contains(strtoupper($content), '<!DOCTYPE')) {
@@ -39,6 +36,20 @@ final class SkipLinkRule extends AbstractA11yRule
             return;
         }
 
-        $emit('Page should include a skip link to bypass navigation', $token, 'SkipLink.Missing');
+        $first = $tokens->get(0);
+        $emit('Page should include a skip link to bypass navigation', $first, 'SkipLink.Missing');
+    }
+
+    /**
+     * @return TemplateKind[]
+     */
+    protected function supportedKinds(): array
+    {
+        return [TemplateKind::FullPage];
+    }
+
+    protected function evaluateOncePerFile(): bool
+    {
+        return true;
     }
 }

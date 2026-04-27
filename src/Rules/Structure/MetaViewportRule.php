@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Template\TemplateKind;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
@@ -35,5 +36,18 @@ final class MetaViewportRule extends AbstractA11yRule
             $token = $tokens->get(0);
             $emit('Avoid using user-scalable=no in the viewport meta.', $token, 'MetaViewport.UserScalable');
         }
+    }
+
+    /**
+     * @return TemplateKind[]
+     */
+    protected function supportedKinds(): array
+    {
+        return [TemplateKind::FullPage];
+    }
+
+    protected function evaluateOncePerFile(): bool
+    {
+        return true;
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Template\TemplateKind;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
@@ -28,5 +29,13 @@ final class LangAttributeRule extends AbstractA11yRule
         if (!preg_match('/\blang\s*=\s*("|\')/i', $opening)) {
             $emit('The <html> element should have a lang attribute.', $token, 'LangAttribute.MissingLang');
         }
+    }
+
+    /**
+     * @return TemplateKind[]
+     */
+    protected function supportedKinds(): array
+    {
+        return [TemplateKind::FullPage];
     }
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace TwigA11y\Rules;
 
+use TwigA11y\Template\TemplateClassifier;
+use TwigA11y\Template\TemplateKind;
 use TwigCsFixer\Rules\AbstractRule;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
@@ -12,8 +14,48 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
 {
     use TokenCollectorTrait;
 
+    /** Cached decision for the currently-processed file when rules are reused */
+    private ?bool $skipThisFile = null;
+
+    // By default rules apply to all template kinds. Rules that should be
+    // limited to specific kinds can override supportedKinds().
+    /**
+     * @return TemplateKind[]
+     */
+    protected function supportedKinds(): array
+    {
+        return TemplateKind::cases();
+    }
+
+    // Rules can opt to run only once per file (for page-level scans).
+    protected function evaluateOncePerFile(): bool
+    {
+        return false;
+    }
+
     final protected function process(int $tokenIndex, Tokens $tokens): void
     {
+        // On the first token, determine the template kind and record whether
+        // this rule applies to the file. This supports rule instances being
+        // reused across multiple files.
+        if (0 === $tokenIndex) {
+            $kind = TemplateClassifier::classify(
+                $this->getFullContent($tokens)
+            );
+
+            $this->skipThisFile = !in_array($kind, $this->supportedKinds(), true);
+        }
+
+        // If earlier we decided this rule doesn't apply to this file, skip.
+        if (true === $this->skipThisFile) {
+            return;
+        }
+
+        // If the rule only runs once per file, only evaluate at tokenIndex 0.
+        if ($this->evaluateOncePerFile() && 0 !== $tokenIndex) {
+            return;
+        }
+
         $this->evaluate($tokens, $tokenIndex, $this->createEmitter());
     }
 
