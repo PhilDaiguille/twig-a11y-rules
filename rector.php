@@ -9,8 +9,17 @@ return RectorConfig::configure()
         __DIR__.'/src',
         __DIR__.'/tests',
     ])
+    ->withPhpSets()
+    ->withPreparedSets(
+        deadCode: true,
+        codeQuality: true,
+        codingStyle: true,
+        phpunitCodeQuality: true,
+        typeDeclarationDocblocks: true,
+        typeDeclarations: true,
+        privatization: true,
+        rectorPreset: true,
+        earlyReturn: true,
+    )
     ->withComposerBased(phpunit: true)
-    ->withTypeCoverageLevel(10)
-    ->withDeadCodeLevel(10)
-    ->withCodeQualityLevel(10)
 ;

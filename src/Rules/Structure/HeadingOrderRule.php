@@ -15,6 +15,7 @@ final class HeadingOrderRule extends AbstractA11yRule
         if (0 !== $tokenIndex) {
             return;
         }
+
         $token = $tokens->get($tokenIndex);
 
         $full = $this->getFullContent($tokens);
@@ -42,6 +43,7 @@ final class HeadingOrderRule extends AbstractA11yRule
 
                 break;
             }
+
             $prev = $lvl;
         }
     }

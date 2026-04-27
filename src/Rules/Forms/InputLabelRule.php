@@ -39,10 +39,8 @@ final class InputLabelRule extends AbstractA11yRule
 
         $full = $this->getFullContent($tokens);
 
-        if (null !== $id) {
-            if (preg_match('/<label[^>]*for\s*=\s*["\']'.preg_quote($id, '/').'["\']/i', $full)) {
-                return;
-            }
+        if (null !== $id && preg_match('/<label[^>]*for\s*=\s*["\']'.preg_quote($id, '/').'["\']/i', $full)) {
+            return;
         }
 
         // Check for wrapping label: any <label ...> that contains an <input

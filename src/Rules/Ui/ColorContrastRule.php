@@ -25,8 +25,11 @@ final class ColorContrastRule extends AbstractA11yRule
         foreach ($matches[1] as $style) {
             $bg = $this->extractColor($style, 'background-color');
             $fg = $this->extractColor($style, 'color');
+            if (null === $fg) {
+                continue;
+            }
 
-            if (null === $fg || null === $bg) {
+            if (null === $bg) {
                 continue;
             }
 
@@ -88,7 +91,7 @@ final class ColorContrastRule extends AbstractA11yRule
         [$r, $g, $b] = array_map(fn (int $v): float => (float) $v / 255.0, $rgb);
 
         // Fix: narrow the return type to float only — the ternary always returns float
-        $f = fn (float $c): float => $c <= 0.03928 ? $c / 12.92 : pow(($c + 0.055) / 1.055, 2.4);
+        $f = fn (float $c): float => $c <= 0.03928 ? $c / 12.92 : (($c + 0.055) / 1.055) ** 2.4;
 
         return 0.2126 * $f($r) + 0.7152 * $f($g) + 0.0722 * $f($b);
     }
