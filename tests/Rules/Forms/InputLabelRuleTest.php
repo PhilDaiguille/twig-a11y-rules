@@ -36,5 +36,11 @@ final class InputLabelRuleTest extends AbstractRuleTestCase
             __DIR__.'/Fixtures/invalid/input_no_label.html.twig',
             ['InputLabel.InputLabel.MissingLabel:3:1' => 'Input element must have an associated <label> or an aria-label.'],
         ];
+
+        // Hidden inputs should not trigger the rule
+        yield 'input hidden' => [__DIR__.'/Fixtures/valid/input_hidden.html.twig', []];
+
+        // Dynamic aria-label (Twig var) should be considered present
+        yield 'input with aria variable' => [__DIR__.'/Fixtures/valid/input_with_aria_variable.html.twig', []];
     }
 }

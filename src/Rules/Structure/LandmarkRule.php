@@ -25,17 +25,26 @@ final class LandmarkRule extends AbstractA11yRule
             return;
         }
 
-        // If we encounter the end of head/body start, and haven't seen
-        // a main landmark previously, emit a missing landmark warning.
-        if (str_contains($value, '<body') || str_contains($value, '</head>')) {
-            // Simple approach: scan a small window ahead to see if a main is present
-            $look = $this->collectUntil($tokenIndex, $tokens, '<main', 200);
-            if (!str_contains($look, '<main') && !preg_match('/role\s*=\s*["\']main["\']/i', $look)) {
-                // Emit at the start of the file for consistency with other
-                // page-level rules (tests expect line 1:1 identifiers).
-                $first = $tokens->get(0);
-                $emit('Page should include a main landmark', $first, 'Landmark.MissingMain');
-            }
+        // This rule is page-level. Only evaluate once per file (at tokenIndex 0)
+        // and only if the content looks like a full HTML page (contains
+        // a <body> or a <!DOCTYPE). This avoids flagging fragments/partials.
+        if (0 !== $tokenIndex) {
+            return;
         }
+
+        $full = $this->getFullContent($tokens);
+
+        // If this looks like a fragment (no body/doctype), skip evaluation
+        if (!str_contains($full, '<body') && !str_contains(strtoupper($full), '<!DOCTYPE')) {
+            return;
+        }
+
+        // Scan the full content for a main landmark or role="main"
+        if (str_contains($full, '<main') || preg_match('/role\s*=\s*["\']main["\']/i', $full)) {
+            return;
+        }
+
+        $first = $tokens->get(0);
+        $emit('Page should include a main landmark', $first, 'Landmark.MissingMain');
     }
 }

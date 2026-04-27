@@ -27,8 +27,8 @@ final class SkipLinkRuleTest extends AbstractRuleTestCase
 
         yield 'valid main id' => [__DIR__.'/Fixtures/valid/main_id.html.twig', []];
 
-        yield 'missing skip link' => [__DIR__.'/Fixtures/invalid/no_skip_link.html.twig', [
-            'SkipLink.SkipLink.Missing:1:1' => 'Page should include a skip link to bypass navigation',
-        ]];
+        // This fixture is a fragment (no <body> or <!DOCTYPE>); skip link
+        // rule is page-level and should NOT emit on partials.
+        yield 'missing skip link' => [__DIR__.'/Fixtures/invalid/no_skip_link.html.twig', []];
     }
 }

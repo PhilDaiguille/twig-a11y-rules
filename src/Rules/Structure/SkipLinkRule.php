@@ -18,20 +18,24 @@ final class SkipLinkRule extends AbstractA11yRule
             return;
         }
 
-        // Only perform a single page-level scan (when invoked on the first
-        // token) to detect absence of skip links. This avoids emitting the
-        // same violation multiple times.
+        // Page-level rule: only run once (tokenIndex 0) and only for full
+        // pages (containing <body> or <!DOCTYPE). This avoids reporting on
+        // partials/components.
         if (0 !== $tokenIndex) {
             return;
         }
 
         $content = $this->getFullContent($tokens);
 
-        if (preg_match('/href\s*=\s*["\"]#([^"\']+)["\"][^>]*>.*?skip/i', $content)) {
+        if (!str_contains($content, '<body') && !str_contains(strtoupper($content), '<!DOCTYPE')) {
             return;
         }
 
-        if (preg_match('/href\s*=\s*["\"]#(main|content)["\"][^>]*>/i', $content)) {
+        if (preg_match('/href\s*=\s*["\']#([^"\']+)["\'][^>]*>.*?skip/i', $content)) {
+            return;
+        }
+
+        if (preg_match('/href\s*=\s*["\']#(main|content)["\'][^>]*>/i', $content)) {
             return;
         }
 

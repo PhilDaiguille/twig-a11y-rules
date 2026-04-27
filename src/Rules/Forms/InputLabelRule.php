@@ -31,6 +31,11 @@ final class InputLabelRule extends AbstractA11yRule
             return;
         }
 
+        // Ignore hidden inputs: they don't require accessible labels
+        if (preg_match('/\btype\s*=\s*["\']hidden["\']/i', $opening)) {
+            return;
+        }
+
         // Id present?
         $id = null;
         if (preg_match('/\bid\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $opening, $m)) {
