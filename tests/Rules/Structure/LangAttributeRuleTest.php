@@ -36,5 +36,8 @@ final class LangAttributeRuleTest extends AbstractRuleTestCase
             __DIR__.'/Fixtures/invalid/html_no_lang.html.twig',
             ['LangAttribute.LangAttribute.MissingLang:2:1' => 'The <html> element should have a lang attribute.'],
         ];
+
+        // Partial fragments (no <html>) should not trigger the rule
+        yield 'partial fragment no html' => [__DIR__.'/Fixtures/valid/partial_no_html.html.twig', []];
     }
 }

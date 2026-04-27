@@ -30,5 +30,13 @@ final class LandmarkRuleTest extends AbstractRuleTestCase
         yield 'missing main' => [__DIR__.'/Fixtures/invalid/no_main.html.twig', [
             'Landmark.Landmark.MissingMain:1:1' => 'Page should include a main landmark',
         ]];
+
+        // Partials/fragments without <body> should NOT trigger the page-level rule
+        yield 'partial fragment' => [__DIR__.'/Fixtures/valid/partial_component_fragment.html.twig', []];
+
+        // Ensure only one error is emitted when the document has </head><body>
+        yield 'duplicate trigger check' => [__DIR__.'/Fixtures/invalid/duplicate_landmark_trigger.html.twig', [
+            'Landmark.Landmark.MissingMain:1:1' => 'Page should include a main landmark',
+        ]];
     }
 }
