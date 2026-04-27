@@ -16,6 +16,13 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
 
     /** Cached decision for the currently-processed file when rules are reused */
     private ?bool $skipThisFile = null;
+    /**
+     * Shared cache of TemplateKind decisions keyed by content hash to avoid
+     * repeatedly classifying the same file across multiple rule instances.
+     *
+     * @var array<string, \TwigA11y\Template\TemplateKind>
+     */
+    private static array $kindCache = [];
 
     // By default rules apply to all template kinds. Rules that should be
     // limited to specific kinds can override supportedKinds().
@@ -39,9 +46,14 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
         // this rule applies to the file. This supports rule instances being
         // reused across multiple files.
         if (0 === $tokenIndex) {
-            $kind = TemplateClassifier::classify(
-                $this->getFullContent($tokens)
-            );
+            $content = $this->getFullContent($tokens);
+            $hash = md5($content);
+
+            if (!isset(self::$kindCache[$hash])) {
+                self::$kindCache[$hash] = TemplateClassifier::classify($content);
+            }
+
+            $kind = self::$kindCache[$hash];
 
             $this->skipThisFile = !in_array($kind, $this->supportedKinds(), true);
         }

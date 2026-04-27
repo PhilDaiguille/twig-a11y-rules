@@ -9,7 +9,7 @@ vendor
 .agents
 .php-cs-fixer.cache
 .phpunit.result.cache
-AGENT.md
+AGENTS.md
 
 .DS_Store
 

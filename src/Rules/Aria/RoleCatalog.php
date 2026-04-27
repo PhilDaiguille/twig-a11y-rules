@@ -1,0 +1,63 @@
+<?php
+
+declare(strict_types=1);
+
+namespace TwigA11y\Rules\Aria;
+
+final class RoleCatalog
+{
+    /**
+     * Minimal role requirements mapping used by static checks.
+     * Map role => required attributes (simple case) and required children (names).
+     *
+     * @return array<string, array{required_attrs: string[], required_children: string[]}>
+     */
+    public static function getCatalog(): array
+    {
+        return [
+            // Structural / composite widgets
+            'table' => [
+                'required_attrs' => [],
+                'required_children' => ['row', 'rowgroup', 'rowheader'],
+            ],
+            'tablist' => [
+                'required_attrs' => [],
+                'required_children' => ['tab'],
+            ],
+            'list' => [
+                'required_attrs' => [],
+                'required_children' => ['listitem'],
+            ],
+            'radiogroup' => [
+                'required_attrs' => [],
+                'required_children' => ['radio'],
+            ],
+
+            // Common ARIA roles with basic expectations
+            'menu' => [
+                'required_attrs' => [],
+                'required_children' => ['menuitem', 'menuitemcheckbox', 'menuitemradio'],
+            ],
+            'menubar' => [
+                'required_attrs' => [],
+                'required_children' => ['menuitem', 'menuitemcheckbox', 'menuitemradio'],
+            ],
+            'tab' => [
+                'required_attrs' => ['aria-selected'],
+                'required_children' => [],
+            ],
+            'button' => [
+                'required_attrs' => [],
+                'required_children' => [],
+            ],
+            'checkbox' => [
+                'required_attrs' => ['aria-checked'],
+                'required_children' => [],
+            ],
+            'radio' => [
+                'required_attrs' => ['aria-checked'],
+                'required_children' => [],
+            ],
+        ];
+    }
+}
