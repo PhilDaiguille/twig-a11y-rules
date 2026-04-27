@@ -35,6 +35,6 @@
         "phpstan": "phpstan analyse",
         "rector": "rector",
         "lint": "composer cs-lint && composer phpstan && composer test && composer rector",
-        "lint:fix": "composer cs-fix && composer rector"
+        "lint:fix": "composer rector && composer cs-fix"
     }
 }

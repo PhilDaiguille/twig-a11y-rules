@@ -5,16 +5,12 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Template\TemplateKind;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
 final class LandmarkRule extends AbstractA11yRule
 {
-    protected function supportedKinds(): array
-    {
-        return [\TwigA11y\Template\TemplateKind::FullPage];
-    }
-
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -30,13 +26,10 @@ final class LandmarkRule extends AbstractA11yRule
             return;
         }
 
-        // This rule is page-level. Only evaluate once per file (at tokenIndex 0)
-        // and only if the content looks like a full HTML page (contains
-        // a <body> or a <!DOCTYPE). This avoids flagging fragments/partials.
-        if (0 !== $tokenIndex) {
-            return;
-        }
-
+        // This is a page-level rule: only run once per file and only on full
+        // pages. The AbstractA11yRule helper provides the once-per-file
+        // behaviour; here we just need to check the full-page heuristics and
+        // emit if missing.
         $full = $this->getFullContent($tokens);
 
         // If this looks like a fragment (no body/doctype), skip evaluation
@@ -51,5 +44,18 @@ final class LandmarkRule extends AbstractA11yRule
 
         $first = $tokens->get(0);
         $emit('Page should include a main landmark', $first, 'Landmark.MissingMain');
+    }
+
+    /**
+     * @return TemplateKind[]
+     */
+    protected function supportedKinds(): array
+    {
+        return [TemplateKind::FullPage];
+    }
+
+    protected function evaluateOncePerFile(): bool
+    {
+        return true;
     }
 }

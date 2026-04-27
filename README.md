@@ -179,6 +179,27 @@ Each rule lives in `src/Rules/{Category}/` and must have:
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full conventions.
 
+## Template classification and rule scoping
+
+Some rules are "page-level" and must only run on full HTML pages (to avoid
+flagging partials/components). To make this reliable we introduce a simple
+TemplateKind classifier used by the rules engine:
+
+- TemplateKind::FullPage: contains both `<html>` and `<body>` and isn't an
+  extending child.
+- TemplateKind::ChildTemplate: contains `{% extends %}`.
+- TemplateKind::ParentTemplate: contains `{% block %}` but no `<html>`.
+- TemplateKind::Partial: no `<html>`/`<body>`, typical component fragment.
+- TemplateKind::MixedTemplate: `{% extends %}` + own `{% block %}`.
+- TemplateKind::TwigUxComponent: uses `{% props %}` (Twig UX style components).
+
+Rules may declare which kinds they support. Page-level rules such as
+LangAttributeRule, LandmarkRule, SkipLinkRule and MetaViewportRule are scoped
+to FullPage only — this prevents false positives on components and partials.
+
+If you add a new page-level rule, include a partial fixture in the valid
+fixtures to document this decision and prevent regressions.
+
 ---
 
 ## License

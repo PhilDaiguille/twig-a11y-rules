@@ -9,10 +9,10 @@ final class TemplateClassifier
     public static function classify(string $content): TemplateKind
     {
         $hasExtends = str_contains($content, '{% extends');
-        $hasBlock   = str_contains($content, '{% block');
-        $hasHtml    = stripos($content, '<html') !== false;
-        $hasBody    = stripos($content, '<body') !== false;
-        $hasProps   = str_contains($content, '{% props');
+        $hasBlock = str_contains($content, '{% block');
+        $hasHtml = false !== stripos($content, '<html');
+        $hasBody = false !== stripos($content, '<body');
+        $hasProps = str_contains($content, '{% props');
 
         if ($hasProps) {
             return TemplateKind::TwigUxComponent;
