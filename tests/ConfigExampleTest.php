@@ -16,6 +16,6 @@ final class ConfigExampleTest extends TestCase
     {
         $config = require dirname(__DIR__).'/.twig-cs-fixer.php';
 
-        self::assertInstanceOf(Config::class, $config);
+        $this->assertInstanceOf(Config::class, $config);
     }
 }

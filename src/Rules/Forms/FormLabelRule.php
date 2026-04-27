@@ -27,11 +27,9 @@ final class FormLabelRule extends AbstractA11yRule
         $full = $this->getFullContent($tokens);
 
         // Check for for attribute
-        if (preg_match('/\bfor\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $opening)) {
-            // also ensure there's content (closing tag with some content)
-            if (preg_match('/<label[^>]*>\s*[^<]+\s*<\/label>/i', $full)) {
-                return;
-            }
+        // also ensure there's content (closing tag with some content)
+        if (preg_match('/\bfor\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $opening) && preg_match('/<label[^>]*>\s*[^<]+\s*<\/label>/i', $full)) {
+            return;
         }
 
         // If label wraps content and contains input/select/textarea

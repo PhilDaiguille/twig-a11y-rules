@@ -37,6 +37,7 @@ use TwigA11y\Standard\A11yBasicStandard;
 use TwigA11y\Standard\A11yRecommendedStandard;
 use TwigA11y\Standard\A11yStandard;
 use TwigA11y\Standard\A11yStrict;
+use TwigCsFixer\Rules\Node\NodeRuleInterface;
 use TwigCsFixer\Rules\RuleInterface;
 use TwigCsFixer\Standard\StandardInterface;
 
@@ -155,9 +156,9 @@ final class A11yStandardTest extends TestCase
         $standard = $this->classes(new A11yStandard());
         $strict = $this->classes(new A11yStrict());
 
-        self::assertSame($basic, array_values(array_intersect($recommended, $basic)));
-        self::assertSame($recommended, array_values(array_intersect($standard, $recommended)));
-        self::assertSame($standard, array_values(array_intersect($strict, $standard)));
+        $this->assertSame($basic, array_values(array_intersect($recommended, $basic)));
+        $this->assertSame($recommended, array_values(array_intersect($standard, $recommended)));
+        $this->assertSame($standard, array_values(array_intersect($strict, $standard)));
     }
 
     /**
@@ -167,13 +168,11 @@ final class A11yStandardTest extends TestCase
     {
         $rules = $standard->getRules();
 
-        self::assertNotEmpty($rules);
-        foreach ($rules as $rule) {
-            self::assertInstanceOf(RuleInterface::class, $rule);
-        }
+        $this->assertNotEmpty($rules);
+        $this->assertContainsOnlyInstancesOf(RuleInterface::class, $rules);
 
         return array_map(
-            static fn ($rule): string => $rule::class,
+            static fn (NodeRuleInterface|RuleInterface $rule): string => $rule::class,
             $rules
         );
     }

@@ -21,7 +21,7 @@ final class AriaRoleRule extends AbstractA11yRule
         $tag = $this->getFullContent($tokens);
 
         if (preg_match_all('/role\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $tag, $m)) {
-            $roles = array_map('strtolower', $m[1]);
+            $roles = array_map(strtolower(...), $m[1]);
 
             // expanded list of common ARIA roles
             $allowed = [

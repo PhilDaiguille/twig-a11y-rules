@@ -36,7 +36,7 @@ final class BannedTagsRuleTest extends AbstractRuleTestCase
             $messages[$id?->toString() ?? ''] = $violation->getMessage();
         }
 
-        self::assertSame($expectedErrors, $messages);
+        $this->assertSame($expectedErrors, $messages);
     }
 
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
