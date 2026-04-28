@@ -2,12 +2,12 @@
 
 ## Phase 2 — Règles moyenne priorité (1 jour)
 
-- [ ] Valider valeurs `autocomplete` officielles WCAG 1.3.5 (`autocomplete-valid`)
-- [ ] `<fieldset>` sans `<legend>` non vide (`fieldset-legend`)
-- [ ] `<svg role="img">` sans `<title>` (`role-img-alt`)
-- [ ] ARIA attrs non autorisés par rôle (`aria-allowed-attr`)
-- [ ] `<ul>`/`<ol>` avec enfants non `<li>` (`list-structure`) + `<dl>` sans `<dt>`/`<dd>`
-- [ ] `overflow:scroll`/`auto` inline sans `tabindex` (`scrollable-region-focusable`)
+ - [x] Valider valeurs `autocomplete` officielles WCAG 1.3.5 (`autocomplete-valid`)
+ - [x] `<fieldset>` sans `<legend>` non vide (`fieldset-legend`)
+ - [x] `<svg role="img">` sans `<title>` (`role-img-alt`)
+ - [x] ARIA attrs non autorisés par rôle (`aria-allowed-attr`)
+ - [x] `<ul>`/`<ol>` avec enfants non `<li>` (`list-structure`) + `<dl>` sans `<dt>`/`<dd>`
+ - [x] `overflow:scroll`/`auto` inline sans `tabindex` (`scrollable-region-focusable`)
 
 ## Phase 3 — Règles complémentaires + AAA (½ jour)
 

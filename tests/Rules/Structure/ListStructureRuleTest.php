@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace TwigA11y\Tests\Rules\Aria;
+namespace TwigA11y\Tests\Rules\Structure;
 
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DataProvider;
-use TwigA11y\Rules\Aria\AriaAllowedAttrRule;
+use TwigA11y\Rules\Structure\ListStructureRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
  * @internal
  */
 #[CoversNothing]
-final class AriaAllowedAttrRuleTest extends AbstractRuleTestCase
+final class ListStructureRuleTest extends AbstractRuleTestCase
 {
     /**
      * @param array<string, string> $expectedErrors
@@ -21,7 +21,7 @@ final class AriaAllowedAttrRuleTest extends AbstractRuleTestCase
     #[DataProvider('provideFixtures')]
     public function testRule(string $fixture, array $expectedErrors): void
     {
-        $this->checkRule(new AriaAllowedAttrRule(), $expectedErrors, $fixture);
+        $this->checkRule(new ListStructureRule(), $expectedErrors, $fixture);
     }
 
     /**
@@ -29,8 +29,8 @@ final class AriaAllowedAttrRuleTest extends AbstractRuleTestCase
      */
     public static function provideFixtures(): iterable
     {
-        yield 'aria attr not allowed' => [__DIR__.'/Fixtures/invalid/aria_attr_not_allowed.html.twig', [
-            'AriaAllowedAttr.AriaAllowed.Invalid:1:1' => 'Attribute aria-checked is not allowed on role button.',
+        yield 'ul with non-li child' => [__DIR__.'/Fixtures/invalid/list_non_li.html.twig', [
+            'ListStructure.ListStructure.InvalidChild:1:1' => 'List (<ul>/<ol>) contains non-<li> child.',
         ]];
     }
 }

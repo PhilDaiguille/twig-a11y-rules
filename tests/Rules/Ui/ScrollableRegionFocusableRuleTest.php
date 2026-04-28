@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace TwigA11y\Tests\Rules\Aria;
+namespace TwigA11y\Tests\Rules\Ui;
 
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DataProvider;
-use TwigA11y\Rules\Aria\AriaAllowedAttrRule;
+use TwigA11y\Rules\Ui\ScrollableRegionFocusableRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
  * @internal
  */
 #[CoversNothing]
-final class AriaAllowedAttrRuleTest extends AbstractRuleTestCase
+final class ScrollableRegionFocusableRuleTest extends AbstractRuleTestCase
 {
     /**
      * @param array<string, string> $expectedErrors
@@ -21,7 +21,7 @@ final class AriaAllowedAttrRuleTest extends AbstractRuleTestCase
     #[DataProvider('provideFixtures')]
     public function testRule(string $fixture, array $expectedErrors): void
     {
-        $this->checkRule(new AriaAllowedAttrRule(), $expectedErrors, $fixture);
+        $this->checkRule(new ScrollableRegionFocusableRule(), $expectedErrors, $fixture);
     }
 
     /**
@@ -29,8 +29,8 @@ final class AriaAllowedAttrRuleTest extends AbstractRuleTestCase
      */
     public static function provideFixtures(): iterable
     {
-        yield 'aria attr not allowed' => [__DIR__.'/Fixtures/invalid/aria_attr_not_allowed.html.twig', [
-            'AriaAllowedAttr.AriaAllowed.Invalid:1:1' => 'Attribute aria-checked is not allowed on role button.',
+        yield 'scrollable without tabindex' => [__DIR__.'/Fixtures/invalid/scrollable_no_tabindex.html.twig', [
+            'ScrollableRegionFocusable.Scrollable.Focusable:1:1' => 'Scrollable region with overflow must be keyboard-focusable via tabindex.',
         ]];
     }
 }
