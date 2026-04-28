@@ -1,28 +1,28 @@
-name: Tests
+name: QA
 
 on:
+  workflow_call: {}
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
 
 jobs:
-  phpunit:
+  build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         php: [ '8.2', '8.3', '8.4' ]
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v6
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: mbstring, dom, xdebug
+          extensions: mbstring, dom, intl, xdebug
           coverage: xdebug
 
       - name: Get composer cache directory
@@ -38,6 +38,18 @@ jobs:
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+
+      - name: Run PHPStan
+        run: composer phpstan -- --no-progress
+
+      - name: Run php-cs-fixer (dry-run)
+        run: composer cs-lint
+
+      - name: Run twig-cs-fixer lint
+        run: vendor/bin/twig-cs-fixer lint . --config=.twig-cs-fixer.php --no-cache || true
+
+      - name: Run rector (dry-run)
+        run: composer rector
 
       - name: Run tests with coverage
         run: |
@@ -55,3 +67,27 @@ jobs:
         uses: codecov/test-results-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
+  infection:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, dom
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+
+      - name: Require Infection (temporary)
+        run: composer require --dev infection/infection --no-interaction --no-progress || true
+
+      - name: Run Infection (mutation testing)
+        run: vendor/bin/infection --min-msi=50
+        continue-on-error: true

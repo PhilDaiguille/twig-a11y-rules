@@ -33,8 +33,9 @@
         "cs-lint": "php-cs-fixer fix --dry-run --diff --verbose",
         "cs-fix": "php-cs-fixer fix",
         "phpstan": "phpstan analyse",
-        "rector": "rector",
+        "rector": "rector --dry-run",
+        "rector:apply": "rector",
         "lint": "composer cs-lint && composer phpstan && composer test && composer rector",
-        "lint:fix": "composer rector && composer cs-fix"
+        "lint:fix": "composer rector:apply && composer cs-fix"
     }
 }
