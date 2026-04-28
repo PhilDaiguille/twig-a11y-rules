@@ -27,7 +27,10 @@ final class TableHeaderRuleTest extends AbstractRuleTestCase
 
         yield 'missing th scope' => [
             __DIR__.'/Fixtures/invalid/table_missing_th_scope.html.twig',
-            ['TableHeader.TableHeader.MissingScope:1:1' => 'Table header <th> elements should include a scope attribute.'],
+            [
+                'TableHeader.TableHeader.MissingScope:1:1' => 'Table header <th> elements should include a scope attribute.',
+                'TableHeader.TableHeader.MissingScope#2:1:1' => 'Table header <th> elements should include a scope attribute.',
+            ],
         ];
     }
 }

@@ -42,8 +42,15 @@ final class AriaRoleRule extends AbstractA11yRule
 
             if ([] !== $invalid) {
                 $tokenRef = $tokens->get(0);
+                $idx = 0;
                 foreach ($invalid as $role) {
-                    $emit(sprintf('Invalid ARIA role "%s".', $role), $tokenRef, 'AriaRole.InvalidRole');
+                    ++$idx;
+                    $id = 'AriaRole.InvalidRole';
+                    if ($idx > 1) {
+                        $id .= '#'.$idx;
+                    }
+
+                    $emit(sprintf('Invalid ARIA role "%s".', $role), $tokenRef, $id);
                 }
             }
         }

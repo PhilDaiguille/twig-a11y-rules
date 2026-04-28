@@ -26,7 +26,15 @@ final class IframeTitleRule extends AbstractA11yRule
 
         // Title attribute must be present and non-empty
         if (!preg_match('/title\s*=\s*(?:"|\')([^"\']*)(?:"|\')/i', $tag, $m) || '' === trim($m[1])) {
-            $emit('Iframe must have a non-empty title attribute.', $token, 'IframeTitle.Missing');
+            /** @var int $idx */
+            static $idx = 0;
+            ++$idx;
+            $id = 'IframeTitle.Missing';
+            if ($idx > 1) {
+                $id .= '#'.$idx;
+            }
+
+            $emit('Iframe must have a non-empty title attribute.', $token, $id);
         }
     }
 }

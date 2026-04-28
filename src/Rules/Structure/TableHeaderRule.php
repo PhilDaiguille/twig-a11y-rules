@@ -26,13 +26,20 @@ final class TableHeaderRule extends AbstractA11yRule
             return;
         }
 
+        $idx = 0;
         foreach ($m as $set) {
             $attrs = $set[1];
             if (!preg_match('/\bscope\b\s*=\s*(?:"|\')/i', $attrs)) {
+                ++$idx;
                 $token = $tokens->get(0);
-                $emit('Table header <th> elements should include a scope attribute.', $token, 'TableHeader.MissingScope');
+                $id = 'TableHeader.MissingScope';
+                if ($idx > 1) {
+                    $id .= '#'.$idx;
+                }
 
-                return;
+                $emit('Table header <th> elements should include a scope attribute.', $token, $id);
+
+                // continue reporting other missing scopes
             }
         }
     }

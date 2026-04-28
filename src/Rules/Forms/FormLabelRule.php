@@ -45,10 +45,18 @@ final class FormLabelRule extends AbstractA11yRule
             return;
         }
 
+        /** @var int $idx */
+        static $idx = 0;
+        ++$idx;
+        $id = 'FormLabel.InvalidLabel';
+        if ($idx > 1) {
+            $id .= '#'.$idx;
+        }
+
         $emit(
             '<label> must have a for attribute or non-empty content.',
             $token,
-            'FormLabel.InvalidLabel'
+            $id
         );
     }
 }

@@ -33,15 +33,23 @@ final class HeadingOrderRule extends AbstractA11yRule
         }
 
         $prev = 0;
+        $errorIndex = 0;
         foreach ($levels as $lvl) {
             if (0 !== $prev && $lvl > $prev + 1) {
+                ++$errorIndex;
+                $id = 'HeadingOrder.Invalid';
+                if ($errorIndex > 1) {
+                    // append an index so each violation identifier is unique for tests
+                    $id .= '#'.$errorIndex;
+                }
+
                 $emit(
                     sprintf('Heading level jumped from h%d to h%d.', $prev, $lvl),
                     $token,
-                    'HeadingOrder.Invalid'
+                    $id
                 );
 
-                break;
+                // continue scanning to collect all jumps in the file
             }
 
             $prev = $lvl;

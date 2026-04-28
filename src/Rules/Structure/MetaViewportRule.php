@@ -32,7 +32,16 @@ final class MetaViewportRule extends AbstractA11yRule
 
         if (preg_match('/user-scalable\s*=\s*no/i', $fullLower)) {
             $token = $tokens->get(0);
-            $emit('Avoid using user-scalable=no in the viewport meta.', $token, 'MetaViewport.UserScalable');
+
+            /** @var int $idx */
+            static $idx = 0;
+            ++$idx;
+            $id = 'MetaViewport.UserScalable';
+            if ($idx > 1) {
+                $id .= '#'.$idx;
+            }
+
+            $emit('Avoid using user-scalable=no in the viewport meta.', $token, $id);
         }
     }
 

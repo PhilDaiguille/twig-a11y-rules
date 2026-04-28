@@ -45,7 +45,15 @@ final class AnchorContentRule extends AbstractA11yRule
                 && !preg_match('/\btitle\s*=\s*("|\')/i', $opening)
             ) {
                 // Axe-core rule reference: link-name
-                $emit('Anchor element without accessible name (axe-core: link-name) should have an aria-label or title.', $token, 'AnchorContent.Warning.LinkName');
+                /** @var int $idx */
+                static $idx = 0;
+                ++$idx;
+                $id = 'AnchorContent.Warning.LinkName';
+                if ($idx > 1) {
+                    $id .= '#'.$idx;
+                }
+
+                $emit('Anchor element without accessible name (axe-core: link-name) should have an aria-label or title.', $token, $id);
             }
         }
     }
