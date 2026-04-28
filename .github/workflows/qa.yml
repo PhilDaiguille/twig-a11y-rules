@@ -52,40 +52,31 @@ jobs:
               run: composer rector -- --dry-run
 
             - name: Run tests with coverage
+              env:
+                  XDEBUG_MODE: coverage
               run: |
                   ./vendor/bin/phpunit \
+                    --coverage-clover=build/coverage/coverage.xml \
                     --coverage-xml=build/coverage/coverage-xml \
-                    --log-junit=build/coverage/junit.xml \
-                    --coverage-clover=build/coverage/coverage.xml
-
-            - name: Upload coverage and test results artifact
-              uses: actions/upload-artifact@v7
-              with:
-                  name: test-results-php${{ matrix.php }}
-                  path: |
-                      build/coverage/coverage.xml
-                      build/coverage/junit.xml
-                  if-no-files-found: warn
+                    --log-junit=build/coverage/junit.xml
 
             - name: Upload coverage to Codecov
-              if: ${{ env.CODECOV_TOKEN != '' }}
+              if: ${{ matrix.php == '8.3' }}
               uses: codecov/codecov-action@v6
-              env:
-                  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
               with:
                   token: ${{ secrets.CODECOV_TOKEN }}
                   files: build/coverage/coverage.xml
                   fail_ci_if_error: true
+                  verbose: true
 
             - name: Upload test results to Codecov
-              if: ${{ !cancelled() }}
+              if: ${{ matrix.php == '8.3' && !cancelled() }}
               uses: codecov/codecov-action@v6
-              env:
-                  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
               with:
                   token: ${{ secrets.CODECOV_TOKEN }}
                   files: build/coverage/junit.xml
                   report_type: test_results
+                  fail_ci_if_error: false
 
     infection:
         needs: build
@@ -116,17 +107,11 @@ jobs:
             - name: Install dependencies
               run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
-            - name: Run tests with coverage (for Infection)
-              run: |
-                  ./vendor/bin/phpunit \
-                    --coverage-xml=build/coverage/coverage-xml \
-                    --log-junit=build/coverage/junit.xml
-
             - name: Run Infection (mutation testing)
+              env:
+                  XDEBUG_MODE: coverage
               run: |
                   vendor/bin/infection \
-                    --coverage=build/coverage \
-                    --skip-initial-tests \
                     --no-progress \
                     --threads=4 \
                     --min-msi=50

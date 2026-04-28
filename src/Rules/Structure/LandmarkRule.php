@@ -37,11 +37,6 @@ final class LandmarkRule extends AbstractA11yRule
         // we just need to check the full-page heuristics and emit if missing.
         $full = $this->getFullContent($tokens);
 
-        // If this looks like a fragment (no body/doctype), skip evaluation
-        if (!str_contains($full, '<body') && !str_contains(strtoupper($full), '<!DOCTYPE')) {
-            return;
-        }
-
         // Scan the full content for a main landmark or role="main"
         if (str_contains($full, '<main') || preg_match('/role\s*=\s*["\']main["\']/i', $full)) {
             return;

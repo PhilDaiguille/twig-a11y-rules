@@ -38,10 +38,6 @@ final class AriaAllowedAttrRule extends AbstractA11yRule
                     continue;
                 }
 
-                foreach ($this->allowed[$role] as $attr) {
-                    // nothing
-                }
-
                 // naive check: find any aria- attribute not in allowed list
                 if (preg_match_all('/\baria-[a-z0-9-]+\s*=\s*(?:"|\')[^"\']*(?:"|\')/i', $attrs, $am)) {
                     foreach ($am[0] as $ariaRaw) {

@@ -48,22 +48,22 @@ final class OutlineNoneWithoutFocusVisibleRule extends AbstractA11yRule
                 }
 
                 if (!$hasCompensation) {
-                    // Calcul la ligne d’apparition pour l’erreur
-                    $ligne = 1;
+                    // Compute the line number where the error appears
+                    $line = 1;
                     $pos = strpos($content, $match[0]);
                     if (false !== $pos) {
-                        $ligne += substr_count(substr($content, 0, $pos), "\n");
+                        $line += substr_count(substr($content, 0, $pos), "\n");
                     }
 
                     $fakeToken = $tokens->get(0);
                     $fakeToken = new Token(
                         $fakeToken->getType(),
-                        $ligne,
+                        $line,
                         1,
                         $fakeToken->getFilename(),
                         $match[0]
                     );
-                    $emit('Usage de outline:none/0 sans compensation focus-visible', $fakeToken, 'OutlineNoneNoFocusVisible');
+                    $emit('Using outline:none/0 without focus-visible compensation.', $fakeToken, 'OutlineNoneNoFocusVisible');
                 }
             }
         }

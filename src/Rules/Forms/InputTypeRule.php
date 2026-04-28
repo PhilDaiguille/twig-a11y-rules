@@ -10,7 +10,12 @@ use TwigCsFixer\Token\Tokens;
 final class InputTypeRule extends AbstractA11yRule
 {
     /**
-     * Check inputs with certain types have an autocomplete attribute.
+     * Input types that require an autocomplete attribute for WCAG 1.3.5 (Identify Input Purpose).
+     */
+    private const AUTOCOMPLETE_REQUIRED_TYPES = ['email', 'tel', 'name', 'username', 'new-password', 'current-password'];
+
+    /**
+     * Check inputs with personal-data types have an autocomplete attribute (WCAG 1.3.5).
      */
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
@@ -20,21 +25,25 @@ final class InputTypeRule extends AbstractA11yRule
 
         $full = $this->getFullContent($tokens);
 
-        // quick bail
         if (!str_contains($full, '<input')) {
             return;
         }
 
-        // find inputs of type email/tel/name etc - we'll check only email for now
-        if (!preg_match_all('/<input\b([^>]*\btype\s*=\s*(?:"|\')email(?:"|\')[^>]*)>/i', $full, $m, PREG_SET_ORDER)) {
+        $typePattern = implode('|', array_map(preg_quote(...), self::AUTOCOMPLETE_REQUIRED_TYPES));
+
+        if (!preg_match_all('/<input\b([^>]*\btype\s*=\s*(?:"|\')(?:'.$typePattern.')(?:"|\')[^>]*)>/i', $full, $m, PREG_SET_ORDER)) {
             return;
         }
 
         foreach ($m as $set) {
             $attrs = $set[1];
             if (!preg_match('/\bautocomplete\b\s*=\s*(?:"|\')/i', $attrs)) {
+                // Extract matched type for a more precise error message
+                preg_match('/\btype\s*=\s*(?:"|\')([^"\']+)(?:"|\')/', $attrs, $tm);
+                $type = $tm[1] ?? 'unknown';
+
                 $token = $tokens->get(0);
-                $emit('Input of type "email" should include an autocomplete attribute.', $token, 'InputType.MissingAutocomplete');
+                $emit(sprintf('Input of type "%s" should include an autocomplete attribute (WCAG 1.3.5).', $type), $token, 'InputType.MissingAutocomplete');
 
                 return;
             }

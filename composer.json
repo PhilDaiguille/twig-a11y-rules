@@ -38,7 +38,7 @@
         "rector": "rector --dry-run",
         "rector:apply": "rector",
         "infection": "infection",
-        "lint": "composer cs-lint && composer phpstan --memory-limit=2g && composer test && composer rector",
+        "lint": "composer cs-lint && vendor/bin/phpstan --memory-limit=2g && composer test && composer rector",
         "lint:fix": "composer rector:apply && composer cs-fix"
     },
     "config": {

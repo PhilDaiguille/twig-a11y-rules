@@ -39,6 +39,8 @@ use TwigA11y\Rules\Structure\AnchorContentRule;
 use TwigA11y\Rules\Structure\AreaAltRule;
 use TwigA11y\Rules\Structure\BannedTagsRule;
 use TwigA11y\Rules\Structure\ButtonContentRule;
+use TwigA11y\Rules\Structure\DocumentTitleRule;
+use TwigA11y\Rules\Structure\DuplicateAccessKeyRule;
 use TwigA11y\Rules\Structure\DuplicateIdRule;
 use TwigA11y\Rules\Structure\FieldsetLegendRule;
 use TwigA11y\Rules\Structure\FrameTitleRule;
@@ -49,9 +51,11 @@ use TwigA11y\Rules\Structure\IframeTitleRule;
 use TwigA11y\Rules\Structure\LandmarkRule;
 use TwigA11y\Rules\Structure\LandmarkUniqueRule;
 use TwigA11y\Rules\Structure\LangAttributeRule;
+use TwigA11y\Rules\Structure\LangAttributeValueRule;
 use TwigA11y\Rules\Structure\ListStructureRule;
 use TwigA11y\Rules\Structure\MetaRefreshRule;
 use TwigA11y\Rules\Structure\MetaViewportRule;
+use TwigA11y\Rules\Structure\NestedInteractiveRule;
 use TwigA11y\Rules\Structure\PageHeadingOneRule;
 use TwigA11y\Rules\Structure\SkipLinkRule;
 use TwigA11y\Rules\Structure\TableDuplicateNameRule;
@@ -201,6 +205,10 @@ final class A11yStandardTest extends TestCase
                 FrameTitleRule::class,
                 InputImageAltRule::class,
                 MetaRefreshRule::class,
+                DocumentTitleRule::class,
+                LangAttributeValueRule::class,
+                NestedInteractiveRule::class,
+                DuplicateAccessKeyRule::class,
             ],
             $this->classes(new A11yStrict())
         );

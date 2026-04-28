@@ -33,9 +33,4 @@ final class PageHeadingOneRule extends AbstractA11yRule
     {
         return [TemplateKind::FullPage];
     }
-
-    protected function shouldSkipByTokenIndex(int $tokenIndex): bool
-    {
-        return $this->evaluateOncePerFile() && 0 !== $tokenIndex;
-    }
 }

@@ -7,6 +7,27 @@ namespace TwigA11y\Rules\Aria;
 final class RoleCatalog
 {
     /**
+     * Complete list of valid WAI-ARIA 1.2 role values.
+     * Used by AriaRoleRule for role validity checks.
+     *
+     * @return string[]
+     */
+    public static function getAllowedRoles(): array
+    {
+        return [
+            'alert', 'alertdialog', 'application', 'article', 'banner', 'button', 'checkbox', 'columnheader',
+            'combobox', 'complementary', 'contentinfo', 'dialog', 'directory', 'document', 'feed', 'figure',
+            'form', 'generic', 'grid', 'gridcell', 'group', 'heading', 'img', 'insertion', 'link', 'list',
+            'listbox', 'listitem', 'log', 'main', 'mark', 'math', 'menu', 'menubar', 'menuitem',
+            'menuitemcheckbox', 'menuitemradio', 'meter', 'navigation', 'none', 'note', 'option',
+            'presentation', 'progressbar', 'radio', 'radiogroup', 'region', 'row', 'rowgroup', 'rowheader',
+            'scrollbar', 'search', 'searchbox', 'separator', 'slider', 'spinbutton', 'status', 'strong',
+            'subscript', 'superscript', 'switch', 'tab', 'table', 'tablist', 'tabpanel', 'term', 'textbox',
+            'time', 'timer', 'toolbar', 'tooltip', 'tree', 'treegrid', 'treeitem',
+        ];
+    }
+
+    /**
      * Minimal role requirements mapping used by static checks.
      * Map role => required attributes (simple case) and required children (names).
      *
