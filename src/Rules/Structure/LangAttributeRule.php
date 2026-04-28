@@ -26,8 +26,8 @@ final class LangAttributeRule extends AbstractA11yRule
 
         $opening = $this->collectUntil($tokenIndex, $tokens, '>');
 
-        if (!preg_match('/\blang\s*=\s*("|\')/i', $opening)) {
-            $emit('The <html> element should have a lang attribute.', $token, 'LangAttribute.MissingLang');
+        if (!preg_match('/\blang\s*=\s*("|\')([^"\']*)("|\')/i', $opening, $m) || '' === trim($m[2])) {
+            $emit('The <html> element should have a non-empty lang attribute.', $token, 'LangAttribute.MissingLang');
         }
     }
 

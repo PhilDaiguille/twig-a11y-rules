@@ -4,42 +4,20 @@ declare(strict_types=1);
 
 namespace TwigA11y\Rules\Forms;
 
-use TwigA11y\Rules\AbstractA11yRule;
-use TwigCsFixer\Token\Token;
-use TwigCsFixer\Token\Tokens;
-
-final class TextareaLabelRule extends AbstractA11yRule
+final class TextareaLabelRule extends AbstractFormFieldLabelRule
 {
-    public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
+    protected function tagName(): string
     {
-        $token = $tokens->get($tokenIndex);
-        if (!$token->isMatching(Token::TEXT_TYPE)) {
-            return;
-        }
+        return 'textarea';
+    }
 
-        $value = $token->getValue();
-        if (!str_contains($value, '<textarea')) {
-            return;
-        }
+    protected function missingMessage(): string
+    {
+        return 'Textarea must have an associated <label>.';
+    }
 
-        // Collect opening tag
-        $opening = $this->collectUntil($tokenIndex, $tokens, '>');
-
-        $id = null;
-        if (preg_match('/\bid\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $opening, $m)) {
-            $id = $m[1];
-        }
-
-        $full = $this->getFullContent($tokens);
-
-        if (null !== $id && preg_match('/<label[^>]*for\s*=\s*["\']'.preg_quote($id, '/').'["\']/i', $full)) {
-            return;
-        }
-
-        if (preg_match('/<label[^>]*>\s*<textarea[^>]*>/i', $full)) {
-            return;
-        }
-
-        $emit('Textarea must have an associated <label>.', $token, 'TextareaLabel.Missing');
+    protected function messageId(): string
+    {
+        return 'TextareaLabel.Missing';
     }
 }

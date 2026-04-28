@@ -12,11 +12,8 @@ final class AriaHiddenFocusRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        // Only run the full-file scan once per file: guard on tokenIndex 0 which
-        // is the first token in the stream. Using an instance property caused
-        // the rule to skip subsequent files when the same rule instance was
-        // reused.
-        if (0 !== $tokenIndex) {
+        // Page-level rule: defer to helper which respects evaluateOncePerFile().
+        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
             return;
         }
 
@@ -48,5 +45,10 @@ final class AriaHiddenFocusRule extends AbstractA11yRule
                 }
             }
         }
+    }
+
+    protected function evaluateOncePerFile(): bool
+    {
+        return true;
     }
 }

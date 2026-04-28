@@ -14,6 +14,10 @@ final class AnchorAccessibleNameRule extends AbstractA11yRule
 
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
+        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
+            return;
+        }
+
         $token = $tokens->get($tokenIndex);
         if (!$token->isMatching(Token::TEXT_TYPE)) {
             return;

@@ -12,7 +12,7 @@ final class IframeFocusableContentRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if (0 !== $tokenIndex) {
+        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
             return;
         }
 
@@ -47,9 +47,14 @@ final class IframeFocusableContentRule extends AbstractA11yRule
 
                     $emit('Iframe has tabindex="-1" but contains focusable content.', $fakeToken, 'Iframe.FocusableContent');
 
-                    return;
+                    return; // emit only once per file
                 }
             }
         }
+    }
+
+    protected function evaluateOncePerFile(): bool
+    {
+        return true;
     }
 }

@@ -25,7 +25,7 @@ final class AutocompleteValidRule extends AbstractA11yRule
 
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if (0 !== $tokenIndex) {
+        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
             return;
         }
 
@@ -58,5 +58,10 @@ final class AutocompleteValidRule extends AbstractA11yRule
                 }
             }
         }
+    }
+
+    protected function evaluateOncePerFile(): bool
+    {
+        return true;
     }
 }

@@ -11,8 +11,8 @@ final class HeadingOrderRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        // Only run once per file to avoid duplicate errors (process is called for many tokens)
-        if (0 !== $tokenIndex) {
+        // Page-level rule: defer to evaluateOncePerFile via shouldSkipByTokenIndex
+        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
             return;
         }
 
@@ -47,4 +47,12 @@ final class HeadingOrderRule extends AbstractA11yRule
             $prev = $lvl;
         }
     }
+
+    protected function evaluateOncePerFile(): bool
+    {
+        return true;
+    }
+
+    // No template kind restriction: headings can appear in fragments and
+    // full-page templates alike.
 }

@@ -19,6 +19,13 @@ final class ImgAltRule extends AbstractA11yRule
 
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
+        // This rule inspects many inline tokens but should still run for
+        // each token that may contain an <img fragment. Use the per-token
+        // guard helper to allow page-level short-circuits where applicable.
+        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
+            return;
+        }
+
         $token = $tokens->get($tokenIndex);
 
         if (!$token->isMatching(Token::TEXT_TYPE)) {

@@ -12,8 +12,8 @@ final class AnchorContentRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        // Guard against out-of-range token indexes using the Tokens API.
-        if (!$tokens->has($tokenIndex)) {
+        // Respect per-token skip behavior for page-level short-circuits.
+        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
             return;
         }
 

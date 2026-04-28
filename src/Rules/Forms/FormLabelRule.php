@@ -12,6 +12,10 @@ final class FormLabelRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
+        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
+            return;
+        }
+
         $token = $tokens->get($tokenIndex);
 
         if (!$token->isMatching(Token::TEXT_TYPE)) {
@@ -26,14 +30,18 @@ final class FormLabelRule extends AbstractA11yRule
         $opening = $this->collectUntil($tokenIndex, $tokens, '>');
         $full = $this->getFullContent($tokens);
 
-        // Check for for attribute
-        // also ensure there's content (closing tag with some content)
-        if (preg_match('/\bfor\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $opening) && preg_match('/<label[^>]*>\s*[^<]+\s*<\/label>/i', $full)) {
+        // Check for for attribute + ensure that the referenced <label for="id"> has non-empty content
+        $forId = '';
+        if (preg_match('/\bfor\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $opening, $m)) {
+            $forId = $m[1];
+        }
+
+        if ('' !== $forId && preg_match('/<label[^>]*for\s*=\s*["\']'.preg_quote($forId, '/').'["\'][^>]*>\s*[^<]+\s*<\/label>/i', $full)) {
             return;
         }
 
         // If label wraps content and contains input/select/textarea
-        if (preg_match('/<label[^>]*>\s*<input|<select|<textarea/i', $full)) {
+        if (preg_match('/<label[^>]*>\s*(?:<input|<select|<textarea)/i', $full)) {
             return;
         }
 
