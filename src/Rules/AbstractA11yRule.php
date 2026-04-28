@@ -17,6 +17,14 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
     /** Cached decision for the currently-processed file when rules are reused */
     private ?bool $skipThisFile = null;
 
+    /** Per-instance cache of already-emitted messages keyed by file hash.
+     *
+     * Keyed by rule-file => array<string, bool>.
+     *
+     * @var array<string, array<string, bool>>
+     */
+    private array $emitted = [];
+
     /**
      * Shared cache of TemplateKind decisions keyed by content hash to avoid
      * repeatedly classifying the same file across multiple rule instances.
@@ -78,7 +86,7 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
             return;
         }
 
-        $this->evaluate($tokens, $tokenIndex, $this->createEmitter());
+        $this->evaluate($tokens, $tokenIndex, $this->createEmitter($tokens));
     }
 
     protected function emitsWarnings(): bool
@@ -105,10 +113,28 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
         return $cache[$hash];
     }
 
-    private function createEmitter(): callable
+    private function createEmitter(Tokens $tokens): callable
     {
+        // Use the file content hash to deduplicate identical emissions from
+        // the same rule for the same file. This prevents noisy repeated
+        // messages when rules are evaluated multiple times for the same
+        // template content.
+        $hash = md5($this->getFullContent($tokens));
+
+        $ruleFileKey = static::class.'::'.$hash;
+        if (!isset($this->emitted[$ruleFileKey])) {
+            $this->emitted[$ruleFileKey] = [];
+        }
+
         if ($this->emitsWarnings()) {
-            return function (string $message, Token $token, ?string $id = null): void {
+            return function (string $message, Token $token, ?string $id = null) use ($ruleFileKey): void {
+                $key = $message.'|'.($id ?? '');
+                if (isset($this->emitted[$ruleFileKey][$key])) {
+                    return;
+                }
+
+                $this->emitted[$ruleFileKey][$key] = true;
+
                 if (null === $id) {
                     $this->addWarning($message, $token);
 
@@ -119,7 +145,14 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
             };
         }
 
-        return function (string $message, Token $token, ?string $id = null): void {
+        return function (string $message, Token $token, ?string $id = null) use ($ruleFileKey): void {
+            $key = $message.'|'.($id ?? '');
+            if (isset($this->emitted[$ruleFileKey][$key])) {
+                return;
+            }
+
+            $this->emitted[$ruleFileKey][$key] = true;
+
             $this->addError($message, $token, $id);
         };
     }

@@ -28,5 +28,11 @@ final class LandmarkUniqueRuleTest extends AbstractRuleTestCase
         yield 'duplicate main landmarks' => [__DIR__.'/Fixtures/invalid/duplicate_main.html.twig', [
             'LandmarkUnique.Landmark.Unique:1:1' => 'Landmark role="main" appears 2 times; landmarks should be unique.',
         ]];
+
+        yield 'multiple nav with distinct labels' => [__DIR__.'/Fixtures/valid/multiple_nav_distinct_labels.html.twig', []];
+
+        yield 'multiple nav without labels' => [__DIR__.'/Fixtures/invalid/multiple_nav_no_labels.html.twig', [
+            'LandmarkUnique.Landmark.Unique:1:1' => 'Multiple nav landmarks found; ensure each has a distinct aria-label or aria-labelledby.',
+        ]];
     }
 }

@@ -40,5 +40,14 @@ final class ListStructureRule extends AbstractA11yRule
                 }
             }
         }
+
+        // detect orphan dt/dd outside of any dl
+        $withoutDl = preg_replace('/<dl[^>]*>.*?<\/dl>/is', '', $full);
+        if (preg_match('/<\s*(dt|dd)\b/i', (string) $withoutDl)) {
+            $fakeToken = $tokens->get(0);
+            $emit('Orphan <dt> or <dd> found outside of a <dl>.', $fakeToken, 'ListStructure.OrphanDtDd');
+
+            return;
+        }
     }
 }

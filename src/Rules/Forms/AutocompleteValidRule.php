@@ -44,6 +44,11 @@ final class AutocompleteValidRule extends AbstractA11yRule
                     $parts = [];
                 }
 
+                // If the attribute contains Twig expressions, skip
+                if ($this->containsTwigExpressions($value)) {
+                    continue;
+                }
+
                 foreach ($parts as $token) {
                     if ('' === $token) {
                         continue;
