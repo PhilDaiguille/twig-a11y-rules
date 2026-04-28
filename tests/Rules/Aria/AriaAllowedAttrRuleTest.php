@@ -9,8 +9,10 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Aria\AriaAllowedAttrRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
+/**
+ * @internal
+ */
 #[CoversNothing]
-/** @internal */
 final class AriaAllowedAttrRuleTest extends AbstractRuleTestCase
 {
     /**
@@ -27,9 +29,8 @@ final class AriaAllowedAttrRuleTest extends AbstractRuleTestCase
      */
     public static function provideFixtures(): iterable
     {
-        yield 'table without row children' => [
-            __DIR__.'/Fixtures/invalid/role_table_no_row.html.twig',
-            ['AriaAllowedAttr.AriaRequired.ChildrenMissing:1:1' => 'Role "table" should include children with role "row".'],
-        ];
+        yield 'aria attr not allowed' => [__DIR__.'/Fixtures/invalid/aria_attr_not_allowed.html.twig', [
+            'AriaAllowedAttr.AriaAllowed.Invalid:1:1' => 'Attribute aria-checked is not allowed on role button.',
+        ]];
     }
 }

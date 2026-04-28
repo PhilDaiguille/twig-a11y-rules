@@ -36,7 +36,15 @@ final class ButtonContentRule extends AbstractA11yRule
             }
 
             if ('' === $textOnly && !preg_match('/\baria-label\s*=\s*("|\')/i', $opening)) {
-                $emit('Button element without textual content must have an aria-label.', $token, 'ButtonContent.MissingContent');
+                /** @var int $idx */
+                static $idx = 0;
+                ++$idx;
+                $id = 'ButtonContent.MissingContent';
+                if ($idx > 1) {
+                    $id .= '#'.$idx;
+                }
+
+                $emit('Button element without textual content must have an aria-label.', $token, $id);
             }
         }
     }

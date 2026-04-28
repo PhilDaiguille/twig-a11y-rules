@@ -13,10 +13,8 @@ final class MetaViewportRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        // Guard so we only perform the full-file scan once by running on the
-        // first token index. Using an instance-scoped scanned flag caused the
-        // rule to silently skip later files when the same instance was reused.
-        if (0 !== $tokenIndex) {
+        // Page-level rule: use the new helper to skip non-zero token indexes.
+        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
             return;
         }
 
@@ -34,7 +32,16 @@ final class MetaViewportRule extends AbstractA11yRule
 
         if (preg_match('/user-scalable\s*=\s*no/i', $fullLower)) {
             $token = $tokens->get(0);
-            $emit('Avoid using user-scalable=no in the viewport meta.', $token, 'MetaViewport.UserScalable');
+
+            /** @var int $idx */
+            static $idx = 0;
+            ++$idx;
+            $id = 'MetaViewport.UserScalable';
+            if ($idx > 1) {
+                $id .= '#'.$idx;
+            }
+
+            $emit('Avoid using user-scalable=no in the viewport meta.', $token, $id);
         }
     }
 

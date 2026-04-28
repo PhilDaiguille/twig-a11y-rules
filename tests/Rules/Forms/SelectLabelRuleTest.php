@@ -25,6 +25,10 @@ final class SelectLabelRuleTest extends AbstractRuleTestCase
     {
         yield 'valid select' => [__DIR__.'/Fixtures/valid/select_with_label.html.twig', []];
 
+        yield 'valid select with aria-labelledby' => [__DIR__.'/Fixtures/valid/select_with_aria_labelledby.html.twig', []];
+
+        yield 'valid select with aria-label' => [__DIR__.'/Fixtures/valid/select_with_aria_label.html.twig', []];
+
         yield 'invalid select' => [__DIR__.'/Fixtures/invalid/select_no_label.html.twig', ['SelectLabel.SelectLabel.Missing:1:1' => 'Select element must have an associated <label>.']];
     }
 }

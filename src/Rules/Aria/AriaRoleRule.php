@@ -5,19 +5,17 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Aria;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
 final class AriaRoleRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        // Run once per file to avoid duplicate reports and to be robust against tokenization
-        if (0 !== $tokenIndex) {
+        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
             return;
         }
 
-        // Scan entire token stream to be robust against tokenization
+        // Page-level scan across the whole template
         $tag = $this->getFullContent($tokens);
 
         if (preg_match_all('/role\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $tag, $m)) {
@@ -34,16 +32,32 @@ final class AriaRoleRule extends AbstractA11yRule
                 'table', 'tablist', 'tabpanel', 'textbox', 'timer', 'toolbar', 'tooltip', 'tree', 'treegrid', 'treeitem',
             ];
 
-            // report only once per file/token stream
+            // Collect and report all invalid roles found in the document.
+            $invalid = [];
             foreach ($roles as $role) {
                 if (!in_array($role, $allowed, true)) {
-                    $tokenRef = $tokens->get(0);
-                    $emit(sprintf('Invalid ARIA role "%s".', $role), $tokenRef, 'AriaRole.InvalidRole');
+                    $invalid[] = $role;
+                }
+            }
 
-                    // stop after first invalid role for determinism in tests
-                    return;
+            if ([] !== $invalid) {
+                $tokenRef = $tokens->get(0);
+                $idx = 0;
+                foreach ($invalid as $role) {
+                    ++$idx;
+                    $id = 'AriaRole.InvalidRole';
+                    if ($idx > 1) {
+                        $id .= '#'.$idx;
+                    }
+
+                    $emit(sprintf('Invalid ARIA role "%s".', $role), $tokenRef, $id);
                 }
             }
         }
+    }
+
+    protected function evaluateOncePerFile(): bool
+    {
+        return true;
     }
 }

@@ -41,6 +41,15 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
         return false;
     }
 
+    // Backwards-compatible helper used by existing rules that used the
+    // pattern "if (0 !== $tokenIndex) return;". When refactoring rules to
+    // use evaluateOncePerFile(), replace those guards with a call to
+    // shouldSkipByTokenIndex().
+    protected function shouldSkipByTokenIndex(int $tokenIndex): bool
+    {
+        return $this->evaluateOncePerFile() && 0 !== $tokenIndex;
+    }
+
     final protected function process(int $tokenIndex, Tokens $tokens): void
     {
         // On the first token, determine the template kind and record whether
@@ -79,12 +88,21 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
 
     protected function getFullContent(Tokens $tokens): string
     {
+        // Build the content once, then cache by content-hash so subsequent
+        // calls for the same file are O(1).
         $content = '';
         foreach ($tokens->toArray() as $token) {
             $content .= $token->getValue();
         }
 
-        return $content;
+        /** @var array<string, string> $cache */
+        static $cache = [];
+        $hash = md5($content);
+        if (!isset($cache[$hash])) {
+            $cache[$hash] = $content;
+        }
+
+        return $cache[$hash];
     }
 
     private function createEmitter(): callable

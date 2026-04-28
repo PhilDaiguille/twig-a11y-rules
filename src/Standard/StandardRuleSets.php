@@ -115,15 +115,31 @@ final class StandardRuleSets
     }
 
     /**
-     * @param list<RuleInterface> $rules
+     * Accept either a list of RuleInterface instances or a list of class-string
+     * and return the corresponding list of class-string entries.
+     *
+     * @param list<RuleInterface|string> $rules
      *
      * @return list<class-string<RuleInterface>>
      */
     private static function classes(array $rules): array
     {
-        return array_map(
-            static fn (RuleInterface $rule): string => $rule::class,
-            $rules
-        );
+        $out = [];
+
+        foreach ($rules as $rule) {
+            if (is_string($rule)) {
+                if (!is_a($rule, RuleInterface::class, true)) {
+                    throw new \InvalidArgumentException($rule.' does not implement RuleInterface');
+                }
+
+                $out[] = $rule;
+
+                continue;
+            }
+
+            $out[] = $rule::class;
+        }
+
+        return $out;
     }
 }

@@ -88,4 +88,29 @@ trait TokenCollectorTrait
 
         return '';
     }
+
+    /**
+     * Find an associated <label for="id"> for the given id inside the
+     * full template content. Returns true when a matching for= is found.
+     */
+    protected function hasLabelFor(string $content, string $id): bool
+    {
+        if ('' === $id) {
+            return false;
+        }
+
+        return (bool) preg_match('/<label[^>]*for\s*=\s*["\']'.preg_quote($id, '/').'["\']/i', $content);
+    }
+
+    /**
+     * Extract the first id attribute value from an opening tag content.
+     */
+    protected function extractFirstId(string $opening): string
+    {
+        if (preg_match('/\bid\s*=\s*["\']([^"\']+)["\']/i', $opening, $m)) {
+            return $m[1];
+        }
+
+        return '';
+    }
 }

@@ -14,9 +14,8 @@ AGENTS.md
 .DS_Store
 
 ## Composer
+# This is a library: do NOT commit composer.lock to avoid locking consumers.
 composer.lock
-
-# Keep composer.lock in the repo (it was generated locally). Remove the ignore entry.
 
 ## Phpunit
 .coverage/
