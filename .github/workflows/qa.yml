@@ -55,7 +55,17 @@ jobs:
         run: |
           ./vendor/bin/phpunit --configuration phpunit.xml --log-junit junit.xml --coverage-text --coverage-clover=coverage.xml
 
+      - name: Upload coverage and test results artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            coverage.xml
+            junit.xml
+          if-no-files-found: warn
+
       - name: Upload coverage to Codecov
+        if: ${{ secrets.CODECOV_TOKEN != '' }}
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -88,3 +98,12 @@ jobs:
       - name: Run Infection (mutation testing)
         run: vendor/bin/infection --min-msi=50
         continue-on-error: true
+
+      - name: Upload Infection reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: infection-report
+          path: |
+            infection.html
+            infection.log
+          if-no-files-found: warn
