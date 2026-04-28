@@ -32,12 +32,9 @@ final class AriaValidAttrValueRule extends AbstractA11yRule
         foreach ($m as $pair) {
             $attr = strtolower($pair[1]);
             $value = $pair[2];
-            // Ignore Twig dynamic expressions
-            if (str_contains($value, '{{')) {
-                continue;
-            }
-
-            if (str_contains($value, '{%')) {
+            // Ignore Twig dynamic expressions using the trait helper which
+            // checks for {{ and {% via str_contains (no regex overhead).
+            if ($this->containsTwigExpressions($value)) {
                 continue;
             }
 

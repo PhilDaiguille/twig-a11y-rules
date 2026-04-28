@@ -10,10 +10,16 @@ use TwigCsFixer\Token\Tokens;
 
 final class FormLabelRule extends AbstractA11yRule
 {
+    private int $idx = 0;
+
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         if ($this->shouldSkipByTokenIndex($tokenIndex)) {
             return;
+        }
+
+        if (0 === $tokenIndex) {
+            $this->idx = 0;
         }
 
         $token = $tokens->get($tokenIndex);
@@ -45,12 +51,10 @@ final class FormLabelRule extends AbstractA11yRule
             return;
         }
 
-        /** @var int $idx */
-        static $idx = 0;
-        ++$idx;
+        ++$this->idx;
         $id = 'FormLabel.InvalidLabel';
-        if ($idx > 1) {
-            $id .= '#'.$idx;
+        if ($this->idx > 1) {
+            $id .= '#'.$this->idx;
         }
 
         $emit(

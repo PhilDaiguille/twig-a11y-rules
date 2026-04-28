@@ -10,6 +10,11 @@ use TwigCsFixer\Token\Tokens;
 
 final class OutlineNoneWithoutFocusVisibleRule extends AbstractA11yRule
 {
+    public function __construct()
+    {
+        parent::__construct(emitAsWarning: true);
+    }
+
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         if ($this->shouldSkipByTokenIndex($tokenIndex)) {
@@ -62,11 +67,6 @@ final class OutlineNoneWithoutFocusVisibleRule extends AbstractA11yRule
                 }
             }
         }
-    }
-
-    protected function emitsWarnings(): bool
-    {
-        return true;
     }
 
     protected function evaluateOncePerFile(): bool

@@ -14,12 +14,12 @@ return RectorConfig::configure()
         deadCode: true,
         codeQuality: true,
         codingStyle: true,
-        phpunitCodeQuality: true,
-        typeDeclarationDocblocks: true,
         typeDeclarations: true,
+        typeDeclarationDocblocks: true,
         privatization: true,
-        rectorPreset: true,
         earlyReturn: true,
+        rectorPreset: true,
+        phpunitCodeQuality: true,
     )
     ->withComposerBased(phpunit: true)
 ;

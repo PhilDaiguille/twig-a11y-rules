@@ -17,7 +17,8 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
     /** Cached decision for the currently-processed file when rules are reused */
     private ?bool $skipThisFile = null;
 
-    /** Per-instance cache of already-emitted messages keyed by file hash.
+    /**
+     * Per-instance cache of already-emitted messages keyed by file hash.
      *
      * Keyed by rule-file => array<string, bool>.
      *
@@ -32,6 +33,16 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
      * @var array<string, TemplateKind>
      */
     private static array $kindCache = [];
+
+    /** Per-instance cache of the full template content for the current file. */
+    private ?string $cachedContent = null;
+
+    /**
+     * @param bool $emitAsWarning Pass true for rules that should report
+     *                            accessibility hints as warnings rather than
+     *                            hard errors (e.g. AnchorContentRule).
+     */
+    public function __construct(private bool $emitAsWarning = false) {}
 
     // By default rules apply to all template kinds. Rules that should be
     // limited to specific kinds can override supportedKinds().
@@ -64,6 +75,8 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
         // this rule applies to the file. This supports rule instances being
         // reused across multiple files.
         if (0 === $tokenIndex) {
+            // Reset the per-file cache so the new file's content is used.
+            $this->cachedContent = null;
             $content = $this->getFullContent($tokens);
             $hash = md5($content);
 
@@ -89,28 +102,20 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
         $this->evaluate($tokens, $tokenIndex, $this->createEmitter($tokens));
     }
 
-    protected function emitsWarnings(): bool
-    {
-        return false;
-    }
-
     protected function getFullContent(Tokens $tokens): string
     {
-        // Build the content once, then cache by content-hash so subsequent
-        // calls for the same file are O(1).
+        if (null !== $this->cachedContent) {
+            return $this->cachedContent;
+        }
+
         $content = '';
         foreach ($tokens->toArray() as $token) {
             $content .= $token->getValue();
         }
 
-        /** @var array<string, string> $cache */
-        static $cache = [];
-        $hash = md5($content);
-        if (!isset($cache[$hash])) {
-            $cache[$hash] = $content;
-        }
+        $this->cachedContent = $content;
 
-        return $cache[$hash];
+        return $this->cachedContent;
     }
 
     private function createEmitter(Tokens $tokens): callable
@@ -126,7 +131,7 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
             $this->emitted[$ruleFileKey] = [];
         }
 
-        if ($this->emitsWarnings()) {
+        if ($this->emitAsWarning) {
             return function (string $message, Token $token, ?string $id = null) use ($ruleFileKey): void {
                 $key = $message.'|'.($id ?? '');
                 if (isset($this->emitted[$ruleFileKey][$key])) {

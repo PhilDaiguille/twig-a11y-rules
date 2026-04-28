@@ -34,7 +34,7 @@ final class AriaDeprecatedRoleRuleTest extends AbstractRuleTestCase
             [
                 // Warning keys are still produced via the test harness; use the
                 // expected key format combining rule shortname + provided id
-                'AriaDeprecatedRole.AriaDeprecated.Deprecated:1:1' => 'ARIA role "toolbar" is deprecated.',
+                'AriaDeprecatedRole.AriaDeprecated.Deprecated:1:1' => 'ARIA role "directory" is deprecated.',
             ],
         ];
     }
