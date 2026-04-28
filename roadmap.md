@@ -1,14 +1,5 @@
 # Roadmap WCAG AA/AAA — Checklist
 
-## Phase 2 — Règles moyenne priorité (1 jour)
-
- - [x] Valider valeurs `autocomplete` officielles WCAG 1.3.5 (`autocomplete-valid`)
- - [x] `<fieldset>` sans `<legend>` non vide (`fieldset-legend`)
- - [x] `<svg role="img">` sans `<title>` (`role-img-alt`)
- - [x] ARIA attrs non autorisés par rôle (`aria-allowed-attr`)
- - [x] `<ul>`/`<ol>` avec enfants non `<li>` (`list-structure`) + `<dl>` sans `<dt>`/`<dd>`
- - [x] `overflow:scroll`/`auto` inline sans `tabindex` (`scrollable-region-focusable`)
-
 ## Phase 3 — Règles complémentaires + AAA (½ jour)
 
 - [ ] Éléments interactifs `<24px` inline (`target-size`, WCAG 2.5.8 AA)
@@ -29,6 +20,14 @@
 - [ ] `FormLabelRule` : combiner correctement `for` + contenu label
 - [ ] `AriaRoleRule` : collecter TOUS les rôles invalides par fichier (pas `return` après le premier)
 - [ ] `SkipLinkRule` : clarifier guard `evaluateOncePerFile()`
+- [ ] `HeadingOrderRule` : corriger faux positif sur `h2` suivi de `h3` (doit être valide)
+- [ ] `DuplicateIdRule` : corriger faux positif sur éléments avec `id`
+- [ ] `AnchorContentRule` : corriger faux positif sur `<a>` avec `title` mais pas de contenu textuel (doit être valide)
+- [ ] `LangAttributeRule` : corriger faux positif sur `<html lang="">` (doit être invalide)
+- [ ] `IframeTitleRule` : corriger faux positif sur `<iframe title="">` (doit être invalide)
+- [ ] `MetaViewportRule` : corriger faux positif sur `<meta name="viewport" content="width=device-width, initial-scale=1">` (doit être valide)
+- [ ] `TableHeaderRule` : corriger faux positif sur `<th scope="col">` (doit être valide)
+- [ ] `ButtonContentRule` : corriger faux positif sur `<button aria-label="Label">` sans contenu textuel (doit être valide)
 
 ## Phase 6 — Tests manquants + TDD (1 jour)
 
