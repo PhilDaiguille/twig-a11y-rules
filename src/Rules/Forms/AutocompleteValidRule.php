@@ -21,6 +21,12 @@ final class AutocompleteValidRule extends AbstractA11yRule
         'street-address', 'address-line1', 'address-line2', 'address-line3', 'address-level4', 'address-level3',
         'address-level2', 'address-level1', 'country', 'country-name', 'postal-code', 'email', 'tel', 'bday',
         'cc-number', 'cc-exp', 'cc-exp-month', 'cc-exp-year', 'cc-csc', 'off',
+        // Additional valid values per HTML spec
+        'on', 'one-time-code', 'transaction-amount', 'sex', 'language', 'url', 'photo',
+        'bday-day', 'bday-month', 'bday-year',
+        'tel-country-code', 'tel-national', 'tel-area-code', 'tel-local', 'tel-extension',
+        'impp', 'transaction-currency',
+        'cc-name', 'cc-given-name', 'cc-additional-name', 'cc-family-name', 'cc-type',
     ];
 
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

@@ -10,7 +10,10 @@ use TwigCsFixer\Token\Tokens;
 final class AriaDeprecatedRoleRule extends AbstractA11yRule
 {
     private const DEPRECATED = [
-        'toolbar', // example deprecated role for tests
+        // WAI-ARIA 1.2 deprecated roles
+        'directory',
+        // 'presentation' was superseded by 'none' but both remain valid; not flagging it
+        // DPUB-ARIA roles are not in scope for general HTML templates
     ];
 
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

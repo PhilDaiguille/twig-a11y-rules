@@ -106,12 +106,13 @@ Rules are grouped by category for easier discovery.
 
 ### Media
 
-| Rule            | Description                                                         |
-|-----------------|---------------------------------------------------------------------|
-| `ImgAltRule`    | `<img>` missing `alt`, or empty `alt` without `role="presentation"` |
-| `AutoplayRule`  | `<video>` or `<audio>` with `autoplay` but without `muted`          |
-| `ObjectAltRule` | `<object>` without alternative text                                 |
-| `VideoTrackRule`| `<video>` without captions track                                    |
+| Rule               | Description                                                         |
+|--------------------|---------------------------------------------------------------------|
+| `ImgAltRule`       | `<img>` missing `alt`, or empty `alt` without `role="presentation"` |
+| `AutoplayRule`     | `<video>` or `<audio>` with `autoplay` but without `muted`          |
+| `ObjectAltRule`    | `<object>` without alternative text (checks inline attrs and fallback content) |
+| `VideoTrackRule`   | `<video>` without captions track                                    |
+| `InputImageAltRule`| `<input type="image">` without a non-empty `alt` attribute (axe: input-image-alt) |
 
 ### Structure
 
@@ -124,9 +125,11 @@ Rules are grouped by category for easier discovery.
 | `HeadingEmptyRule`  | Empty heading elements                             |
 | `LangAttributeRule` | `<html>` missing `lang` attribute                  |
 | `IframeTitleRule`   | `<iframe>` without `title` attribute               |
+| `FrameTitleRule`    | `<frame>` without a non-empty `title` attribute (axe: frame-title) |
 | `DuplicateIdRule`   | Duplicate `id` values in the same document         |
 | `LandmarkRule`      | Missing main landmark                              |
 | `MetaViewportRule`  | `<meta name="viewport">` with `user-scalable=no`   |
+| `MetaRefreshRule`   | `<meta http-equiv="refresh">` with non-zero timeout (WCAG 2.2.1, axe: meta-refresh) |
 | `SkipLinkRule`      | Missing skip link to main content                  |
 | `TableHeaderRule`   | `<th>` without `scope` attribute                   |
 
@@ -142,20 +145,42 @@ Rules are grouped by category for easier discovery.
 
 ### Forms
 
-| Rule                | Description                                               |
-|---------------------|-----------------------------------------------------------|
-| `FormLabelRule`     | `<label>` without `for` or without non-empty content      |
-| `InputLabelRule`    | `<input>` without an associated `<label>` or `aria-label` |
-| `SelectLabelRule`   | `<select>` without an associated `<label>`                |
-| `TextareaLabelRule` | `<textarea>` without an associated `<label>`              |
-| `InputTypeRule`     | `<input type="email">` without `autocomplete`             |
+| Rule                   | Description                                               |
+|------------------------|-----------------------------------------------------------|
+| `FormLabelRule`        | `<label>` without `for` or without non-empty content      |
+| `InputLabelRule`       | `<input>` without an associated `<label>` or `aria-label` |
+| `SelectLabelRule`      | `<select>` without an associated `<label>`                |
+| `TextareaLabelRule`    | `<textarea>` without an associated `<label>`              |
+| `InputTypeRule`        | `<input type="email">` without `autocomplete`             |
+| `InputButtonNameRule`  | `<input type="submit|button">` without `value` or `aria-label` |
 
 ### UI
 
-| Rule                | Description                                |
-|---------------------|--------------------------------------------|
-| `ColorContrastRule` | Insufficient inline text/background contrast |
- 
+| Rule                               | Description                                        |
+|------------------------------------|----------------------------------------------------|
+| `ColorContrastRule`                | Insufficient inline text/background contrast       |
+| `ScrollableRegionFocusableRule`    | Scrollable region not keyboard-focusable           |
+| `OutlineNoneWithoutFocusVisibleRule`| `outline:none` without a `focus-visible` fallback |
+| `TargetSizeRule`                   | Interactive element smaller than 24×24 px          |
+
+### ARIA (strict preset)
+
+| Rule                      | Description                                                  |
+|---------------------------|--------------------------------------------------------------|
+| `AriaRoleRule`            | Invalid ARIA `role` value                                    |
+| `AriaLabelRule`           | Landmark missing a non-empty `aria-label`                    |
+| `AriaHiddenFocusRule`     | Focusable element with `aria-hidden="true"`                  |
+| `AriaRequiredAttrRule`    | Missing required attributes for a given ARIA role            |
+| `AriaValidAttrRule`       | Unknown `aria-*` attribute (checks all 46 WAI-ARIA 1.2 attrs)|
+| `AriaValidAttrValueRule`  | Invalid enum value for `aria-hidden` or `aria-checked`       |
+| `AriaDeprecatedRoleRule`  | Deprecated ARIA role used (e.g. `directory`)                 |
+| `AriaRequiredChildrenRule`| Composite role missing required child roles                  |
+| `AriaRequiredParentRule`  | Child role not wrapped in appropriate parent role            |
+| `AriaReferencedIdExistsRule`| `aria-labelledby`/`aria-describedby` references missing id |
+| `AriaAllowedAttrRule`     | `aria-*` attribute not allowed for the given role            |
+| `AriaHiddenBodyRule`      | `<body aria-hidden="true">`                                  |
+| `AutocompleteValidRule`   | Invalid `autocomplete` attribute value                       |
+| `AriaInputFieldNameRule`  | Custom input-role widget without accessible name             |
 ### 📝 Documentation — 7 rules not feasible to evaluate statically
 
 - [ ] **Document in the README** the 7 rules not feasible to evaluate statically with a link to axe-core runtime:

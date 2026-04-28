@@ -33,6 +33,9 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
      */
     private static array $kindCache = [];
 
+    /** Per-instance cache of the full template content for the current file. */
+    private ?string $cachedContent = null;
+
     // By default rules apply to all template kinds. Rules that should be
     // limited to specific kinds can override supportedKinds().
     /**
@@ -64,6 +67,8 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
         // this rule applies to the file. This supports rule instances being
         // reused across multiple files.
         if (0 === $tokenIndex) {
+            // Reset the per-file cache so the new file's content is used.
+            $this->cachedContent = null;
             $content = $this->getFullContent($tokens);
             $hash = md5($content);
 
@@ -96,21 +101,18 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
 
     protected function getFullContent(Tokens $tokens): string
     {
-        // Build the content once, then cache by content-hash so subsequent
-        // calls for the same file are O(1).
+        if (null !== $this->cachedContent) {
+            return $this->cachedContent;
+        }
+
         $content = '';
         foreach ($tokens->toArray() as $token) {
             $content .= $token->getValue();
         }
 
-        /** @var array<string, string> $cache */
-        static $cache = [];
-        $hash = md5($content);
-        if (!isset($cache[$hash])) {
-            $cache[$hash] = $content;
-        }
+        $this->cachedContent = $content;
 
-        return $cache[$hash];
+        return $this->cachedContent;
     }
 
     private function createEmitter(Tokens $tokens): callable

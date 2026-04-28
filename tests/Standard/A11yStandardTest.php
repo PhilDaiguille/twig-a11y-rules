@@ -23,12 +23,14 @@ use TwigA11y\Rules\Aria\TabIndexRule;
 use TwigA11y\Rules\Forms\AriaInputFieldNameRule;
 use TwigA11y\Rules\Forms\AutocompleteValidRule;
 use TwigA11y\Rules\Forms\FormLabelRule;
+use TwigA11y\Rules\Forms\InputButtonNameRule;
 use TwigA11y\Rules\Forms\InputLabelRule;
 use TwigA11y\Rules\Forms\InputTypeRule;
 use TwigA11y\Rules\Forms\SelectLabelRule;
 use TwigA11y\Rules\Forms\TextareaLabelRule;
 use TwigA11y\Rules\Media\AutoplayRule;
 use TwigA11y\Rules\Media\ImgAltRule;
+use TwigA11y\Rules\Media\InputImageAltRule;
 use TwigA11y\Rules\Media\NoAutoplayAudioRule;
 use TwigA11y\Rules\Media\ObjectAltRule;
 use TwigA11y\Rules\Media\RoleImgAltRule;
@@ -39,6 +41,7 @@ use TwigA11y\Rules\Structure\BannedTagsRule;
 use TwigA11y\Rules\Structure\ButtonContentRule;
 use TwigA11y\Rules\Structure\DuplicateIdRule;
 use TwigA11y\Rules\Structure\FieldsetLegendRule;
+use TwigA11y\Rules\Structure\FrameTitleRule;
 use TwigA11y\Rules\Structure\HeadingEmptyRule;
 use TwigA11y\Rules\Structure\HeadingOrderRule;
 use TwigA11y\Rules\Structure\IframeFocusableContentRule;
@@ -47,6 +50,7 @@ use TwigA11y\Rules\Structure\LandmarkRule;
 use TwigA11y\Rules\Structure\LandmarkUniqueRule;
 use TwigA11y\Rules\Structure\LangAttributeRule;
 use TwigA11y\Rules\Structure\ListStructureRule;
+use TwigA11y\Rules\Structure\MetaRefreshRule;
 use TwigA11y\Rules\Structure\MetaViewportRule;
 use TwigA11y\Rules\Structure\PageHeadingOneRule;
 use TwigA11y\Rules\Structure\SkipLinkRule;
@@ -132,6 +136,7 @@ final class A11yStandardTest extends TestCase
                 TableHeaderRule::class,
                 TabIndexRule::class,
                 InputTypeRule::class,
+                InputButtonNameRule::class,
             ],
             $this->classes(new A11yStandard())
         );
@@ -163,6 +168,7 @@ final class A11yStandardTest extends TestCase
                 TableHeaderRule::class,
                 TabIndexRule::class,
                 InputTypeRule::class,
+                InputButtonNameRule::class,
                 AriaRoleRule::class,
                 AriaLabelRule::class,
                 AriaHiddenFocusRule::class,
@@ -192,6 +198,9 @@ final class A11yStandardTest extends TestCase
                 NoAutoplayAudioRule::class,
                 RoleImgAltRule::class,
                 ColorContrastRule::class,
+                FrameTitleRule::class,
+                InputImageAltRule::class,
+                MetaRefreshRule::class,
             ],
             $this->classes(new A11yStrict())
         );
