@@ -11,20 +11,21 @@ trait TokenCollectorTrait
 {
     /**
      * Collect token values starting at $tokenIndex until $endPattern matches or
-     * $limit tokens have been consumed.
+     * $limit tokens have been consumed. $limit is treated as a token-count
+     * offset from the starting index (default 200).
      *
-     * Uses Tokens::findNext() to skip non-TEXT tokens efficiently, falling back
-     * to manual iteration only when a regex end-pattern is required.
+     * Every token in the range is visited sequentially so that whitespace and
+     * EOL tokens between HTML attributes are included in the collected string.
+     * Use tokenRangeContainsTwig() when you need to detect Twig expression
+     * tokens in a range without assembling the full string.
      */
     protected function collectUntil(int $tokenIndex, Tokens $tokens, string $endPattern, int $limit = 200): string
     {
         $collected = '';
-        $i = $tokenIndex;
         $end = $tokenIndex + $limit;
 
-        while ($i <= $end && $tokens->has($i)) {
-            $value = $tokens->get($i)->getValue();
-            $collected .= $value;
+        for ($i = $tokenIndex; $i <= $end && $tokens->has($i); ++$i) {
+            $collected .= $tokens->get($i)->getValue();
 
             if (str_starts_with($endPattern, '/')) {
                 if ($this->safePregMatch($endPattern, $collected)) {
@@ -33,24 +34,6 @@ trait TokenCollectorTrait
             } elseif (str_contains($collected, $endPattern)) {
                 break;
             }
-
-            // Jump to the next token that has a value worth collecting.
-            // Whitespace and EOL tokens between HTML attributes are skipped
-            // implicitly because their values contribute to $collected without
-            // needing special treatment — we only want to stop early when
-            // we've collected enough.
-            $next = $tokens->findNext(
-                [Token::EOF_TYPE],
-                $i + 1,
-                $end + 1,
-                true // exclude EOF — i.e. find the next non-EOF token
-            );
-
-            if (false === $next) {
-                break;
-            }
-
-            $i = $next;
         }
 
         return $collected;
