@@ -85,9 +85,6 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
-      - name: Require Infection (temporary)
-        run: composer require --dev infection/infection --no-interaction --no-progress || true
-
       - name: Run Infection (mutation testing)
         run: vendor/bin/infection --min-msi=50
         continue-on-error: true

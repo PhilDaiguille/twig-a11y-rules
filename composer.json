@@ -16,7 +16,8 @@
         "phpunit/phpunit": "^11.5.55",
         "friendsofphp/php-cs-fixer": "^3.95",
         "rector/rector": "^2.4",
-        "phpstan/phpstan": "^2.1"
+        "phpstan/phpstan": "^2.1",
+        "infection/infection": "^0.32.0"
     },
     "autoload": {
         "psr-4": {
@@ -35,6 +36,7 @@
         "phpstan": "phpstan analyse",
         "rector": "rector --dry-run",
         "rector:apply": "rector",
+        "infection": "infection"
         "lint": "composer cs-lint && composer phpstan && composer test && composer rector",
         "lint:fix": "composer rector:apply && composer cs-fix"
     }
