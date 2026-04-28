@@ -32,5 +32,9 @@ final class ListStructureRuleTest extends AbstractRuleTestCase
         yield 'ul with non-li child' => [__DIR__.'/Fixtures/invalid/list_non_li.html.twig', [
             'ListStructure.ListStructure.InvalidChild:1:1' => 'List (<ul>/<ol>) contains non-<li> child.',
         ]];
+
+        yield 'orphan dt dd' => [__DIR__.'/Fixtures/invalid/orphan_dt.html.twig', [
+            'ListStructure.ListStructure.OrphanDtDd:1:1' => 'Orphan <dt> or <dd> found outside of a <dl>.',
+        ]];
     }
 }

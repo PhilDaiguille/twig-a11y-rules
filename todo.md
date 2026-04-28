@@ -6,42 +6,42 @@ Voici ta todo list structurée et priorisée pour implémenter les 22 règles ax
 
 ### 🔴 ARIA — 7 règles
 
-- [ ] **`aria-valid-attr`** *(Critical / Facile)* — Whitelist des 46 attributs ARIA officiels, regex `/aria-([a-z-]+)/gi`, comparer à la liste
-- [ ] **`aria-valid-attr-value`** *(Critical / Modéré)* — Map enum → valeurs valides, ignorer les expressions `{{ }}` Twig dynamiques
-- [ ] **`aria-allowed-attr`** *(Critical / Facile)* — Map `role → [attributs interdits]`, vérifier aria-* présents contre la liste "prohibited" du rôle
-- [ ] **`aria-hidden-body`** *(Critical / Facile)* — Règle FullPage uniquement, regex `<body[^>]*aria-hidden\s*=\s*["']true["']`
-- [ ] **`aria-required-children`** *(Critical / Modéré)* — Map `role → [rôles enfants requis]`, extraire blocs parent+contenu, vérifier enfants directs
-- [ ] **`aria-required-parent`** *(Critical / Modéré)* — Inverse de `aria-required-children`, vérifier contexte parent dans le fichier
-- [ ] **`aria-deprecated-role`** *(Minor / Facile)* — Extension de `AriaRoleRule` existante, ajouter liste de rôles dépréciés, émettre un warning
+- [x] **`aria-valid-attr`** *(Critical / Facile)* — Whitelist des 46 attributs ARIA officiels, regex `/aria-([a-z-]+)/gi`, comparer à la liste
+- [x] **`aria-valid-attr-value`** *(Critical / Modéré)* — Map enum → valeurs valides, ignorer les expressions `{{ }}` Twig dynamiques
+- [x] **`aria-allowed-attr`** *(Critical / Facile)* — Map `role → [attributs interdits]`, vérifier aria-* présents contre la liste "prohibited" du rôle
+- [x] **`aria-hidden-body`** *(Critical / Facile)* — Règle FullPage uniquement, regex `<body[^>]*aria-hidden\s*=\s*["']true["']`
+- [x] **`aria-required-children`** *(Critical / Modéré)* — Map `role → [rôles enfants requis]`, extraire blocs parent+contenu, vérifier enfants directs
+- [x] **`aria-required-parent`** *(Critical / Modéré)* — Inverse de `aria-required-children`, vérifier contexte parent dans le fichier
+- [x] **`aria-deprecated-role`** *(Minor / Facile)* — Extension de `AriaRoleRule` existante, ajouter liste de rôles dépréciés, émettre un warning
 
 ***
 
 ### 🟠 Formulaires — 5 règles
 
-- [ ] **`input-button-name`** *(Critical / Facile)* — Extension de `ButtonContentRule`, détecter `<input type="submit|button|reset">` sans `value` ni `aria-label`
-- [ ] **`autocomplete-valid`** *(Serious / Facile)* — Whitelist des 53 valeurs WCAG 1.3.5, ignorer valeurs Twig dynamiques, émettre si valeur statique inconnue
-- [ ] **`aria-input-field-name`** *(Serious / Modéré)* — Compléter `InputLabelRule` pour couvrir `role="textbox/combobox/searchbox/spinbutton"` sur div/span
-- [ ] **`select-name`** *(Critical / Modéré)* — Modifier `SelectLabelRule::evaluate()` pour accepter `aria-label` et `aria-labelledby` comme nom accessible valide
-- [ ] **`fieldset-legend`** *(Serious / Modéré)* — Règle once-per-file, regex `<fieldset>...</fieldset>`, vérifier présence de `<legend>` non vide
+- [x] **`input-button-name`** *(Critical / Facile)* — Extension de `ButtonContentRule`, détecter `<input type="submit|button|reset">` sans `value` ni `aria-label`
+- [x] **`autocomplete-valid`** *(Serious / Facile)* — Whitelist des 53 valeurs WCAG 1.3.5, ignorer valeurs Twig dynamiques, émettre si valeur statique inconnue
+- [x] **`aria-input-field-name`** *(Serious / Modéré)* — Compléter `InputLabelRule` pour couvrir `role="textbox/combobox/searchbox/spinbutton"` sur div/span
+- [x] **`select-name`** *(Critical / Modéré)* — Modifier `SelectLabelRule::evaluate()` pour accepter `aria-label` et `aria-labelledby` comme nom accessible valide
+- [x] **`fieldset-legend`** *(Serious / Modéré)* — Règle once-per-file, regex `<fieldset>...</fieldset>`, vérifier présence de `<legend>` non vide
 
 ***
 
 ### 🟡 Structure & Navigation — 5 règles
 
-- [ ] **`document-title`** *(Serious / Facile)* — FullPage uniquement, regex `/<title[^>]*>\s*[^<\s]/i` sur le contenu complet
-- [ ] **`page-has-heading-one`** *(Moderate / Facile)* — FullPage uniquement, `preg_match('/<h1[^>]*>\s*[^<\s]/i', $full)`
-- [ ] **`area-alt`** *(Critical / Facile)* — Clone simplifié de `ImgAltRule`, détecter `<area>` sans `alt` ou `alt=""` sans `role="presentation"`
-- [ ] **`list-structure`** *(Serious / Modéré)* — Once-per-file, extraire contenu `<ul>/<ol>`, vérifier que les enfants directs sont bien des `<li>`
-- [ ] **`scrollable-region-focusable`** *(Serious / Complexe)* — Détecter `style="overflow:(auto|scroll)"` sans `tabindex` sur le même tag (styles inline uniquement)
+- [x] **`document-title`** *(Serious / Facile)* — FullPage uniquement, regex `/<title[^>]*>\s*[^<\s]/i` sur le contenu complet
+- [x] **`page-has-heading-one`** *(Moderate / Facile)* — FullPage uniquement, `preg_match('/<h1[^>]*>\s*[^<\s]/i', $full)`
+- [x] **`area-alt`** *(Critical / Facile)* — Clone simplifié de `ImgAltRule`, détecter `<area>` sans `alt` ou `alt=""` sans `role="presentation"`
+- [x] **`list-structure`** *(Serious / Modéré)* — Once-per-file, extraire contenu `<ul>/<ol>`, vérifier que les enfants directs sont bien des `<li>`
+- [x] **`scrollable-region-focusable`** *(Serious / Complexe)* — Détecter `style="overflow:(auto|scroll)"` sans `tabindex` sur le même tag (styles inline uniquement)
 
 ***
 
 ### 🔵 Structure (suite) & Tables — 4 règles
 
-- [ ] **`definition-list`** *(Serious / Modéré)* — Deux sous-règles : structure `<dl>` + orphelins `<dt>/<dd>`, extraction regex once-per-file
-- [ ] **`td-headers-attr`** *(Critical / Modéré)* — Extraire chaque `<table>`, collecter les `id` des `<th>`, valider les `headers="..."` des `<td>`
-- [ ] **`scope-attr-valid`** *(Moderate / Facile)* — Modifier `TableHeaderRule` pour vérifier que la valeur de `scope` ∈ `{col, row, colgroup, rowgroup}`
-- [ ] **`table-duplicate-name`** *(Minor / Facile)* — Extraire `summary` et contenu `<caption>`, comparer (insensible à la casse, trim), once-per-file
+- [x] **`definition-list`** *(Serious / Modéré)* — Deux sous-règles : structure `<dl>` + orphelins `<dt>/<dd>`, extraction regex once-per-file
+- [x] **`td-headers-attr`** *(Critical / Modéré)* — Extraire chaque `<table>`, collecter les `id` des `<th>`, valider les `headers="..."` des `<td>`
+- [x] **`scope-attr-valid`** *(Moderate / Facile)* — Modifier `TableHeaderRule` pour vérifier que la valeur de `scope` ∈ `{col, row, colgroup, rowgroup}`
+- [x] **`table-duplicate-name`** *(Minor / Facile)* — Extraire `summary` et contenu `<caption>`, comparer (insensible à la casse, trim), once-per-file
 
 ***
 

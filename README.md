@@ -155,6 +155,12 @@ Rules are grouped by category for easier discovery.
 | Rule                | Description                                |
 |---------------------|--------------------------------------------|
 | `ColorContrastRule` | Insufficient inline text/background contrast |
+ 
+### 📝 Documentation — 7 rules not feasible to evaluate statically
+
+- [ ] **Document in the README** the 7 rules not feasible to evaluate statically with a link to axe-core runtime:
+    - `color-contrast-enhanced`, `focus-visible`, `identical-links-same-purpose`
+    - `target-size`, `aria-labelledby-valid`, `frame-tested`, `avoid-inline-spacing`
 
 ## Contributing
 
