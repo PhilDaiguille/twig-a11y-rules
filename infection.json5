@@ -1,0 +1,24 @@
+{
+  "$schema": "vendor/infection/infection/resources/schema.json",
+  "source": {
+    "directories": ["src"],
+    "excludes": ["Test"]
+  },
+  "mutators": {
+    "@default": true,
+    "global-ignoreSourceCodeByRegex": [
+      "Assert\\:\\:.*",
+      "throw new \\\\LogicException\\(.*"
+    ]
+  },
+  "logs": {
+    "text": "infection.log",
+    "html": "infection.html",
+    "github": true,
+    "stryker": {
+      "report": "main"
+    }
+  },
+  "minMsi": 50,
+  "minCoveredMsi": 50
+}

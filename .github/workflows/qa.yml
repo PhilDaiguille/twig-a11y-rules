@@ -1,109 +1,142 @@
 name: QA
 
 on:
-  workflow_call: {}
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+    workflow_call: {}
+    push:
+        branches: [ main ]
+    pull_request:
+        branches: [ main ]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php: [ '8.2', '8.3', '8.4' ]
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                php: [ '8.2', '8.3', '8.4' ]
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v6
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: mbstring, dom, intl, xdebug
-          coverage: xdebug
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  extensions: mbstring, dom, intl, xdebug
+                  coverage: xdebug
 
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-files-dir)" >> $GITHUB_ENV
+            - name: Get composer cache directory
+              id: composer-cache
+              run: echo "COMPOSER_CACHE_DIR=$(composer config cache-files-dir)" >> $GITHUB_ENV
 
-      - name: Cache composer dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.COMPOSER_CACHE_DIR }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
+            - name: Cache composer dependencies
+              uses: actions/cache@v5
+              with:
+                  path: ${{ env.COMPOSER_CACHE_DIR }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: ${{ runner.os }}-composer-
 
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+            - name: Install dependencies
+              run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
-      - name: Run PHPStan
-        run: composer phpstan -- --no-progress
+            - name: Run PHPStan
+              run: composer phpstan -- --no-progress
 
-      - name: Run php-cs-fixer (dry-run)
-        run: composer cs-lint
+            - name: Run php-cs-fixer (dry-run)
+              run: composer cs-lint
 
-      - name: Run twig-cs-fixer lint
-        run: vendor/bin/twig-cs-fixer lint . --config=.twig-cs-fixer.php --no-cache || true
+            - name: Run twig-cs-fixer lint
+              run: vendor/bin/twig-cs-fixer lint . --config=.twig-cs-fixer.php --no-cache || true
 
-      - name: Run rector (dry-run)
-        run: composer rector
+            - name: Run rector (dry-run)
+              run: composer rector -- --dry-run
 
-      - name: Run tests with coverage
-        run: |
-          ./vendor/bin/phpunit --configuration phpunit.xml --log-junit junit.xml --coverage-text --coverage-clover=coverage.xml
+            - name: Run tests with coverage
+              run: |
+                  ./vendor/bin/phpunit \
+                    --coverage-xml=build/coverage/coverage-xml \
+                    --log-junit=build/coverage/junit.xml \
+                    --coverage-clover=build/coverage/coverage.xml
 
-      - name: Upload coverage and test results artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: |
-            coverage.xml
-            junit.xml
-          if-no-files-found: warn
+            - name: Upload coverage and test results artifact
+              uses: actions/upload-artifact@v7
+              with:
+                  name: test-results-php${{ matrix.php }}
+                  path: |
+                      build/coverage/coverage.xml
+                      build/coverage/junit.xml
+                  if-no-files-found: warn
 
-      - name: Upload coverage to Codecov
-        if: ${{ secrets.CODECOV_TOKEN != '' }}
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage.xml
-          fail_ci_if_error: true
+            - name: Upload coverage to Codecov
+              if: ${{ env.CODECOV_TOKEN != '' }}
+              uses: codecov/codecov-action@v6
+              env:
+                  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+              with:
+                  token: ${{ secrets.CODECOV_TOKEN }}
+                  files: build/coverage/coverage.xml
+                  fail_ci_if_error: true
 
-      - name: Upload test results to Codecov
-        if: ${{ !cancelled() }}
-        uses: codecov/test-results-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+            - name: Upload test results to Codecov
+              if: ${{ !cancelled() }}
+              uses: codecov/codecov-action@v6
+              env:
+                  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+              with:
+                  token: ${{ secrets.CODECOV_TOKEN }}
+                  files: build/coverage/junit.xml
+                  report_type: test_results
 
-  infection:
-    needs: build
-    runs-on: ubuntu-latest
+    infection:
+        needs: build
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v6
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-          extensions: mbstring, dom
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.3'
+                  extensions: mbstring, dom, intl, xdebug
+                  coverage: xdebug
 
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+            - name: Get composer cache directory
+              id: composer-cache
+              run: echo "COMPOSER_CACHE_DIR=$(composer config cache-files-dir)" >> $GITHUB_ENV
 
-      - name: Run Infection (mutation testing)
-        run: vendor/bin/infection --min-msi=50
-        continue-on-error: true
+            - name: Cache composer dependencies
+              uses: actions/cache@v5
+              with:
+                  path: ${{ env.COMPOSER_CACHE_DIR }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: ${{ runner.os }}-composer-
 
-      - name: Upload Infection reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: infection-report
-          path: |
-            infection.html
-            infection.log
-          if-no-files-found: warn
+            - name: Install dependencies
+              run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+
+            - name: Run tests with coverage (for Infection)
+              run: |
+                  ./vendor/bin/phpunit \
+                    --coverage-xml=build/coverage/coverage-xml \
+                    --log-junit=build/coverage/junit.xml
+
+            - name: Run Infection (mutation testing)
+              run: |
+                  vendor/bin/infection \
+                    --coverage=build/coverage \
+                    --skip-initial-tests \
+                    --no-progress \
+                    --threads=4 \
+                    --min-msi=50
+              continue-on-error: true
+
+            - name: Upload Infection reports
+              uses: actions/upload-artifact@v7
+              with:
+                  name: infection-report
+                  path: |
+                      infection.html
+                      infection.log
+                  if-no-files-found: warn
