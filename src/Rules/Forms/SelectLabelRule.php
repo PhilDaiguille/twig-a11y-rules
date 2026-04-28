@@ -30,13 +30,25 @@ final class SelectLabelRule extends AbstractA11yRule
             $id = $m[1];
         }
 
+        // If the select has an aria-labelledby attribute, consider it labelled.
+        // We accept presence here; a dedicated rule should validate referenced IDs.
+        if (preg_match('/\baria-labelledby\s*=\s*(?:"([^"]+)"|\'([^\']+)\')/i', $opening, $mm)) {
+            return;
+        }
+
         $full = $this->getFullContent($tokens);
 
         if (null !== $id && preg_match('/<label[^>]*for\s*=\s*["\']'.preg_quote($id, '/').'["\']/i', $full)) {
             return;
         }
 
+        // Label wrapping the select (implicit association)
         if (preg_match('/<label[^>]*>\s*<select[^>]*>/i', $full)) {
+            return;
+        }
+
+        // Also accept aria-label directly on the select
+        if (preg_match('/<select[^>]*\baria-label\s*=\s*(?:"([^"]+)"|\'([^\']+)\')/i', $opening)) {
             return;
         }
 
