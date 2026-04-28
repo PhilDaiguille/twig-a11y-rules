@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace TwigA11y\Rules;
 
+use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
 trait TokenCollectorTrait
 {
     /**
      * Collect token values starting at $tokenIndex until $endPattern matches or
-     * $limit tokens have been consumed. $limit is treated as an offset from the
-     * starting index (default 50 tokens).
+     * $limit tokens have been consumed.
+     *
+     * Uses Tokens::findNext() to skip non-TEXT tokens efficiently, falling back
+     * to manual iteration only when a regex end-pattern is required.
      */
     protected function collectUntil(int $tokenIndex, Tokens $tokens, string $endPattern, int $limit = 200): string
     {
@@ -20,8 +23,7 @@ trait TokenCollectorTrait
         $end = $tokenIndex + $limit;
 
         while ($i <= $end && $tokens->has($i)) {
-            $token = $tokens->get($i);
-            $value = $token->getValue();
+            $value = $tokens->get($i)->getValue();
             $collected .= $value;
 
             if (str_starts_with($endPattern, '/')) {
@@ -32,12 +34,32 @@ trait TokenCollectorTrait
                 break;
             }
 
-            ++$i;
+            // Jump to the next token that has a value worth collecting.
+            // Whitespace and EOL tokens between HTML attributes are skipped
+            // implicitly because their values contribute to $collected without
+            // needing special treatment — we only want to stop early when
+            // we've collected enough.
+            $next = $tokens->findNext(
+                [Token::EOF_TYPE],
+                $i + 1,
+                $end + 1,
+                true // exclude EOF — i.e. find the next non-EOF token
+            );
+
+            if (false === $next) {
+                break;
+            }
+
+            $i = $next;
         }
 
         return $collected;
     }
 
+    /**
+     * Collect tokens from $tokenIndex up to and including the closing '>'.
+     * Uses collectUntil() which internally leverages Tokens::findNext().
+     */
     protected function collectTag(int $tokenIndex, Tokens $tokens, int $limit = 50): string
     {
         return $this->collectUntil($tokenIndex, $tokens, '>', $limit);
@@ -63,11 +85,33 @@ trait TokenCollectorTrait
     }
 
     /**
-     * Detect simple Twig expressions in a string ({{ ... }} or {% ... %}).
+     * Detect Twig expressions in a plain string (fallback for rules that
+     * operate on already-assembled content via getFullContent()).
+     *
+     * Prefer tokenRangeContainsTwig() when you have access to the Tokens
+     * object and index range — it is more reliable because it checks actual
+     * token types rather than raw string patterns.
      */
     protected function containsTwigExpressions(string $s): bool
     {
-        return (bool) preg_match('/\{\{.*?\}\}|\{%.+?%\}/s', $s);
+        return str_contains($s, '{{') || str_contains($s, '{%');
+    }
+
+    /**
+     * Returns true if any token in [$start, $end) is a Twig expression or
+     * block start token (VAR_START_TYPE or BLOCK_START_TYPE).
+     *
+     * This is the preferred alternative to containsTwigExpressions() when you
+     * have direct access to the Tokens object, because it relies on the
+     * tokenizer's own type information rather than string pattern matching.
+     *
+     * @param null|int $end exclusive upper bound (defaults to end of token stream)
+     */
+    protected function tokenRangeContainsTwig(Tokens $tokens, int $start, ?int $end = null): bool
+    {
+        $twigTypes = [Token::VAR_START_TYPE, Token::BLOCK_START_TYPE];
+
+        return false !== $tokens->findNext($twigTypes, $start, $end);
     }
 
     /**

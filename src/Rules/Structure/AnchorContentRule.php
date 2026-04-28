@@ -12,6 +12,11 @@ final class AnchorContentRule extends AbstractA11yRule
 {
     private int $idx = 0;
 
+    public function __construct()
+    {
+        parent::__construct(emitAsWarning: true);
+    }
+
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Respect per-token skip behavior for page-level short-circuits.
@@ -60,10 +65,5 @@ final class AnchorContentRule extends AbstractA11yRule
                 $emit('Anchor element without accessible name (axe-core: link-name) should have an aria-label or title.', $token, $id);
             }
         }
-    }
-
-    protected function emitsWarnings(): bool
-    {
-        return true;
     }
 }

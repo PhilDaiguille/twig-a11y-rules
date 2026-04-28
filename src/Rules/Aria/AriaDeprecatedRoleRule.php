@@ -16,6 +16,11 @@ final class AriaDeprecatedRoleRule extends AbstractA11yRule
         // DPUB-ARIA roles are not in scope for general HTML templates
     ];
 
+    public function __construct()
+    {
+        parent::__construct(emitAsWarning: true);
+    }
+
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         if ($this->shouldSkipByTokenIndex($tokenIndex)) {
@@ -37,11 +42,6 @@ final class AriaDeprecatedRoleRule extends AbstractA11yRule
     }
 
     protected function evaluateOncePerFile(): bool
-    {
-        return true;
-    }
-
-    protected function emitsWarnings(): bool
     {
         return true;
     }

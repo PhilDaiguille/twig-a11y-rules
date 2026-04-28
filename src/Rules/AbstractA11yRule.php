@@ -17,7 +17,8 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
     /** Cached decision for the currently-processed file when rules are reused */
     private ?bool $skipThisFile = null;
 
-    /** Per-instance cache of already-emitted messages keyed by file hash.
+    /**
+     * Per-instance cache of already-emitted messages keyed by file hash.
      *
      * Keyed by rule-file => array<string, bool>.
      *
@@ -35,6 +36,13 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
 
     /** Per-instance cache of the full template content for the current file. */
     private ?string $cachedContent = null;
+
+    /**
+     * @param bool $emitAsWarning Pass true for rules that should report
+     *                            accessibility hints as warnings rather than
+     *                            hard errors (e.g. AnchorContentRule).
+     */
+    public function __construct(private bool $emitAsWarning = false) {}
 
     // By default rules apply to all template kinds. Rules that should be
     // limited to specific kinds can override supportedKinds().
@@ -94,11 +102,6 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
         $this->evaluate($tokens, $tokenIndex, $this->createEmitter($tokens));
     }
 
-    protected function emitsWarnings(): bool
-    {
-        return false;
-    }
-
     protected function getFullContent(Tokens $tokens): string
     {
         if (null !== $this->cachedContent) {
@@ -128,7 +131,7 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
             $this->emitted[$ruleFileKey] = [];
         }
 
-        if ($this->emitsWarnings()) {
+        if ($this->emitAsWarning) {
             return function (string $message, Token $token, ?string $id = null) use ($ruleFileKey): void {
                 $key = $message.'|'.($id ?? '');
                 if (isset($this->emitted[$ruleFileKey][$key])) {

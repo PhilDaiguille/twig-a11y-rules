@@ -17,6 +17,11 @@ final class ImgAltRule extends AbstractA11yRule
      */
     private array $seenTagHashes = [];
 
+    public function __construct()
+    {
+        parent::__construct(emitAsWarning: true);
+    }
+
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // This rule inspects many inline tokens but should still run for
@@ -87,7 +92,12 @@ final class ImgAltRule extends AbstractA11yRule
         if (preg_match('/\balt\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))/is', $fullTag, $matches)) {
             $attrValue = $this->firstMatch($matches, 1, 2, 3);
 
-            if ($this->containsTwigExpressions($attrValue)) {
+            // Use the string-based helper on the extracted attribute value.
+            // containsTwigExpressions() uses str_contains which is safe and
+            // reliable for values already assembled from the token stream.
+            $hasTwig = $this->containsTwigExpressions($attrValue);
+
+            if ($hasTwig) {
                 $emit('Alt attribute contains template expression; verify it is non-empty at runtime.', $token, 'ImgAlt.DynamicAlt');
 
                 return;
@@ -103,10 +113,5 @@ final class ImgAltRule extends AbstractA11yRule
                 $emit('Empty alt on <img> requires role="presentation" or role="none".', $token, 'ImgAlt.EmptyAlt');
             }
         }
-    }
-
-    protected function emitsWarnings(): bool
-    {
-        return true;
     }
 }
