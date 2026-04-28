@@ -37,7 +37,7 @@ final class OutlineNoneWithoutFocusVisibleRuleTest extends AbstractRuleTestCase
         yield 'invalide, pas de focus-visible' => [
             __DIR__.'/Fixtures/invalid/outline_none_no_focus_visible.html.twig',
             [
-                'OutlineNoneWithoutFocusVisible.OutlineNoneNoFocusVisible:2:1' => 'Usage de outline:none/0 sans compensation focus-visible',
+                'OutlineNoneWithoutFocusVisible.OutlineNoneNoFocusVisible:2:1' => 'Using outline:none/0 without focus-visible compensation.',
             ],
         ];
     }

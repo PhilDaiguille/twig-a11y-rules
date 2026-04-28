@@ -11,8 +11,7 @@ final class HeadingEmptyRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        // Only run once per file to avoid repeated full-file scans
-        if (0 !== $tokenIndex) {
+        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
             return;
         }
 
@@ -29,5 +28,10 @@ final class HeadingEmptyRule extends AbstractA11yRule
                 return;
             }
         }
+    }
+
+    protected function evaluateOncePerFile(): bool
+    {
+        return true;
     }
 }

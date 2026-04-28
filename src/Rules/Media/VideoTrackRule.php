@@ -11,8 +11,7 @@ final class VideoTrackRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        // Only run once per file
-        if (0 !== $tokenIndex) {
+        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
             return;
         }
 
@@ -28,7 +27,6 @@ final class VideoTrackRule extends AbstractA11yRule
         }
 
         foreach ($m as $set) {
-            $openAttrs = $set[1];
             $content = $set[2];
 
             // If a <track kind="captions" exists inside the video block, OK
@@ -42,5 +40,10 @@ final class VideoTrackRule extends AbstractA11yRule
 
             return;
         }
+    }
+
+    protected function evaluateOncePerFile(): bool
+    {
+        return true;
     }
 }

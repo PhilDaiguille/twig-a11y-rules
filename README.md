@@ -102,90 +102,102 @@ vendor/bin/twig-cs-fixer fix /path/to/templates
 See [`src/Rules/`](src/Rules/) for the full list.
 
 This ruleset includes automated accessibility checks for common issues in Twig templates.
-Rules are grouped by category for easier discovery.
+Rules are grouped by category for easier discovery. The **Preset** column indicates the earliest preset that activates the rule.
 
 ### Media
 
-| Rule               | Description                                                         |
-|--------------------|---------------------------------------------------------------------|
-| `ImgAltRule`       | `<img>` missing `alt`, or empty `alt` without `role="presentation"` |
-| `AutoplayRule`     | `<video>` or `<audio>` with `autoplay` but without `muted`          |
-| `ObjectAltRule`    | `<object>` without alternative text (checks inline attrs and fallback content) |
-| `VideoTrackRule`   | `<video>` without captions track                                    |
-| `InputImageAltRule`| `<input type="image">` without a non-empty `alt` attribute (axe: input-image-alt) |
+| Rule | Description | Preset |
+|---|---|---|
+| `ImgAltRule` | `<img>` missing `alt`, or empty `alt` without `role="presentation"` | Basic |
+| `ObjectAltRule` | `<object>` without alternative text | Recommended |
+| `VideoTrackRule` | `<video>` without captions track | Recommended |
+| `AutoplayRule` | `<video>` or `<audio>` with `autoplay` but without `muted` | Standard |
+| `InputImageAltRule` | `<input type="image">` without a non-empty `alt` (axe: input-image-alt) | Strict |
+| `NoAutoplayAudioRule` | `<audio autoplay>` without controls (axe: audio-caption) | Strict |
+| `RoleImgAltRule` | Element with `role="img"` without a non-empty `title` | Strict |
 
 ### Structure
 
-| Rule                | Description                                        |
-|---------------------|----------------------------------------------------|
-| `BannedTagsRule`    | Disallows `<marquee>` and `<blink>`                |
-| `ButtonContentRule` | `<button>` with no text content or `aria-label`    |
-| `AnchorContentRule` | `<a>` with no text, `aria-label`, or `title`       |
-| `HeadingOrderRule`  | Heading levels that skip, for example `h1` to `h3` |
-| `HeadingEmptyRule`  | Empty heading elements                             |
-| `LangAttributeRule` | `<html>` missing `lang` attribute                  |
-| `IframeTitleRule`   | `<iframe>` without `title` attribute               |
-| `FrameTitleRule`    | `<frame>` without a non-empty `title` attribute (axe: frame-title) |
-| `DuplicateIdRule`   | Duplicate `id` values in the same document         |
-| `LandmarkRule`      | Missing main landmark                              |
-| `MetaViewportRule`  | `<meta name="viewport">` with `user-scalable=no`   |
-| `MetaRefreshRule`   | `<meta http-equiv="refresh">` with non-zero timeout (WCAG 2.2.1, axe: meta-refresh) |
-| `SkipLinkRule`      | Missing skip link to main content                  |
-| `TableHeaderRule`   | `<th>` without `scope` attribute                   |
-
-### ARIA
-
-| Rule                   | Description                                       |
-|------------------------|---------------------------------------------------|
-| `TabIndexRule`         | `tabindex` value greater than `0`                 |
-| `AriaRoleRule`         | Invalid ARIA `role` value                         |
-| `AriaLabelRule`        | Landmark missing a non-empty `aria-label`         |
-| `AriaHiddenFocusRule`  | Focusable element with `aria-hidden="true"`       |
-| `AriaRequiredAttrRule` | Missing required attributes for a given ARIA role |
+| Rule | Description | Preset |
+|---|---|---|
+| `BannedTagsRule` | Disallows `<marquee>` and `<blink>` | Basic |
+| `ButtonContentRule` | `<button>` with no text content or `aria-label` | Basic |
+| `LangAttributeRule` | `<html>` missing `lang` attribute | Basic |
+| `HeadingOrderRule` | Heading levels that skip, for example `h1` to `h3` | Recommended |
+| `IframeTitleRule` | `<iframe>` without `title` attribute | Recommended |
+| `DuplicateIdRule` | Duplicate `id` values in the same document | Recommended |
+| `LandmarkRule` | Missing main landmark (`<main>` or `role="main"`) | Recommended |
+| `AnchorContentRule` | `<a>` with no text, `aria-label`, or `title` — warning; superseded by `AnchorAccessibleNameRule` in the strict preset | Standard |
+| `HeadingEmptyRule` | Empty heading elements | Standard |
+| `MetaViewportRule` | `<meta name="viewport">` with `user-scalable=no` | Standard |
+| `SkipLinkRule` | Missing skip link to main content | Standard |
+| `TableHeaderRule` | `<th>` without `scope` attribute, or invalid `scope` value | Standard |
+| `AreaAltRule` | `<area>` without `alt`, or empty `alt` without `role="presentation"` | Strict |
+| `DocumentTitleRule` | `<head>` missing a non-empty `<title>` element | Strict |
+| `DuplicateAccessKeyRule` | Duplicate `accesskey` values in the same document (WCAG 4.1.1, axe: accesskeys) | Strict |
+| `FieldsetLegendRule` | `<fieldset>` without a non-empty `<legend>` | Strict |
+| `FrameTitleRule` | `<frame>` without a non-empty `title` (axe: frame-title) | Strict |
+| `IframeFocusableContentRule` | `<iframe tabindex="-1">` that contains focusable content | Strict |
+| `LangAttributeValueRule` | `lang` attribute with an invalid BCP 47 primary language subtag (WCAG 3.1.1, axe: html-lang-valid) | Strict |
+| `LandmarkUniqueRule` | Multiple landmarks of the same type without distinct labels | Strict |
+| `ListStructureRule` | `<ul>`/`<ol>` with non-`<li>` children, or `<dl>` missing `<dt>`/`<dd>` | Strict |
+| `MetaRefreshRule` | `<meta http-equiv="refresh">` with non-zero timeout (WCAG 2.2.1, axe: meta-refresh) | Strict |
+| `NestedInteractiveRule` | `<button>`, `<input>` or `<select>` nested inside `<a>`, or `<a>` inside `<button>` (WCAG 4.1.1, axe: nested-interactive) | Strict |
+| `PageHeadingOneRule` | Full-page document without at least one non-empty `<h1>` | Strict |
+| `TableDuplicateNameRule` | Table `caption` and `summary` with identical text | Strict |
+| `TdHeadersAttrRule` | `<td headers="...">` referencing a non-existent `id` | Strict |
 
 ### Forms
 
-| Rule                   | Description                                               |
-|------------------------|-----------------------------------------------------------|
-| `FormLabelRule`        | `<label>` without `for` or without non-empty content      |
-| `InputLabelRule`       | `<input>` without an associated `<label>` or `aria-label` |
-| `SelectLabelRule`      | `<select>` without an associated `<label>`                |
-| `TextareaLabelRule`    | `<textarea>` without an associated `<label>`              |
-| `InputTypeRule`        | `<input type="email">` without `autocomplete`             |
-| `InputButtonNameRule`  | `<input type="submit|button">` without `value` or `aria-label` |
+| Rule | Description | Preset |
+|---|---|---|
+| `InputLabelRule` | `<input>` without an associated `<label>` or `aria-label` | Basic |
+| `FormLabelRule` | `<label>` without `for` or without non-empty content | Recommended |
+| `SelectLabelRule` | `<select>` without an associated `<label>`, `aria-label`, or `aria-labelledby` | Recommended |
+| `TextareaLabelRule` | `<textarea>` without an associated `<label>` | Recommended |
+| `InputTypeRule` | `<input>` with personal-data type (`email`, `tel`, `name`, `username`, `new-password`, `current-password`) without `autocomplete` (WCAG 1.3.5) | Standard |
+| `InputButtonNameRule` | `<input type="submit\|button">` without `value` or `aria-label` | Standard |
+| `AutocompleteValidRule` | Invalid `autocomplete` attribute value | Strict |
+| `AriaInputFieldNameRule` | Custom input-role widget without accessible name | Strict |
+
+### ARIA
+
+| Rule | Description | Preset |
+|---|---|---|
+| `TabIndexRule` | `tabindex` value greater than `0` | Standard |
+| `AriaRoleRule` | Invalid WAI-ARIA 1.2 `role` value (source: `RoleCatalog`) | Strict |
+| `AriaLabelRule` | Landmark missing a non-empty `aria-label` | Strict |
+| `AriaHiddenFocusRule` | Focusable element with `aria-hidden="true"` | Strict |
+| `AriaRequiredAttrRule` | Missing required attributes for a given ARIA role | Strict |
+| `AriaValidAttrRule` | Unknown `aria-*` attribute (checks all 46 WAI-ARIA 1.2 attrs) | Strict |
+| `AriaValidAttrValueRule` | Invalid enum value for `aria-*` attributes (covers 21 WAI-ARIA 1.2 enum attrs including `aria-sort`, `aria-live`, `aria-orientation`, `aria-haspopup`, `aria-current`) | Strict |
+| `AriaDeprecatedRoleRule` | Deprecated ARIA role used (e.g. `directory`) | Strict |
+| `AriaRequiredChildrenRule` | Composite role missing required child roles | Strict |
+| `AriaRequiredParentRule` | Child role not wrapped in appropriate parent role | Strict |
+| `AriaReferencedIdExistsRule` | `aria-labelledby`/`aria-describedby` references a missing `id` | Strict |
+| `AriaAllowedAttrRule` | `aria-*` attribute not allowed for the given role | Strict |
+| `AriaHiddenBodyRule` | `<body aria-hidden="true">` | Strict |
+
+### Anchor
+
+| Rule | Description | Preset |
+|---|---|---|
+| `AnchorAccessibleNameRule` | `<a>` without any accessible name (`aria-label`, `aria-labelledby`, inner text, or img alt) — supersedes `AnchorContentRule` in the strict preset | Strict |
 
 ### UI
 
-| Rule                               | Description                                        |
-|------------------------------------|----------------------------------------------------|
-| `ColorContrastRule`                | Insufficient inline text/background contrast       |
-| `ScrollableRegionFocusableRule`    | Scrollable region not keyboard-focusable           |
-| `OutlineNoneWithoutFocusVisibleRule`| `outline:none` without a `focus-visible` fallback |
-| `TargetSizeRule`                   | Interactive element smaller than 24×24 px          |
+| Rule | Description | Preset |
+|---|---|---|
+| `ColorContrastRule` | Insufficient inline text/background contrast (inline `style` only) | Strict |
+| `ScrollableRegionFocusableRule` | Scrollable region not keyboard-focusable | Strict |
+| `OutlineNoneWithoutFocusVisibleRule` | `outline:none` or `outline:0` without a `focus-visible` class compensation | Strict |
+| `TargetSizeRule` | Interactive element smaller than 24×24 px (inline `style` only) | Strict |
 
-### ARIA (strict preset)
-
-| Rule                      | Description                                                  |
-|---------------------------|--------------------------------------------------------------|
-| `AriaRoleRule`            | Invalid ARIA `role` value                                    |
-| `AriaLabelRule`           | Landmark missing a non-empty `aria-label`                    |
-| `AriaHiddenFocusRule`     | Focusable element with `aria-hidden="true"`                  |
-| `AriaRequiredAttrRule`    | Missing required attributes for a given ARIA role            |
-| `AriaValidAttrRule`       | Unknown `aria-*` attribute (checks all 46 WAI-ARIA 1.2 attrs)|
-| `AriaValidAttrValueRule`  | Invalid enum value for `aria-hidden` or `aria-checked`       |
-| `AriaDeprecatedRoleRule`  | Deprecated ARIA role used (e.g. `directory`)                 |
-| `AriaRequiredChildrenRule`| Composite role missing required child roles                  |
-| `AriaRequiredParentRule`  | Child role not wrapped in appropriate parent role            |
-| `AriaReferencedIdExistsRule`| `aria-labelledby`/`aria-describedby` references missing id |
-| `AriaAllowedAttrRule`     | `aria-*` attribute not allowed for the given role            |
-| `AriaHiddenBodyRule`      | `<body aria-hidden="true">`                                  |
-| `AutocompleteValidRule`   | Invalid `autocomplete` attribute value                       |
-| `AriaInputFieldNameRule`  | Custom input-role widget without accessible name             |
-### 📝 Documentation — 7 rules not feasible to evaluate statically
-
-- [ ] **Document in the README** the 7 rules not feasible to evaluate statically with a link to axe-core runtime:
-    - `color-contrast-enhanced`, `focus-visible`, `identical-links-same-purpose`
-    - `target-size`, `aria-labelledby-valid`, `frame-tested`, `avoid-inline-spacing`
+> **Note on static analysis limits:** some accessibility checks cannot be evaluated statically from template source alone.
+> Rules such as `color-contrast-enhanced`, `focus-visible`, `identical-links-same-purpose`, CSS-based `target-size`,
+> `aria-labelledby-valid`, `frame-tested`, and `avoid-inline-spacing` require runtime context.
+> Use a browser-based tool such as [axe DevTools](https://www.deque.com/axe/) or
+> [Lighthouse](https://developer.chrome.com/docs/lighthouse/) alongside this linter for complete coverage.
 
 ## Contributing
 
