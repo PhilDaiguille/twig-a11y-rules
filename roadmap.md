@@ -1,11 +1,5 @@
 # Roadmap WCAG AA/AAA — Checklist
 
-## Phase 3 — Règles complémentaires + AAA (½ jour)
-
- - [x] Éléments interactifs `<24px` inline (`target-size`, WCAG 2.5.8 AA)
- - [x] `<audio autoplay>` sans `controls` (`no-autoplay-audio`)
- - [x] `landmark-unique`, `avoid-inline-spacing` et autres axe-core manquants
-
 ## Phase 4 — Refactorisations techniques (1 jour)
 
 - [ ] Remplacer pattern "scan once" dupliqué (~12 règles) par override `evaluateOncePerFile()` dans `AbstractA11yRule`
@@ -14,6 +8,12 @@
 - [ ] Créer `AbstractFormFieldLabelRule` pour `Input/Select/TextareaLabelRule`
 - [ ] Simplifier `StandardRuleSets::classes()` → accepter `class-string[]` directement
 - [ ] Utiliser Rector pour auto-refacto patterns répétitifs
+ - [x] Remplacer pattern "scan once" dupliqué (~12 règles) par override `evaluateOncePerFile()` dans `AbstractA11yRule`
+ - [x] Extraire `findAssociatedLabel()` et `extractId()` dans `TokenCollectorTrait` (3 règles forms)
+ - [x] Cacher `getFullContent()` en propriété `$cachedContent` (évite O(n²))
+ - [ ] Créer `AbstractFormFieldLabelRule` pour `Input/Select/TextareaLabelRule`
+ - [ ] Simplifier `StandardRuleSets::classes()` → accepter `class-string[]` directement
+ - [ ] Utiliser Rector pour auto-refacto patterns répétitifs
 
 ## Phase 5 — Corrections bugs (½ jour)
 

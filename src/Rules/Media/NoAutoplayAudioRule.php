@@ -38,5 +38,4 @@ final class NoAutoplayAudioRule extends AbstractA11yRule
     {
         return true;
     }
-
 }

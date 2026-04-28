@@ -66,5 +66,4 @@ final class TargetSizeRule extends AbstractA11yRule
     {
         return true;
     }
-
 }
