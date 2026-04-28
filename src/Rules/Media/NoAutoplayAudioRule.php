@@ -11,7 +11,7 @@ final class NoAutoplayAudioRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if (0 !== $tokenIndex) {
+        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
             return;
         }
 
@@ -28,9 +28,15 @@ final class NoAutoplayAudioRule extends AbstractA11yRule
                     $fake = $tokens->get(0);
                     $emit('Audio with autoplay must expose controls.', $fake, 'AutoplayAudio.NoControls');
 
-                    return;
+                    return; // emit only once per file
                 }
             }
         }
     }
+
+    protected function evaluateOncePerFile(): bool
+    {
+        return true;
+    }
+
 }

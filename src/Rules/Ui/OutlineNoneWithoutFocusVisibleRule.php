@@ -12,7 +12,7 @@ final class OutlineNoneWithoutFocusVisibleRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if (0 !== $tokenIndex) {
+        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
             return;
         }
 
@@ -65,6 +65,11 @@ final class OutlineNoneWithoutFocusVisibleRule extends AbstractA11yRule
     }
 
     protected function emitsWarnings(): bool
+    {
+        return true;
+    }
+
+    protected function evaluateOncePerFile(): bool
     {
         return true;
     }

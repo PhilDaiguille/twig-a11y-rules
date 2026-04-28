@@ -11,7 +11,7 @@ final class TargetSizeRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if (0 !== $tokenIndex) {
+        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
             return;
         }
 
@@ -57,8 +57,14 @@ final class TargetSizeRule extends AbstractA11yRule
                 $fake = $tokens->get(0);
                 $emit('Interactive element has inline size < 24px; this may fail target-size (WCAG 2.5.8).', $fake, 'TargetSize.Small');
 
-                return;
+                return; // emit only once per file
             }
         }
     }
+
+    protected function evaluateOncePerFile(): bool
+    {
+        return true;
+    }
+
 }

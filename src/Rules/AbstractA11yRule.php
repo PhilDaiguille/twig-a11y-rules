@@ -41,6 +41,15 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
         return false;
     }
 
+    // Backwards-compatible helper used by existing rules that used the
+    // pattern "if (0 !== $tokenIndex) return;". When refactoring rules to
+    // use evaluateOncePerFile(), replace those guards with a call to
+    // shouldSkipByTokenIndex().
+    protected function shouldSkipByTokenIndex(int $tokenIndex): bool
+    {
+        return $this->evaluateOncePerFile() && 0 !== $tokenIndex;
+    }
+
     final protected function process(int $tokenIndex, Tokens $tokens): void
     {
         // On the first token, determine the template kind and record whether

@@ -2,9 +2,9 @@
 
 ## Phase 3 — Règles complémentaires + AAA (½ jour)
 
-- [ ] Éléments interactifs `<24px` inline (`target-size`, WCAG 2.5.8 AA)
-- [ ] `<audio autoplay>` sans `controls` (`no-autoplay-audio`)
-- [ ] `landmark-unique`, `avoid-inline-spacing` et autres axe-core manquants
+ - [x] Éléments interactifs `<24px` inline (`target-size`, WCAG 2.5.8 AA)
+ - [x] `<audio autoplay>` sans `controls` (`no-autoplay-audio`)
+ - [x] `landmark-unique`, `avoid-inline-spacing` et autres axe-core manquants
 
 ## Phase 4 — Refactorisations techniques (1 jour)
 

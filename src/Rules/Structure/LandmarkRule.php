@@ -13,6 +13,13 @@ final class LandmarkRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
+        // This is a page-level rule: defer to evaluateOncePerFile helper so
+        // the rule only runs once per file. For backwards compatibility we
+        // keep the per-token guard via shouldSkipByTokenIndex().
+        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
+            return;
+        }
+
         $token = $tokens->get($tokenIndex);
 
         if (!$token->isMatching(Token::TEXT_TYPE)) {
@@ -26,10 +33,8 @@ final class LandmarkRule extends AbstractA11yRule
             return;
         }
 
-        // This is a page-level rule: only run once per file and only on full
-        // pages. The AbstractA11yRule helper provides the once-per-file
-        // behaviour; here we just need to check the full-page heuristics and
-        // emit if missing.
+        // The AbstractA11yRule helper provides the once-per-file behaviour; here
+        // we just need to check the full-page heuristics and emit if missing.
         $full = $this->getFullContent($tokens);
 
         // If this looks like a fragment (no body/doctype), skip evaluation
