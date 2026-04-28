@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Structure;
 
-use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Structure\BannedTagsRule;
 use TwigCsFixer\Environment\StubbedEnvironment;
@@ -13,8 +12,11 @@ use TwigCsFixer\Runner\Linter;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 use TwigCsFixer\Token\Tokenizer;
 
-#[CoversNothing]
-/** @internal */
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 final class BannedTagsRuleTest extends AbstractRuleTestCase
 {
     /** @param array<null|string> $expectedErrors */

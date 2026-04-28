@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Aria;
 
-use PHPUnit\Framework\Attributes\CoversNothing;
 use TwigA11y\Rules\Aria\AriaRoleRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
  * @internal
+ *
+ * @coversNothing
  */
-#[CoversNothing]
 final class AriaRoleRuleReuseTest extends AbstractRuleTestCase
 {
     public function testRuleWorksWhenTheSameInstanceIsReusedAcrossFiles(): void

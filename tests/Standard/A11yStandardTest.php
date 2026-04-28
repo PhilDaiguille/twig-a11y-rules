@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Standard;
 
-use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\TestCase;
 use TwigA11y\Rules\Anchor\AnchorAccessibleNameRule;
 use TwigA11y\Rules\Aria\AriaAllowedAttrRule;
@@ -73,8 +72,11 @@ use TwigCsFixer\Rules\Node\NodeRuleInterface;
 use TwigCsFixer\Rules\RuleInterface;
 use TwigCsFixer\Standard\StandardInterface;
 
-#[CoversNothing]
-/** @internal */
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 final class A11yStandardTest extends TestCase
 {
     public function testBasicStandardProvidesExpectedRules(): void

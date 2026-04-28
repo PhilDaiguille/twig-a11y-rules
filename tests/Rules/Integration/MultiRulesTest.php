@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Integration;
 
-use PHPUnit\Framework\Attributes\CoversNothing;
 use TwigA11y\Rules\Aria\AriaRoleRule;
 use TwigA11y\Rules\Structure\AnchorContentRule;
 use TwigA11y\Rules\Structure\ButtonContentRule;
@@ -14,8 +13,9 @@ use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
  * @internal
+ *
+ * @coversNothing
  */
-#[CoversNothing]
 final class MultiRulesTest extends AbstractRuleTestCase
 {
     public function testMultipleRulesProduceAllViolations(): void

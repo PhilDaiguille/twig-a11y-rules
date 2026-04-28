@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Structure;
 
-use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Structure\TableHeaderRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
-#[CoversNothing]
-/** @internal */
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 final class TableHeaderRuleTest extends AbstractRuleTestCase
 {
     /** @param array<null|string> $expectedErrors */

@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Media;
 
-use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Media\NoAutoplayAudioRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
  * @internal
+ *
+ * @coversNothing
  */
-#[CoversNothing]
 final class NoAutoplayAudioRuleTest extends AbstractRuleTestCase
 {
     /** @param array<null|string> $expectedErrors */
