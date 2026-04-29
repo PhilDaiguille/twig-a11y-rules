@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Aria;
 
-use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Aria\AriaReferencedIdExistsRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
  * @internal
+ *
+ * @coversNothing
  */
-#[CoversNothing]
 final class AriaReferencedIdExistsRuleTest extends AbstractRuleTestCase
 {
     /**

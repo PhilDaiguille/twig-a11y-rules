@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Forms;
 
-use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Forms\AriaInputFieldNameRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
-#[CoversNothing]
-/** @internal */
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 final class AriaInputFieldNameRuleTest extends AbstractRuleTestCase
 {
     /**

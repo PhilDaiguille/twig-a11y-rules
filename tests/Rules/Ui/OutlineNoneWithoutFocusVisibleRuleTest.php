@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Ui;
 
-use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Ui\OutlineNoneWithoutFocusVisibleRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
  * @internal
+ *
+ * @coversNothing
  */
-#[CoversNothing]
 final class OutlineNoneWithoutFocusVisibleRuleTest extends AbstractRuleTestCase
 {
     /**

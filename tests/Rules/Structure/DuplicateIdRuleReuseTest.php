@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Structure;
 
-use PHPUnit\Framework\Attributes\CoversNothing;
 use TwigA11y\Rules\Structure\DuplicateIdRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
  * @internal
+ *
+ * @coversNothing
  */
-#[CoversNothing]
 final class DuplicateIdRuleReuseTest extends AbstractRuleTestCase
 {
     public function testRuleWorksWhenTheSameInstanceIsReusedAcrossFiles(): void
