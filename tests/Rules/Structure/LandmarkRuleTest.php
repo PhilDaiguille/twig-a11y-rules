@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Structure;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Structure\LandmarkRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(LandmarkRule::class)]
 final class LandmarkRuleTest extends AbstractRuleTestCase
 {
     /** @param array<null|string> $expectedErrors */

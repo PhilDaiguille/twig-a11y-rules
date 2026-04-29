@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Structure;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Structure\TableDuplicateNameRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(TableDuplicateNameRule::class)]
 final class TableDuplicateNameRuleTest extends AbstractRuleTestCase
 {
     /** @param array<string, string> $expectedErrors */

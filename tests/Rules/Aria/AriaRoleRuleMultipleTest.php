@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Aria;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use TwigA11y\Rules\Aria\AriaRoleRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(AriaRoleRule::class)]
 final class AriaRoleRuleMultipleTest extends AbstractRuleTestCase
 {
     public function testMultipleInvalidRolesAreReported(): void

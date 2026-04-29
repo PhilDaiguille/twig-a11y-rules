@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Structure;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use TwigA11y\Rules\Structure\LandmarkRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(LandmarkRule::class)]
 final class LandmarkOncePerFileTest extends AbstractRuleTestCase
 {
     public function testDuplicateLandmarksAreReportedOncePerFileWhenReused(): void

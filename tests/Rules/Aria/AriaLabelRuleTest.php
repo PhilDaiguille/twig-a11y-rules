@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Aria;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Aria\AriaLabelRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(AriaLabelRule::class)]
 final class AriaLabelRuleTest extends AbstractRuleTestCase
 {
     /** @param array<null|string> $expectedErrors */
