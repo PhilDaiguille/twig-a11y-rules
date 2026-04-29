@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Media;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Media\AutoplayRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @covers \TwigA11y\Rules\Media\AutoplayRule
+ * @internal
  */
+#[CoversClass(AutoplayRule::class)]
 final class AutoplayRuleTest extends AbstractRuleTestCase
 {
     /** @param array<null|string> $expectedErrors */

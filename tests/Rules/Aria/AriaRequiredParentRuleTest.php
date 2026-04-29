@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Aria;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Aria\AriaRequiredParentRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @covers \TwigA11y\Rules\Aria\AriaRequiredParentRule
+ * @internal
  */
+#[CoversClass(AriaRequiredParentRule::class)]
 final class AriaRequiredParentRuleTest extends AbstractRuleTestCase
 {
     /**

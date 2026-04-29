@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Integration;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use TwigA11y\Rules\Aria\AriaRoleRule;
 use TwigA11y\Rules\Structure\AnchorContentRule;
 use TwigA11y\Rules\Structure\ButtonContentRule;
@@ -12,12 +13,13 @@ use TwigA11y\Rules\Structure\HeadingOrderRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @covers \TwigA11y\Rules\Aria\AriaRoleRule
- * @covers \TwigA11y\Rules\Structure\AnchorContentRule
- * @covers \TwigA11y\Rules\Structure\ButtonContentRule
- * @covers \TwigA11y\Rules\Structure\DuplicateIdRule
- * @covers \TwigA11y\Rules\Structure\HeadingOrderRule
+ * @internal
  */
+#[CoversClass(AriaRoleRule::class)]
+#[CoversClass(AnchorContentRule::class)]
+#[CoversClass(ButtonContentRule::class)]
+#[CoversClass(DuplicateIdRule::class)]
+#[CoversClass(HeadingOrderRule::class)]
 final class MultiRulesTest extends AbstractRuleTestCase
 {
     public function testMultipleRulesProduceAllViolations(): void

@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Structure;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Structure\FrameTitleRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @covers \TwigA11y\Rules\Structure\FrameTitleRule
+ * @internal
  */
+#[CoversClass(FrameTitleRule::class)]
 final class FrameTitleRuleTest extends AbstractRuleTestCase
 {
     /** @param array<null|string> $expectedErrors */

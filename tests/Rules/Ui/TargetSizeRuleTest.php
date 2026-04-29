@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Ui;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Ui\TargetSizeRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @covers \TwigA11y\Rules\Ui\TargetSizeRule
+ * @internal
  */
+#[CoversClass(TargetSizeRule::class)]
 final class TargetSizeRuleTest extends AbstractRuleTestCase
 {
     /** @param array<null|string> $expectedErrors */

@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Template;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use TwigA11y\Template\TemplateClassifier;
 use TwigA11y\Template\TemplateKind;
 
 /**
- * @covers \TwigA11y\Template\TemplateClassifier
- * @covers \TwigA11y\Template\TemplateKind
+ * @internal
  */
+#[CoversClass(TemplateClassifier::class)]
+#[CoversClass(TemplateKind::class)]
 final class TemplateClassifierTest extends TestCase
 {
     #[DataProvider('provideTemplates')]

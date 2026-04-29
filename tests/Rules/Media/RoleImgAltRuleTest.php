@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Media;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Media\RoleImgAltRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @covers \TwigA11y\Rules\Media\RoleImgAltRule
+ * @internal
  */
+#[CoversClass(RoleImgAltRule::class)]
 final class RoleImgAltRuleTest extends AbstractRuleTestCase
 {
     /**

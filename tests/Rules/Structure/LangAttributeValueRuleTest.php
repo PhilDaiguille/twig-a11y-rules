@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Structure;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Structure\LangAttributeValueRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @covers \TwigA11y\Rules\Structure\LangAttributeValueRule
+ * @internal
  */
+#[CoversClass(LangAttributeValueRule::class)]
 final class LangAttributeValueRuleTest extends AbstractRuleTestCase
 {
     /**

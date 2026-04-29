@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Structure;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use TwigA11y\Rules\Structure\HeadingOrderRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @covers \TwigA11y\Rules\Structure\HeadingOrderRule
+ * @internal
  */
+#[CoversClass(HeadingOrderRule::class)]
 final class HeadingOrderRuleReuseTest extends AbstractRuleTestCase
 {
     public function testRuleWorksWhenTheSameInstanceIsReusedAcrossFiles(): void

@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Forms;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Forms\AutocompleteValidRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @covers \TwigA11y\Rules\Forms\AutocompleteValidRule
+ * @internal
  */
+#[CoversClass(AutocompleteValidRule::class)]
 final class AutocompleteValidRuleTest extends AbstractRuleTestCase
 {
     /**

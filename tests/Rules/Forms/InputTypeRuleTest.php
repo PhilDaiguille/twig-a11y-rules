@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules\Forms;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TwigA11y\Rules\Forms\InputTypeRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @covers \TwigA11y\Rules\Forms\InputTypeRule
+ * @internal
  */
+#[CoversClass(InputTypeRule::class)]
 final class InputTypeRuleTest extends AbstractRuleTestCase
 {
     /** @param array<null|string> $expectedErrors */
