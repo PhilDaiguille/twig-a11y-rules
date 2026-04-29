@@ -9,9 +9,7 @@ use TwigA11y\Rules\Aria\AriaReferencedIdExistsRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Aria\AriaReferencedIdExistsRule
  */
 final class AriaReferencedIdExistsRuleTest extends AbstractRuleTestCase
 {

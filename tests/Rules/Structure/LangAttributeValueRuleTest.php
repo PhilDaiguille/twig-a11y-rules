@@ -9,9 +9,7 @@ use TwigA11y\Rules\Structure\LangAttributeValueRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\LangAttributeValueRule
  */
 final class LangAttributeValueRuleTest extends AbstractRuleTestCase
 {

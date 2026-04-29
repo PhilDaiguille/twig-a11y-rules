@@ -9,9 +9,7 @@ use TwigA11y\Rules\Aria\AriaHiddenBodyRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Aria\AriaHiddenBodyRule
  */
 final class AriaHiddenBodyRuleTest extends AbstractRuleTestCase
 {

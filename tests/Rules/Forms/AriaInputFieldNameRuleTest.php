@@ -9,9 +9,7 @@ use TwigA11y\Rules\Forms\AriaInputFieldNameRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Forms\AriaInputFieldNameRule
  */
 final class AriaInputFieldNameRuleTest extends AbstractRuleTestCase
 {

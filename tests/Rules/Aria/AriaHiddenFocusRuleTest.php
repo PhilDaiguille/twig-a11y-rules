@@ -9,9 +9,7 @@ use TwigA11y\Rules\Aria\AriaHiddenFocusRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Aria\AriaHiddenFocusRule
  */
 final class AriaHiddenFocusRuleTest extends AbstractRuleTestCase
 {

@@ -9,9 +9,7 @@ use TwigA11y\Rules\Structure\DocumentTitleRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\DocumentTitleRule
  */
 final class DocumentTitleRuleTest extends AbstractRuleTestCase
 {

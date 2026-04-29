@@ -9,9 +9,7 @@ use TwigA11y\Rules\Forms\FormLabelRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Forms\FormLabelRule
  */
 final class FormLabelRuleTest extends AbstractRuleTestCase
 {

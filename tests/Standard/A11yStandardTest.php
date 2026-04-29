@@ -73,9 +73,69 @@ use TwigCsFixer\Rules\RuleInterface;
 use TwigCsFixer\Standard\StandardInterface;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Anchor\AnchorAccessibleNameRule
+ * @covers \TwigA11y\Rules\Aria\AriaAllowedAttrRule
+ * @covers \TwigA11y\Rules\Aria\AriaDeprecatedRoleRule
+ * @covers \TwigA11y\Rules\Aria\AriaHiddenBodyRule
+ * @covers \TwigA11y\Rules\Aria\AriaHiddenFocusRule
+ * @covers \TwigA11y\Rules\Aria\AriaLabelRule
+ * @covers \TwigA11y\Rules\Aria\AriaReferencedIdExistsRule
+ * @covers \TwigA11y\Rules\Aria\AriaRequiredAttrRule
+ * @covers \TwigA11y\Rules\Aria\AriaRequiredChildrenRule
+ * @covers \TwigA11y\Rules\Aria\AriaRequiredParentRule
+ * @covers \TwigA11y\Rules\Aria\AriaRoleRule
+ * @covers \TwigA11y\Rules\Aria\AriaValidAttrRule
+ * @covers \TwigA11y\Rules\Aria\AriaValidAttrValueRule
+ * @covers \TwigA11y\Rules\Aria\TabIndexRule
+ * @covers \TwigA11y\Rules\Forms\AriaInputFieldNameRule
+ * @covers \TwigA11y\Rules\Forms\AutocompleteValidRule
+ * @covers \TwigA11y\Rules\Forms\FormLabelRule
+ * @covers \TwigA11y\Rules\Forms\InputButtonNameRule
+ * @covers \TwigA11y\Rules\Forms\InputLabelRule
+ * @covers \TwigA11y\Rules\Forms\InputTypeRule
+ * @covers \TwigA11y\Rules\Forms\SelectLabelRule
+ * @covers \TwigA11y\Rules\Forms\TextareaLabelRule
+ * @covers \TwigA11y\Rules\Media\AutoplayRule
+ * @covers \TwigA11y\Rules\Media\ImgAltRule
+ * @covers \TwigA11y\Rules\Media\InputImageAltRule
+ * @covers \TwigA11y\Rules\Media\NoAutoplayAudioRule
+ * @covers \TwigA11y\Rules\Media\ObjectAltRule
+ * @covers \TwigA11y\Rules\Media\RoleImgAltRule
+ * @covers \TwigA11y\Rules\Media\VideoTrackRule
+ * @covers \TwigA11y\Rules\Structure\AnchorContentRule
+ * @covers \TwigA11y\Rules\Structure\AreaAltRule
+ * @covers \TwigA11y\Rules\Structure\BannedTagsRule
+ * @covers \TwigA11y\Rules\Structure\ButtonContentRule
+ * @covers \TwigA11y\Rules\Structure\DocumentTitleRule
+ * @covers \TwigA11y\Rules\Structure\DuplicateAccessKeyRule
+ * @covers \TwigA11y\Rules\Structure\DuplicateIdRule
+ * @covers \TwigA11y\Rules\Structure\FieldsetLegendRule
+ * @covers \TwigA11y\Rules\Structure\FrameTitleRule
+ * @covers \TwigA11y\Rules\Structure\HeadingEmptyRule
+ * @covers \TwigA11y\Rules\Structure\HeadingOrderRule
+ * @covers \TwigA11y\Rules\Structure\IframeFocusableContentRule
+ * @covers \TwigA11y\Rules\Structure\IframeTitleRule
+ * @covers \TwigA11y\Rules\Structure\LandmarkRule
+ * @covers \TwigA11y\Rules\Structure\LandmarkUniqueRule
+ * @covers \TwigA11y\Rules\Structure\LangAttributeRule
+ * @covers \TwigA11y\Rules\Structure\LangAttributeValueRule
+ * @covers \TwigA11y\Rules\Structure\ListStructureRule
+ * @covers \TwigA11y\Rules\Structure\MetaRefreshRule
+ * @covers \TwigA11y\Rules\Structure\MetaViewportRule
+ * @covers \TwigA11y\Rules\Structure\NestedInteractiveRule
+ * @covers \TwigA11y\Rules\Structure\PageHeadingOneRule
+ * @covers \TwigA11y\Rules\Structure\SkipLinkRule
+ * @covers \TwigA11y\Rules\Structure\TableDuplicateNameRule
+ * @covers \TwigA11y\Rules\Structure\TableHeaderRule
+ * @covers \TwigA11y\Rules\Structure\TdHeadersAttrRule
+ * @covers \TwigA11y\Rules\Ui\ColorContrastRule
+ * @covers \TwigA11y\Rules\Ui\OutlineNoneWithoutFocusVisibleRule
+ * @covers \TwigA11y\Rules\Ui\ScrollableRegionFocusableRule
+ * @covers \TwigA11y\Rules\Ui\TargetSizeRule
+ * @covers \TwigA11y\Standard\A11yBasicStandard
+ * @covers \TwigA11y\Standard\A11yRecommendedStandard
+ * @covers \TwigA11y\Standard\A11yStandard
+ * @covers \TwigA11y\Standard\A11yStrict
  */
 final class A11yStandardTest extends TestCase
 {

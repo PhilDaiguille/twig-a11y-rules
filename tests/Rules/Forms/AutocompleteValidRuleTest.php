@@ -9,9 +9,7 @@ use TwigA11y\Rules\Forms\AutocompleteValidRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Forms\AutocompleteValidRule
  */
 final class AutocompleteValidRuleTest extends AbstractRuleTestCase
 {

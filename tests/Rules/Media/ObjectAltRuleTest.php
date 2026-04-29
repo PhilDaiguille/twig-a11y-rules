@@ -9,9 +9,7 @@ use TwigA11y\Rules\Media\ObjectAltRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Media\ObjectAltRule
  */
 final class ObjectAltRuleTest extends AbstractRuleTestCase
 {

@@ -9,9 +9,7 @@ use TwigA11y\Rules\Structure\ListStructureRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\ListStructureRule
  */
 final class ListStructureRuleTest extends AbstractRuleTestCase
 {

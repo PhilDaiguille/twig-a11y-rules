@@ -9,9 +9,7 @@ use TwigA11y\Rules\Structure\TableDuplicateNameRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\TableDuplicateNameRule
  */
 final class TableDuplicateNameRuleTest extends AbstractRuleTestCase
 {

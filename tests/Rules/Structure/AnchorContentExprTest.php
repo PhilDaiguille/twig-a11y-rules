@@ -8,9 +8,7 @@ use TwigA11y\Rules\Structure\AnchorContentRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\AnchorContentRule
  */
 final class AnchorContentExprTest extends AbstractRuleTestCase
 {

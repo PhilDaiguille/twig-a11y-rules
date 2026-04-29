@@ -9,9 +9,7 @@ use TwigA11y\Rules\Structure\PageHeadingOneRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\PageHeadingOneRule
  */
 final class PageHeadingOneRuleTest extends AbstractRuleTestCase
 {

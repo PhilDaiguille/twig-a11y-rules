@@ -9,9 +9,7 @@ use TwigA11y\Rules\Ui\TargetSizeRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Ui\TargetSizeRule
  */
 final class TargetSizeRuleTest extends AbstractRuleTestCase
 {

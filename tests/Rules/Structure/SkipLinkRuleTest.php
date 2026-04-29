@@ -9,9 +9,7 @@ use TwigA11y\Rules\Structure\SkipLinkRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\SkipLinkRule
  */
 final class SkipLinkRuleTest extends AbstractRuleTestCase
 {

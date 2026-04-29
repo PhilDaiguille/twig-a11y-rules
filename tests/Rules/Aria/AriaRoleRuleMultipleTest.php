@@ -8,9 +8,7 @@ use TwigA11y\Rules\Aria\AriaRoleRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Aria\AriaRoleRule
  */
 final class AriaRoleRuleMultipleTest extends AbstractRuleTestCase
 {

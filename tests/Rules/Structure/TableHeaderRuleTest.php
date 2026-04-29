@@ -9,9 +9,7 @@ use TwigA11y\Rules\Structure\TableHeaderRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\TableHeaderRule
  */
 final class TableHeaderRuleTest extends AbstractRuleTestCase
 {

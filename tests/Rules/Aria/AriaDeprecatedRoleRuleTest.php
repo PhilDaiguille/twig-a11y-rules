@@ -9,9 +9,7 @@ use TwigA11y\Rules\Aria\AriaDeprecatedRoleRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Aria\AriaDeprecatedRoleRule
  */
 final class AriaDeprecatedRoleRuleTest extends AbstractRuleTestCase
 {

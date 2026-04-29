@@ -9,9 +9,7 @@ use TwigA11y\Rules\Structure\IframeFocusableContentRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\IframeFocusableContentRule
  */
 final class IframeFocusableContentRuleTest extends AbstractRuleTestCase
 {

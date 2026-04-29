@@ -9,9 +9,7 @@ use TwigA11y\Rules\Forms\TextareaLabelRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Forms\TextareaLabelRule
  */
 final class TextareaLabelRuleTest extends AbstractRuleTestCase
 {

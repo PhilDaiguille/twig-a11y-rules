@@ -13,9 +13,7 @@ use TwigCsFixer\Test\AbstractRuleTestCase;
 use TwigCsFixer\Token\Tokenizer;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\BannedTagsRule
  */
 final class BannedTagsRuleTest extends AbstractRuleTestCase
 {

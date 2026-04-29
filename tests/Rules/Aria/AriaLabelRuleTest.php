@@ -9,9 +9,7 @@ use TwigA11y\Rules\Aria\AriaLabelRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Aria\AriaLabelRule
  */
 final class AriaLabelRuleTest extends AbstractRuleTestCase
 {

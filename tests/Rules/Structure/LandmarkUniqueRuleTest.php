@@ -9,9 +9,7 @@ use TwigA11y\Rules\Structure\LandmarkUniqueRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\LandmarkUniqueRule
  */
 final class LandmarkUniqueRuleTest extends AbstractRuleTestCase
 {

@@ -10,9 +10,8 @@ use TwigA11y\Template\TemplateClassifier;
 use TwigA11y\Template\TemplateKind;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Template\TemplateClassifier
+ * @covers \TwigA11y\Template\TemplateKind
  */
 final class TemplateClassifierTest extends TestCase
 {

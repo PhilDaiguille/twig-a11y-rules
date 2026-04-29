@@ -9,9 +9,7 @@ use TwigA11y\Rules\Anchor\AnchorAccessibleNameRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Anchor\AnchorAccessibleNameRule
  */
 final class AnchorAccessibleNameRuleTest extends AbstractRuleTestCase
 {

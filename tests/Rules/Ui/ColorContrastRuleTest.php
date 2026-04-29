@@ -9,9 +9,7 @@ use TwigA11y\Rules\Ui\ColorContrastRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Ui\ColorContrastRule
  */
 final class ColorContrastRuleTest extends AbstractRuleTestCase
 {

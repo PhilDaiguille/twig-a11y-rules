@@ -9,9 +9,7 @@ use TwigA11y\Rules\Structure\ButtonContentRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\ButtonContentRule
  */
 final class ButtonContentRuleTest extends AbstractRuleTestCase
 {

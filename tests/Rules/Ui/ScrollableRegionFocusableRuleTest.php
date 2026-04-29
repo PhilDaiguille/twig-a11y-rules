@@ -9,9 +9,7 @@ use TwigA11y\Rules\Ui\ScrollableRegionFocusableRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Ui\ScrollableRegionFocusableRule
  */
 final class ScrollableRegionFocusableRuleTest extends AbstractRuleTestCase
 {

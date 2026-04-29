@@ -9,9 +9,7 @@ use TwigA11y\Rules\Aria\AriaRequiredAttrRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Aria\AriaRequiredAttrRule
  */
 final class AriaRequiredAttrRuleTest extends AbstractRuleTestCase
 {

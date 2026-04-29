@@ -9,9 +9,7 @@ use TwigA11y\Rules\Media\RoleImgAltRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Media\RoleImgAltRule
  */
 final class RoleImgAltRuleTest extends AbstractRuleTestCase
 {

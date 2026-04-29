@@ -9,9 +9,7 @@ use TwigA11y\Rules\Forms\InputTypeRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Forms\InputTypeRule
  */
 final class InputTypeRuleTest extends AbstractRuleTestCase
 {

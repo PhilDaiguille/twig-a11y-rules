@@ -9,9 +9,7 @@ use TwigA11y\Rules\Structure\DuplicateIdRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\DuplicateIdRule
  */
 final class DuplicateIdRuleTest extends AbstractRuleTestCase
 {

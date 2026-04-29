@@ -8,9 +8,7 @@ use PHPUnit\Framework\TestCase;
 use TwigCsFixer\Config\Config;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigCsFixer\Config\Config
  */
 final class ConfigExampleTest extends TestCase
 {

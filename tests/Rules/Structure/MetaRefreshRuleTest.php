@@ -9,9 +9,7 @@ use TwigA11y\Rules\Structure\MetaRefreshRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\MetaRefreshRule
  */
 final class MetaRefreshRuleTest extends AbstractRuleTestCase
 {

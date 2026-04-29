@@ -9,9 +9,7 @@ use TwigA11y\Rules\Structure\MetaViewportRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\MetaViewportRule
  */
 final class MetaViewportRuleTest extends AbstractRuleTestCase
 {

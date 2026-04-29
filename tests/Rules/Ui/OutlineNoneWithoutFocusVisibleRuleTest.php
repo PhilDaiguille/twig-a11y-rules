@@ -9,9 +9,7 @@ use TwigA11y\Rules\Ui\OutlineNoneWithoutFocusVisibleRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Ui\OutlineNoneWithoutFocusVisibleRule
  */
 final class OutlineNoneWithoutFocusVisibleRuleTest extends AbstractRuleTestCase
 {

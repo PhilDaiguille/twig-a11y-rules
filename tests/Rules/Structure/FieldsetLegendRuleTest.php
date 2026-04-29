@@ -9,9 +9,7 @@ use TwigA11y\Rules\Structure\FieldsetLegendRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\FieldsetLegendRule
  */
 final class FieldsetLegendRuleTest extends AbstractRuleTestCase
 {

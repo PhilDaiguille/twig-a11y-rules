@@ -9,9 +9,7 @@ use TwigA11y\Rules\Structure\FrameTitleRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\FrameTitleRule
  */
 final class FrameTitleRuleTest extends AbstractRuleTestCase
 {

@@ -9,9 +9,7 @@ use TwigA11y\Rules\Forms\SelectLabelRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Forms\SelectLabelRule
  */
 final class SelectLabelRuleTest extends AbstractRuleTestCase
 {

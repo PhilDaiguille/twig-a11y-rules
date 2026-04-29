@@ -12,9 +12,11 @@ use TwigA11y\Rules\Structure\HeadingOrderRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Aria\AriaRoleRule
+ * @covers \TwigA11y\Rules\Structure\AnchorContentRule
+ * @covers \TwigA11y\Rules\Structure\ButtonContentRule
+ * @covers \TwigA11y\Rules\Structure\DuplicateIdRule
+ * @covers \TwigA11y\Rules\Structure\HeadingOrderRule
  */
 final class MultiRulesTest extends AbstractRuleTestCase
 {

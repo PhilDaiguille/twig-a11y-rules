@@ -9,9 +9,7 @@ use TwigA11y\Rules\Media\AutoplayRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Media\AutoplayRule
  */
 final class AutoplayRuleTest extends AbstractRuleTestCase
 {

@@ -9,9 +9,7 @@ use TwigA11y\Rules\Structure\DuplicateAccessKeyRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\DuplicateAccessKeyRule
  */
 final class DuplicateAccessKeyRuleTest extends AbstractRuleTestCase
 {

@@ -9,9 +9,7 @@ use TwigA11y\Rules\Media\ImgAltRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Media\ImgAltRule
  */
 final class ImgAltRuleTest extends AbstractRuleTestCase
 {

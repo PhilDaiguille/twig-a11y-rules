@@ -9,9 +9,7 @@ use TwigA11y\Rules\Structure\IframeTitleRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Structure\IframeTitleRule
  */
 final class IframeTitleRuleTest extends AbstractRuleTestCase
 {

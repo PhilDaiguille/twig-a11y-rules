@@ -9,9 +9,7 @@ use TwigA11y\Rules\Aria\TabIndexRule;
 use TwigCsFixer\Test\AbstractRuleTestCase;
 
 /**
- * @internal
- *
- * @coversNothing
+ * @covers \TwigA11y\Rules\Aria\TabIndexRule
  */
 final class TabIndexRuleTest extends AbstractRuleTestCase
 {
