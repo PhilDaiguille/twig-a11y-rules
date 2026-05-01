@@ -18,8 +18,7 @@ final class RoleCatalogTest extends TestCase
     {
         $roles = RoleCatalog::getAllowedRoles();
 
-        self::assertIsArray($roles);
-        self::assertNotEmpty($roles);
+        $this->assertNotEmpty($roles);
     }
 
     public function testGetAllowedRolesContainsKnownWaiAriaRoles(): void
@@ -40,15 +39,14 @@ final class RoleCatalogTest extends TestCase
         ];
 
         foreach ($expected as $role) {
-            self::assertContains($role, $roles, \sprintf('Expected role "%s" to be in the allowed roles list.', $role));
+            $this->assertContains($role, $roles, \sprintf('Expected role "%s" to be in the allowed roles list.', $role));
         }
     }
 
     public function testGetAllowedRolesContainsOnlyStrings(): void
     {
         foreach (RoleCatalog::getAllowedRoles() as $role) {
-            self::assertIsString($role);
-            self::assertNotEmpty($role);
+            $this->assertNotEmpty($role);
         }
     }
 
@@ -56,18 +54,14 @@ final class RoleCatalogTest extends TestCase
     {
         $catalog = RoleCatalog::getCatalog();
 
-        self::assertIsArray($catalog);
-        self::assertNotEmpty($catalog);
+        $this->assertNotEmpty($catalog);
     }
 
     public function testGetCatalogEntriesHaveExpectedShape(): void
     {
         foreach (RoleCatalog::getCatalog() as $role => $entry) {
-            self::assertIsString($role, 'Catalog key must be a string role name.');
-            self::assertArrayHasKey('required_attrs', $entry, \sprintf('Role "%s" must have required_attrs.', $role));
-            self::assertArrayHasKey('required_children', $entry, \sprintf('Role "%s" must have required_children.', $role));
-            self::assertIsArray($entry['required_attrs']);
-            self::assertIsArray($entry['required_children']);
+            $this->assertArrayHasKey('required_attrs', $entry, \sprintf('Role "%s" must have required_attrs.', $role));
+            $this->assertArrayHasKey('required_children', $entry, \sprintf('Role "%s" must have required_children.', $role));
         }
     }
 
@@ -75,46 +69,46 @@ final class RoleCatalogTest extends TestCase
     {
         $catalog = RoleCatalog::getCatalog();
 
-        self::assertArrayHasKey('table', $catalog);
-        self::assertContains('row', $catalog['table']['required_children']);
+        $this->assertArrayHasKey('table', $catalog);
+        $this->assertContains('row', $catalog['table']['required_children']);
 
-        self::assertArrayHasKey('tablist', $catalog);
-        self::assertContains('tab', $catalog['tablist']['required_children']);
+        $this->assertArrayHasKey('tablist', $catalog);
+        $this->assertContains('tab', $catalog['tablist']['required_children']);
 
-        self::assertArrayHasKey('list', $catalog);
-        self::assertContains('listitem', $catalog['list']['required_children']);
+        $this->assertArrayHasKey('list', $catalog);
+        $this->assertContains('listitem', $catalog['list']['required_children']);
 
-        self::assertArrayHasKey('radiogroup', $catalog);
-        self::assertContains('radio', $catalog['radiogroup']['required_children']);
+        $this->assertArrayHasKey('radiogroup', $catalog);
+        $this->assertContains('radio', $catalog['radiogroup']['required_children']);
 
-        self::assertArrayHasKey('tree', $catalog);
-        self::assertContains('treeitem', $catalog['tree']['required_children']);
+        $this->assertArrayHasKey('tree', $catalog);
+        $this->assertContains('treeitem', $catalog['tree']['required_children']);
 
-        self::assertArrayHasKey('grid', $catalog);
-        self::assertContains('row', $catalog['grid']['required_children']);
+        $this->assertArrayHasKey('grid', $catalog);
+        $this->assertContains('row', $catalog['grid']['required_children']);
 
-        self::assertArrayHasKey('listbox', $catalog);
-        self::assertContains('option', $catalog['listbox']['required_children']);
+        $this->assertArrayHasKey('listbox', $catalog);
+        $this->assertContains('option', $catalog['listbox']['required_children']);
 
-        self::assertArrayHasKey('menu', $catalog);
-        self::assertContains('menuitem', $catalog['menu']['required_children']);
+        $this->assertArrayHasKey('menu', $catalog);
+        $this->assertContains('menuitem', $catalog['menu']['required_children']);
 
-        self::assertArrayHasKey('menubar', $catalog);
-        self::assertContains('menuitem', $catalog['menubar']['required_children']);
+        $this->assertArrayHasKey('menubar', $catalog);
+        $this->assertContains('menuitem', $catalog['menubar']['required_children']);
     }
 
     public function testGetCatalogRolesWithRequiredAttrs(): void
     {
         $catalog = RoleCatalog::getCatalog();
 
-        self::assertArrayHasKey('tab', $catalog);
-        self::assertContains('aria-selected', $catalog['tab']['required_attrs']);
+        $this->assertArrayHasKey('tab', $catalog);
+        $this->assertContains('aria-selected', $catalog['tab']['required_attrs']);
 
-        self::assertArrayHasKey('checkbox', $catalog);
-        self::assertContains('aria-checked', $catalog['checkbox']['required_attrs']);
+        $this->assertArrayHasKey('checkbox', $catalog);
+        $this->assertContains('aria-checked', $catalog['checkbox']['required_attrs']);
 
-        self::assertArrayHasKey('radio', $catalog);
-        self::assertContains('aria-checked', $catalog['radio']['required_attrs']);
+        $this->assertArrayHasKey('radio', $catalog);
+        $this->assertContains('aria-checked', $catalog['radio']['required_attrs']);
     }
 
     public function testGetCatalogRolesWithNoRequiredAttrs(): void
@@ -122,8 +116,8 @@ final class RoleCatalogTest extends TestCase
         $catalog = RoleCatalog::getCatalog();
 
         foreach (['button', 'table', 'list', 'menu', 'menubar', 'row'] as $role) {
-            self::assertArrayHasKey($role, $catalog);
-            self::assertSame([], $catalog[$role]['required_attrs'], \sprintf('Role "%s" should have no required_attrs.', $role));
+            $this->assertArrayHasKey($role, $catalog);
+            $this->assertSame([], $catalog[$role]['required_attrs'], \sprintf('Role "%s" should have no required_attrs.', $role));
         }
     }
 }

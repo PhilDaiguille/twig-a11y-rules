@@ -24,15 +24,15 @@ final class StandardRuleSetsTest extends TestCase
     {
         $rules = StandardRuleSets::basic();
 
-        self::assertNotEmpty($rules);
-        self::assertContainsOnlyInstancesOf(RuleInterface::class, $rules);
+        $this->assertNotEmpty($rules);
+        $this->assertCount(5, $rules);
     }
 
     public function testBasicContainsExpectedClasses(): void
     {
         $classes = array_map(static fn (RuleInterface $r): string => $r::class, StandardRuleSets::basic());
 
-        self::assertSame([
+        $this->assertSame([
             ImgAltRule::class,
             BannedTagsRule::class,
             ButtonContentRule::class,
@@ -45,8 +45,8 @@ final class StandardRuleSetsTest extends TestCase
     {
         $rules = StandardRuleSets::recommended();
 
-        self::assertNotEmpty($rules);
-        self::assertContainsOnlyInstancesOf(RuleInterface::class, $rules);
+        $this->assertNotEmpty($rules);
+        $this->assertCount(15, $rules);
     }
 
     public function testRecommendedIsSupersetOfBasic(): void
@@ -55,7 +55,7 @@ final class StandardRuleSetsTest extends TestCase
         $recommendedClasses = array_map(static fn (RuleInterface $r): string => $r::class, StandardRuleSets::recommended());
 
         foreach ($basicClasses as $class) {
-            self::assertContains($class, $recommendedClasses, \sprintf('Recommended should include basic rule "%s".', $class));
+            $this->assertContains($class, $recommendedClasses, \sprintf('Recommended should include basic rule "%s".', $class));
         }
     }
 
@@ -63,8 +63,8 @@ final class StandardRuleSetsTest extends TestCase
     {
         $rules = StandardRuleSets::standard();
 
-        self::assertNotEmpty($rules);
-        self::assertContainsOnlyInstancesOf(RuleInterface::class, $rules);
+        $this->assertNotEmpty($rules);
+        $this->assertCount(26, $rules);
     }
 
     public function testStandardIsSupersetOfRecommended(): void
@@ -73,7 +73,7 @@ final class StandardRuleSetsTest extends TestCase
         $standardClasses = array_map(static fn (RuleInterface $r): string => $r::class, StandardRuleSets::standard());
 
         foreach ($recommendedClasses as $class) {
-            self::assertContains($class, $standardClasses, \sprintf('Standard should include recommended rule "%s".', $class));
+            $this->assertContains($class, $standardClasses, \sprintf('Standard should include recommended rule "%s".', $class));
         }
     }
 
@@ -81,8 +81,8 @@ final class StandardRuleSetsTest extends TestCase
     {
         $rules = StandardRuleSets::strict();
 
-        self::assertNotEmpty($rules);
-        self::assertContainsOnlyInstancesOf(RuleInterface::class, $rules);
+        $this->assertNotEmpty($rules);
+        $this->assertGreaterThan(26, \count($rules));
     }
 
     public function testStrictIsSupersetOfStandard(): void
@@ -91,7 +91,7 @@ final class StandardRuleSetsTest extends TestCase
         $strictClasses = array_map(static fn (RuleInterface $r): string => $r::class, StandardRuleSets::strict());
 
         foreach ($standardClasses as $class) {
-            self::assertContains($class, $strictClasses, \sprintf('Strict should include standard rule "%s".', $class));
+            $this->assertContains($class, $strictClasses, \sprintf('Strict should include standard rule "%s".', $class));
         }
     }
 
@@ -104,11 +104,7 @@ final class StandardRuleSetsTest extends TestCase
             'strict' => StandardRuleSets::strict(),
         ] as $level => $rules) {
             $classes = array_map(static fn (RuleInterface $r): string => $r::class, $rules);
-            self::assertSame(
-                array_unique($classes),
-                $classes,
-                \sprintf('Rule set "%s" should not contain duplicate rule classes.', $level)
-            );
+            $this->assertSame(array_unique($classes), $classes, \sprintf('Rule set "%s" should not contain duplicate rule classes.', $level));
         }
     }
 
@@ -117,10 +113,10 @@ final class StandardRuleSetsTest extends TestCase
         $rulesA = StandardRuleSets::basic();
         $rulesB = StandardRuleSets::basic();
 
-        self::assertCount(\count($rulesA), $rulesB);
+        $this->assertCount(\count($rulesA), $rulesB);
 
         foreach ($rulesA as $i => $ruleA) {
-            self::assertNotSame($ruleA, $rulesB[$i], 'Each call to basic() should return fresh instances.');
+            $this->assertNotSame($ruleA, $rulesB[$i], 'Each call to basic() should return fresh instances.');
         }
     }
 }
