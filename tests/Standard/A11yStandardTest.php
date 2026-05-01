@@ -73,6 +73,7 @@ use TwigA11y\Standard\A11yBasicStandard;
 use TwigA11y\Standard\A11yRecommendedStandard;
 use TwigA11y\Standard\A11yStandard;
 use TwigA11y\Standard\A11yStrict;
+use TwigA11y\Standard\StandardRuleSets;
 use TwigCsFixer\Rules\Node\NodeRuleInterface;
 use TwigCsFixer\Rules\RuleInterface;
 use TwigCsFixer\Standard\StandardInterface;
@@ -147,6 +148,7 @@ use TwigCsFixer\Standard\StandardInterface;
 #[CoversClass(A11yRecommendedStandard::class)]
 #[CoversClass(A11yStandard::class)]
 #[CoversClass(A11yStrict::class)]
+#[CoversClass(StandardRuleSets::class)]
 final class A11yStandardTest extends TestCase
 {
     public function testBasicStandardProvidesExpectedRules(): void
