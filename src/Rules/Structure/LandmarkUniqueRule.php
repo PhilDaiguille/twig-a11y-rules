@@ -145,4 +145,9 @@ final class LandmarkUniqueRule extends AbstractA11yRule
             }
         }
     }
+
+    protected function evaluateOncePerFile(): bool
+    {
+        return true;
+    }
 }

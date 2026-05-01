@@ -54,6 +54,30 @@ final class RoleCatalog
                 'required_children' => ['radio'],
             ],
 
+            // Hierarchical tree widget
+            'tree' => [
+                'required_attrs' => [],
+                'required_children' => ['treeitem'],
+            ],
+
+            // Grid (data grid / spreadsheet pattern)
+            'grid' => [
+                'required_attrs' => [],
+                'required_children' => ['row', 'rowgroup'],
+            ],
+
+            // Listbox (selection widget)
+            'listbox' => [
+                'required_attrs' => [],
+                'required_children' => ['option'],
+            ],
+
+            // Row — allowed children depend on context (grid vs table)
+            'row' => [
+                'required_attrs' => [],
+                'required_children' => ['gridcell', 'columnheader', 'rowheader'],
+            ],
+
             // Common ARIA roles with basic expectations
             'menu' => [
                 'required_attrs' => [],

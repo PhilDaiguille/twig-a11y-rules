@@ -64,9 +64,17 @@ abstract class AbstractFormFieldLabelRule extends AbstractA11yRule
     /**
      * Allow subclasses to perform extra checks on the opening tag. Return true
      * when the opening tag already provides a label (eg. aria-labelledby).
+     *
+     * The base implementation accepts both aria-label and aria-labelledby.
+     * Both attributes are valid for most form elements. Subclasses that need
+     * to further restrict or extend this list can override the method.
      */
     protected function openingProvidesLabel(string $opening): bool
     {
+        if (preg_match('/\baria-labelledby\s*=\s*(?:"|\')/i', $opening)) {
+            return true;
+        }
+
         return (bool) preg_match('/\baria-label\s*=\s*(?:"|\')/i', $opening);
     }
 

@@ -42,8 +42,10 @@ use TwigA11y\Rules\Structure\ButtonContentRule;
 use TwigA11y\Rules\Structure\DocumentTitleRule;
 use TwigA11y\Rules\Structure\DuplicateAccessKeyRule;
 use TwigA11y\Rules\Structure\DuplicateIdRule;
+use TwigA11y\Rules\Structure\EmptyTableHeaderRule;
 use TwigA11y\Rules\Structure\FieldsetLegendRule;
 use TwigA11y\Rules\Structure\FrameTitleRule;
+use TwigA11y\Rules\Structure\GenericLinkTextRule;
 use TwigA11y\Rules\Structure\HeadingEmptyRule;
 use TwigA11y\Rules\Structure\HeadingOrderRule;
 use TwigA11y\Rules\Structure\IframeFocusableContentRule;
@@ -57,8 +59,10 @@ use TwigA11y\Rules\Structure\MetaRefreshRule;
 use TwigA11y\Rules\Structure\MetaViewportRule;
 use TwigA11y\Rules\Structure\NestedInteractiveRule;
 use TwigA11y\Rules\Structure\PageHeadingOneRule;
+use TwigA11y\Rules\Structure\PAsHeadingRule;
 use TwigA11y\Rules\Structure\SkipLinkRule;
 use TwigA11y\Rules\Structure\TableDuplicateNameRule;
+use TwigA11y\Rules\Structure\TableFakeCaptionRule;
 use TwigA11y\Rules\Structure\TableHeaderRule;
 use TwigA11y\Rules\Structure\TdHeadersAttrRule;
 use TwigA11y\Rules\Ui\ColorContrastRule;
@@ -112,8 +116,10 @@ use TwigCsFixer\Standard\StandardInterface;
 #[CoversClass(DocumentTitleRule::class)]
 #[CoversClass(DuplicateAccessKeyRule::class)]
 #[CoversClass(DuplicateIdRule::class)]
+#[CoversClass(EmptyTableHeaderRule::class)]
 #[CoversClass(FieldsetLegendRule::class)]
 #[CoversClass(FrameTitleRule::class)]
+#[CoversClass(GenericLinkTextRule::class)]
 #[CoversClass(HeadingEmptyRule::class)]
 #[CoversClass(HeadingOrderRule::class)]
 #[CoversClass(IframeFocusableContentRule::class)]
@@ -126,9 +132,11 @@ use TwigCsFixer\Standard\StandardInterface;
 #[CoversClass(MetaRefreshRule::class)]
 #[CoversClass(MetaViewportRule::class)]
 #[CoversClass(NestedInteractiveRule::class)]
+#[CoversClass(PAsHeadingRule::class)]
 #[CoversClass(PageHeadingOneRule::class)]
 #[CoversClass(SkipLinkRule::class)]
 #[CoversClass(TableDuplicateNameRule::class)]
+#[CoversClass(TableFakeCaptionRule::class)]
 #[CoversClass(TableHeaderRule::class)]
 #[CoversClass(TdHeadersAttrRule::class)]
 #[CoversClass(ColorContrastRule::class)]
@@ -173,6 +181,7 @@ final class A11yStandardTest extends TestCase
                 FormLabelRule::class,
                 SelectLabelRule::class,
                 TextareaLabelRule::class,
+                TableFakeCaptionRule::class,
             ],
             $this->classes(new A11yRecommendedStandard())
         );
@@ -196,6 +205,7 @@ final class A11yStandardTest extends TestCase
                 FormLabelRule::class,
                 SelectLabelRule::class,
                 TextareaLabelRule::class,
+                TableFakeCaptionRule::class,
                 AutoplayRule::class,
                 AnchorContentRule::class,
                 HeadingEmptyRule::class,
@@ -205,6 +215,8 @@ final class A11yStandardTest extends TestCase
                 TabIndexRule::class,
                 InputTypeRule::class,
                 InputButtonNameRule::class,
+                EmptyTableHeaderRule::class,
+                GenericLinkTextRule::class,
             ],
             $this->classes(new A11yStandard())
         );
@@ -228,6 +240,7 @@ final class A11yStandardTest extends TestCase
                 FormLabelRule::class,
                 SelectLabelRule::class,
                 TextareaLabelRule::class,
+                TableFakeCaptionRule::class,
                 AutoplayRule::class,
                 AnchorContentRule::class,
                 HeadingEmptyRule::class,
@@ -237,6 +250,8 @@ final class A11yStandardTest extends TestCase
                 TabIndexRule::class,
                 InputTypeRule::class,
                 InputButtonNameRule::class,
+                EmptyTableHeaderRule::class,
+                GenericLinkTextRule::class,
                 AriaRoleRule::class,
                 AriaLabelRule::class,
                 AriaHiddenFocusRule::class,
@@ -273,6 +288,7 @@ final class A11yStandardTest extends TestCase
                 LangAttributeValueRule::class,
                 NestedInteractiveRule::class,
                 DuplicateAccessKeyRule::class,
+                PAsHeadingRule::class,
             ],
             $this->classes(new A11yStrict())
         );

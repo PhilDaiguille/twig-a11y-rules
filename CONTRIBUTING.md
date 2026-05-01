@@ -30,6 +30,13 @@ Run tests and static checks locally
 - ./vendor/bin/phpstan analyse -c phpstan.dist.neon
 - composer test
 
+Lint and formatting
+- `composer lint` runs the full validation sequence (PHPStan, Rector, and PHP CS Fixer).
+- WARNING: `composer lint` is **not** a dry-run — it applies Rector refactors and PHP CS Fixer formatting changes directly to the source files. Commit your work before running it, or use the individual commands below for a read-only check:
+  - `composer cs-lint` — check formatting without applying changes.
+  - `composer phpstan` — static analysis only.
+  - `composer rector -- --dry-run` — preview Rector changes without writing them.
+
 Checklist for PRs
 - Tests covering valid and invalid examples included.
 - phpstan passes locally.
