@@ -28,18 +28,7 @@ final class AnchorAccessibleNameRule extends AbstractA11yRule
             return;
         }
 
-        $full = $this->collectTag($tokenIndex, $tokens, 200);
-        if (!str_contains($full, '>')) {
-            $collected = $full;
-            $i = $tokenIndex + 1;
-            $limit = $tokenIndex + 200;
-            while ($i <= $limit && $tokens->has($i) && !str_contains($collected, '>')) {
-                $collected .= $tokens->get($i)->getValue();
-                ++$i;
-            }
-
-            $full = $collected;
-        }
+        $full = $this->collectUntil($tokenIndex, $tokens, '</a>', 200);
 
         if (!preg_match('/<\s*a\b([^>]*)>(.*?)<\s*\/\s*a\s*>/is', $full, $m)) {
             return;

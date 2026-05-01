@@ -28,5 +28,7 @@ final class AriaRequiredAttrRuleTest extends AbstractRuleTestCase
         yield 'missing required attr' => [__DIR__.'/Fixtures/invalid/required_attr_missing.html.twig', ['AriaRequiredAttr.AriaRequired.Missing:1:1' => 'Role "img" requires attribute "alt".']];
 
         yield 'no role' => [__DIR__.'/Fixtures/valid/role_none.html.twig', []];
+
+        yield 'textbox with aria-labelledby is valid' => [__DIR__.'/Fixtures/valid/textbox_with_aria_labelledby.html.twig', []];
     }
 }

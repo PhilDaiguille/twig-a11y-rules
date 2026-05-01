@@ -27,6 +27,8 @@ final class AriaHiddenFocusRuleTest extends AbstractRuleTestCase
     {
         yield 'valid non focusable' => [__DIR__.'/Fixtures/valid/aria_hidden_non_focusable.html.twig', []];
 
+        yield 'valid tabindex -1 with aria-hidden — not a focusable violation' => [__DIR__.'/Fixtures/valid/aria_hidden_tabindex_minus_one.html.twig', []];
+
         yield 'invalid focusable' => [__DIR__.'/Fixtures/invalid/aria_hidden_focus.html.twig', ['AriaHiddenFocus.AriaHiddenFocus.HiddenFocusable:1:1' => 'Focusable element should not be aria-hidden.']];
     }
 

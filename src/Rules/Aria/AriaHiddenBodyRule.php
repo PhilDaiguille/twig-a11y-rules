@@ -18,11 +18,6 @@ final class AriaHiddenBodyRule extends AbstractA11yRule
 
         $full = $this->getFullContent($tokens);
 
-        // Only apply to full pages
-        if (!str_contains(strtoupper($full), '<!DOCTYPE') && !str_contains($full, '<body')) {
-            return;
-        }
-
         if (preg_match('/<body[^>]*aria-hidden\s*=\s*(?:"|\')true(?:"|\')/i', $full)) {
             $first = $tokens->get(0);
             $emit('Do not set aria-hidden="true" on the <body> element.', $first, 'AriaHiddenBody.HiddenOnBody');

@@ -25,7 +25,7 @@ final class ObjectAltRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'no alt' => [__DIR__.'/Fixtures/invalid/object_no_alt.html.twig', ['ObjectAlt.ObjectAlt.Missing:1:1' => 'Object element should have alternative text.']];
+        yield 'no alt' => [__DIR__.'/Fixtures/invalid/object_no_alt.html.twig', ['ObjectAlt.ObjectAlt.Missing:2:1' => 'Object element should have alternative text.']];
 
         yield 'ok' => [__DIR__.'/Fixtures/valid/img_with_alt.html.twig', []];
     }

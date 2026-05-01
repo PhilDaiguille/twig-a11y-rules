@@ -25,7 +25,7 @@ final class IframeTitleRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'no title' => [__DIR__.'/Fixtures/invalid/iframe_no_title.html.twig', ['IframeTitle.IframeTitle.Missing:1:1' => 'Iframe must have a non-empty title attribute.']];
+        yield 'no title' => [__DIR__.'/Fixtures/invalid/iframe_no_title.html.twig', ['IframeTitle.IframeTitle.Missing:2:1' => 'Iframe must have a non-empty title attribute.']];
 
         yield 'ok' => [__DIR__.'/Fixtures/valid/no_banned.html.twig', []];
     }

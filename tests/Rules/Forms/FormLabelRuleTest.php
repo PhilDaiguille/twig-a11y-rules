@@ -27,6 +27,6 @@ final class FormLabelRuleTest extends AbstractRuleTestCase
     {
         yield 'valid label with for' => [__DIR__.'/Fixtures/valid/label_with_for.html.twig', []];
 
-        yield 'invalid empty label' => [__DIR__.'/Fixtures/invalid/label_empty.html.twig', ['FormLabel.FormLabel.InvalidLabel:1:1' => '<label> must have a for attribute or non-empty content.']];
+        yield 'invalid empty label' => [__DIR__.'/Fixtures/invalid/label_empty.html.twig', ['FormLabel.FormLabel.InvalidLabel:2:1' => '<label> must have a for attribute or non-empty content.']];
     }
 }

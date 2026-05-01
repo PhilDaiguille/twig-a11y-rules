@@ -63,7 +63,7 @@ final class OutlineNoneWithoutFocusVisibleRule extends AbstractA11yRule
                         $fakeToken->getFilename(),
                         $match[0]
                     );
-                    $emit('Using outline:none/0 without focus-visible compensation.', $fakeToken, 'OutlineNoneNoFocusVisible');
+                    $emit('Using outline:none/0 without focus-visible compensation.', $fakeToken, 'OutlineNone.NoFocusVisible');
                 }
             }
         }

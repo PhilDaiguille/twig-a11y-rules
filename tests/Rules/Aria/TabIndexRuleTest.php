@@ -36,7 +36,7 @@ final class TabIndexRuleTest extends AbstractRuleTestCase
 
         yield 'tabindex positive' => [
             __DIR__.'/Fixtures/invalid/tabindex_positive.html.twig',
-            ['TabIndex.TabIndex.PositiveTabindex:3:6' => 'Avoid positive tabindex values — use 0 or manage focus order differently.'],
+            ['TabIndex.TabIndex.PositiveTabindex:4:6' => 'Avoid positive tabindex values — use 0 or manage focus order differently.'],
         ];
     }
 }

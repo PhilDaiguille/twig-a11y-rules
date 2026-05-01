@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests\Rules;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\TestCase;
 use TwigA11y\Rules\Anchor\AnchorAccessibleNameRule;
 use TwigA11y\Rules\Aria\AriaLabelRule;
@@ -31,9 +32,8 @@ use TwigA11y\Rules\Structure\AreaAltRule;
  * rules that deliberately run per-token for good reasons.
  *
  * @internal
- *
- * @coversNothing
  */
+#[CoversNothing]
 final class EvaluateOncePerFileConsistencyTest extends TestCase
 {
     /**

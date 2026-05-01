@@ -54,22 +54,8 @@ final class ImgAltRule extends AbstractA11yRule
         // handle long attributes and Twig interpolations.
         $fullTag = $this->collectTag($tokenIndex, $tokens, 200);
 
-        // If collectTag failed to find a closing '>', try scanning adjacent
-        // tokens forward to assemble a candidate.
         if (!str_contains($fullTag, '>')) {
-            $collected = $fullTag;
-            $i = $tokenIndex + 1;
-            $limit = $tokenIndex + 200;
-            while ($i <= $limit && $tokens->has($i) && !str_contains($collected, '>')) {
-                $collected .= $tokens->get($i)->getValue();
-                ++$i;
-            }
-
-            $fullTag = $collected;
-        }
-
-        if (!str_contains($fullTag, '>')) {
-            // No complete tag found, give up.
+            // No complete tag found in 200 tokens, give up.
             return;
         }
 

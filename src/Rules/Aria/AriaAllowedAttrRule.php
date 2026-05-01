@@ -178,6 +178,8 @@ final class AriaAllowedAttrRule extends AbstractA11yRule
             return;
         }
 
+        $idx = 0;
+
         if (preg_match_all('/<([a-z0-9]+)([^>]*)\srole\s*=\s*(?:"|\')([^"\']+)(?:"|\')([^>]*)>/i', $full, $matches, PREG_SET_ORDER)) {
             foreach ($matches as $m) {
                 $role = strtolower($m[3]);
@@ -192,10 +194,10 @@ final class AriaAllowedAttrRule extends AbstractA11yRule
                         if (preg_match('/\baria-([a-z0-9-]+)/i', $ariaRaw, $an)) {
                             $name = strtolower($an[1]);
                             if (!in_array('aria-'.$name, $this->allowed[$role], true)) {
+                                ++$idx;
                                 $fakeToken = $tokens->get(0);
-                                $emit(sprintf('Attribute aria-%s is not allowed on role %s.', $name, $role), $fakeToken, 'AriaAllowed.Invalid');
-
-                                return;
+                                $id = 1 === $idx ? 'AriaAllowed.Invalid' : sprintf('AriaAllowed.Invalid#%d', $idx);
+                                $emit(sprintf('Attribute aria-%s is not allowed on role %s.', $name, $role), $fakeToken, $id);
                             }
                         }
                     }

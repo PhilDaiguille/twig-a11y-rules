@@ -6,7 +6,6 @@ namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
 use TwigA11y\Template\TemplateKind;
-use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
 /**
@@ -57,21 +56,14 @@ final class LangAttributeValueRule extends AbstractA11yRule
 
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        $token = $tokens->get($tokenIndex);
-
-        if (!$token->isMatching(Token::TEXT_TYPE)) {
+        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
             return;
         }
 
-        $value = $token->getValue();
-        if (!str_contains($value, '<html')) {
-            return;
-        }
-
-        $opening = $this->collectUntil($tokenIndex, $tokens, '>');
+        $content = $this->getFullContent($tokens);
 
         // No lang attribute at all — that is LangAttributeRule's concern, not ours
-        if (!preg_match('/\blang\s*=\s*(?:"|\')([^"\']+)(?:"|\')/', $opening, $m)) {
+        if (!preg_match('/\blang\s*=\s*(?:"|\')([^"\']+)(?:"|\')/', $content, $m)) {
             return;
         }
 
@@ -93,12 +85,18 @@ final class LangAttributeValueRule extends AbstractA11yRule
         $primary = strtolower($parts[0]);
 
         if (!in_array($primary, self::VALID_PRIMARY_SUBTAGS, true)) {
+            $token = $tokens->get(0);
             $emit(
                 sprintf('The lang attribute value "%s" is not a valid BCP 47 language tag (invalid primary subtag "%s").', $m[1], $parts[0]),
                 $token,
                 'LangAttributeValue.InvalidLang'
             );
         }
+    }
+
+    protected function evaluateOncePerFile(): bool
+    {
+        return true;
     }
 
     /**

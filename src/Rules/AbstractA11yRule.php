@@ -16,6 +16,13 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
 
     private const KIND_CACHE_MAX = 500;
 
+    /**
+     * Maximum number of rule-file keys in the $emitted map. When exceeded the
+     * map is reset to prevent unbounded memory growth during long-running
+     * linting sessions (watch-mode, large CI pipelines, etc.).
+     */
+    private const EMITTED_MAX = 2000;
+
     /** Cached decision for the currently-processed file when rules are reused */
     private ?bool $skipThisFile = null;
 
@@ -139,6 +146,10 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
 
         $ruleFileKey = static::class.'::'.$hash;
         if (!isset($this->emitted[$ruleFileKey])) {
+            if (count($this->emitted) >= self::EMITTED_MAX) {
+                $this->emitted = [];
+            }
+
             $this->emitted[$ruleFileKey] = [];
         }
 

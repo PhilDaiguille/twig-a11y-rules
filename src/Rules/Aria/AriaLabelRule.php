@@ -30,8 +30,13 @@ final class AriaLabelRule extends AbstractA11yRule
 
         $tag = $this->collectUntil($tokenIndex, $tokens, '>');
 
-        // If aria-label present and non-empty - OK
+        // aria-label present and non-empty - OK
         if (preg_match('/aria-label\s*=\s*(?:"|\')([^"\']*)(?:"|\')/i', $tag, $m) && '' !== trim($m[1])) {
+            return;
+        }
+
+        // aria-labelledby present and non-empty - also acceptable per WCAG
+        if (preg_match('/aria-labelledby\s*=\s*(?:"|\')([^"\']*)(?:"|\')/i', $tag, $m) && '' !== trim($m[1])) {
             return;
         }
 
