@@ -23,12 +23,9 @@ final class InputLabelRule extends AbstractFormFieldLabelRule
 
     protected function openingProvidesLabel(string $opening): bool
     {
-        // aria-label or aria-labelledby on the input itself is acceptable
-        if (preg_match('/\baria-label\s*=\s*(?:"|\')/i', $opening)) {
-            return true;
-        }
-
-        return (bool) preg_match('/\baria-labelledby\s*=\s*(?:"|\')/i', $opening);
+        // Delegate to the base implementation which checks for non-empty values.
+        // Both aria-label (non-empty) and aria-labelledby (non-empty) are acceptable.
+        return parent::openingProvidesLabel($opening);
     }
 
     protected function isHidden(string $opening): bool

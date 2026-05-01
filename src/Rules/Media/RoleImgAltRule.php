@@ -20,9 +20,11 @@ final class RoleImgAltRule extends AbstractA11yRule
             return;
         }
 
-        if (preg_match_all('/<svg([^>]*)role\s*=\s*(?:"|\')img(?:"|\')([^>]*)>/i', $full, $matches, PREG_SET_ORDER)) {
+        // Capture the full SVG block (opening tag + inner content + closing tag)
+        if (preg_match_all('/<svg\b([^>]*)role\s*=\s*(?:"|\')img(?:"|\')[^>]*>(.*?)<\/svg>/is', $full, $matches, PREG_SET_ORDER)) {
             foreach ($matches as $m) {
-                if (!preg_match('/<title[^>]*>\s*[^<]+\s*<\/title>/i', $m[0])) {
+                // $m[2] is the inner content of the <svg> element
+                if (!preg_match('/<title[^>]*>\s*[^<]+\s*<\/title>/i', $m[2])) {
                     $fakeToken = $tokens->get(0);
                     $emit('SVG with role="img" must include a <title>.', $fakeToken, 'RoleImg.MissingTitle');
 

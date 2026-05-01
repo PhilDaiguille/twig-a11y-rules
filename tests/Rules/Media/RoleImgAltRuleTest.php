@@ -32,5 +32,7 @@ final class RoleImgAltRuleTest extends AbstractRuleTestCase
         yield 'svg role img without title' => [__DIR__.'/Fixtures/invalid/svg_role_img_no_title.html.twig', [
             'RoleImgAlt.RoleImg.MissingTitle:1:1' => 'SVG with role="img" must include a <title>.',
         ]];
+
+        yield 'svg role img with title' => [__DIR__.'/Fixtures/valid/svg_role_img_with_title.html.twig', []];
     }
 }

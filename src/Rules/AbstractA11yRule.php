@@ -14,6 +14,15 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
 {
     use TokenCollectorTrait;
 
+    private const KIND_CACHE_MAX = 500;
+
+    /**
+     * Maximum number of rule-file keys in the $emitted map. When exceeded the
+     * map is reset to prevent unbounded memory growth during long-running
+     * linting sessions (watch-mode, large CI pipelines, etc.).
+     */
+    private const EMITTED_MAX = 2000;
+
     /** Cached decision for the currently-processed file when rules are reused */
     private ?bool $skipThisFile = null;
 
@@ -29,6 +38,11 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
     /**
      * Shared cache of TemplateKind decisions keyed by content hash to avoid
      * repeatedly classifying the same file across multiple rule instances.
+     *
+     * Bounded to 500 entries to prevent unbounded memory growth when linting
+     * very large projects in a single PHP process (e.g. via a long-running CI
+     * worker or watch mode). When the limit is reached the cache is reset so
+     * the next classification starts fresh.
      *
      * @var array<string, TemplateKind>
      */
@@ -81,6 +95,10 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
             $hash = md5($content);
 
             if (!isset(self::$kindCache[$hash])) {
+                if (count(self::$kindCache) >= self::KIND_CACHE_MAX) {
+                    self::$kindCache = [];
+                }
+
                 self::$kindCache[$hash] = TemplateClassifier::classify($content);
             }
 
@@ -128,6 +146,10 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
 
         $ruleFileKey = static::class.'::'.$hash;
         if (!isset($this->emitted[$ruleFileKey])) {
+            if (count($this->emitted) >= self::EMITTED_MAX) {
+                $this->emitted = [];
+            }
+
             $this->emitted[$ruleFileKey] = [];
         }
 

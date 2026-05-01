@@ -20,14 +20,4 @@ final class SelectLabelRule extends AbstractFormFieldLabelRule
     {
         return 'SelectLabel.Missing';
     }
-
-    protected function openingProvidesLabel(string $opening): bool
-    {
-        // aria-labelledby or aria-label on the select itself is acceptable
-        if (preg_match('/\baria-labelledby\s*=\s*(?:"|\')/i', $opening)) {
-            return true;
-        }
-
-        return (bool) preg_match('/\baria-label\s*=\s*(?:"|\')/i', $opening);
-    }
 }

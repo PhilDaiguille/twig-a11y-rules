@@ -34,6 +34,11 @@ final class PageHeadingOneRuleTest extends AbstractRuleTestCase
             [],
         ];
 
+        yield 'h1 with child element is valid' => [
+            __DIR__.'/Fixtures/valid/h1_with_child_element.html.twig',
+            [],
+        ];
+
         yield 'no h1' => [
             __DIR__.'/Fixtures/invalid/no_h1.html.twig',
             ['PageHeadingOne.PageHeadingOne.Missing:1:1' => 'Document should include at least one non-empty <h1> heading.'],

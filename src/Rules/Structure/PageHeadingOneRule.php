@@ -14,8 +14,10 @@ final class PageHeadingOneRule extends AbstractA11yRule
     {
         $content = $this->getFullContent($tokens);
 
-        // look for at least one <h1> element with non-empty content
-        if (!preg_match('/<h1\b[^>]*>\s*([^<]+?)\s*<\/h1>/is', $content)) {
+        // Look for at least one <h1> element with non-empty content (plain text
+        // or child elements like <span>). strip_tags() is used on the captured
+        // inner content to ensure there is actual visible text and not just markup.
+        if (!preg_match('/<h1\b[^>]*>(.*?)<\/h1>/is', $content, $m) || '' === trim(strip_tags($m[1]))) {
             $tokenRef = $tokens->get(0);
             $emit('Document should include at least one non-empty <h1> heading.', $tokenRef, 'PageHeadingOne.Missing');
         }

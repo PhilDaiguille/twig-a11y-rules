@@ -127,11 +127,14 @@ Rules are grouped by category for easier discovery. The **Preset** column indica
 | `IframeTitleRule` | `<iframe>` without `title` attribute | Recommended |
 | `DuplicateIdRule` | Duplicate `id` values in the same document | Recommended |
 | `LandmarkRule` | Missing main landmark (`<main>` or `role="main"`) | Recommended |
+| `TableFakeCaptionRule` | First `<td>` used as a visual table caption instead of `<caption>` | Recommended |
 | `AnchorContentRule` | `<a>` with no text, `aria-label`, or `title` — warning; superseded by `AnchorAccessibleNameRule` in the strict preset | Standard |
 | `HeadingEmptyRule` | Empty heading elements | Standard |
-| `MetaViewportRule` | `<meta name="viewport">` with `user-scalable=no` | Standard |
+| `MetaViewportRule` | `<meta name="viewport">` with `user-scalable=no` or `maximum-scale` below 2 (WCAG 1.4.4) | Standard |
 | `SkipLinkRule` | Missing skip link to main content | Standard |
 | `TableHeaderRule` | `<th>` without `scope` attribute, or invalid `scope` value | Standard |
+| `EmptyTableHeaderRule` | `<th>` with no text content | Standard |
+| `GenericLinkTextRule` | Link text is a known generic phrase such as "click here" or "read more" — warning (WCAG 2.4.4) | Standard |
 | `AreaAltRule` | `<area>` without `alt`, or empty `alt` without `role="presentation"` | Strict |
 | `DocumentTitleRule` | `<head>` missing a non-empty `<title>` element | Strict |
 | `DuplicateAccessKeyRule` | Duplicate `accesskey` values in the same document (WCAG 4.1.1, axe: accesskeys) | Strict |
@@ -144,6 +147,7 @@ Rules are grouped by category for easier discovery. The **Preset** column indica
 | `MetaRefreshRule` | `<meta http-equiv="refresh">` with non-zero timeout (WCAG 2.2.1, axe: meta-refresh) | Strict |
 | `NestedInteractiveRule` | `<button>`, `<input>` or `<select>` nested inside `<a>`, or `<a>` inside `<button>` (WCAG 4.1.1, axe: nested-interactive) | Strict |
 | `PageHeadingOneRule` | Full-page document without at least one non-empty `<h1>` | Strict |
+| `PAsHeadingRule` | `<p>` with `font-weight:bold` or large `font-size` mimicking a heading (WCAG 1.3.1) | Strict |
 | `TableDuplicateNameRule` | Table `caption` and `summary` with identical text | Strict |
 | `TdHeadersAttrRule` | `<td headers="...">` referencing a non-existent `id` | Strict |
 
@@ -188,16 +192,22 @@ Rules are grouped by category for easier discovery. The **Preset** column indica
 
 | Rule | Description | Preset |
 |---|---|---|
-| `ColorContrastRule` | Insufficient inline text/background contrast (inline `style` only) | Strict |
+| `ColorContrastRule` | Insufficient inline text/background contrast (inline `style` only) — **best-effort, inline styles only** | Strict |
 | `ScrollableRegionFocusableRule` | Scrollable region not keyboard-focusable | Strict |
 | `OutlineNoneWithoutFocusVisibleRule` | `outline:none` or `outline:0` without a `focus-visible` class compensation | Strict |
-| `TargetSizeRule` | Interactive element smaller than 24×24 px (inline `style` only) | Strict |
+| `TargetSizeRule` | Interactive element smaller than 24×24 px (inline `style` only) — **best-effort, inline styles only** | Strict |
 
 > **Note on static analysis limits:** some accessibility checks cannot be evaluated statically from template source alone.
 > Rules such as `color-contrast-enhanced`, `focus-visible`, `identical-links-same-purpose`, CSS-based `target-size`,
 > `aria-labelledby-valid`, `frame-tested`, and `avoid-inline-spacing` require runtime context.
 > Use a browser-based tool such as [axe DevTools](https://www.deque.com/axe/) or
 > [Lighthouse](https://developer.chrome.com/docs/lighthouse/) alongside this linter for complete coverage.
+>
+> `ColorContrastRule` and `TargetSizeRule` are **best-effort, inline-only** checks: they only inspect
+> `style="..."` attributes present directly in the template source. Contrast ratios and target sizes
+> driven by external CSS, CSS variables, or computed styles are **not** detected. These rules reduce
+> the chance of obvious mistakes in quick-markup situations; they are not a substitute for a full
+> browser-based audit.
 
 ## Contributing
 

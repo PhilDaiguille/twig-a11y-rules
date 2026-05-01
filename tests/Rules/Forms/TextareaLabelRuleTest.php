@@ -27,6 +27,8 @@ final class TextareaLabelRuleTest extends AbstractRuleTestCase
     {
         yield 'valid textarea' => [__DIR__.'/Fixtures/valid/textarea_with_label.html.twig', []];
 
-        yield 'invalid textarea' => [__DIR__.'/Fixtures/invalid/textarea_no_label.html.twig', ['TextareaLabel.TextareaLabel.Missing:1:1' => 'Textarea must have an associated <label>.']];
+        yield 'valid textarea with aria-labelledby' => [__DIR__.'/Fixtures/valid/textarea_aria_labelledby.html.twig', []];
+
+        yield 'invalid textarea' => [__DIR__.'/Fixtures/invalid/textarea_no_label.html.twig', ['TextareaLabel.TextareaLabel.Missing:2:1' => 'Textarea must have an associated <label>.']];
     }
 }

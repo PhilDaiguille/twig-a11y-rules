@@ -15,8 +15,9 @@ final class DocumentTitleRule extends AbstractA11yRule
         // only runs at tokenIndex 0 because evaluateOncePerFile = true
         $content = $this->getFullContent($tokens);
 
-        // Look for a <title> tag with non-empty content inside <head>
-        if (!preg_match('/<head[\s>].*?<title\s*>\s*([^<\n]+?)\s*<\/title>/is', $content)) {
+        // Look for a <title> tag with non-empty content inside <head>.
+        // The [^<]+ pattern (instead of [^<\n]+) allows multi-line title values.
+        if (!preg_match('/<head[\s>].*?<title\s*>\s*([^<]+?)\s*<\/title>/is', $content)) {
             $tokenRef = $tokens->get(0);
             $emit('Document should include a non-empty <title> element.', $tokenRef, 'DocumentTitle.Missing');
         }

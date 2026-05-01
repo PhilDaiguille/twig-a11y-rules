@@ -27,7 +27,7 @@ final class FrameTitleRuleTest extends AbstractRuleTestCase
     {
         yield 'no title' => [
             __DIR__.'/Fixtures/invalid/frame_no_title.html.twig',
-            ['FrameTitle.FrameTitle.Missing:1:1' => 'Frame element must have a non-empty title attribute.'],
+            ['FrameTitle.FrameTitle.Missing:2:1' => 'Frame element must have a non-empty title attribute.'],
         ];
 
         yield 'with title' => [__DIR__.'/Fixtures/valid/frame_with_title.html.twig', []];

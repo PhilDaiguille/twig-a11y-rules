@@ -31,6 +31,12 @@ final class ImgAltRule extends AbstractA11yRule
             return;
         }
 
+        // Reset deduplication hashes at the start of each new file so that
+        // identical <img> tags in different files are not silently suppressed.
+        if (0 === $tokenIndex) {
+            $this->seenTagHashes = [];
+        }
+
         $token = $tokens->get($tokenIndex);
 
         if (!$token->isMatching(Token::TEXT_TYPE)) {
@@ -48,22 +54,8 @@ final class ImgAltRule extends AbstractA11yRule
         // handle long attributes and Twig interpolations.
         $fullTag = $this->collectTag($tokenIndex, $tokens, 200);
 
-        // If collectTag failed to find a closing '>', try scanning adjacent
-        // tokens forward to assemble a candidate.
         if (!str_contains($fullTag, '>')) {
-            $collected = $fullTag;
-            $i = $tokenIndex + 1;
-            $limit = $tokenIndex + 200;
-            while ($i <= $limit && $tokens->has($i) && !str_contains($collected, '>')) {
-                $collected .= $tokens->get($i)->getValue();
-                ++$i;
-            }
-
-            $fullTag = $collected;
-        }
-
-        if (!str_contains($fullTag, '>')) {
-            // No complete tag found, give up.
+            // No complete tag found in 200 tokens, give up.
             return;
         }
 

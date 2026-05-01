@@ -34,6 +34,11 @@ final class DocumentTitleRuleTest extends AbstractRuleTestCase
             [],
         ];
 
+        yield 'with multiline title' => [
+            __DIR__.'/Fixtures/valid/with_multiline_title.html.twig',
+            [],
+        ];
+
         yield 'no title' => [
             __DIR__.'/Fixtures/invalid/no_title.html.twig',
             ['DocumentTitle.DocumentTitle.Missing:1:1' => 'Document should include a non-empty <title> element.'],

@@ -53,4 +53,9 @@ final class TableDuplicateNameRule extends AbstractA11yRule
             }
         }
     }
+
+    protected function evaluateOncePerFile(): bool
+    {
+        return true;
+    }
 }

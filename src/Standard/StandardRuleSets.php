@@ -40,8 +40,10 @@ use TwigA11y\Rules\Structure\ButtonContentRule;
 use TwigA11y\Rules\Structure\DocumentTitleRule;
 use TwigA11y\Rules\Structure\DuplicateAccessKeyRule;
 use TwigA11y\Rules\Structure\DuplicateIdRule;
+use TwigA11y\Rules\Structure\EmptyTableHeaderRule;
 use TwigA11y\Rules\Structure\FieldsetLegendRule;
 use TwigA11y\Rules\Structure\FrameTitleRule;
+use TwigA11y\Rules\Structure\GenericLinkTextRule;
 use TwigA11y\Rules\Structure\HeadingEmptyRule;
 use TwigA11y\Rules\Structure\HeadingOrderRule;
 use TwigA11y\Rules\Structure\IframeFocusableContentRule;
@@ -55,8 +57,10 @@ use TwigA11y\Rules\Structure\MetaRefreshRule;
 use TwigA11y\Rules\Structure\MetaViewportRule;
 use TwigA11y\Rules\Structure\NestedInteractiveRule;
 use TwigA11y\Rules\Structure\PageHeadingOneRule;
+use TwigA11y\Rules\Structure\PAsHeadingRule;
 use TwigA11y\Rules\Structure\SkipLinkRule;
 use TwigA11y\Rules\Structure\TableDuplicateNameRule;
+use TwigA11y\Rules\Structure\TableFakeCaptionRule;
 use TwigA11y\Rules\Structure\TableHeaderRule;
 use TwigA11y\Rules\Structure\TdHeadersAttrRule;
 use TwigA11y\Rules\Ui\ColorContrastRule;
@@ -97,6 +101,7 @@ final class StandardRuleSets
             FormLabelRule::class,
             SelectLabelRule::class,
             TextareaLabelRule::class,
+            TableFakeCaptionRule::class,
         ]);
     }
 
@@ -116,6 +121,8 @@ final class StandardRuleSets
             TabIndexRule::class,
             InputTypeRule::class,
             InputButtonNameRule::class,
+            EmptyTableHeaderRule::class,
+            GenericLinkTextRule::class,
         ]);
     }
 
@@ -162,6 +169,7 @@ final class StandardRuleSets
             LangAttributeValueRule::class,
             NestedInteractiveRule::class,
             DuplicateAccessKeyRule::class,
+            PAsHeadingRule::class,
         ]);
     }
 

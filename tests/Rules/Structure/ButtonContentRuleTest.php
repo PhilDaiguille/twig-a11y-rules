@@ -36,7 +36,7 @@ final class ButtonContentRuleTest extends AbstractRuleTestCase
 
         yield 'button empty without aria' => [
             __DIR__.'/Fixtures/invalid/button_empty_no_aria.html.twig',
-            ['ButtonContent.ButtonContent.MissingContent:3:1' => 'Button element without textual content must have an aria-label.'],
+            ['ButtonContent.ButtonContent.MissingContent:4:1' => 'Button element without textual content must have an aria-label.'],
         ];
     }
 }

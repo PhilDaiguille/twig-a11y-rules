@@ -36,7 +36,7 @@ final class AnchorContentRuleTest extends AbstractRuleTestCase
 
         yield 'anchor empty without accessible name' => [
             __DIR__.'/Fixtures/invalid/anchor_empty.html.twig',
-            ['AnchorContent.AnchorContent.Warning.LinkName:3:1' => 'Anchor element without accessible name (axe-core: link-name) should have an aria-label or title.'],
+            ['AnchorContent.AnchorContent.Warning.LinkName:4:1' => 'Anchor element without accessible name (axe-core: link-name) should have an aria-label or title.'],
         ];
     }
 }
