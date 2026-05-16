@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace TwigA11y\Standard;
 
 use TwigA11y\Rules\Anchor\AnchorAccessibleNameRule;
+use TwigA11y\Rules\Anchor\LinkHrefValidityRule;
 use TwigA11y\Rules\Aria\AriaAllowedAttrRule;
+use TwigA11y\Rules\Aria\AriaControlsIdExistsRule;
 use TwigA11y\Rules\Aria\AriaDeprecatedRoleRule;
 use TwigA11y\Rules\Aria\AriaHiddenBodyRule;
 use TwigA11y\Rules\Aria\AriaHiddenFocusRule;
@@ -20,10 +22,15 @@ use TwigA11y\Rules\Aria\AriaValidAttrValueRule;
 use TwigA11y\Rules\Aria\TabIndexRule;
 use TwigA11y\Rules\Forms\AriaInputFieldNameRule;
 use TwigA11y\Rules\Forms\AutocompleteValidRule;
+use TwigA11y\Rules\Forms\ButtonTypeRule;
 use TwigA11y\Rules\Forms\FormLabelRule;
 use TwigA11y\Rules\Forms\InputButtonNameRule;
 use TwigA11y\Rules\Forms\InputLabelRule;
 use TwigA11y\Rules\Forms\InputTypeRule;
+use TwigA11y\Rules\Forms\InvalidFieldErrorMessageRule;
+use TwigA11y\Rules\Forms\LabelForTargetExistsRule;
+use TwigA11y\Rules\Forms\PlaceholderOnlyLabelRule;
+use TwigA11y\Rules\Forms\RadioGroupStructureRule;
 use TwigA11y\Rules\Forms\SelectLabelRule;
 use TwigA11y\Rules\Forms\TextareaLabelRule;
 use TwigA11y\Rules\Media\AutoplayRule;
@@ -31,12 +38,14 @@ use TwigA11y\Rules\Media\ImgAltRule;
 use TwigA11y\Rules\Media\InputImageAltRule;
 use TwigA11y\Rules\Media\NoAutoplayAudioRule;
 use TwigA11y\Rules\Media\ObjectAltRule;
-use TwigA11y\Rules\Media\RoleImgAltRule;
+use TwigA11y\Rules\Media\SvgAccessibilityRule;
 use TwigA11y\Rules\Media\VideoTrackRule;
 use TwigA11y\Rules\Structure\AnchorContentRule;
 use TwigA11y\Rules\Structure\AreaAltRule;
 use TwigA11y\Rules\Structure\BannedTagsRule;
 use TwigA11y\Rules\Structure\ButtonContentRule;
+use TwigA11y\Rules\Structure\DetailsSummaryRule;
+use TwigA11y\Rules\Structure\DialogAccessibleNameRule;
 use TwigA11y\Rules\Structure\DocumentTitleRule;
 use TwigA11y\Rules\Structure\DuplicateAccessKeyRule;
 use TwigA11y\Rules\Structure\DuplicateIdRule;
@@ -59,6 +68,7 @@ use TwigA11y\Rules\Structure\NestedInteractiveRule;
 use TwigA11y\Rules\Structure\PageHeadingOneRule;
 use TwigA11y\Rules\Structure\PAsHeadingRule;
 use TwigA11y\Rules\Structure\SkipLinkRule;
+use TwigA11y\Rules\Structure\TableCaptionMissingRule;
 use TwigA11y\Rules\Structure\TableDuplicateNameRule;
 use TwigA11y\Rules\Structure\TableFakeCaptionRule;
 use TwigA11y\Rules\Structure\TableHeaderRule;
@@ -143,24 +153,34 @@ final class StandardRuleSets
             AriaRequiredChildrenRule::class,
             AriaRequiredParentRule::class,
             AriaReferencedIdExistsRule::class,
+            AriaControlsIdExistsRule::class,
             AriaAllowedAttrRule::class,
             AriaHiddenBodyRule::class,
             AutocompleteValidRule::class,
+            ButtonTypeRule::class,
+            InvalidFieldErrorMessageRule::class,
             AriaInputFieldNameRule::class,
             AnchorAccessibleNameRule::class,
+            LinkHrefValidityRule::class,
             AreaAltRule::class,
             FieldsetLegendRule::class,
             IframeFocusableContentRule::class,
             LandmarkUniqueRule::class,
             ListStructureRule::class,
             PageHeadingOneRule::class,
+            TableCaptionMissingRule::class,
             TableDuplicateNameRule::class,
             TdHeadersAttrRule::class,
             ScrollableRegionFocusableRule::class,
             OutlineNoneWithoutFocusVisibleRule::class,
             TargetSizeRule::class,
             NoAutoplayAudioRule::class,
-            RoleImgAltRule::class,
+            SvgAccessibilityRule::class,
+            DetailsSummaryRule::class,
+            DialogAccessibleNameRule::class,
+            LabelForTargetExistsRule::class,
+            PlaceholderOnlyLabelRule::class,
+            RadioGroupStructureRule::class,
             ColorContrastRule::class,
             FrameTitleRule::class,
             InputImageAltRule::class,
