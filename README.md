@@ -114,7 +114,7 @@ Rules are grouped by category for easier discovery. The **Preset** column indica
 | `AutoplayRule` | `<video>` or `<audio>` with `autoplay` but without `muted` | Standard |
 | `InputImageAltRule` | `<input type="image">` without a non-empty `alt` (axe: input-image-alt) | Strict |
 | `NoAutoplayAudioRule` | `<audio autoplay>` without controls (axe: audio-caption) | Strict |
-| `RoleImgAltRule` | Element with `role="img"` without a non-empty `title` | Strict |
+| `SvgAccessibilityRule` | `<svg>` without accessible name, or `<svg role="img">` without `<title>`, `aria-label`, or `aria-labelledby` | Strict |
 
 ### Structure
 
@@ -146,8 +146,11 @@ Rules are grouped by category for easier discovery. The **Preset** column indica
 | `ListStructureRule` | `<ul>`/`<ol>` with non-`<li>` children, or `<dl>` missing `<dt>`/`<dd>` | Strict |
 | `MetaRefreshRule` | `<meta http-equiv="refresh">` with non-zero timeout (WCAG 2.2.1, axe: meta-refresh) | Strict |
 | `NestedInteractiveRule` | `<button>`, `<input>` or `<select>` nested inside `<a>`, or `<a>` inside `<button>` (WCAG 4.1.1, axe: nested-interactive) | Strict |
+| `DetailsSummaryRule` | `<details>` without a non-empty `<summary>` | Strict |
+| `DialogAccessibleNameRule` | `<dialog>` or `role="dialog"/"alertdialog"` without `aria-label` or `aria-labelledby` | Strict |
 | `PageHeadingOneRule` | Full-page document without at least one non-empty `<h1>` | Strict |
 | `PAsHeadingRule` | `<p>` with `font-weight:bold` or large `font-size` mimicking a heading (WCAG 1.3.1) | Strict |
+| `TableCaptionMissingRule` | Data table without a non-empty `<caption>` | Strict |
 | `TableDuplicateNameRule` | Table `caption` and `summary` with identical text | Strict |
 | `TdHeadersAttrRule` | `<td headers="...">` referencing a non-existent `id` | Strict |
 
@@ -162,7 +165,13 @@ Rules are grouped by category for easier discovery. The **Preset** column indica
 | `InputTypeRule` | `<input>` with personal-data type (`email`, `tel`, `name`, `username`, `new-password`, `current-password`) without `autocomplete` (WCAG 1.3.5) | Standard |
 | `InputButtonNameRule` | `<input type="submit\|button">` without `value` or `aria-label` | Standard |
 | `AutocompleteValidRule` | Invalid `autocomplete` attribute value | Strict |
+| `ButtonTypeRule` | `<button>` without explicit `type` attribute | Strict |
+| `InvalidFieldErrorMessageRule` | Field with `aria-invalid` but without `aria-describedby` or `aria-errormessage` | Strict |
 | `AriaInputFieldNameRule` | Custom input-role widget without accessible name | Strict |
+| `LabelForTargetExistsRule` | `<label for="...">` referencing a non-existent `id` | Strict |
+| `PlaceholderOnlyLabelRule` | Form field relying on `placeholder` text without a proper label | Strict |
+| `RadioGroupAccessibleNameRule` | Radio groups missing an accessible group label via `<legend>`, `aria-label`, or `aria-labelledby` | Strict |
+| `RadioGroupStructureRule` | Multiple radio inputs sharing the same `name` not grouped in `<fieldset>` or `role="radiogroup"` | Strict |
 
 ### ARIA
 
@@ -179,6 +188,8 @@ Rules are grouped by category for easier discovery. The **Preset** column indica
 | `AriaRequiredChildrenRule` | Composite role missing required child roles | Strict |
 | `AriaRequiredParentRule` | Child role not wrapped in appropriate parent role | Strict |
 | `AriaReferencedIdExistsRule` | `aria-labelledby`/`aria-describedby` references a missing `id` | Strict |
+| `AriaControlsIdExistsRule` | `aria-controls` references a missing `id` | Strict |
+| `AriaErrorMessageIdExistsRule` | `aria-errormessage` references a missing `id` | Strict |
 | `AriaAllowedAttrRule` | `aria-*` attribute not allowed for the given role | Strict |
 | `AriaHiddenBodyRule` | `<body aria-hidden="true">` | Strict |
 
@@ -187,6 +198,7 @@ Rules are grouped by category for easier discovery. The **Preset** column indica
 | Rule | Description | Preset |
 |---|---|---|
 | `AnchorAccessibleNameRule` | `<a>` without any accessible name (`aria-label`, `aria-labelledby`, inner text, or img alt) — supersedes `AnchorContentRule` in the strict preset | Strict |
+| `LinkHrefValidityRule` | `<a>` without `href`, with empty `href`, or using placeholder href values like `#` or `javascript:void(0)` | Strict |
 
 ### UI
 

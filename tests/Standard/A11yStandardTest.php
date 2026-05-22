@@ -7,8 +7,11 @@ namespace TwigA11y\Tests\Standard;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use TwigA11y\Rules\Anchor\AnchorAccessibleNameRule;
+use TwigA11y\Rules\Anchor\LinkHrefValidityRule;
 use TwigA11y\Rules\Aria\AriaAllowedAttrRule;
+use TwigA11y\Rules\Aria\AriaControlsIdExistsRule;
 use TwigA11y\Rules\Aria\AriaDeprecatedRoleRule;
+use TwigA11y\Rules\Aria\AriaErrorMessageIdExistsRule;
 use TwigA11y\Rules\Aria\AriaHiddenBodyRule;
 use TwigA11y\Rules\Aria\AriaHiddenFocusRule;
 use TwigA11y\Rules\Aria\AriaLabelRule;
@@ -22,10 +25,16 @@ use TwigA11y\Rules\Aria\AriaValidAttrValueRule;
 use TwigA11y\Rules\Aria\TabIndexRule;
 use TwigA11y\Rules\Forms\AriaInputFieldNameRule;
 use TwigA11y\Rules\Forms\AutocompleteValidRule;
+use TwigA11y\Rules\Forms\ButtonTypeRule;
 use TwigA11y\Rules\Forms\FormLabelRule;
 use TwigA11y\Rules\Forms\InputButtonNameRule;
 use TwigA11y\Rules\Forms\InputLabelRule;
 use TwigA11y\Rules\Forms\InputTypeRule;
+use TwigA11y\Rules\Forms\InvalidFieldErrorMessageRule;
+use TwigA11y\Rules\Forms\LabelForTargetExistsRule;
+use TwigA11y\Rules\Forms\PlaceholderOnlyLabelRule;
+use TwigA11y\Rules\Forms\RadioGroupAccessibleNameRule;
+use TwigA11y\Rules\Forms\RadioGroupStructureRule;
 use TwigA11y\Rules\Forms\SelectLabelRule;
 use TwigA11y\Rules\Forms\TextareaLabelRule;
 use TwigA11y\Rules\Media\AutoplayRule;
@@ -34,11 +43,14 @@ use TwigA11y\Rules\Media\InputImageAltRule;
 use TwigA11y\Rules\Media\NoAutoplayAudioRule;
 use TwigA11y\Rules\Media\ObjectAltRule;
 use TwigA11y\Rules\Media\RoleImgAltRule;
+use TwigA11y\Rules\Media\SvgAccessibilityRule;
 use TwigA11y\Rules\Media\VideoTrackRule;
 use TwigA11y\Rules\Structure\AnchorContentRule;
 use TwigA11y\Rules\Structure\AreaAltRule;
 use TwigA11y\Rules\Structure\BannedTagsRule;
 use TwigA11y\Rules\Structure\ButtonContentRule;
+use TwigA11y\Rules\Structure\DetailsSummaryRule;
+use TwigA11y\Rules\Structure\DialogAccessibleNameRule;
 use TwigA11y\Rules\Structure\DocumentTitleRule;
 use TwigA11y\Rules\Structure\DuplicateAccessKeyRule;
 use TwigA11y\Rules\Structure\DuplicateIdRule;
@@ -61,6 +73,7 @@ use TwigA11y\Rules\Structure\NestedInteractiveRule;
 use TwigA11y\Rules\Structure\PageHeadingOneRule;
 use TwigA11y\Rules\Structure\PAsHeadingRule;
 use TwigA11y\Rules\Structure\SkipLinkRule;
+use TwigA11y\Rules\Structure\TableCaptionMissingRule;
 use TwigA11y\Rules\Structure\TableDuplicateNameRule;
 use TwigA11y\Rules\Structure\TableFakeCaptionRule;
 use TwigA11y\Rules\Structure\TableHeaderRule;
@@ -82,8 +95,11 @@ use TwigCsFixer\Standard\StandardInterface;
  * @internal
  */
 #[CoversClass(AnchorAccessibleNameRule::class)]
+#[CoversClass(LinkHrefValidityRule::class)]
 #[CoversClass(AriaAllowedAttrRule::class)]
+#[CoversClass(AriaControlsIdExistsRule::class)]
 #[CoversClass(AriaDeprecatedRoleRule::class)]
+#[CoversClass(AriaErrorMessageIdExistsRule::class)]
 #[CoversClass(AriaHiddenBodyRule::class)]
 #[CoversClass(AriaHiddenFocusRule::class)]
 #[CoversClass(AriaLabelRule::class)]
@@ -97,10 +113,16 @@ use TwigCsFixer\Standard\StandardInterface;
 #[CoversClass(TabIndexRule::class)]
 #[CoversClass(AriaInputFieldNameRule::class)]
 #[CoversClass(AutocompleteValidRule::class)]
+#[CoversClass(ButtonTypeRule::class)]
 #[CoversClass(FormLabelRule::class)]
+#[CoversClass(InvalidFieldErrorMessageRule::class)]
 #[CoversClass(InputButtonNameRule::class)]
 #[CoversClass(InputLabelRule::class)]
 #[CoversClass(InputTypeRule::class)]
+#[CoversClass(LabelForTargetExistsRule::class)]
+#[CoversClass(PlaceholderOnlyLabelRule::class)]
+#[CoversClass(RadioGroupAccessibleNameRule::class)]
+#[CoversClass(RadioGroupStructureRule::class)]
 #[CoversClass(SelectLabelRule::class)]
 #[CoversClass(TextareaLabelRule::class)]
 #[CoversClass(AutoplayRule::class)]
@@ -109,11 +131,14 @@ use TwigCsFixer\Standard\StandardInterface;
 #[CoversClass(NoAutoplayAudioRule::class)]
 #[CoversClass(ObjectAltRule::class)]
 #[CoversClass(RoleImgAltRule::class)]
+#[CoversClass(SvgAccessibilityRule::class)]
 #[CoversClass(VideoTrackRule::class)]
 #[CoversClass(AnchorContentRule::class)]
 #[CoversClass(AreaAltRule::class)]
 #[CoversClass(BannedTagsRule::class)]
 #[CoversClass(ButtonContentRule::class)]
+#[CoversClass(DetailsSummaryRule::class)]
+#[CoversClass(DialogAccessibleNameRule::class)]
 #[CoversClass(DocumentTitleRule::class)]
 #[CoversClass(DuplicateAccessKeyRule::class)]
 #[CoversClass(DuplicateIdRule::class)]
@@ -136,6 +161,7 @@ use TwigCsFixer\Standard\StandardInterface;
 #[CoversClass(PAsHeadingRule::class)]
 #[CoversClass(PageHeadingOneRule::class)]
 #[CoversClass(SkipLinkRule::class)]
+#[CoversClass(TableCaptionMissingRule::class)]
 #[CoversClass(TableDuplicateNameRule::class)]
 #[CoversClass(TableFakeCaptionRule::class)]
 #[CoversClass(TableHeaderRule::class)]
@@ -264,24 +290,36 @@ final class A11yStandardTest extends TestCase
                 AriaRequiredChildrenRule::class,
                 AriaRequiredParentRule::class,
                 AriaReferencedIdExistsRule::class,
+                AriaControlsIdExistsRule::class,
+                AriaErrorMessageIdExistsRule::class,
                 AriaAllowedAttrRule::class,
                 AriaHiddenBodyRule::class,
                 AutocompleteValidRule::class,
+                ButtonTypeRule::class,
+                InvalidFieldErrorMessageRule::class,
                 AriaInputFieldNameRule::class,
                 AnchorAccessibleNameRule::class,
+                LinkHrefValidityRule::class,
                 AreaAltRule::class,
                 FieldsetLegendRule::class,
                 IframeFocusableContentRule::class,
                 LandmarkUniqueRule::class,
                 ListStructureRule::class,
                 PageHeadingOneRule::class,
+                TableCaptionMissingRule::class,
                 TableDuplicateNameRule::class,
                 TdHeadersAttrRule::class,
                 ScrollableRegionFocusableRule::class,
                 OutlineNoneWithoutFocusVisibleRule::class,
                 TargetSizeRule::class,
                 NoAutoplayAudioRule::class,
-                RoleImgAltRule::class,
+                SvgAccessibilityRule::class,
+                DetailsSummaryRule::class,
+                DialogAccessibleNameRule::class,
+                LabelForTargetExistsRule::class,
+                PlaceholderOnlyLabelRule::class,
+                RadioGroupAccessibleNameRule::class,
+                RadioGroupStructureRule::class,
                 ColorContrastRule::class,
                 FrameTitleRule::class,
                 InputImageAltRule::class,
