@@ -9,6 +9,7 @@ use TwigA11y\Rules\Anchor\LinkHrefValidityRule;
 use TwigA11y\Rules\Aria\AriaAllowedAttrRule;
 use TwigA11y\Rules\Aria\AriaControlsIdExistsRule;
 use TwigA11y\Rules\Aria\AriaDeprecatedRoleRule;
+use TwigA11y\Rules\Aria\AriaErrorMessageIdExistsRule;
 use TwigA11y\Rules\Aria\AriaHiddenBodyRule;
 use TwigA11y\Rules\Aria\AriaHiddenFocusRule;
 use TwigA11y\Rules\Aria\AriaLabelRule;
@@ -30,6 +31,7 @@ use TwigA11y\Rules\Forms\InputTypeRule;
 use TwigA11y\Rules\Forms\InvalidFieldErrorMessageRule;
 use TwigA11y\Rules\Forms\LabelForTargetExistsRule;
 use TwigA11y\Rules\Forms\PlaceholderOnlyLabelRule;
+use TwigA11y\Rules\Forms\RadioGroupAccessibleNameRule;
 use TwigA11y\Rules\Forms\RadioGroupStructureRule;
 use TwigA11y\Rules\Forms\SelectLabelRule;
 use TwigA11y\Rules\Forms\TextareaLabelRule;
@@ -154,6 +156,7 @@ final class StandardRuleSets
             AriaRequiredParentRule::class,
             AriaReferencedIdExistsRule::class,
             AriaControlsIdExistsRule::class,
+            AriaErrorMessageIdExistsRule::class,
             AriaAllowedAttrRule::class,
             AriaHiddenBodyRule::class,
             AutocompleteValidRule::class,
@@ -180,6 +183,7 @@ final class StandardRuleSets
             DialogAccessibleNameRule::class,
             LabelForTargetExistsRule::class,
             PlaceholderOnlyLabelRule::class,
+            RadioGroupAccessibleNameRule::class,
             RadioGroupStructureRule::class,
             ColorContrastRule::class,
             FrameTitleRule::class,

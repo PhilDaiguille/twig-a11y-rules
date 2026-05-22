@@ -11,6 +11,7 @@ use TwigA11y\Rules\Anchor\LinkHrefValidityRule;
 use TwigA11y\Rules\Aria\AriaAllowedAttrRule;
 use TwigA11y\Rules\Aria\AriaControlsIdExistsRule;
 use TwigA11y\Rules\Aria\AriaDeprecatedRoleRule;
+use TwigA11y\Rules\Aria\AriaErrorMessageIdExistsRule;
 use TwigA11y\Rules\Aria\AriaHiddenBodyRule;
 use TwigA11y\Rules\Aria\AriaHiddenFocusRule;
 use TwigA11y\Rules\Aria\AriaLabelRule;
@@ -32,6 +33,7 @@ use TwigA11y\Rules\Forms\InputTypeRule;
 use TwigA11y\Rules\Forms\InvalidFieldErrorMessageRule;
 use TwigA11y\Rules\Forms\LabelForTargetExistsRule;
 use TwigA11y\Rules\Forms\PlaceholderOnlyLabelRule;
+use TwigA11y\Rules\Forms\RadioGroupAccessibleNameRule;
 use TwigA11y\Rules\Forms\RadioGroupStructureRule;
 use TwigA11y\Rules\Forms\SelectLabelRule;
 use TwigA11y\Rules\Forms\TextareaLabelRule;
@@ -97,6 +99,7 @@ use TwigCsFixer\Standard\StandardInterface;
 #[CoversClass(AriaAllowedAttrRule::class)]
 #[CoversClass(AriaControlsIdExistsRule::class)]
 #[CoversClass(AriaDeprecatedRoleRule::class)]
+#[CoversClass(AriaErrorMessageIdExistsRule::class)]
 #[CoversClass(AriaHiddenBodyRule::class)]
 #[CoversClass(AriaHiddenFocusRule::class)]
 #[CoversClass(AriaLabelRule::class)]
@@ -118,6 +121,7 @@ use TwigCsFixer\Standard\StandardInterface;
 #[CoversClass(InputTypeRule::class)]
 #[CoversClass(LabelForTargetExistsRule::class)]
 #[CoversClass(PlaceholderOnlyLabelRule::class)]
+#[CoversClass(RadioGroupAccessibleNameRule::class)]
 #[CoversClass(RadioGroupStructureRule::class)]
 #[CoversClass(SelectLabelRule::class)]
 #[CoversClass(TextareaLabelRule::class)]
@@ -287,6 +291,7 @@ final class A11yStandardTest extends TestCase
                 AriaRequiredParentRule::class,
                 AriaReferencedIdExistsRule::class,
                 AriaControlsIdExistsRule::class,
+                AriaErrorMessageIdExistsRule::class,
                 AriaAllowedAttrRule::class,
                 AriaHiddenBodyRule::class,
                 AutocompleteValidRule::class,
@@ -313,6 +318,7 @@ final class A11yStandardTest extends TestCase
                 DialogAccessibleNameRule::class,
                 LabelForTargetExistsRule::class,
                 PlaceholderOnlyLabelRule::class,
+                RadioGroupAccessibleNameRule::class,
                 RadioGroupStructureRule::class,
                 ColorContrastRule::class,
                 FrameTitleRule::class,

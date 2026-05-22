@@ -170,6 +170,7 @@ Rules are grouped by category for easier discovery. The **Preset** column indica
 | `AriaInputFieldNameRule` | Custom input-role widget without accessible name | Strict |
 | `LabelForTargetExistsRule` | `<label for="...">` referencing a non-existent `id` | Strict |
 | `PlaceholderOnlyLabelRule` | Form field relying on `placeholder` text without a proper label | Strict |
+| `RadioGroupAccessibleNameRule` | Radio groups missing an accessible group label via `<legend>`, `aria-label`, or `aria-labelledby` | Strict |
 | `RadioGroupStructureRule` | Multiple radio inputs sharing the same `name` not grouped in `<fieldset>` or `role="radiogroup"` | Strict |
 
 ### ARIA
@@ -188,6 +189,7 @@ Rules are grouped by category for easier discovery. The **Preset** column indica
 | `AriaRequiredParentRule` | Child role not wrapped in appropriate parent role | Strict |
 | `AriaReferencedIdExistsRule` | `aria-labelledby`/`aria-describedby` references a missing `id` | Strict |
 | `AriaControlsIdExistsRule` | `aria-controls` references a missing `id` | Strict |
+| `AriaErrorMessageIdExistsRule` | `aria-errormessage` references a missing `id` | Strict |
 | `AriaAllowedAttrRule` | `aria-*` attribute not allowed for the given role | Strict |
 | `AriaHiddenBodyRule` | `<body aria-hidden="true">` | Strict |
 
