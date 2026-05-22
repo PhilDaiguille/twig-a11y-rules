@@ -51,8 +51,10 @@ final class InvalidFieldErrorMessageRule extends AbstractA11yRule
             if (!$this->isSupportedField($tagName, $tag)) {
                 continue;
             }
-
-            if ($this->hasNonEmptyReference($tag, 'aria-describedby') || $this->hasNonEmptyReference($tag, 'aria-errormessage')) {
+            if ($this->hasNonEmptyReference($tag, 'aria-describedby')) {
+                continue;
+            }
+            if ($this->hasNonEmptyReference($tag, 'aria-errormessage')) {
                 continue;
             }
 

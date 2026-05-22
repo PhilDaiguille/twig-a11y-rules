@@ -35,10 +35,8 @@ final class TableCaptionMissingRule extends AbstractA11yRule
                 continue;
             }
 
-            if (preg_match('/<caption\b[^>]*>(.*?)<\/caption>/is', $inner, $captionMatch)) {
-                if ('' !== trim(strip_tags($captionMatch[1]))) {
-                    continue;
-                }
+            if (preg_match('/<caption\b[^>]*>(.*?)<\/caption>/is', $inner, $captionMatch) && '' !== trim(strip_tags($captionMatch[1]))) {
+                continue;
             }
 
             $line = 1 + substr_count(substr($full, 0, $offset), "\n");

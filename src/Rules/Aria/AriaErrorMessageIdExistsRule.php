@@ -30,7 +30,10 @@ final class AriaErrorMessageIdExistsRule extends AbstractA11yRule
 
         foreach ($refs as $ref) {
             $refId = $this->firstMatch($ref, 1, 2);
-            if ('' === $refId || isset($ids[$refId])) {
+            if ('' === $refId) {
+                continue;
+            }
+            if (isset($ids[$refId])) {
                 continue;
             }
 

@@ -121,10 +121,7 @@ final class SvgAccessibilityRule extends AbstractA11yRule
         // Look ahead in tokens for a title element within the SVG
         // Collect more content to find nested elements
         $extendedContent = $this->collectUntil($tokenIndex, $tokens, '</svg>', 500);
-        if (preg_match('/<\s*title(\s+[^>]*)?>(.*?)<\/\s*title\s*>/is', $extendedContent)) {
-            return true;
-        }
 
-        return false;
+        return (bool) preg_match('/<\s*title(\s+[^>]*)?>(.*?)<\/\s*title\s*>/is', $extendedContent);
     }
 }

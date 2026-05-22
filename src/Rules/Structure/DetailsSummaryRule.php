@@ -26,7 +26,7 @@ final class DetailsSummaryRule extends AbstractA11yRule
             return;
         }
 
-        foreach ($matches[0] as $index => $match) {
+        foreach ($matches[0] as $match) {
             $detailsBlock = $match[0];
             $offset = $match[1];
             $line = 1 + substr_count(substr($full, 0, $offset), "\n");

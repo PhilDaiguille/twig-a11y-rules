@@ -42,8 +42,10 @@ final class RadioGroupStructureRule extends AbstractA11yRule
             if (count($items) < 2) {
                 continue;
             }
-
-            if ($this->isInsideFieldsetGroup($full, $name) || $this->isInsideAriaRadioGroup($full, $name)) {
+            if ($this->isInsideFieldsetGroup($full, $name)) {
+                continue;
+            }
+            if ($this->isInsideAriaRadioGroup($full, $name)) {
                 continue;
             }
 
@@ -69,7 +71,7 @@ final class RadioGroupStructureRule extends AbstractA11yRule
 
         foreach ($fieldsets as $fieldset) {
             $content = $fieldset[1];
-            $count = preg_match_all('/<input\b[^>]*\btype\s*=\s*(?:"radio"|\'radio\')[^>]*\bname\s*=\s*(?:"'.preg_quote($name, '/').'"|\''.preg_quote($name, '/').'\')[^>]*>/i', $content);
+            $count = preg_match_all('/<input\b[^>]*\btype\s*=\s*(?:"radio"|\'radio\')[^>]*\bname\s*=\s*(?:"'.preg_quote($name, '/').'"|\''.preg_quote($name, '/')."')[^>]*>/i", $content);
             if ($count >= 2) {
                 return true;
             }
@@ -86,7 +88,7 @@ final class RadioGroupStructureRule extends AbstractA11yRule
 
         foreach ($groups as $group) {
             $content = $group[2];
-            $count = preg_match_all('/<input\b[^>]*\btype\s*=\s*(?:"radio"|\'radio\')[^>]*\bname\s*=\s*(?:"'.preg_quote($name, '/').'"|\''.preg_quote($name, '/').'\')[^>]*>/i', $content);
+            $count = preg_match_all('/<input\b[^>]*\btype\s*=\s*(?:"radio"|\'radio\')[^>]*\bname\s*=\s*(?:"'.preg_quote($name, '/').'"|\''.preg_quote($name, '/')."')[^>]*>/i", $content);
             if ($count >= 2) {
                 return true;
             }

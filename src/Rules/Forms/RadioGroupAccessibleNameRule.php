@@ -58,8 +58,10 @@ final class RadioGroupAccessibleNameRule extends AbstractA11yRule
             if ($radioCount < 2) {
                 continue;
             }
-
-            if ($this->hasNonEmptyReference($groupBlock, 'aria-labelledby') || $this->hasNonEmptyReference($groupBlock, 'aria-label')) {
+            if ($this->hasNonEmptyReference($groupBlock, 'aria-labelledby')) {
+                continue;
+            }
+            if ($this->hasNonEmptyReference($groupBlock, 'aria-label')) {
                 continue;
             }
 
