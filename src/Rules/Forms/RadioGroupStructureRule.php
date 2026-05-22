@@ -42,9 +42,11 @@ final class RadioGroupStructureRule extends AbstractA11yRule
             if (count($items) < 2) {
                 continue;
             }
+
             if ($this->isInsideFieldsetGroup($full, $name)) {
                 continue;
             }
+
             if ($this->isInsideAriaRadioGroup($full, $name)) {
                 continue;
             }

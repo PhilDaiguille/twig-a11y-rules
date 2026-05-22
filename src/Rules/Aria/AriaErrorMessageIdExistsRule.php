@@ -33,6 +33,7 @@ final class AriaErrorMessageIdExistsRule extends AbstractA11yRule
             if ('' === $refId) {
                 continue;
             }
+
             if (isset($ids[$refId])) {
                 continue;
             }
