@@ -7,6 +7,15 @@ namespace TwigA11y\Rules\Forms;
 use TwigA11y\Rules\AbstractA11yRule;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * Checks that non-native input-role elements (div/span with role="textbox",
+ * "combobox", etc.) have an accessible name via aria-label or aria-labelledby.
+ *
+ * This rule uses a whole-file scan (evaluateOncePerFile + preg_match_all)
+ * because the role and id attributes may be spread across token boundaries.
+ * It cannot extend AbstractFormFieldLabelRule which is token-by-token and
+ * targets native HTML form elements.
+ */
 final class AriaInputFieldNameRule extends AbstractA11yRule
 {
     private const ROLES = [
@@ -15,10 +24,6 @@ final class AriaInputFieldNameRule extends AbstractA11yRule
 
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
         $full = $this->getFullContent($tokens);
 
         if (!preg_match_all('/<(div|span)[^>]*role\s*=\s*(?:"|\')([^"\']+)(?:"|\')[^>]*>/i', $full, $m, PREG_SET_ORDER)) {

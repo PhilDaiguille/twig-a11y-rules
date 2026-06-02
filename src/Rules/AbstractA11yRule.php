@@ -10,7 +10,7 @@ use TwigCsFixer\Rules\AbstractRule;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
-abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleInterface
+abstract class AbstractA11yRule extends AbstractRule
 {
     use TokenCollectorTrait;
 
@@ -58,6 +58,15 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
      */
     public function __construct(private bool $emitAsWarning = false) {}
 
+    /**
+     * Implement this method to perform the actual accessibility check.
+     *
+     * Called for each token (or once per file when evaluateOncePerFile()
+     * returns true). Use the $emit callable to report violations — it
+     * handles deduplication and warning/error routing automatically.
+     */
+    abstract public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void;
+
     // By default rules apply to all template kinds. Rules that should be
     // limited to specific kinds can override supportedKinds().
     /**
@@ -99,10 +108,13 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
         );
     }
 
-    // Backwards-compatible helper used by existing rules that used the
-    // pattern "if (0 !== $tokenIndex) return;". When refactoring rules to
-    // use evaluateOncePerFile(), replace those guards with a call to
-    // shouldSkipByTokenIndex().
+    /**
+     * @deprecated This guard is a no-op when evaluateOncePerFile() returns true
+     *             because AbstractA11yRule::process() already skips subsequent
+     *             tokens before calling evaluate(). Remove the call from
+     *             evaluate() in concrete rules — no behaviour change results.
+     *             This method will be removed in a future major version.
+     */
     protected function shouldSkipByTokenIndex(int $tokenIndex): bool
     {
         return $this->evaluateOncePerFile() && 0 !== $tokenIndex;
@@ -180,26 +192,17 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
             $this->emitted[$ruleFileKey] = [];
         }
 
-        if ($this->emitAsWarning) {
-            return function (string $message, Token $token, ?string $id = null) use ($ruleFileKey): void {
-                $key = $message.'|'.($id ?? '');
-                if (isset($this->emitted[$ruleFileKey][$key])) {
-                    return;
-                }
+        $reporter = $this->emitAsWarning
+            ? function (string $message, Token $token, ?string $id): void {
+                null === $id
+                    ? $this->addWarning($message, $token)
+                    : $this->addWarning($message, $token, $id);
+            }
+        : function (string $message, Token $token, ?string $id): void {
+            $this->addError($message, $token, $id);
+        };
 
-                $this->emitted[$ruleFileKey][$key] = true;
-
-                if (null === $id) {
-                    $this->addWarning($message, $token);
-
-                    return;
-                }
-
-                $this->addWarning($message, $token, $id);
-            };
-        }
-
-        return function (string $message, Token $token, ?string $id = null) use ($ruleFileKey): void {
+        return function (string $message, Token $token, ?string $id = null) use ($ruleFileKey, $reporter): void {
             $key = $message.'|'.($id ?? '');
             if (isset($this->emitted[$ruleFileKey][$key])) {
                 return;
@@ -207,7 +210,7 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
 
             $this->emitted[$ruleFileKey][$key] = true;
 
-            $this->addError($message, $token, $id);
+            $reporter($message, $token, $id);
         };
     }
 }

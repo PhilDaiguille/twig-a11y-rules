@@ -16,10 +16,6 @@ final class MetaCharsetRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
         $full = $this->getFullContent($tokens);
 
         $hasCharset = preg_match('/<meta\b[^>]*\bcharset\s*=/i', $full)

@@ -11,10 +11,6 @@ final class DialogAccessibleNameRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
         $full = $this->getFullContent($tokens);
 
         if (!str_contains($full, '<dialog') && !preg_match('/\brole\s*=\s*["\'](?:alertdialog|dialog)["\']/i', $full)) {

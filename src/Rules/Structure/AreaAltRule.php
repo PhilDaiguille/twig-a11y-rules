@@ -19,10 +19,6 @@ final class AreaAltRule extends AbstractA11yRule
 
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
         $token = $tokens->get($tokenIndex);
 
         // Token::isMatching is available on Token objects and narrows the

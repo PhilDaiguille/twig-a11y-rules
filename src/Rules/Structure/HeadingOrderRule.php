@@ -11,11 +11,6 @@ final class HeadingOrderRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        // Page-level rule: defer to evaluateOncePerFile via shouldSkipByTokenIndex
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
         $token = $tokens->get($tokenIndex);
 
         $full = $this->getFullContent($tokens);

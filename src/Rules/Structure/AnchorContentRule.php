@@ -20,10 +20,6 @@ final class AnchorContentRule extends AbstractA11yRule
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Respect per-token skip behavior for page-level short-circuits.
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
         $token = $tokens->get($tokenIndex);
 
         if (!$token->isMatching(Token::TEXT_TYPE)) {
