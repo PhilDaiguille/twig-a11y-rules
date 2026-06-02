@@ -25,6 +25,10 @@ final class MouseEventKeyboardEquivalentRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<string,string>}> */
     public static function provideFixtures(): iterable
     {
+        yield 'no mouse event handlers' => [__DIR__.'/Fixtures/valid/mouse_no_events.html.twig', []];
+
+        yield 'mouse event keyword in twig — no html tags' => [__DIR__.'/Fixtures/valid/mouse_event_keyword_in_twig_no_tags.html.twig', []];
+
         yield 'mouse events with keyboard equivalents' => [__DIR__.'/Fixtures/valid/mouse_events_with_keyboard.html.twig', []];
 
         yield 'onmouseover without onfocus' => [__DIR__.'/Fixtures/invalid/mouse_event_no_keyboard.html.twig', [

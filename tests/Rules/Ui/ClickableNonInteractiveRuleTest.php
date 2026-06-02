@@ -25,6 +25,10 @@ final class ClickableNonInteractiveRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<string,string>}> */
     public static function provideFixtures(): iterable
     {
+        yield 'no onclick handlers' => [__DIR__.'/Fixtures/valid/clickable_no_onclick.html.twig', []];
+
+        yield 'onclick keyword in twig — no html tags' => [__DIR__.'/Fixtures/valid/clickable_onclick_in_twig_no_tags.html.twig', []];
+
         yield 'native interactive elements' => [__DIR__.'/Fixtures/valid/clickable_native_interactive.html.twig', []];
 
         yield 'div onclick without tabindex' => [__DIR__.'/Fixtures/invalid/clickable_div_no_tabindex.html.twig', [

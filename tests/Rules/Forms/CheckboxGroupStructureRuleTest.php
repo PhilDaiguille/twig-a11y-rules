@@ -25,6 +25,8 @@ final class CheckboxGroupStructureRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<string,string>}> */
     public static function provideFixtures(): iterable
     {
+        yield 'no input elements' => [__DIR__.'/Fixtures/valid/checkbox_no_inputs.html.twig', []];
+
         yield 'checkbox group in fieldset' => [__DIR__.'/Fixtures/valid/checkbox_group_in_fieldset.html.twig', []];
 
         yield 'checkbox group with role group' => [__DIR__.'/Fixtures/valid/checkbox_group_role_group.html.twig', []];

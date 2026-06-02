@@ -25,6 +25,10 @@ final class RoleButtonTabindexRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<string,string>}> */
     public static function provideFixtures(): iterable
     {
+        yield 'no interactive role attributes' => [__DIR__.'/Fixtures/valid/role_no_interactive_roles.html.twig', []];
+
+        yield 'role keyword in twig expression — no html tags' => [__DIR__.'/Fixtures/valid/role_keyword_in_twig_no_tags.html.twig', []];
+
         yield 'interactive roles with tabindex' => [__DIR__.'/Fixtures/valid/role_interactive_with_tabindex.html.twig', []];
 
         yield 'role button missing tabindex' => [__DIR__.'/Fixtures/invalid/role_button_missing_tabindex.html.twig', [
