@@ -12,10 +12,6 @@ final class DuplicateIdRule extends AbstractA11yRule
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Only run once per file
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
         $full = $this->getFullContent($tokens);
 
         if (!str_contains($full, 'id=')) {

@@ -29,3 +29,5 @@ infection.html
 ## Box
 bin/twig-cs-fixer.phar
 .twig-cs-fixer.cache
+
+.castor.stub.php

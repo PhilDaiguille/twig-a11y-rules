@@ -12,10 +12,6 @@ final class LandmarkRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
         $full = $this->getFullContent($tokens);
 
         if (str_contains($full, '<main') || preg_match('/role\s*=\s*["\']main["\']/i', $full)) {

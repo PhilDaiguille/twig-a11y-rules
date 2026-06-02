@@ -5,17 +5,12 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Forms;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
 final class PlaceholderOnlyLabelRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
         $full = $this->getFullContent($tokens);
 
         if (!str_contains($full, 'placeholder=')) {
@@ -60,37 +55,5 @@ final class PlaceholderOnlyLabelRule extends AbstractA11yRule
     protected function evaluateOncePerFile(): bool
     {
         return true;
-    }
-
-    private function openingProvidesLabel(string $opening): bool
-    {
-        if (preg_match('/\baria-labelledby\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $opening, $m)) {
-            $value = $this->firstMatch($m, 1, 2);
-            if ('' !== trim($value)) {
-                return true;
-            }
-        }
-
-        if (preg_match('/\baria-label\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $opening, $m)) {
-            $value = $this->firstMatch($m, 1, 2);
-            if ('' !== trim($value)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private function fakeTokenForLine(Tokens $tokens, int $line, string $value): Token
-    {
-        $token = $tokens->get(0);
-
-        return new Token(
-            $token->getType(),
-            $line,
-            1,
-            $token->getFilename(),
-            $value
-        );
     }
 }

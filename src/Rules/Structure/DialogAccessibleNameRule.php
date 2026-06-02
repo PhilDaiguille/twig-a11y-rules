@@ -5,17 +5,12 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
 final class DialogAccessibleNameRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
         $full = $this->getFullContent($tokens);
 
         if (!str_contains($full, '<dialog') && !preg_match('/\brole\s*=\s*["\'](?:alertdialog|dialog)["\']/i', $full)) {
@@ -56,18 +51,5 @@ final class DialogAccessibleNameRule extends AbstractA11yRule
     protected function evaluateOncePerFile(): bool
     {
         return true;
-    }
-
-    private function fakeTokenForLine(Tokens $tokens, int $line, string $value): Token
-    {
-        $token = $tokens->get(0);
-
-        return new Token(
-            $token->getType(),
-            $line,
-            1,
-            $token->getFilename(),
-            $value
-        );
     }
 }

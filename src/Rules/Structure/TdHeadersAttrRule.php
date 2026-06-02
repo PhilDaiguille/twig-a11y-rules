@@ -12,10 +12,6 @@ final class TdHeadersAttrRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
         $full = $this->getFullContent($tokens);
 
         // Collect all ids

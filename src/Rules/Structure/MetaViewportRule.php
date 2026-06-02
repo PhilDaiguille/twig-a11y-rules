@@ -13,10 +13,6 @@ final class MetaViewportRule extends AbstractA11yRule
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Page-level rule: use the new helper to skip non-zero token indexes.
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
         $full = $this->getFullContent($tokens);
 
         $fullLower = strtolower($full);

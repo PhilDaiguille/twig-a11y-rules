@@ -20,14 +20,6 @@ final class AnchorContentRule extends AbstractA11yRule
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Respect per-token skip behavior for page-level short-circuits.
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
-        if (0 === $tokenIndex) {
-            $this->idx = 0;
-        }
-
         $token = $tokens->get($tokenIndex);
 
         if (!$token->isMatching(Token::TEXT_TYPE)) {
@@ -57,7 +49,7 @@ final class AnchorContentRule extends AbstractA11yRule
             ) {
                 // Axe-core rule reference: link-name
                 ++$this->idx;
-                $id = 'AnchorContent.Warning.LinkName';
+                $id = 'LinkName';
                 if ($this->idx > 1) {
                     $id .= '#'.$this->idx;
                 }
@@ -65,5 +57,10 @@ final class AnchorContentRule extends AbstractA11yRule
                 $emit('Anchor element without accessible name (axe-core: link-name) should have an aria-label or title.', $token, $id);
             }
         }
+    }
+
+    protected function evaluateStart(Tokens $tokens): void
+    {
+        $this->idx = 0;
     }
 }

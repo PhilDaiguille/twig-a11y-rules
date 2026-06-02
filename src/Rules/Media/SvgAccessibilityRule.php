@@ -34,11 +34,6 @@ final class SvgAccessibilityRule extends AbstractA11yRule
 
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        // Reset deduplication hashes at the start of each new file
-        if (0 === $tokenIndex) {
-            $this->seenTagHashes = [];
-        }
-
         $token = $tokens->get($tokenIndex);
 
         if (!$token->isMatching(Token::TEXT_TYPE)) {
@@ -101,6 +96,11 @@ final class SvgAccessibilityRule extends AbstractA11yRule
         if (!$hasAccessibleName) {
             $emit('SVG element is missing an accessible name. Add <title>, aria-label, aria-labelledby, or aria-hidden="true" if decorative.', $token, 'SvgA11y.MissingAccessibleName');
         }
+    }
+
+    protected function evaluateStart(Tokens $tokens): void
+    {
+        $this->seenTagHashes = [];
     }
 
     /**

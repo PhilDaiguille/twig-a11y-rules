@@ -11,10 +11,6 @@ final class TargetSizeRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
         $full = strtolower($this->getFullContent($tokens));
 
         // look for interactive elements with inline style width/height < 24px

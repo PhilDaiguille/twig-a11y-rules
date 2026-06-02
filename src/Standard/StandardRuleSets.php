@@ -20,34 +20,41 @@ use TwigA11y\Rules\Aria\AriaRequiredParentRule;
 use TwigA11y\Rules\Aria\AriaRoleRule;
 use TwigA11y\Rules\Aria\AriaValidAttrRule;
 use TwigA11y\Rules\Aria\AriaValidAttrValueRule;
+use TwigA11y\Rules\Aria\RoleButtonTabindexRule;
 use TwigA11y\Rules\Aria\TabIndexRule;
 use TwigA11y\Rules\Forms\AriaInputFieldNameRule;
 use TwigA11y\Rules\Forms\AutocompleteValidRule;
 use TwigA11y\Rules\Forms\ButtonTypeRule;
+use TwigA11y\Rules\Forms\CheckboxGroupStructureRule;
 use TwigA11y\Rules\Forms\FormLabelRule;
 use TwigA11y\Rules\Forms\InputButtonNameRule;
 use TwigA11y\Rules\Forms\InputLabelRule;
 use TwigA11y\Rules\Forms\InputTypeRule;
 use TwigA11y\Rules\Forms\InvalidFieldErrorMessageRule;
 use TwigA11y\Rules\Forms\LabelForTargetExistsRule;
+use TwigA11y\Rules\Forms\OptGroupLabelRule;
 use TwigA11y\Rules\Forms\PlaceholderOnlyLabelRule;
 use TwigA11y\Rules\Forms\RadioGroupAccessibleNameRule;
 use TwigA11y\Rules\Forms\RadioGroupStructureRule;
 use TwigA11y\Rules\Forms\SelectLabelRule;
 use TwigA11y\Rules\Forms\TextareaLabelRule;
+use TwigA11y\Rules\Media\AudioControlsRule;
 use TwigA11y\Rules\Media\AutoplayRule;
 use TwigA11y\Rules\Media\ImgAltRule;
 use TwigA11y\Rules\Media\InputImageAltRule;
 use TwigA11y\Rules\Media\NoAutoplayAudioRule;
 use TwigA11y\Rules\Media\ObjectAltRule;
 use TwigA11y\Rules\Media\SvgAccessibilityRule;
+use TwigA11y\Rules\Media\VideoDescriptionTrackRule;
 use TwigA11y\Rules\Media\VideoTrackRule;
+use TwigA11y\Rules\Structure\AbbrTitleRule;
 use TwigA11y\Rules\Structure\AnchorContentRule;
 use TwigA11y\Rules\Structure\AreaAltRule;
 use TwigA11y\Rules\Structure\BannedTagsRule;
 use TwigA11y\Rules\Structure\ButtonContentRule;
 use TwigA11y\Rules\Structure\DetailsSummaryRule;
 use TwigA11y\Rules\Structure\DialogAccessibleNameRule;
+use TwigA11y\Rules\Structure\DocTypeRule;
 use TwigA11y\Rules\Structure\DocumentTitleRule;
 use TwigA11y\Rules\Structure\DuplicateAccessKeyRule;
 use TwigA11y\Rules\Structure\DuplicateIdRule;
@@ -64,18 +71,23 @@ use TwigA11y\Rules\Structure\LandmarkUniqueRule;
 use TwigA11y\Rules\Structure\LangAttributeRule;
 use TwigA11y\Rules\Structure\LangAttributeValueRule;
 use TwigA11y\Rules\Structure\ListStructureRule;
+use TwigA11y\Rules\Structure\MetaCharsetRule;
 use TwigA11y\Rules\Structure\MetaRefreshRule;
 use TwigA11y\Rules\Structure\MetaViewportRule;
 use TwigA11y\Rules\Structure\NestedInteractiveRule;
 use TwigA11y\Rules\Structure\PageHeadingOneRule;
 use TwigA11y\Rules\Structure\PAsHeadingRule;
 use TwigA11y\Rules\Structure\SkipLinkRule;
+use TwigA11y\Rules\Structure\SummaryAttributeObsoleteRule;
 use TwigA11y\Rules\Structure\TableCaptionMissingRule;
 use TwigA11y\Rules\Structure\TableDuplicateNameRule;
 use TwigA11y\Rules\Structure\TableFakeCaptionRule;
 use TwigA11y\Rules\Structure\TableHeaderRule;
+use TwigA11y\Rules\Structure\TableLayoutRoleRule;
 use TwigA11y\Rules\Structure\TdHeadersAttrRule;
+use TwigA11y\Rules\Ui\ClickableNonInteractiveRule;
 use TwigA11y\Rules\Ui\ColorContrastRule;
+use TwigA11y\Rules\Ui\MouseEventKeyboardEquivalentRule;
 use TwigA11y\Rules\Ui\OutlineNoneWithoutFocusVisibleRule;
 use TwigA11y\Rules\Ui\ScrollableRegionFocusableRule;
 use TwigA11y\Rules\Ui\TargetSizeRule;
@@ -159,6 +171,7 @@ final class StandardRuleSets
             AriaErrorMessageIdExistsRule::class,
             AriaAllowedAttrRule::class,
             AriaHiddenBodyRule::class,
+            RoleButtonTabindexRule::class,
             AutocompleteValidRule::class,
             ButtonTypeRule::class,
             InvalidFieldErrorMessageRule::class,
@@ -194,6 +207,17 @@ final class StandardRuleSets
             NestedInteractiveRule::class,
             DuplicateAccessKeyRule::class,
             PAsHeadingRule::class,
+            AbbrTitleRule::class,
+            DocTypeRule::class,
+            MetaCharsetRule::class,
+            TableLayoutRoleRule::class,
+            SummaryAttributeObsoleteRule::class,
+            OptGroupLabelRule::class,
+            CheckboxGroupStructureRule::class,
+            AudioControlsRule::class,
+            VideoDescriptionTrackRule::class,
+            ClickableNonInteractiveRule::class,
+            MouseEventKeyboardEquivalentRule::class,
         ]);
     }
 

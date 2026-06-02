@@ -17,10 +17,6 @@ final class OutlineNoneWithoutFocusVisibleRule extends AbstractA11yRule
 
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
         $content = $this->getFullContent($tokens);
         if (!preg_match_all('/<([a-zA-Z0-9]+)([^>]*)style\s*=\s*[\"\']([^\"\']+)[\"\']/i', $content, $matches, PREG_SET_ORDER)) {
             return;

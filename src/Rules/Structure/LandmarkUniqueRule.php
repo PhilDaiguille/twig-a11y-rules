@@ -13,10 +13,6 @@ final class LandmarkUniqueRule extends AbstractA11yRule
     {
         // Page-level rule: only evaluate once per file. Use the helper for
         // backwards-compatibility with older rules.
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
         $full = $this->getFullContent($tokens);
 
         // Landmarks to consider by tag name. We also map to their ARIA role

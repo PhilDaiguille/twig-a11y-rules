@@ -8,9 +8,14 @@ use TwigCsFixer\Rules\RuleInterface;
 use TwigCsFixer\Standard\StandardInterface;
 
 /**
- * A convenience standard that aggregates accessibility rules.
+ * Standard accessibility ruleset — comprehensive WCAG 2.2 AA coverage.
  *
- * Users can add this to their Ruleset via $ruleset->addStandard(new A11yStandard());
+ * Extends the Recommended tier with deeper checks: duplicate IDs, landmark
+ * structure, table semantics, meta viewport, skip links, and more. Suitable
+ * for projects targeting full WCAG 2.2 Level AA conformance.
+ *
+ * Usage:
+ *   $ruleset->addStandard(new A11yStandard());
  */
 final class A11yStandard implements StandardInterface
 {

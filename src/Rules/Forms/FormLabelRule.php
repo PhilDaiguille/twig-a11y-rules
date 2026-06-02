@@ -8,20 +8,21 @@ use TwigA11y\Rules\AbstractA11yRule;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * Checks that every <label> element is well-formed: it must either have a
+ * non-empty `for` attribute pointing to a visible field, or wrap a form
+ * control directly.
+ *
+ * This rule targets the <label> element itself — the inverse of
+ * AbstractFormFieldLabelRule which checks fields for their labels.
+ * The two concerns are distinct and cannot share the same abstraction.
+ */
 final class FormLabelRule extends AbstractA11yRule
 {
     private int $idx = 0;
 
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
-        if (0 === $tokenIndex) {
-            $this->idx = 0;
-        }
-
         $token = $tokens->get($tokenIndex);
 
         if (!$token->isMatching(Token::TEXT_TYPE)) {
@@ -62,5 +63,10 @@ final class FormLabelRule extends AbstractA11yRule
             $token,
             $id
         );
+    }
+
+    protected function evaluateStart(Tokens $tokens): void
+    {
+        $this->idx = 0;
     }
 }

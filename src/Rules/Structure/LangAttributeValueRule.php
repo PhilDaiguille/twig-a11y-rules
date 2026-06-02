@@ -56,10 +56,6 @@ final class LangAttributeValueRule extends AbstractA11yRule
 
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
         $content = $this->getFullContent($tokens);
 
         // No lang attribute at all — that is LangAttributeRule's concern, not ours

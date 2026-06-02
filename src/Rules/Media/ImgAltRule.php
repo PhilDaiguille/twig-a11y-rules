@@ -27,16 +27,6 @@ final class ImgAltRule extends AbstractA11yRule
         // This rule inspects many inline tokens but should still run for
         // each token that may contain an <img fragment. Use the per-token
         // guard helper to allow page-level short-circuits where applicable.
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
-        // Reset deduplication hashes at the start of each new file so that
-        // identical <img> tags in different files are not silently suppressed.
-        if (0 === $tokenIndex) {
-            $this->seenTagHashes = [];
-        }
-
         $token = $tokens->get($tokenIndex);
 
         if (!$token->isMatching(Token::TEXT_TYPE)) {
@@ -105,5 +95,10 @@ final class ImgAltRule extends AbstractA11yRule
                 $emit('Empty alt on <img> requires role="presentation" or role="none".', $token, 'ImgAlt.EmptyAlt');
             }
         }
+    }
+
+    protected function evaluateStart(Tokens $tokens): void
+    {
+        $this->seenTagHashes = [];
     }
 }

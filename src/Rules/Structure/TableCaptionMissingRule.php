@@ -5,17 +5,12 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
 final class TableCaptionMissingRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if ($this->shouldSkipByTokenIndex($tokenIndex)) {
-            return;
-        }
-
         $full = $this->getFullContent($tokens);
 
         if (!str_contains($full, '<table')) {
@@ -56,18 +51,5 @@ final class TableCaptionMissingRule extends AbstractA11yRule
     private function looksLikeDataTable(string $tableBlock, string $inner): bool
     {
         return (bool) preg_match('/<th\b|\bscope\s*=|\bheaders\s*=|<thead\b|<tbody\b|<tfoot\b|\bsummary\s*=/i', $tableBlock.$inner);
-    }
-
-    private function fakeTokenForLine(Tokens $tokens, int $line, string $value): Token
-    {
-        $token = $tokens->get(0);
-
-        return new Token(
-            $token->getType(),
-            $line,
-            1,
-            $token->getFilename(),
-            $value
-        );
     }
 }

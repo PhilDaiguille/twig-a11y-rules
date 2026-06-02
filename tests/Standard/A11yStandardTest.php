@@ -5,83 +5,9 @@ declare(strict_types=1);
 namespace TwigA11y\Tests\Standard;
 
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use TwigA11y\Rules\Anchor\AnchorAccessibleNameRule;
-use TwigA11y\Rules\Anchor\LinkHrefValidityRule;
-use TwigA11y\Rules\Aria\AriaAllowedAttrRule;
-use TwigA11y\Rules\Aria\AriaControlsIdExistsRule;
-use TwigA11y\Rules\Aria\AriaDeprecatedRoleRule;
-use TwigA11y\Rules\Aria\AriaErrorMessageIdExistsRule;
-use TwigA11y\Rules\Aria\AriaHiddenBodyRule;
-use TwigA11y\Rules\Aria\AriaHiddenFocusRule;
-use TwigA11y\Rules\Aria\AriaLabelRule;
-use TwigA11y\Rules\Aria\AriaReferencedIdExistsRule;
-use TwigA11y\Rules\Aria\AriaRequiredAttrRule;
-use TwigA11y\Rules\Aria\AriaRequiredChildrenRule;
-use TwigA11y\Rules\Aria\AriaRequiredParentRule;
-use TwigA11y\Rules\Aria\AriaRoleRule;
-use TwigA11y\Rules\Aria\AriaValidAttrRule;
-use TwigA11y\Rules\Aria\AriaValidAttrValueRule;
-use TwigA11y\Rules\Aria\TabIndexRule;
-use TwigA11y\Rules\Forms\AriaInputFieldNameRule;
-use TwigA11y\Rules\Forms\AutocompleteValidRule;
-use TwigA11y\Rules\Forms\ButtonTypeRule;
-use TwigA11y\Rules\Forms\FormLabelRule;
-use TwigA11y\Rules\Forms\InputButtonNameRule;
-use TwigA11y\Rules\Forms\InputLabelRule;
-use TwigA11y\Rules\Forms\InputTypeRule;
-use TwigA11y\Rules\Forms\InvalidFieldErrorMessageRule;
-use TwigA11y\Rules\Forms\LabelForTargetExistsRule;
-use TwigA11y\Rules\Forms\PlaceholderOnlyLabelRule;
-use TwigA11y\Rules\Forms\RadioGroupAccessibleNameRule;
-use TwigA11y\Rules\Forms\RadioGroupStructureRule;
-use TwigA11y\Rules\Forms\SelectLabelRule;
-use TwigA11y\Rules\Forms\TextareaLabelRule;
-use TwigA11y\Rules\Media\AutoplayRule;
-use TwigA11y\Rules\Media\ImgAltRule;
-use TwigA11y\Rules\Media\InputImageAltRule;
-use TwigA11y\Rules\Media\NoAutoplayAudioRule;
-use TwigA11y\Rules\Media\ObjectAltRule;
-use TwigA11y\Rules\Media\RoleImgAltRule;
-use TwigA11y\Rules\Media\SvgAccessibilityRule;
-use TwigA11y\Rules\Media\VideoTrackRule;
-use TwigA11y\Rules\Structure\AnchorContentRule;
-use TwigA11y\Rules\Structure\AreaAltRule;
-use TwigA11y\Rules\Structure\BannedTagsRule;
-use TwigA11y\Rules\Structure\ButtonContentRule;
-use TwigA11y\Rules\Structure\DetailsSummaryRule;
-use TwigA11y\Rules\Structure\DialogAccessibleNameRule;
-use TwigA11y\Rules\Structure\DocumentTitleRule;
-use TwigA11y\Rules\Structure\DuplicateAccessKeyRule;
-use TwigA11y\Rules\Structure\DuplicateIdRule;
-use TwigA11y\Rules\Structure\EmptyTableHeaderRule;
-use TwigA11y\Rules\Structure\FieldsetLegendRule;
-use TwigA11y\Rules\Structure\FrameTitleRule;
-use TwigA11y\Rules\Structure\GenericLinkTextRule;
-use TwigA11y\Rules\Structure\HeadingEmptyRule;
-use TwigA11y\Rules\Structure\HeadingOrderRule;
-use TwigA11y\Rules\Structure\IframeFocusableContentRule;
-use TwigA11y\Rules\Structure\IframeTitleRule;
-use TwigA11y\Rules\Structure\LandmarkRule;
-use TwigA11y\Rules\Structure\LandmarkUniqueRule;
-use TwigA11y\Rules\Structure\LangAttributeRule;
-use TwigA11y\Rules\Structure\LangAttributeValueRule;
-use TwigA11y\Rules\Structure\ListStructureRule;
-use TwigA11y\Rules\Structure\MetaRefreshRule;
-use TwigA11y\Rules\Structure\MetaViewportRule;
-use TwigA11y\Rules\Structure\NestedInteractiveRule;
-use TwigA11y\Rules\Structure\PageHeadingOneRule;
-use TwigA11y\Rules\Structure\PAsHeadingRule;
-use TwigA11y\Rules\Structure\SkipLinkRule;
-use TwigA11y\Rules\Structure\TableCaptionMissingRule;
-use TwigA11y\Rules\Structure\TableDuplicateNameRule;
-use TwigA11y\Rules\Structure\TableFakeCaptionRule;
-use TwigA11y\Rules\Structure\TableHeaderRule;
-use TwigA11y\Rules\Structure\TdHeadersAttrRule;
-use TwigA11y\Rules\Ui\ColorContrastRule;
-use TwigA11y\Rules\Ui\OutlineNoneWithoutFocusVisibleRule;
-use TwigA11y\Rules\Ui\ScrollableRegionFocusableRule;
-use TwigA11y\Rules\Ui\TargetSizeRule;
+use TwigA11y\Rules\AbstractA11yRule;
 use TwigA11y\Standard\A11yBasicStandard;
 use TwigA11y\Standard\A11yRecommendedStandard;
 use TwigA11y\Standard\A11yStandard;
@@ -94,82 +20,6 @@ use TwigCsFixer\Standard\StandardInterface;
 /**
  * @internal
  */
-#[CoversClass(AnchorAccessibleNameRule::class)]
-#[CoversClass(LinkHrefValidityRule::class)]
-#[CoversClass(AriaAllowedAttrRule::class)]
-#[CoversClass(AriaControlsIdExistsRule::class)]
-#[CoversClass(AriaDeprecatedRoleRule::class)]
-#[CoversClass(AriaErrorMessageIdExistsRule::class)]
-#[CoversClass(AriaHiddenBodyRule::class)]
-#[CoversClass(AriaHiddenFocusRule::class)]
-#[CoversClass(AriaLabelRule::class)]
-#[CoversClass(AriaReferencedIdExistsRule::class)]
-#[CoversClass(AriaRequiredAttrRule::class)]
-#[CoversClass(AriaRequiredChildrenRule::class)]
-#[CoversClass(AriaRequiredParentRule::class)]
-#[CoversClass(AriaRoleRule::class)]
-#[CoversClass(AriaValidAttrRule::class)]
-#[CoversClass(AriaValidAttrValueRule::class)]
-#[CoversClass(TabIndexRule::class)]
-#[CoversClass(AriaInputFieldNameRule::class)]
-#[CoversClass(AutocompleteValidRule::class)]
-#[CoversClass(ButtonTypeRule::class)]
-#[CoversClass(FormLabelRule::class)]
-#[CoversClass(InvalidFieldErrorMessageRule::class)]
-#[CoversClass(InputButtonNameRule::class)]
-#[CoversClass(InputLabelRule::class)]
-#[CoversClass(InputTypeRule::class)]
-#[CoversClass(LabelForTargetExistsRule::class)]
-#[CoversClass(PlaceholderOnlyLabelRule::class)]
-#[CoversClass(RadioGroupAccessibleNameRule::class)]
-#[CoversClass(RadioGroupStructureRule::class)]
-#[CoversClass(SelectLabelRule::class)]
-#[CoversClass(TextareaLabelRule::class)]
-#[CoversClass(AutoplayRule::class)]
-#[CoversClass(ImgAltRule::class)]
-#[CoversClass(InputImageAltRule::class)]
-#[CoversClass(NoAutoplayAudioRule::class)]
-#[CoversClass(ObjectAltRule::class)]
-#[CoversClass(RoleImgAltRule::class)]
-#[CoversClass(SvgAccessibilityRule::class)]
-#[CoversClass(VideoTrackRule::class)]
-#[CoversClass(AnchorContentRule::class)]
-#[CoversClass(AreaAltRule::class)]
-#[CoversClass(BannedTagsRule::class)]
-#[CoversClass(ButtonContentRule::class)]
-#[CoversClass(DetailsSummaryRule::class)]
-#[CoversClass(DialogAccessibleNameRule::class)]
-#[CoversClass(DocumentTitleRule::class)]
-#[CoversClass(DuplicateAccessKeyRule::class)]
-#[CoversClass(DuplicateIdRule::class)]
-#[CoversClass(EmptyTableHeaderRule::class)]
-#[CoversClass(FieldsetLegendRule::class)]
-#[CoversClass(FrameTitleRule::class)]
-#[CoversClass(GenericLinkTextRule::class)]
-#[CoversClass(HeadingEmptyRule::class)]
-#[CoversClass(HeadingOrderRule::class)]
-#[CoversClass(IframeFocusableContentRule::class)]
-#[CoversClass(IframeTitleRule::class)]
-#[CoversClass(LandmarkRule::class)]
-#[CoversClass(LandmarkUniqueRule::class)]
-#[CoversClass(LangAttributeRule::class)]
-#[CoversClass(LangAttributeValueRule::class)]
-#[CoversClass(ListStructureRule::class)]
-#[CoversClass(MetaRefreshRule::class)]
-#[CoversClass(MetaViewportRule::class)]
-#[CoversClass(NestedInteractiveRule::class)]
-#[CoversClass(PAsHeadingRule::class)]
-#[CoversClass(PageHeadingOneRule::class)]
-#[CoversClass(SkipLinkRule::class)]
-#[CoversClass(TableCaptionMissingRule::class)]
-#[CoversClass(TableDuplicateNameRule::class)]
-#[CoversClass(TableFakeCaptionRule::class)]
-#[CoversClass(TableHeaderRule::class)]
-#[CoversClass(TdHeadersAttrRule::class)]
-#[CoversClass(ColorContrastRule::class)]
-#[CoversClass(OutlineNoneWithoutFocusVisibleRule::class)]
-#[CoversClass(ScrollableRegionFocusableRule::class)]
-#[CoversClass(TargetSizeRule::class)]
 #[CoversClass(A11yBasicStandard::class)]
 #[CoversClass(A11yRecommendedStandard::class)]
 #[CoversClass(A11yStandard::class)]
@@ -177,169 +27,66 @@ use TwigCsFixer\Standard\StandardInterface;
 #[CoversClass(StandardRuleSets::class)]
 final class A11yStandardTest extends TestCase
 {
-    public function testBasicStandardProvidesExpectedRules(): void
+    /**
+     * Each tier must return a non-empty list of AbstractA11yRule instances,
+     * with no duplicates, and at least the expected minimum count.
+     *
+     * @param int $minCount lower bound — adding new rules never breaks this test
+     */
+    #[DataProvider('provideStandards')]
+    public function testTierIsValid(StandardInterface $standard, int $minCount): void
     {
+        $rules = $standard->getRules();
+
+        $this->assertNotEmpty($rules, 'Standard must provide at least one rule.');
+        $this->assertContainsOnlyInstancesOf(RuleInterface::class, $rules);
+
+        foreach ($rules as $rule) {
+            $this->assertInstanceOf(
+                AbstractA11yRule::class,
+                $rule,
+                sprintf('Expected %s to extend AbstractA11yRule.', $rule::class)
+            );
+        }
+
+        $classes = $this->classNames($rules);
         $this->assertSame(
-            [
-                ImgAltRule::class,
-                BannedTagsRule::class,
-                ButtonContentRule::class,
-                InputLabelRule::class,
-                LangAttributeRule::class,
-            ],
-            $this->classes(new A11yBasicStandard())
+            $classes,
+            array_values(array_unique($classes)),
+            'Standard must not contain duplicate rules.'
+        );
+
+        $this->assertGreaterThanOrEqual(
+            $minCount,
+            count($rules),
+            sprintf('Expected at least %d rules, got %d.', $minCount, count($rules))
         );
     }
 
-    public function testRecommendedStandardProvidesExpectedRules(): void
+    /**
+     * @return iterable<string, array{StandardInterface, int}>
+     */
+    public static function provideStandards(): iterable
     {
-        $this->assertSame(
-            [
-                ImgAltRule::class,
-                BannedTagsRule::class,
-                ButtonContentRule::class,
-                InputLabelRule::class,
-                LangAttributeRule::class,
-                ObjectAltRule::class,
-                VideoTrackRule::class,
-                HeadingOrderRule::class,
-                IframeTitleRule::class,
-                DuplicateIdRule::class,
-                LandmarkRule::class,
-                FormLabelRule::class,
-                SelectLabelRule::class,
-                TextareaLabelRule::class,
-                TableFakeCaptionRule::class,
-            ],
-            $this->classes(new A11yRecommendedStandard())
-        );
+        yield 'basic' => [new A11yBasicStandard(), 5];
+
+        yield 'recommended' => [new A11yRecommendedStandard(), 15];
+
+        yield 'standard' => [new A11yStandard(), 26];
+
+        yield 'strict' => [new A11yStrict(), 73];
     }
 
-    public function testA11yStandardProvidesExpectedRules(): void
-    {
-        $this->assertSame(
-            [
-                ImgAltRule::class,
-                BannedTagsRule::class,
-                ButtonContentRule::class,
-                InputLabelRule::class,
-                LangAttributeRule::class,
-                ObjectAltRule::class,
-                VideoTrackRule::class,
-                HeadingOrderRule::class,
-                IframeTitleRule::class,
-                DuplicateIdRule::class,
-                LandmarkRule::class,
-                FormLabelRule::class,
-                SelectLabelRule::class,
-                TextareaLabelRule::class,
-                TableFakeCaptionRule::class,
-                AutoplayRule::class,
-                AnchorContentRule::class,
-                HeadingEmptyRule::class,
-                MetaViewportRule::class,
-                SkipLinkRule::class,
-                TableHeaderRule::class,
-                TabIndexRule::class,
-                InputTypeRule::class,
-                InputButtonNameRule::class,
-                EmptyTableHeaderRule::class,
-                GenericLinkTextRule::class,
-            ],
-            $this->classes(new A11yStandard())
-        );
-    }
-
-    public function testA11yStrictProvidesAllRules(): void
-    {
-        $this->assertSame(
-            [
-                ImgAltRule::class,
-                BannedTagsRule::class,
-                ButtonContentRule::class,
-                InputLabelRule::class,
-                LangAttributeRule::class,
-                ObjectAltRule::class,
-                VideoTrackRule::class,
-                HeadingOrderRule::class,
-                IframeTitleRule::class,
-                DuplicateIdRule::class,
-                LandmarkRule::class,
-                FormLabelRule::class,
-                SelectLabelRule::class,
-                TextareaLabelRule::class,
-                TableFakeCaptionRule::class,
-                AutoplayRule::class,
-                AnchorContentRule::class,
-                HeadingEmptyRule::class,
-                MetaViewportRule::class,
-                SkipLinkRule::class,
-                TableHeaderRule::class,
-                TabIndexRule::class,
-                InputTypeRule::class,
-                InputButtonNameRule::class,
-                EmptyTableHeaderRule::class,
-                GenericLinkTextRule::class,
-                AriaRoleRule::class,
-                AriaLabelRule::class,
-                AriaHiddenFocusRule::class,
-                AriaRequiredAttrRule::class,
-                AriaValidAttrRule::class,
-                AriaValidAttrValueRule::class,
-                AriaDeprecatedRoleRule::class,
-                AriaRequiredChildrenRule::class,
-                AriaRequiredParentRule::class,
-                AriaReferencedIdExistsRule::class,
-                AriaControlsIdExistsRule::class,
-                AriaErrorMessageIdExistsRule::class,
-                AriaAllowedAttrRule::class,
-                AriaHiddenBodyRule::class,
-                AutocompleteValidRule::class,
-                ButtonTypeRule::class,
-                InvalidFieldErrorMessageRule::class,
-                AriaInputFieldNameRule::class,
-                AnchorAccessibleNameRule::class,
-                LinkHrefValidityRule::class,
-                AreaAltRule::class,
-                FieldsetLegendRule::class,
-                IframeFocusableContentRule::class,
-                LandmarkUniqueRule::class,
-                ListStructureRule::class,
-                PageHeadingOneRule::class,
-                TableCaptionMissingRule::class,
-                TableDuplicateNameRule::class,
-                TdHeadersAttrRule::class,
-                ScrollableRegionFocusableRule::class,
-                OutlineNoneWithoutFocusVisibleRule::class,
-                TargetSizeRule::class,
-                NoAutoplayAudioRule::class,
-                SvgAccessibilityRule::class,
-                DetailsSummaryRule::class,
-                DialogAccessibleNameRule::class,
-                LabelForTargetExistsRule::class,
-                PlaceholderOnlyLabelRule::class,
-                RadioGroupAccessibleNameRule::class,
-                RadioGroupStructureRule::class,
-                ColorContrastRule::class,
-                FrameTitleRule::class,
-                InputImageAltRule::class,
-                MetaRefreshRule::class,
-                DocumentTitleRule::class,
-                LangAttributeValueRule::class,
-                NestedInteractiveRule::class,
-                DuplicateAccessKeyRule::class,
-                PAsHeadingRule::class,
-            ],
-            $this->classes(new A11yStrict())
-        );
-    }
-
+    /**
+     * Each tier must be a prefix-subset of the next: every rule in a lighter
+     * tier must appear — in the same order — at the start of the heavier tier.
+     */
     public function testStandardsAreMonotonic(): void
     {
-        $basic = $this->classes(new A11yBasicStandard());
-        $recommended = $this->classes(new A11yRecommendedStandard());
-        $standard = $this->classes(new A11yStandard());
-        $strict = $this->classes(new A11yStrict());
+        $basic = $this->classNames((new A11yBasicStandard())->getRules());
+        $recommended = $this->classNames((new A11yRecommendedStandard())->getRules());
+        $standard = $this->classNames((new A11yStandard())->getRules());
+        $strict = $this->classNames((new A11yStrict())->getRules());
 
         $this->assertSame($basic, array_values(array_intersect($recommended, $basic)));
         $this->assertSame($recommended, array_values(array_intersect($standard, $recommended)));
@@ -347,15 +94,39 @@ final class A11yStandardTest extends TestCase
     }
 
     /**
+     * Every rule in the strict tier must also appear in the strict tier of
+     * StandardRuleSets — i.e. the Standard classes are faithful proxies.
+     */
+    public function testStandardClassesProxyStandardRuleSets(): void
+    {
+        $this->assertSame(
+            $this->classNames(StandardRuleSets::basic()),
+            $this->classNames((new A11yBasicStandard())->getRules())
+        );
+
+        $this->assertSame(
+            $this->classNames(StandardRuleSets::recommended()),
+            $this->classNames((new A11yRecommendedStandard())->getRules())
+        );
+
+        $this->assertSame(
+            $this->classNames(StandardRuleSets::standard()),
+            $this->classNames((new A11yStandard())->getRules())
+        );
+
+        $this->assertSame(
+            $this->classNames(StandardRuleSets::strict()),
+            $this->classNames((new A11yStrict())->getRules())
+        );
+    }
+
+    /**
+     * @param list<RuleInterface> $rules
+     *
      * @return list<string>
      */
-    private function classes(StandardInterface $standard): array
+    private function classNames(array $rules): array
     {
-        $rules = $standard->getRules();
-
-        $this->assertNotEmpty($rules);
-        $this->assertContainsOnlyInstancesOf(RuleInterface::class, $rules);
-
         return array_map(
             static fn (NodeRuleInterface|RuleInterface $rule): string => $rule::class,
             $rules
