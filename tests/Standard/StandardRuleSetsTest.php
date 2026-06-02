@@ -22,12 +22,12 @@ use TwigCsFixer\Rules\Function\NamedArgumentSpacingRule;
 use TwigCsFixer\Rules\Literal\CompactHashRule;
 use TwigCsFixer\Rules\Literal\HashQuoteRule;
 use TwigCsFixer\Rules\Literal\SingleQuoteRule;
+use TwigCsFixer\Rules\Node\NodeRuleInterface;
 use TwigCsFixer\Rules\Operator\OperatorNameSpacingRule;
 use TwigCsFixer\Rules\Operator\OperatorSpacingRule;
 use TwigCsFixer\Rules\Punctuation\PunctuationSpacingRule;
 use TwigCsFixer\Rules\Punctuation\TrailingCommaMultiLineRule;
 use TwigCsFixer\Rules\Punctuation\TrailingCommaSingleLineRule;
-use TwigCsFixer\Rules\Node\NodeRuleInterface;
 use TwigCsFixer\Rules\RuleInterface;
 use TwigCsFixer\Rules\Variable\VariableNameRule;
 use TwigCsFixer\Rules\Whitespace\BlankEOFRule;
@@ -51,7 +51,7 @@ final class StandardRuleSetsTest extends TestCase
 
     public function testBasicContainsExpectedClasses(): void
     {
-        $classes = array_map(static fn (RuleInterface|NodeRuleInterface $r): string => $r::class, StandardRuleSets::basic());
+        $classes = array_map(static fn (NodeRuleInterface|RuleInterface $r): string => $r::class, StandardRuleSets::basic());
 
         $this->assertSame([
             // TwigCsFixer base formatting rules (bundled for plug-and-play usage)
@@ -94,8 +94,8 @@ final class StandardRuleSetsTest extends TestCase
 
     public function testRecommendedIsSupersetOfBasic(): void
     {
-        $basicClasses = array_map(static fn (RuleInterface|NodeRuleInterface $r): string => $r::class, StandardRuleSets::basic());
-        $recommendedClasses = array_map(static fn (RuleInterface|NodeRuleInterface $r): string => $r::class, StandardRuleSets::recommended());
+        $basicClasses = array_map(static fn (NodeRuleInterface|RuleInterface $r): string => $r::class, StandardRuleSets::basic());
+        $recommendedClasses = array_map(static fn (NodeRuleInterface|RuleInterface $r): string => $r::class, StandardRuleSets::recommended());
 
         foreach ($basicClasses as $class) {
             $this->assertContains($class, $recommendedClasses, \sprintf('Recommended should include basic rule "%s".', $class));
@@ -112,8 +112,8 @@ final class StandardRuleSetsTest extends TestCase
 
     public function testStandardIsSupersetOfRecommended(): void
     {
-        $recommendedClasses = array_map(static fn (RuleInterface|NodeRuleInterface $r): string => $r::class, StandardRuleSets::recommended());
-        $standardClasses = array_map(static fn (RuleInterface|NodeRuleInterface $r): string => $r::class, StandardRuleSets::standard());
+        $recommendedClasses = array_map(static fn (NodeRuleInterface|RuleInterface $r): string => $r::class, StandardRuleSets::recommended());
+        $standardClasses = array_map(static fn (NodeRuleInterface|RuleInterface $r): string => $r::class, StandardRuleSets::standard());
 
         foreach ($recommendedClasses as $class) {
             $this->assertContains($class, $standardClasses, \sprintf('Standard should include recommended rule "%s".', $class));
@@ -130,8 +130,8 @@ final class StandardRuleSetsTest extends TestCase
 
     public function testStrictIsSupersetOfStandard(): void
     {
-        $standardClasses = array_map(static fn (RuleInterface|NodeRuleInterface $r): string => $r::class, StandardRuleSets::standard());
-        $strictClasses = array_map(static fn (RuleInterface|NodeRuleInterface $r): string => $r::class, StandardRuleSets::strict());
+        $standardClasses = array_map(static fn (NodeRuleInterface|RuleInterface $r): string => $r::class, StandardRuleSets::standard());
+        $strictClasses = array_map(static fn (NodeRuleInterface|RuleInterface $r): string => $r::class, StandardRuleSets::strict());
 
         foreach ($standardClasses as $class) {
             $this->assertContains($class, $strictClasses, \sprintf('Strict should include standard rule "%s".', $class));
@@ -146,7 +146,7 @@ final class StandardRuleSetsTest extends TestCase
             'standard' => StandardRuleSets::standard(),
             'strict' => StandardRuleSets::strict(),
         ] as $level => $rules) {
-            $classes = array_map(static fn (RuleInterface|NodeRuleInterface $r): string => $r::class, $rules);
+            $classes = array_map(static fn (NodeRuleInterface|RuleInterface $r): string => $r::class, $rules);
             $this->assertSame(array_unique($classes), $classes, \sprintf('Rule set "%s" should not contain duplicate rule classes.', $level));
         }
     }

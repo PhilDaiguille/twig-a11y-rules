@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
-use Rector\PHPUnit\AnnotationsToAttributes\Rector\Class_\CoversAnnotationWithValueToAttributeRector;
+use Rector\PHPUnit\Set\PHPUnitSetList;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -13,12 +13,9 @@ return RectorConfig::configure()
     ])
     ->withCache(
         cacheDirectory: '/tmp/rector',
-        cacheClass: FileCacheStorage::class
+        cacheClass: FileCacheStorage::class,
     )
-    ->withPhpSets()
-    ->withRules([
-        CoversAnnotationWithValueToAttributeRector::class,
-    ])
+    ->withPhpSets(php83: true)
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,
@@ -26,12 +23,21 @@ return RectorConfig::configure()
         typeDeclarations: true,
         typeDeclarationDocblocks: true,
         privatization: true,
+        instanceOf: true,
         earlyReturn: true,
         rectorPreset: true,
         phpunitCodeQuality: true,
     )
-    ->withDeadCodeLevel(10)
-    ->withCodeQualityLevel(10)
-    ->withCodingStyleLevel(10)
     ->withComposerBased(phpunit: true)
+    ->withSets([
+        PHPUnitSetList::PHPUNIT_110,
+        PHPUnitSetList::ANNOTATIONS_TO_ATTRIBUTES,
+    ])
+    ->withParallel(
+        timeoutSeconds: 120,
+        maxNumberOfProcess: 8,
+    )
+    ->withSkip([
+        __DIR__.'/vendor',
+    ])
 ;

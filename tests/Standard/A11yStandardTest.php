@@ -127,7 +127,7 @@ final class A11yStandardTest extends TestCase
     }
 
     /**
-     * @param list<RuleInterface|NodeRuleInterface> $rules
+     * @param list<NodeRuleInterface|RuleInterface> $rules
      *
      * @return list<string>
      */

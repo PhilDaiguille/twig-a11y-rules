@@ -21,7 +21,7 @@ use TwigCsFixer\Standard\StandardInterface;
 final class A11yStandard implements StandardInterface
 {
     /**
-     * @return list<RuleInterface|NodeRuleInterface>
+     * @return list<NodeRuleInterface|RuleInterface>
      */
     public function getRules(): array
     {

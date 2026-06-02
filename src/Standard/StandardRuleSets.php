@@ -98,7 +98,7 @@ use TwigCsFixer\Standard\TwigCsFixer as TwigCsFixerStandard;
 final class StandardRuleSets
 {
     /**
-     * @return list<RuleInterface|NodeRuleInterface>
+     * @return list<NodeRuleInterface|RuleInterface>
      */
     public static function basic(): array
     {
@@ -115,7 +115,7 @@ final class StandardRuleSets
     }
 
     /**
-     * @return list<RuleInterface|NodeRuleInterface>
+     * @return list<NodeRuleInterface|RuleInterface>
      */
     public static function recommended(): array
     {
@@ -135,7 +135,7 @@ final class StandardRuleSets
     }
 
     /**
-     * @return list<RuleInterface|NodeRuleInterface>
+     * @return list<NodeRuleInterface|RuleInterface>
      */
     public static function standard(): array
     {
@@ -156,7 +156,7 @@ final class StandardRuleSets
     }
 
     /**
-     * @return list<RuleInterface|NodeRuleInterface>
+     * @return list<NodeRuleInterface|RuleInterface>
      */
     public static function strict(): array
     {
@@ -227,14 +227,14 @@ final class StandardRuleSets
     }
 
     /**
-     * @param list<class-string<RuleInterface|NodeRuleInterface>> $classes
+     * @param list<class-string<NodeRuleInterface|RuleInterface>> $classes
      *
-     * @return list<RuleInterface|NodeRuleInterface>
+     * @return list<NodeRuleInterface|RuleInterface>
      */
     private static function instantiate(array $classes): array
     {
         return array_map(
-            static fn (string $class): RuleInterface|NodeRuleInterface => new $class(),
+            static fn (string $class): NodeRuleInterface|RuleInterface => new $class(),
             $classes
         );
     }
@@ -243,9 +243,9 @@ final class StandardRuleSets
      * Accept either a list of RuleInterface/NodeRuleInterface instances or a list of class-string
      * and return the corresponding list of class-string entries.
      *
-     * @param list<RuleInterface|NodeRuleInterface|string> $rules
+     * @param list<NodeRuleInterface|RuleInterface|string> $rules
      *
-     * @return list<class-string<RuleInterface|NodeRuleInterface>>
+     * @return list<class-string<NodeRuleInterface|RuleInterface>>
      */
     private static function classes(array $rules): array
     {
