@@ -21,13 +21,6 @@ final class InputLabelRule extends AbstractFormFieldLabelRule
         return 'InputLabel.MissingLabel';
     }
 
-    protected function openingProvidesLabel(string $opening): bool
-    {
-        // Delegate to the base implementation which checks for non-empty values.
-        // Both aria-label (non-empty) and aria-labelledby (non-empty) are acceptable.
-        return parent::openingProvidesLabel($opening);
-    }
-
     protected function isHidden(string $opening): bool
     {
         return (bool) preg_match('/\btype\s*=\s*["\']hidden["\']/i', $opening);

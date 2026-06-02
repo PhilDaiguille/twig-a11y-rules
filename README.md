@@ -115,6 +115,8 @@ Rules are grouped by category for easier discovery. The **Preset** column indica
 | `InputImageAltRule` | `<input type="image">` without a non-empty `alt` (axe: input-image-alt) | Strict |
 | `NoAutoplayAudioRule` | `<audio autoplay>` without controls (axe: audio-caption) | Strict |
 | `SvgAccessibilityRule` | `<svg>` without accessible name, or `<svg role="img">` without `<title>`, `aria-label`, or `aria-labelledby` | Strict |
+| `AudioControlsRule` | `<audio>` without `controls` attribute (WCAG 1.2.1) | Strict |
+| `VideoDescriptionTrackRule` | `<video>` without an audio description track (`<track kind="descriptions">`) (WCAG 1.2.5) | Strict |
 
 ### Structure
 
@@ -153,6 +155,11 @@ Rules are grouped by category for easier discovery. The **Preset** column indica
 | `TableCaptionMissingRule` | Data table without a non-empty `<caption>` | Strict |
 | `TableDuplicateNameRule` | Table `caption` and `summary` with identical text | Strict |
 | `TdHeadersAttrRule` | `<td headers="...">` referencing a non-existent `id` | Strict |
+| `AbbrTitleRule` | `<abbr>` without a non-empty `title` providing the expansion (RGAA 9.4) | Strict |
+| `DocTypeRule` | Full-page document missing `<!DOCTYPE html>` (RGAA 8.1) | Strict |
+| `MetaCharsetRule` | Full-page document missing `<meta charset>` declaration (RGAA 8.8, WCAG 4.1.1) | Strict |
+| `TableLayoutRoleRule` | `<table>` without `<th>` that should declare `role="presentation"` or `role="none"` (RGAA 5.3, WCAG 1.3.1) | Strict |
+| `SummaryAttributeObsoleteRule` | `<table summary="...">` — obsolete HTML5 attribute, use `<caption>` instead (WCAG 4.1.1) | Strict |
 
 ### Forms
 
@@ -172,6 +179,8 @@ Rules are grouped by category for easier discovery. The **Preset** column indica
 | `PlaceholderOnlyLabelRule` | Form field relying on `placeholder` text without a proper label | Strict |
 | `RadioGroupAccessibleNameRule` | Radio groups missing an accessible group label via `<legend>`, `aria-label`, or `aria-labelledby` | Strict |
 | `RadioGroupStructureRule` | Multiple radio inputs sharing the same `name` not grouped in `<fieldset>` or `role="radiogroup"` | Strict |
+| `OptGroupLabelRule` | `<optgroup>` without a non-empty `label` attribute (WCAG 1.3.1) | Strict |
+| `CheckboxGroupStructureRule` | Multiple checkboxes sharing the same `name` not grouped in `<fieldset>` or `role="group"` (WCAG 1.3.1, RGAA 11.7) | Strict |
 
 ### ARIA
 
@@ -192,6 +201,7 @@ Rules are grouped by category for easier discovery. The **Preset** column indica
 | `AriaErrorMessageIdExistsRule` | `aria-errormessage` references a missing `id` | Strict |
 | `AriaAllowedAttrRule` | `aria-*` attribute not allowed for the given role | Strict |
 | `AriaHiddenBodyRule` | `<body aria-hidden="true">` | Strict |
+| `RoleButtonTabindexRule` | Non-native element with interactive role (`button`, `link`, `checkbox`, `tab`, …) missing `tabindex="0"` (WCAG 4.1.2, 2.1.1) | Strict |
 
 ### Anchor
 
@@ -208,6 +218,8 @@ Rules are grouped by category for easier discovery. The **Preset** column indica
 | `ScrollableRegionFocusableRule` | Scrollable region not keyboard-focusable | Strict |
 | `OutlineNoneWithoutFocusVisibleRule` | `outline:none` or `outline:0` without a `focus-visible` class compensation | Strict |
 | `TargetSizeRule` | Interactive element smaller than 24×24 px (inline `style` only) — **best-effort, inline styles only** | Strict |
+| `ClickableNonInteractiveRule` | Non-interactive element (`<div>`, `<span>`, …) with `onclick` but without `tabindex` (WCAG 4.1.2, 2.1.1) | Strict |
+| `MouseEventKeyboardEquivalentRule` | `onmouseover`/`onmouseout`/`onmousedown` without keyboard equivalent (`onfocus`/`onblur`/`onkeydown`) (WCAG 2.1.1) | Strict |
 
 > **Note on static analysis limits:** some accessibility checks cannot be evaluated statically from template source alone.
 > Rules such as `color-contrast-enhanced`, `focus-visible`, `identical-links-same-purpose`, CSS-based `target-size`,

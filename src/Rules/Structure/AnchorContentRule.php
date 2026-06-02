@@ -53,7 +53,7 @@ final class AnchorContentRule extends AbstractA11yRule
             ) {
                 // Axe-core rule reference: link-name
                 ++$this->idx;
-                $id = 'AnchorContent.Warning.LinkName';
+                $id = 'LinkName';
                 if ($this->idx > 1) {
                     $id .= '#'.$this->idx;
                 }
