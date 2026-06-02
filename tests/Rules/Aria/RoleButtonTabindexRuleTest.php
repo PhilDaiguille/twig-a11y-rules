@@ -34,5 +34,10 @@ final class RoleButtonTabindexRuleTest extends AbstractRuleTestCase
         yield 'role checkbox missing tabindex' => [__DIR__.'/Fixtures/invalid/role_checkbox_missing_tabindex.html.twig', [
             'RoleButtonTabindex.MissingTabindex:2:1' => '<span role="checkbox"> is not natively focusable and must have tabindex="0" to be keyboard-reachable (WCAG 4.1.2, 2.1.1).',
         ]];
+
+        yield 'multiple elements missing tabindex' => [__DIR__.'/Fixtures/invalid/role_multiple_missing_tabindex.html.twig', [
+            'RoleButtonTabindex.MissingTabindex:2:1' => '<div role="button"> is not natively focusable and must have tabindex="0" to be keyboard-reachable (WCAG 4.1.2, 2.1.1).',
+            'RoleButtonTabindex.MissingTabindex#2:3:1' => '<span role="link"> is not natively focusable and must have tabindex="0" to be keyboard-reachable (WCAG 4.1.2, 2.1.1).',
+        ]];
     }
 }

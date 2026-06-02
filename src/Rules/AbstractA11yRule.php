@@ -194,9 +194,7 @@ abstract class AbstractA11yRule extends AbstractRule
 
         $reporter = $this->emitAsWarning
             ? function (string $message, Token $token, ?string $id): void {
-                null === $id
-                    ? $this->addWarning($message, $token)
-                    : $this->addWarning($message, $token, $id);
+                $this->addWarning($message, $token, $id);
             }
         : function (string $message, Token $token, ?string $id): void {
             $this->addError($message, $token, $id);

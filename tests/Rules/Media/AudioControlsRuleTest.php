@@ -30,5 +30,10 @@ final class AudioControlsRuleTest extends AbstractRuleTestCase
         yield 'audio missing controls' => [__DIR__.'/Fixtures/invalid/audio_missing_controls.html.twig', [
             'AudioControls.MissingControls:2:1' => '<audio> element must have a controls attribute to be operable by keyboard users (WCAG 1.2.1).',
         ]];
+
+        yield 'multiple audio missing controls' => [__DIR__.'/Fixtures/invalid/audio_multiple_missing_controls.html.twig', [
+            'AudioControls.MissingControls:2:1' => '<audio> element must have a controls attribute to be operable by keyboard users (WCAG 1.2.1).',
+            'AudioControls.MissingControls#2:5:1' => '<audio> element must have a controls attribute to be operable by keyboard users (WCAG 1.2.1).',
+        ]];
     }
 }

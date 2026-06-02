@@ -27,6 +27,8 @@ final class VideoDescriptionTrackRuleTest extends AbstractRuleTestCase
     {
         yield 'video with descriptions track' => [__DIR__.'/Fixtures/valid/video_with_descriptions.html.twig', []];
 
+        yield 'video unclosed tag — no descriptions required' => [__DIR__.'/Fixtures/valid/video_unclosed_no_descriptions_needed.html.twig', []];
+
         yield 'video missing descriptions track' => [__DIR__.'/Fixtures/invalid/video_missing_descriptions.html.twig', [
             'VideoDescriptionTrack.MissingDescriptions:1:1' => 'Video should have an audio description track (<track kind="descriptions">) (WCAG 1.2.5).',
         ]];

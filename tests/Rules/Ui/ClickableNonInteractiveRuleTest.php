@@ -30,5 +30,10 @@ final class ClickableNonInteractiveRuleTest extends AbstractRuleTestCase
         yield 'div onclick without tabindex' => [__DIR__.'/Fixtures/invalid/clickable_div_no_tabindex.html.twig', [
             'ClickableNonInteractive.NonInteractiveOnclick:2:1' => '<div onclick="..."> is not keyboard-reachable. Use a <button>, or add tabindex="0" and a role (WCAG 4.1.2, 2.1.1).',
         ]];
+
+        yield 'multiple clickable violations' => [__DIR__.'/Fixtures/invalid/clickable_multiple_violations.html.twig', [
+            'ClickableNonInteractive.NonInteractiveOnclick:3:1' => '<div onclick="..."> is not keyboard-reachable. Use a <button>, or add tabindex="0" and a role (WCAG 4.1.2, 2.1.1).',
+            'ClickableNonInteractive.NonInteractiveOnclick#2:4:1' => '<div onclick="..."> is not keyboard-reachable. Use a <button>, or add tabindex="0" and a role (WCAG 4.1.2, 2.1.1).',
+        ]];
     }
 }

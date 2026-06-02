@@ -31,6 +31,8 @@ final class CheckboxGroupStructureRuleTest extends AbstractRuleTestCase
 
         yield 'single checkbox — no grouping needed' => [__DIR__.'/Fixtures/valid/checkbox_single_no_group_needed.html.twig', []];
 
+        yield 'edge cases — non-checkbox inputs, no-name, empty-name' => [__DIR__.'/Fixtures/valid/checkbox_edge_cases_no_group_needed.html.twig', []];
+
         yield 'checkbox group missing structure' => [__DIR__.'/Fixtures/invalid/checkbox_group_missing_structure.html.twig', [
             'CheckboxGroupStructure.MissingGroup:1:1' => 'Checkbox inputs sharing name "notify" should be grouped inside a <fieldset> or a container with role="group" (WCAG 1.3.1, RGAA 11.7).',
         ]];
