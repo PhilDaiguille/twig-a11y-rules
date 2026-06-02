@@ -1,7 +1,7 @@
 name: QA
 
 on:
-    workflow_call: {}
+    workflow_call: { }
     push:
         branches: [ main ]
     pull_request:
@@ -15,65 +15,72 @@ jobs:
                 php: [ '8.2', '8.3', '8.4', '8.5' ]
 
         steps:
-            - name: Checkout
-              uses: actions/checkout@v6
+            -   name: Checkout
+                uses: actions/checkout@v6
 
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: ${{ matrix.php }}
-                  extensions: mbstring, dom, intl, xdebug
-                  coverage: xdebug
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    extensions: mbstring, dom, intl, xdebug
+                    coverage: xdebug
 
-            - name: Get composer cache directory
-              id: composer-cache
-              run: echo "COMPOSER_CACHE_DIR=$(composer config cache-files-dir)" >> $GITHUB_ENV
+            -   name: Get composer cache directory
+                id: composer-cache
+                run: echo "COMPOSER_CACHE_DIR=$(composer config cache-files-dir)" >> $GITHUB_ENV
 
-            - name: Cache composer dependencies
-              uses: actions/cache@v5
-              with:
-                  path: ${{ env.COMPOSER_CACHE_DIR }}
-                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-                  restore-keys: ${{ runner.os }}-composer-
+            -   name: Cache composer dependencies
+                uses: actions/cache@v5
+                with:
+                    path: ${{ env.COMPOSER_CACHE_DIR }}
+                    key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                    restore-keys: ${{ runner.os }}-composer-
 
-            - name: Install dependencies
-              run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+            -   name: Install dependencies
+                run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
-            - name: Run PHPStan
-              run: composer phpstan -- --no-progress
+            -   name: Run PHPStan
+                run: composer phpstan -- --no-progress
 
-            - name: Run php-cs-fixer (dry-run)
-              run: composer cs-lint
+            -   name: Run php-cs-fixer (dry-run)
+                run: composer cs-lint
 
-            - name: Run twig-cs-fixer lint
-              run: vendor/bin/twig-cs-fixer lint . --config=.twig-cs-fixer.php --no-cache || true
+            -   name: Run twig-cs-fixer lint
+                run: vendor/bin/twig-cs-fixer lint . --config=.twig-cs-fixer.php --no-cache || true
 
-            - name: Run rector (dry-run)
-              run: composer rector -- --dry-run
+            -   name: Rector Cache
+                uses: actions/cache@v4
+                with:
+                    path: /tmp/rector
+                    key: ${{ runner.os }}-rector-${{ github.run_id }}
+                    restore-keys: ${{ runner.os }}-rector-
 
-            - name: Run tests with coverage
-              env:
-                  XDEBUG_MODE: coverage
-              run: |
-                  ./vendor/bin/phpunit \
-                    --coverage-clover=build/coverage/coverage.xml \
-                    --coverage-xml=build/coverage/coverage-xml \
-                    --log-junit=build/coverage/junit.xml
+            -   name: Run rector (dry-run)
+                run: composer rector -- --dry-run
 
-            - name: Upload coverage to Codecov
-              if: ${{ matrix.php == '8.3' }}
-              uses: codecov/codecov-action@v6
-              with:
-                  token: ${{ secrets.CODECOV_TOKEN }}
-                  files: build/coverage/coverage.xml
-                  fail_ci_if_error: true
-                  verbose: true
+            -   name: Run tests with coverage
+                env:
+                    XDEBUG_MODE: coverage
+                run: |
+                    ./vendor/bin/phpunit \
+                      --coverage-clover=build/coverage/coverage.xml \
+                      --coverage-xml=build/coverage/coverage-xml \
+                      --log-junit=build/coverage/junit.xml
 
-            - name: Upload test results to Codecov
-              if: ${{ matrix.php == '8.3' && !cancelled() }}
-              uses: codecov/codecov-action@v6
-              with:
-                  token: ${{ secrets.CODECOV_TOKEN }}
-                  files: build/coverage/junit.xml
-                  report_type: test_results
-                  fail_ci_if_error: false
+            -   name: Upload coverage to Codecov
+                if: ${{ matrix.php == '8.3' }}
+                uses: codecov/codecov-action@v6
+                with:
+                    token: ${{ secrets.CODECOV_TOKEN }}
+                    files: build/coverage/coverage.xml
+                    fail_ci_if_error: true
+                    verbose: true
+
+            -   name: Upload test results to Codecov
+                if: ${{ matrix.php == '8.3' && !cancelled() }}
+                uses: codecov/codecov-action@v6
+                with:
+                    token: ${{ secrets.CODECOV_TOKEN }}
+                    files: build/coverage/junit.xml
+                    report_type: test_results
+                    fail_ci_if_error: false

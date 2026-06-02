@@ -31,6 +31,8 @@ final class MouseEventKeyboardEquivalentRuleTest extends AbstractRuleTestCase
 
         yield 'mouse events with keyboard equivalents' => [__DIR__.'/Fixtures/valid/mouse_events_with_keyboard.html.twig', []];
 
+        yield 'TwigUX components with mouse events are not flagged' => [__DIR__.'/Fixtures/valid/mouse_twigux_component.html.twig', []];
+
         yield 'onmouseover without onfocus' => [__DIR__.'/Fixtures/invalid/mouse_event_no_keyboard.html.twig', [
             'MouseEventKeyboardEquivalent.MouseOnlyEvent:2:1' => 'Mouse event handler "onmouseover" has no keyboard equivalent (onfocus) (WCAG 2.1.1).',
         ]];

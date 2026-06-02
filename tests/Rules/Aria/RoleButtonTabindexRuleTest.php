@@ -31,6 +31,8 @@ final class RoleButtonTabindexRuleTest extends AbstractRuleTestCase
 
         yield 'interactive roles with tabindex' => [__DIR__.'/Fixtures/valid/role_interactive_with_tabindex.html.twig', []];
 
+        yield 'TwigUX components with interactive roles are not flagged' => [__DIR__.'/Fixtures/valid/role_twigux_component.html.twig', []];
+
         yield 'role button missing tabindex' => [__DIR__.'/Fixtures/invalid/role_button_missing_tabindex.html.twig', [
             'RoleButtonTabindex.MissingTabindex:2:1' => '<div role="button"> is not natively focusable and must have tabindex="0" to be keyboard-reachable (WCAG 4.1.2, 2.1.1).',
         ]];

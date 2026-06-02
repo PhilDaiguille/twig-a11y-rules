@@ -31,6 +31,8 @@ final class ClickableNonInteractiveRuleTest extends AbstractRuleTestCase
 
         yield 'native interactive elements' => [__DIR__.'/Fixtures/valid/clickable_native_interactive.html.twig', []];
 
+        yield 'TwigUX components with onclick are not flagged' => [__DIR__.'/Fixtures/valid/clickable_twigux_component.html.twig', []];
+
         yield 'div onclick without tabindex' => [__DIR__.'/Fixtures/invalid/clickable_div_no_tabindex.html.twig', [
             'ClickableNonInteractive.NonInteractiveOnclick:2:1' => '<div onclick="..."> is not keyboard-reachable. Use a <button>, or add tabindex="0" and a role (WCAG 4.1.2, 2.1.1).',
         ]];

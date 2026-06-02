@@ -91,26 +91,31 @@ use TwigA11y\Rules\Ui\MouseEventKeyboardEquivalentRule;
 use TwigA11y\Rules\Ui\OutlineNoneWithoutFocusVisibleRule;
 use TwigA11y\Rules\Ui\ScrollableRegionFocusableRule;
 use TwigA11y\Rules\Ui\TargetSizeRule;
+use TwigCsFixer\Rules\Node\NodeRuleInterface;
 use TwigCsFixer\Rules\RuleInterface;
+use TwigCsFixer\Standard\TwigCsFixer as TwigCsFixerStandard;
 
 final class StandardRuleSets
 {
     /**
-     * @return list<RuleInterface>
+     * @return list<RuleInterface|NodeRuleInterface>
      */
     public static function basic(): array
     {
-        return self::instantiate([
-            ImgAltRule::class,
-            BannedTagsRule::class,
-            ButtonContentRule::class,
-            InputLabelRule::class,
-            LangAttributeRule::class,
-        ]);
+        return [
+            ...(new TwigCsFixerStandard())->getRules(),
+            ...self::instantiate([
+                ImgAltRule::class,
+                BannedTagsRule::class,
+                ButtonContentRule::class,
+                InputLabelRule::class,
+                LangAttributeRule::class,
+            ]),
+        ];
     }
 
     /**
-     * @return list<RuleInterface>
+     * @return list<RuleInterface|NodeRuleInterface>
      */
     public static function recommended(): array
     {
@@ -130,7 +135,7 @@ final class StandardRuleSets
     }
 
     /**
-     * @return list<RuleInterface>
+     * @return list<RuleInterface|NodeRuleInterface>
      */
     public static function standard(): array
     {
@@ -151,7 +156,7 @@ final class StandardRuleSets
     }
 
     /**
-     * @return list<RuleInterface>
+     * @return list<RuleInterface|NodeRuleInterface>
      */
     public static function strict(): array
     {
@@ -222,25 +227,25 @@ final class StandardRuleSets
     }
 
     /**
-     * @param list<class-string<RuleInterface>> $classes
+     * @param list<class-string<RuleInterface|NodeRuleInterface>> $classes
      *
-     * @return list<RuleInterface>
+     * @return list<RuleInterface|NodeRuleInterface>
      */
     private static function instantiate(array $classes): array
     {
         return array_map(
-            static fn (string $class): RuleInterface => new $class(),
+            static fn (string $class): RuleInterface|NodeRuleInterface => new $class(),
             $classes
         );
     }
 
     /**
-     * Accept either a list of RuleInterface instances or a list of class-string
+     * Accept either a list of RuleInterface/NodeRuleInterface instances or a list of class-string
      * and return the corresponding list of class-string entries.
      *
-     * @param list<RuleInterface|string> $rules
+     * @param list<RuleInterface|NodeRuleInterface|string> $rules
      *
-     * @return list<class-string<RuleInterface>>
+     * @return list<class-string<RuleInterface|NodeRuleInterface>>
      */
     private static function classes(array $rules): array
     {

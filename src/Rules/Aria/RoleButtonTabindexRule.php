@@ -69,6 +69,12 @@ final class RoleButtonTabindexRule extends AbstractA11yRule
                 continue;
             }
 
+            // TwigUX components (<twig:Button>, <twig:Modal>, …) are rendered as native
+            // interactive HTML elements — the Twig tag itself is not the final DOM node.
+            if ('twig' === $tagName) {
+                continue;
+            }
+
             if (!preg_match('/\brole\s*=\s*["\'\s]*('.$rolePattern.')\s*["\']/i', $attrs, $roleMatch)) {
                 continue;
             }

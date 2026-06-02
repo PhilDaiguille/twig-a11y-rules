@@ -45,15 +45,22 @@ final class MouseEventKeyboardEquivalentRule extends AbstractA11yRule
             return;
         }
 
-        if (!preg_match_all('/<[a-z][a-z0-9]*\b([^>]*)\s*>/is', $full, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
+        if (!preg_match_all('/<([a-z][a-z0-9]*)\b([^>]*)\s*>/is', $full, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
             return;
         }
 
         $idx = 0;
         foreach ($matches as $match) {
-            $attrs = $match[1][0];
+            $tagName = strtolower($match[1][0]);
+            $attrs = $match[2][0];
             $attrsLower = strtolower($attrs);
             $offset = $match[0][1];
+
+            // TwigUX components (<twig:Button>, <twig:Modal>, …) are rendered as native
+            // interactive HTML elements — the Twig tag itself is not the final DOM node.
+            if ('twig' === $tagName) {
+                continue;
+            }
 
             foreach (self::PAIRS as $mouseEvent => $keyboardEquivalents) {
                 if (!str_contains($attrsLower, $mouseEvent)) {

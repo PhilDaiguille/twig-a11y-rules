@@ -41,7 +41,13 @@ final class A11yStandardTest extends TestCase
         $this->assertNotEmpty($rules, 'Standard must provide at least one rule.');
         $this->assertContainsOnlyInstancesOf(RuleInterface::class, $rules);
 
+        // Every rule belonging to this package must extend AbstractA11yRule.
+        // TwigCsFixer base formatting rules (different namespace) are also bundled.
         foreach ($rules as $rule) {
+            if (!str_starts_with($rule::class, 'TwigA11y\\')) {
+                continue;
+            }
+
             $this->assertInstanceOf(
                 AbstractA11yRule::class,
                 $rule,
@@ -68,13 +74,13 @@ final class A11yStandardTest extends TestCase
      */
     public static function provideStandards(): iterable
     {
-        yield 'basic' => [new A11yBasicStandard(), 5];
+        yield 'basic' => [new A11yBasicStandard(), 25];
 
-        yield 'recommended' => [new A11yRecommendedStandard(), 15];
+        yield 'recommended' => [new A11yRecommendedStandard(), 35];
 
-        yield 'standard' => [new A11yStandard(), 26];
+        yield 'standard' => [new A11yStandard(), 46];
 
-        yield 'strict' => [new A11yStrict(), 73];
+        yield 'strict' => [new A11yStrict(), 93];
     }
 
     /**
@@ -121,7 +127,7 @@ final class A11yStandardTest extends TestCase
     }
 
     /**
-     * @param list<RuleInterface> $rules
+     * @param list<RuleInterface|NodeRuleInterface> $rules
      *
      * @return list<string>
      */

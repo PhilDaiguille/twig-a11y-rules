@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TwigA11y\Standard;
 
+use TwigCsFixer\Rules\Node\NodeRuleInterface;
 use TwigCsFixer\Rules\RuleInterface;
 use TwigCsFixer\Standard\StandardInterface;
 
@@ -20,7 +21,7 @@ use TwigCsFixer\Standard\StandardInterface;
 final class A11yStandard implements StandardInterface
 {
     /**
-     * @return list<RuleInterface>
+     * @return list<RuleInterface|NodeRuleInterface>
      */
     public function getRules(): array
     {
