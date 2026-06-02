@@ -31,12 +31,6 @@ final class ImgAltRule extends AbstractA11yRule
             return;
         }
 
-        // Reset deduplication hashes at the start of each new file so that
-        // identical <img> tags in different files are not silently suppressed.
-        if (0 === $tokenIndex) {
-            $this->seenTagHashes = [];
-        }
-
         $token = $tokens->get($tokenIndex);
 
         if (!$token->isMatching(Token::TEXT_TYPE)) {
@@ -105,5 +99,10 @@ final class ImgAltRule extends AbstractA11yRule
                 $emit('Empty alt on <img> requires role="presentation" or role="none".', $token, 'ImgAlt.EmptyAlt');
             }
         }
+    }
+
+    protected function evaluateStart(Tokens $tokens): void
+    {
+        $this->seenTagHashes = [];
     }
 }

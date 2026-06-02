@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Forms;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
 final class InvalidFieldErrorMessageRule extends AbstractA11yRule
@@ -96,18 +95,5 @@ final class InvalidFieldErrorMessageRule extends AbstractA11yRule
         }
 
         return '' !== trim($this->firstMatch($match, 1, 2));
-    }
-
-    private function fakeTokenForLine(Tokens $tokens, int $line, string $value): Token
-    {
-        $token = $tokens->get(0);
-
-        return new Token(
-            $token->getType(),
-            $line,
-            1,
-            $token->getFilename(),
-            $value
-        );
     }
 }

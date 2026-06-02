@@ -15,10 +15,6 @@ final class LangAttributeRule extends AbstractA11yRule
 
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if (0 === $tokenIndex) {
-            $this->idx = 0;
-        }
-
         $token = $tokens->get($tokenIndex);
 
         if (!$token->isMatching(Token::TEXT_TYPE)) {
@@ -41,6 +37,11 @@ final class LangAttributeRule extends AbstractA11yRule
 
             $emit('The <html> element should have a non-empty lang attribute.', $token, $id);
         }
+    }
+
+    protected function evaluateStart(Tokens $tokens): void
+    {
+        $this->idx = 0;
     }
 
     /**

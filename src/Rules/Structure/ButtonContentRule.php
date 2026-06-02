@@ -14,10 +14,6 @@ final class ButtonContentRule extends AbstractA11yRule
 
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        if (0 === $tokenIndex) {
-            $this->idx = 0;
-        }
-
         $token = $tokens->get($tokenIndex);
 
         if (!$token->isMatching(Token::TEXT_TYPE)) {
@@ -51,5 +47,10 @@ final class ButtonContentRule extends AbstractA11yRule
                 $emit('Button element without textual content must have an aria-label.', $token, $id);
             }
         }
+    }
+
+    protected function evaluateStart(Tokens $tokens): void
+    {
+        $this->idx = 0;
     }
 }

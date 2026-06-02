@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
 final class DetailsSummaryRule extends AbstractA11yRule
@@ -52,18 +51,5 @@ final class DetailsSummaryRule extends AbstractA11yRule
     protected function evaluateOncePerFile(): bool
     {
         return true;
-    }
-
-    private function fakeTokenForLine(Tokens $tokens, int $line, string $value): Token
-    {
-        $token = $tokens->get(0);
-
-        return new Token(
-            $token->getType(),
-            $line,
-            1,
-            $token->getFilename(),
-            $value
-        );
     }
 }

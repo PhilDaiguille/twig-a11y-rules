@@ -74,6 +74,31 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
         return false;
     }
 
+    /**
+     * Called once per file just before the first evaluate() call. Rules that
+     * maintain per-file state (e.g. counters, deduplication hashes) should
+     * override this instead of checking "if (0 === $tokenIndex)" in evaluate().
+     */
+    protected function evaluateStart(Tokens $tokens): void {}
+
+    /**
+     * Build a synthetic Token pointing at a specific line. Useful when a rule
+     * has already computed the correct line number from a full-content regex
+     * offset and wants to report the error at that precise line.
+     */
+    protected function fakeTokenForLine(Tokens $tokens, int $line, string $value): Token
+    {
+        $token = $tokens->get(0);
+
+        return new Token(
+            $token->getType(),
+            $line,
+            1,
+            $token->getFilename(),
+            $value
+        );
+    }
+
     // Backwards-compatible helper used by existing rules that used the
     // pattern "if (0 !== $tokenIndex) return;". When refactoring rules to
     // use evaluateOncePerFile(), replace those guards with a call to
@@ -105,6 +130,8 @@ abstract class AbstractA11yRule extends AbstractRule implements EvaluatableRuleI
             $kind = self::$kindCache[$hash];
 
             $this->skipThisFile = !in_array($kind, $this->supportedKinds(), true);
+
+            $this->evaluateStart($tokens);
         }
 
         // If earlier we decided this rule doesn't apply to this file, skip.

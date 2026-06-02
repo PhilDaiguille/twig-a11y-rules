@@ -18,10 +18,6 @@ final class FormLabelRule extends AbstractA11yRule
             return;
         }
 
-        if (0 === $tokenIndex) {
-            $this->idx = 0;
-        }
-
         $token = $tokens->get($tokenIndex);
 
         if (!$token->isMatching(Token::TEXT_TYPE)) {
@@ -62,5 +58,10 @@ final class FormLabelRule extends AbstractA11yRule
             $token,
             $id
         );
+    }
+
+    protected function evaluateStart(Tokens $tokens): void
+    {
+        $this->idx = 0;
     }
 }

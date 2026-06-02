@@ -140,4 +140,27 @@ trait TokenCollectorTrait
 
         return '';
     }
+
+    /**
+     * Check if an opening tag provides its own accessible name via
+     * aria-labelledby or aria-label with a non-empty value.
+     */
+    protected function openingProvidesLabel(string $opening): bool
+    {
+        if (preg_match('/\baria-labelledby\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $opening, $m)) {
+            $value = '' !== $m[1] ? $m[1] : ($m[2] ?? '');
+            if ('' !== trim($value)) {
+                return true;
+            }
+        }
+
+        if (preg_match('/\baria-label\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $opening, $m)) {
+            $value = '' !== $m[1] ? $m[1] : ($m[2] ?? '');
+            if ('' !== trim($value)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
