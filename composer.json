@@ -2,6 +2,22 @@
     "name": "phildaiguille/twig-a11y-rules",
     "description": "Accessibility linting rules for Twig templates",
     "type": "library",
+    "keywords": [
+        "twig",
+        "accessibility",
+        "a11y",
+        "wcag",
+        "linter",
+        "static-analysis",
+        "twig-cs-fixer",
+        "symfony",
+        "code-quality"
+    ],
+    "homepage": "https://github.com/PhilDaiguille/twig-a11y-rules",
+    "support": {
+        "issues": "https://github.com/PhilDaiguille/twig-a11y-rules/issues",
+        "source": "https://github.com/PhilDaiguille/twig-a11y-rules"
+    },
     "license": "MIT",
     "authors": [
         {

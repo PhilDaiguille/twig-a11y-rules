@@ -42,19 +42,24 @@ Create a `.twig-cs-fixer.php` configuration file at the root of your project:
 <?php
 
 use TwigCsFixer\Config\Config;
-use TwigCsFixer\Ruleset\Ruleset;
 use TwigA11y\Rules\Media\ImgAltRule;
 use TwigA11y\Rules\Structure\BannedTagsRule;
 
-$ruleset = new Ruleset();
-$ruleset->addRule(new ImgAltRule());
-$ruleset->addRule(new BannedTagsRule());
-
 $config = new Config();
-$config->setRuleset($ruleset);
+
+// getRuleset() conserve le standard twig-cs-fixer par défaut.
+$config->getRuleset()
+    ->addRule(new ImgAltRule())
+    ->addRule(new BannedTagsRule());
 
 return $config;
 ```
+
+> Utilisez `$config->getRuleset()` et non `$config->setRuleset(new Ruleset())` :
+> `Config` charge déjà le standard `TwigCsFixer` dans son ruleset, et le remplacer
+> par un `Ruleset` vide désactive tout le lint de formatage Twig. Passez un ruleset
+> neuf à `setRuleset()` seulement si vous voulez explicitement *uniquement* les
+> règles a11y.
 
 ### Standards
 
@@ -65,13 +70,9 @@ add the standard to your Ruleset:
 ```php
 use TwigA11y\Standard\A11yStandard;
 use TwigCsFixer\Config\Config;
-use TwigCsFixer\Ruleset\Ruleset;
-
-$ruleset = new Ruleset();
-$ruleset->addStandard(new A11yStandard());
 
 $config = new Config();
-$config->setRuleset($ruleset);
+$config->getRuleset()->addStandard(new A11yStandard());
 $config->allowNonFixableRules(true);
 
 return $config;
