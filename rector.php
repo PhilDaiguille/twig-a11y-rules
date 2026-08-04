@@ -23,6 +23,6 @@ return RectorConfig::configure()
         phpunitCodeQuality: true,
     )
     ->withComposerBased(phpunit: true)
-    // ponytail: non-idempotent, il empile un @see par run et couple src/ à tests/
+    // Not idempotent: it stacks one @see per run and couples src/ to tests/
     ->withSkip([AddSeeTestAnnotationRector::class])
 ;
