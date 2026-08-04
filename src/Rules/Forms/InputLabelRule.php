@@ -21,9 +21,14 @@ final class InputLabelRule extends AbstractFormFieldLabelRule
         return 'InputLabel.MissingLabel';
     }
 
+    /**
+     * These input types take no <label>: hidden is not rendered, and the others
+     * get their accessible name from value= or alt=. Those are checked by
+     * InputButtonNameRule and InputImageAltRule instead.
+     */
     #[\Override]
     protected function isHidden(string $opening): bool
     {
-        return (bool) preg_match('/\btype\s*=\s*["\']hidden["\']/i', $opening);
+        return (bool) preg_match('/\btype\s*=\s*["\'](?:hidden|submit|reset|button|image)["\']/i', $opening);
     }
 }

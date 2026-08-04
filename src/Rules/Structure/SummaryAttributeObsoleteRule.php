@@ -30,7 +30,10 @@ final class SummaryAttributeObsoleteRule extends AbstractA11yRule
             return;
         }
 
-        $opening = $this->collectUntil($tokenIndex, $tokens, '>');
+        $opening = $this->collectOpeningTag($tokenIndex, $tokens, 'table');
+        if ('' === $opening) {
+            return;
+        }
 
         if (!preg_match('/\bsummary\s*=/i', $opening)) {
             return;

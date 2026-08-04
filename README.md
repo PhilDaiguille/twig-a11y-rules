@@ -3,7 +3,7 @@
 > Accessibility linting rules for Twig templates, built on top of [`vincentlanglet/twig-cs-fixer`](https://github.com/VincentLanglet/Twig-CS-Fixer).
 
 [![Latest Stable Version](http://poser.pugx.org/phildaiguille/twig-a11y-rules/v)](https://packagist.org/packages/phildaiguille/twig-a11y-rules) [![Total Downloads](http://poser.pugx.org/phildaiguille/twig-a11y-rules/downloads)](https://packagist.org/packages/phildaiguille/twig-a11y-rules) [![Latest Unstable Version](http://poser.pugx.org/phildaiguille/twig-a11y-rules/v/unstable)](https://packagist.org/packages/phildaiguille/twig-a11y-rules) [![License](http://poser.pugx.org/phildaiguille/twig-a11y-rules/license)](https://packagist.org/packages/phildaiguille/twig-a11y-rules) [![PHP Version Require](http://poser.pugx.org/phildaiguille/twig-a11y-rules/require/php)](https://packagist.org/packages/phildaiguille/twig-a11y-rules)
-[![CI](https://github.com/PhilDaiguille/twig-a11y-rules/workflows/Tests/badge.svg)](https://github.com/PhilDaiguille/twig-a11y-rules/actions?query=workflow%3ATests)
+[![QA](https://github.com/PhilDaiguille/twig-a11y-rules/actions/workflows/qa.yml/badge.svg)](https://github.com/PhilDaiguille/twig-a11y-rules/actions/workflows/qa.yml)
 [![codecov](https://codecov.io/gh/PhilDaiguille/twig-a11y-rules/branch/main/graph/badge.svg?token=CWK2T8325J)](https://codecov.io/gh/PhilDaiguille/twig-a11y-rules)
 ---
 
@@ -19,8 +19,8 @@ Inspired by [Deque's Axe Linter](https://axe-linter.deque.com/) and built as a m
 
 ## Requirements
 
-- PHP >= 8.2
-- [`vincentlanglet/twig-cs-fixer`](https://packagist.org/packages/vincentlanglet/twig-cs-fixer) >= 3.0
+- PHP >= 8.4
+- [`vincentlanglet/twig-cs-fixer`](https://packagist.org/packages/vincentlanglet/twig-cs-fixer) ^4.0
 
 ---
 
@@ -279,6 +279,29 @@ fixtures to document this decision and prevent regressions.
 
 ---
 
+## Versioning & backward compatibility
+
+This package follows [Semantic Versioning](https://semver.org/).
+
+**Public API** (breaking changes only in a major release):
+
+- Rule class names and namespaces under `TwigA11y\Rules\`
+- Rule identifiers (`Domain.ShortId`, e.g. `InputLabel.MissingLabel`) — used in
+  `// twig-cs-fixer-disable` comments and in your own baselines
+- The four standards under `TwigA11y\Standard\` and their constructors
+
+**Not covered** (may change in any release):
+
+- Rule internals, `AbstractA11yRule` protected members, `TokenCollectorTrait`
+- The exact wording of error messages
+- The `TwigA11y\Template\` classifier internals
+
+**New rules in an existing preset are a minor release.** They may surface new
+errors in templates that previously passed. Pin an exact version if your CI
+cannot tolerate that.
+
+---
+
 ## License
 
-MIT — see [`LICENCE`](LICENCE).
+MIT — see [`LICENSE`](LICENSE).

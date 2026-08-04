@@ -26,7 +26,7 @@ final class ObjectAltRule extends AbstractA11yRule
         $full = $this->collectUntil($tokenIndex, $tokens, '/<\/object>/i', 200);
 
         // Check inline attributes on the opening tag
-        $tag = $this->collectUntil($tokenIndex, $tokens, '>');
+        $tag = $this->collectOpeningTag($tokenIndex, $tokens, 'object');
         if (preg_match('/\btitle\s*=|\baria-label\s*=|\balt\s*=/i', $tag)) {
             return;
         }

@@ -42,7 +42,10 @@ final class ImgAltRule extends AbstractA11yRule
 
         // Try to collect a full tag around this token. Use a larger limit to
         // handle long attributes and Twig interpolations.
-        $fullTag = $this->collectTag($tokenIndex, $tokens, 200);
+        $fullTag = $this->collectOpeningTag($tokenIndex, $tokens, 'img', 200);
+        if ('' === $fullTag) {
+            return;
+        }
 
         if (!str_contains($fullTag, '>')) {
             // No complete tag found in 200 tokens, give up.

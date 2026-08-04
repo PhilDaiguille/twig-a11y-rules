@@ -34,7 +34,11 @@ final class FormLabelRule extends AbstractA11yRule
             return;
         }
 
-        $opening = $this->collectUntil($tokenIndex, $tokens, '>');
+        $opening = $this->collectOpeningTag($tokenIndex, $tokens, 'label');
+        if ('' === $opening) {
+            return;
+        }
+
         $full = $this->getFullContent($tokens);
 
         // Check for for attribute + ensure that the referenced <label for="id"> has non-empty content

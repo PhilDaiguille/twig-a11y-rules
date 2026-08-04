@@ -30,7 +30,10 @@ final class OptGroupLabelRule extends AbstractA11yRule
             return;
         }
 
-        $opening = $this->collectUntil($tokenIndex, $tokens, '>');
+        $opening = $this->collectOpeningTag($tokenIndex, $tokens, 'optgroup');
+        if ('' === $opening) {
+            return;
+        }
 
         if (preg_match('/\blabel\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $opening, $m)) {
             $labelValue = '' !== $m[1] ? $m[1] : ($m[2] ?? '');

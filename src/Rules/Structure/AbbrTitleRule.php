@@ -30,7 +30,10 @@ final class AbbrTitleRule extends AbstractA11yRule
             return;
         }
 
-        $opening = $this->collectUntil($tokenIndex, $tokens, '>');
+        $opening = $this->collectOpeningTag($tokenIndex, $tokens, 'abbr');
+        if ('' === $opening) {
+            return;
+        }
 
         if (preg_match('/\btitle\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $opening, $m)) {
             $titleValue = '' !== $m[1] ? $m[1] : ($m[2] ?? '');

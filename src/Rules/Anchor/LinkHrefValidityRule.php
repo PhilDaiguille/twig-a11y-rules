@@ -22,9 +22,9 @@ final class LinkHrefValidityRule extends AbstractA11yRule
             return;
         }
 
-        $tag = $this->collectUntil($tokenIndex, $tokens, '>', 100);
+        $tag = $this->collectOpeningTag($tokenIndex, $tokens, 'a', 100);
 
-        if (!preg_match('/<a\b/i', $tag)) {
+        if ('' === $tag) {
             return;
         }
 

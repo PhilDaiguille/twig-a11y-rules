@@ -49,6 +49,69 @@ trait TokenCollectorTrait
     }
 
     /**
+     * Collect the opening tag of $tagName that starts inside the token at
+     * $tokenIndex, continuing into the following tokens until its closing '>'.
+     *
+     * Prefer this over collectTag() when the tag can follow another one inside
+     * the same text token: the tokenizer emits values such as "<li><a", and
+     * collectTag() would stop on the '>' of the <li>, returning an attribute-less
+     * fragment. Anchoring on the tag name avoids that.
+     *
+     * Returns '' when the token does not open such a tag, so that callers keep
+     * reporting once per tag instead of once per token that happens to precede
+     * one.
+     */
+    protected function collectOpeningTag(int $tokenIndex, Tokens $tokens, string $tagName, int $limit = 50): string
+    {
+        $startLength = \strlen($tokens->get($tokenIndex)->getValue());
+
+        $collected = '';
+        $end = $tokenIndex + $limit;
+
+        for ($i = $tokenIndex; $i <= $end && $tokens->has($i); ++$i) {
+            $collected .= $tokens->get($i)->getValue();
+        }
+
+        if (!preg_match('/<\s*'.preg_quote($tagName, '/').'\b[^>]*>/i', $collected, $m, \PREG_OFFSET_CAPTURE)) {
+            return '';
+        }
+
+        [$tag, $offset] = $m[0];
+
+        // The tag must open in the current token; otherwise it belongs to a
+        // later token, which will be visited on its own.
+        return $offset < $startLength ? $tag : '';
+    }
+
+    /**
+     * Collect the opening tag that encloses the token at $tokenIndex.
+     *
+     * Use this when a rule is triggered by an *attribute* rather than by the
+     * tag name: the tokenizer splits on whitespace, so `role="main"` and the
+     * `<div` that carries it are different tokens, and collecting forward only
+     * would miss every attribute written before the trigger one.
+     */
+    protected function collectEnclosingTag(int $tokenIndex, Tokens $tokens, int $limit = 50): string
+    {
+        $start = $tokenIndex;
+        $lowest = max(0, $tokenIndex - $limit);
+
+        for ($i = $tokenIndex; $i >= $lowest; --$i) {
+            if (!$tokens->has($i)) {
+                continue;
+            }
+
+            if (preg_match('/<\s*[a-z][a-z0-9-]*/i', $tokens->get($i)->getValue())) {
+                $start = $i;
+
+                break;
+            }
+        }
+
+        return $this->collectUntil($start, $tokens, '>', $limit * 2);
+    }
+
+    /**
      * Safe wrapper around preg_match that avoids silencing errors with @ and
      * returns a boolean result. If the pattern is invalid, false is returned.
      */

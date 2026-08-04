@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nos produits — Boutique</title>
+</head>
+<body>
+<a class="skip-link" href="#main">Aller au contenu principal</a>
+
+<header>
+    <nav aria-label="Navigation principale">
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/produits">Produits</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main id="main">
+    <h1>Nos produits</h1>
+
+    <form action="/recherche" method="get">
+        <label for="q">Rechercher un produit</label>
+        <input type="search" id="q" name="q" autocomplete="off">
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <h2>Catalogue</h2>
+    <ul>
+        <li>
+            <article>
+                <h3>Chaise en chêne</h3>
+                <img src="/img/chaise.jpg" alt="Chaise en chêne massif, vue de trois quarts">
+                <p>Fabriquée en France.</p>
+                <a href="/produits/chaise-chene">Voir la fiche de la chaise en chêne</a>
+            </article>
+        </li>
+    </ul>
+
+    <h2>Comparatif</h2>
+    <table>
+        <caption>Comparatif des matériaux</caption>
+        <thead>
+        <tr><th scope="col">Matériau</th><th scope="col">Prix</th></tr>
+        </thead>
+        <tbody>
+        <tr><th scope="row">Chêne</th><td>249 €</td></tr>
+        </tbody>
+    </table>
+
+    <button type="button" aria-expanded="false" aria-controls="details-livraison">Options de livraison</button>
+    <div id="details-livraison" hidden>
+        <p>Livraison sous 5 jours.</p>
+    </div>
+</main>
+
+<footer>
+    <p>© 2026 Boutique</p>
+</footer>
+</body>
+</html>

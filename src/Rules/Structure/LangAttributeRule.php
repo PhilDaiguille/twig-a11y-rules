@@ -26,7 +26,10 @@ final class LangAttributeRule extends AbstractA11yRule
             return;
         }
 
-        $opening = $this->collectUntil($tokenIndex, $tokens, '>');
+        $opening = $this->collectOpeningTag($tokenIndex, $tokens, 'html');
+        if ('' === $opening) {
+            return;
+        }
 
         if (!preg_match('/\blang\s*=\s*("|\')([^"\']*)("|\')/i', $opening, $m) || '' === trim($m[2])) {
             ++$this->idx;

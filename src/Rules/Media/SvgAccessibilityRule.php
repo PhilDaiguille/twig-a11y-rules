@@ -48,14 +48,9 @@ final class SvgAccessibilityRule extends AbstractA11yRule
         }
 
         // Try to collect a full tag around this token
-        $fullTag = $this->collectTag($tokenIndex, $tokens, 200);
+        $fullTag = $this->collectOpeningTag($tokenIndex, $tokens, 'svg', 200);
 
-        if (!str_contains($fullTag, '>')) {
-            return;
-        }
-
-        // Only act on things that look like an <svg tag
-        if (!preg_match('/<\s*svg\b/i', $fullTag)) {
+        if ('' === $fullTag) {
             return;
         }
 
