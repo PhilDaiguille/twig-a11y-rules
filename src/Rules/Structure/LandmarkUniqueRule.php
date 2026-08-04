@@ -142,6 +142,7 @@ final class LandmarkUniqueRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;

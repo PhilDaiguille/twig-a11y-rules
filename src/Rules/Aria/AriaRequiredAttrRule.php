@@ -39,16 +39,7 @@ final class AriaRequiredAttrRule extends AbstractA11yRule
                     $role = strtolower($m[1]);
                     if (isset($requiredMap[$role])) {
                         foreach ($requiredMap[$role] as $group) {
-                            // The group is satisfied when at least one of its attributes is present
-                            $satisfied = false;
-                            foreach ($group as $attr) {
-                                if (preg_match('/\b'.preg_quote($attr, '/').'\s*=\s*(?:"|\')/i', $attrs)) {
-                                    $satisfied = true;
-
-                                    break;
-                                }
-                            }
-
+                            $satisfied = array_any($group, fn (string $attr): bool => 1 === preg_match('/\b'.preg_quote($attr, '/').'\s*=\s*(?:"|\')/i', $attrs));
                             if (!$satisfied) {
                                 $tokenRef = $tokens->get(0);
                                 $missing = implode('" or "', $group);
@@ -64,6 +55,7 @@ final class AriaRequiredAttrRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;

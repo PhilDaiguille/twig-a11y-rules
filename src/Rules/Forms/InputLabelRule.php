@@ -21,6 +21,7 @@ final class InputLabelRule extends AbstractFormFieldLabelRule
         return 'InputLabel.MissingLabel';
     }
 
+    #[\Override]
     protected function isHidden(string $opening): bool
     {
         return (bool) preg_match('/\btype\s*=\s*["\']hidden["\']/i', $opening);

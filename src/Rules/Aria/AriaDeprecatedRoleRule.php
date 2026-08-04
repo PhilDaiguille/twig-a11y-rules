@@ -9,7 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class AriaDeprecatedRoleRule extends AbstractA11yRule
 {
-    private const DEPRECATED = [
+    private const array DEPRECATED = [
         // WAI-ARIA 1.2 deprecated roles
         'directory',
         // 'presentation' was superseded by 'none' but both remain valid; not flagging it
@@ -37,6 +37,7 @@ final class AriaDeprecatedRoleRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;

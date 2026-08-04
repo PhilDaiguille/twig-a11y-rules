@@ -9,7 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class InvalidFieldErrorMessageRule extends AbstractA11yRule
 {
-    private const CUSTOM_FIELD_ROLES = [
+    private const array CUSTOM_FIELD_ROLES = [
         'textbox',
         'combobox',
         'searchbox',
@@ -64,6 +64,7 @@ final class InvalidFieldErrorMessageRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;

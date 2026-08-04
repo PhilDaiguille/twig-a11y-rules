@@ -44,6 +44,7 @@ final class DetailsSummaryRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;

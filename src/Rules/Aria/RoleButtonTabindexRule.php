@@ -18,7 +18,7 @@ final class RoleButtonTabindexRule extends AbstractA11yRule
      * Interactive ARIA roles that require keyboard reachability when placed on
      * elements that are not natively focusable.
      */
-    private const INTERACTIVE_ROLES = [
+    private const array INTERACTIVE_ROLES = [
         'button',
         'link',
         'checkbox',
@@ -36,7 +36,7 @@ final class RoleButtonTabindexRule extends AbstractA11yRule
     /**
      * HTML elements that are natively focusable and do not need an explicit tabindex.
      */
-    private const NATIVE_INTERACTIVE = [
+    private const array NATIVE_INTERACTIVE = [
         'a',
         'button',
         'input',
@@ -98,6 +98,7 @@ final class RoleButtonTabindexRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;

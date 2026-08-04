@@ -24,6 +24,7 @@ final class DocumentTitleRule extends AbstractA11yRule
     }
 
     // page-level rule
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;
@@ -32,6 +33,7 @@ final class DocumentTitleRule extends AbstractA11yRule
     /**
      * @return TemplateKind[]
      */
+    #[\Override]
     protected function supportedKinds(): array
     {
         return [TemplateKind::FullPage];

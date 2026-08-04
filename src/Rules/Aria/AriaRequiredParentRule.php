@@ -34,16 +34,7 @@ final class AriaRequiredParentRule extends AbstractA11yRule
             }
 
             foreach ($matches[0] as $occ) {
-                $found = false;
-                foreach ($parents as $parent) {
-                    // Check for a parent wrapper containing this child occurrence
-                    if (preg_match('/<([a-z0-9]+)[^>]*role\s*=\s*(?:"|\')'.preg_quote($parent, '/').'(?:(?:"|\'))[^>]*>.*?'.preg_quote($occ[0], '/').'.*?<\/\1>/is', $full)) {
-                        $found = true;
-
-                        break;
-                    }
-                }
-
+                $found = array_any($parents, fn (string $parent): bool => 1 === preg_match('/<([a-z0-9]+)[^>]*role\s*=\s*(?:"|\')'.preg_quote($parent, '/').'(?:(?:"|\'))[^>]*>.*?'.preg_quote($occ[0], '/').'.*?<\/\1>/is', $full));
                 if (!$found) {
                     $token = $tokens->get(0);
                     $emit(sprintf('Role %s must be contained in one of: %s.', $childRole, implode(', ', $parents)), $token, 'AriaRequiredParent.MissingParent');
@@ -52,6 +43,7 @@ final class AriaRequiredParentRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;

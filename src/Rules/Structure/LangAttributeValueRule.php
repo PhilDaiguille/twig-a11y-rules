@@ -22,7 +22,7 @@ final class LangAttributeValueRule extends AbstractA11yRule
      *
      * @var string[]
      */
-    private const VALID_PRIMARY_SUBTAGS = [
+    private const array VALID_PRIMARY_SUBTAGS = [
         'aa', 'ab', 'ae', 'af', 'ak', 'am', 'an', 'ar', 'as', 'av', 'ay', 'az',
         'ba', 'be', 'bg', 'bh', 'bi', 'bm', 'bn', 'bo', 'br', 'bs',
         'ca', 'ce', 'ch', 'co', 'cr', 'cs', 'cu', 'cv', 'cy',
@@ -90,6 +90,7 @@ final class LangAttributeValueRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;
@@ -98,6 +99,7 @@ final class LangAttributeValueRule extends AbstractA11yRule
     /**
      * @return TemplateKind[]
      */
+    #[\Override]
     protected function supportedKinds(): array
     {
         return [TemplateKind::FullPage];

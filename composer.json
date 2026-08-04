@@ -2,6 +2,22 @@
     "name": "phildaiguille/twig-a11y-rules",
     "description": "Accessibility linting rules for Twig templates",
     "type": "library",
+    "keywords": [
+        "twig",
+        "accessibility",
+        "a11y",
+        "wcag",
+        "linter",
+        "static-analysis",
+        "twig-cs-fixer",
+        "symfony",
+        "code-quality"
+    ],
+    "homepage": "https://github.com/PhilDaiguille/twig-a11y-rules",
+    "support": {
+        "issues": "https://github.com/PhilDaiguille/twig-a11y-rules/issues",
+        "source": "https://github.com/PhilDaiguille/twig-a11y-rules"
+    },
     "license": "MIT",
     "authors": [
         {
@@ -9,16 +25,16 @@
         }
     ],
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.4",
         "composer-runtime-api": "^2.0",
-        "vincentlanglet/twig-cs-fixer": "^3.14.0"
+        "vincentlanglet/twig-cs-fixer": "^4.0.0"
     },
     "require-dev": {
-        "brianium/paratest": "^7.8",
+        "brianium/paratest": "^7.23.1",
         "friendsofphp/php-cs-fixer": "^3.95",
-        "infection/infection": "^0.32.0",
+        "infection/infection": "^0.34.1",
         "phpstan/phpstan": "^2.1",
-        "phpunit/phpunit": "^11.5.55",
+        "phpunit/phpunit": "^13.2.6",
         "rector/rector": "^2.4"
     },
     "autoload": {

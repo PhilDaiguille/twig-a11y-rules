@@ -18,7 +18,7 @@ use TwigCsFixer\Token\Tokens;
  */
 final class AriaInputFieldNameRule extends AbstractA11yRule
 {
-    private const ROLES = [
+    private const array ROLES = [
         'textbox', 'combobox', 'searchbox', 'spinbutton',
     ];
 
@@ -59,6 +59,7 @@ final class AriaInputFieldNameRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;

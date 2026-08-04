@@ -16,7 +16,7 @@ final class InputTypeRule extends AbstractA11yRule
      * Note: values such as "name", "username", "new-password" are autocomplete *tokens*, not
      * valid type= values, so they must NOT appear here.
      */
-    private const AUTOCOMPLETE_REQUIRED_TYPES = ['email', 'tel'];
+    private const array AUTOCOMPLETE_REQUIRED_TYPES = ['email', 'tel'];
 
     /**
      * Check inputs with personal-data types have an autocomplete attribute (WCAG 1.3.5).
@@ -50,6 +50,7 @@ final class InputTypeRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;

@@ -60,6 +60,7 @@ final class NestedInteractiveRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;

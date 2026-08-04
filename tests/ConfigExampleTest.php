@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace TwigA11y\Tests;
 
-use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\TestCase;
 use TwigCsFixer\Config\Config;
 
 /**
  * @internal
  */
-#[CoversClass(Config::class)]
+#[CoversNothing]
 final class ConfigExampleTest extends TestCase
 {
     public function testExampleConfigCanBeLoaded(): void

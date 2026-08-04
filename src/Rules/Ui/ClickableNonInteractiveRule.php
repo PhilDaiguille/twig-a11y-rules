@@ -17,7 +17,7 @@ final class ClickableNonInteractiveRule extends AbstractA11yRule
     /**
      * HTML elements that are natively interactive; onclick on these is acceptable.
      */
-    private const NATIVE_INTERACTIVE = [
+    private const array NATIVE_INTERACTIVE = [
         'a',
         'button',
         'input',
@@ -79,6 +79,7 @@ final class ClickableNonInteractiveRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;

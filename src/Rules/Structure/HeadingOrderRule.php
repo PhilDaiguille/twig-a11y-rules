@@ -51,6 +51,7 @@ final class HeadingOrderRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;
