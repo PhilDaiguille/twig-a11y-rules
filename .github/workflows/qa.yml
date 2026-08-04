@@ -12,7 +12,7 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                php: [ '8.3', '8.4', '8.5' ]
+                php: [ '8.4', '8.5' ]
 
         steps:
             - name: Checkout
@@ -61,7 +61,7 @@ jobs:
                     --log-junit=build/coverage/junit.xml
 
             - name: Upload coverage to Codecov
-              if: ${{ matrix.php == '8.3' }}
+              if: ${{ matrix.php == '8.4' }}
               uses: codecov/codecov-action@v6
               with:
                   token: ${{ secrets.CODECOV_TOKEN }}
@@ -70,7 +70,7 @@ jobs:
                   verbose: true
 
             - name: Upload test results to Codecov
-              if: ${{ matrix.php == '8.3' && !cancelled() }}
+              if: ${{ matrix.php == '8.4' && !cancelled() }}
               uses: codecov/codecov-action@v6
               with:
                   token: ${{ secrets.CODECOV_TOKEN }}

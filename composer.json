@@ -25,7 +25,7 @@
         }
     ],
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.4",
         "composer-runtime-api": "^2.0",
         "vincentlanglet/twig-cs-fixer": "^4.0.0"
     },
