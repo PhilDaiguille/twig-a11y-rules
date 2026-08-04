@@ -29,14 +29,7 @@ final class AriaRequiredChildrenRule extends AbstractA11yRule
                 // PREG_SET_ORDER with the regex above guarantees group 2 exists
                 // for each match, so access it directly.
                 $inner = $set[2];
-                $found = false;
-                foreach ($info['required_children'] as $childRole) {
-                    if (preg_match('/role\s*=\s*(?:"|\')'.preg_quote($childRole, '/').'(?:(?:"|\'))/i', $inner)) {
-                        $found = true;
-
-                        break;
-                    }
-                }
+                $found = array_any($info['required_children'], fn ($childRole): false|int => preg_match('/role\s*=\s*(?:"|\')'.preg_quote($childRole, '/').'(?:(?:"|\'))/i', $inner));
 
                 if (!$found) {
                     $token = $tokens->get(0);
@@ -46,6 +39,7 @@ final class AriaRequiredChildrenRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;

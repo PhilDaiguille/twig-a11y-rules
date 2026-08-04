@@ -23,11 +23,13 @@ final class AriaHiddenBodyRule extends AbstractA11yRule
     /**
      * @return TemplateKind[]
      */
+    #[\Override]
     protected function supportedKinds(): array
     {
         return [TemplateKind::FullPage];
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;

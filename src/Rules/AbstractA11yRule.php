@@ -14,14 +14,14 @@ abstract class AbstractA11yRule extends AbstractRule
 {
     use TokenCollectorTrait;
 
-    private const KIND_CACHE_MAX = 500;
+    private const int KIND_CACHE_MAX = 500;
 
     /**
      * Maximum number of rule-file keys in the $emitted map. When exceeded the
      * map is reset to prevent unbounded memory growth during long-running
      * linting sessions (watch-mode, large CI pipelines, etc.).
      */
-    private const EMITTED_MAX = 2000;
+    private const int EMITTED_MAX = 2000;
 
     /** Cached decision for the currently-processed file when rules are reused */
     private ?bool $skipThisFile = null;
@@ -108,13 +108,13 @@ abstract class AbstractA11yRule extends AbstractRule
         );
     }
 
-    /**
-     * @deprecated This guard is a no-op when evaluateOncePerFile() returns true
-     *             because AbstractA11yRule::process() already skips subsequent
-     *             tokens before calling evaluate(). Remove the call from
-     *             evaluate() in concrete rules — no behaviour change results.
-     *             This method will be removed in a future major version.
-     */
+    #[\Deprecated(message: <<<'TXT'
+        This guard is a no-op when evaluateOncePerFile() returns true
+                     because AbstractA11yRule::process() already skips subsequent
+                     tokens before calling evaluate(). Remove the call from
+                     evaluate() in concrete rules — no behaviour change results.
+                     This method will be removed in a future major version.
+        TXT)]
     protected function shouldSkipByTokenIndex(int $tokenIndex): bool
     {
         return $this->evaluateOncePerFile() && 0 !== $tokenIndex;

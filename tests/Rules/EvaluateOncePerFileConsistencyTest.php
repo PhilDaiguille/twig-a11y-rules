@@ -43,7 +43,7 @@ final class EvaluateOncePerFileConsistencyTest extends TestCase
      *
      * @var class-string[]
      */
-    private const EXEMPTED = [
+    private const array EXEMPTED = [
         ImgAltRule::class,
         AutoplayRule::class,
         AnchorContentRule::class,

@@ -9,7 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class AriaValidAttrRule extends AbstractA11yRule
 {
-    private const WHITELIST = [
+    private const array WHITELIST = [
         // Full WAI-ARIA 1.2 global and widget attributes
         'aria-activedescendant',
         'aria-atomic',
@@ -80,6 +80,7 @@ final class AriaValidAttrRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;

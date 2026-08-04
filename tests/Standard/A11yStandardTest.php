@@ -83,10 +83,10 @@ final class A11yStandardTest extends TestCase
      */
     public function testStandardsAreMonotonic(): void
     {
-        $basic = $this->classNames((new A11yBasicStandard())->getRules());
-        $recommended = $this->classNames((new A11yRecommendedStandard())->getRules());
-        $standard = $this->classNames((new A11yStandard())->getRules());
-        $strict = $this->classNames((new A11yStrict())->getRules());
+        $basic = $this->classNames(new A11yBasicStandard()->getRules());
+        $recommended = $this->classNames(new A11yRecommendedStandard()->getRules());
+        $standard = $this->classNames(new A11yStandard()->getRules());
+        $strict = $this->classNames(new A11yStrict()->getRules());
 
         $this->assertSame($basic, array_values(array_intersect($recommended, $basic)));
         $this->assertSame($recommended, array_values(array_intersect($standard, $recommended)));
@@ -101,22 +101,22 @@ final class A11yStandardTest extends TestCase
     {
         $this->assertSame(
             $this->classNames(StandardRuleSets::basic()),
-            $this->classNames((new A11yBasicStandard())->getRules())
+            $this->classNames(new A11yBasicStandard()->getRules())
         );
 
         $this->assertSame(
             $this->classNames(StandardRuleSets::recommended()),
-            $this->classNames((new A11yRecommendedStandard())->getRules())
+            $this->classNames(new A11yRecommendedStandard()->getRules())
         );
 
         $this->assertSame(
             $this->classNames(StandardRuleSets::standard()),
-            $this->classNames((new A11yStandard())->getRules())
+            $this->classNames(new A11yStandard()->getRules())
         );
 
         $this->assertSame(
             $this->classNames(StandardRuleSets::strict()),
-            $this->classNames((new A11yStrict())->getRules())
+            $this->classNames(new A11yStrict()->getRules())
         );
     }
 

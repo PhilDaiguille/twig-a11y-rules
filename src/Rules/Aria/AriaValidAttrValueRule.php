@@ -9,7 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class AriaValidAttrValueRule extends AbstractA11yRule
 {
-    private const ENUM_MAP = [
+    private const array ENUM_MAP = [
         'aria-hidden' => ['true', 'false'],
         'aria-checked' => ['true', 'false', 'mixed'],
         'aria-expanded' => ['true', 'false'],
@@ -64,6 +64,7 @@ final class AriaValidAttrValueRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;

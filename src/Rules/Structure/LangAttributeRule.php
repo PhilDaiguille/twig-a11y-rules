@@ -47,6 +47,7 @@ final class LangAttributeRule extends AbstractA11yRule
     /**
      * @return TemplateKind[]
      */
+    #[\Override]
     protected function supportedKinds(): array
     {
         return [TemplateKind::FullPage];

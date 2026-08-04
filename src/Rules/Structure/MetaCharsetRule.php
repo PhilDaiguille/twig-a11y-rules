@@ -30,12 +30,14 @@ final class MetaCharsetRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;
     }
 
     /** @return TemplateKind[] */
+    #[\Override]
     protected function supportedKinds(): array
     {
         return [TemplateKind::FullPage];

@@ -38,6 +38,7 @@ final class ColorContrastRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;

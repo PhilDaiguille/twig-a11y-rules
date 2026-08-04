@@ -23,6 +23,7 @@ final class PageHeadingOneRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;
@@ -31,6 +32,7 @@ final class PageHeadingOneRule extends AbstractA11yRule
     /**
      * @return TemplateKind[]
      */
+    #[\Override]
     protected function supportedKinds(): array
     {
         return [TemplateKind::FullPage];

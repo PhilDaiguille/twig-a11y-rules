@@ -20,7 +20,7 @@ final class MouseEventKeyboardEquivalentRule extends AbstractA11yRule
      *
      * @var array<string, list<string>>
      */
-    private const PAIRS = [
+    private const array PAIRS = [
         'onmousedown' => ['onkeydown', 'onkeyup', 'onkeypress'],
         'onmouseover' => ['onfocus'],
         'onmouseout' => ['onblur'],
@@ -60,14 +60,7 @@ final class MouseEventKeyboardEquivalentRule extends AbstractA11yRule
                     continue;
                 }
 
-                $hasKeyboard = false;
-                foreach ($keyboardEquivalents as $kbEvent) {
-                    if (str_contains($attrsLower, $kbEvent)) {
-                        $hasKeyboard = true;
-
-                        break;
-                    }
-                }
+                $hasKeyboard = array_any($keyboardEquivalents, fn ($kbEvent): bool => str_contains($attrsLower, $kbEvent));
 
                 if ($hasKeyboard) {
                     continue;
@@ -95,6 +88,7 @@ final class MouseEventKeyboardEquivalentRule extends AbstractA11yRule
         }
     }
 
+    #[\Override]
     protected function evaluateOncePerFile(): bool
     {
         return true;
