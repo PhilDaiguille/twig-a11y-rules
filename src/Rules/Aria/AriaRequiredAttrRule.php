@@ -39,7 +39,7 @@ final class AriaRequiredAttrRule extends AbstractA11yRule
                     $role = strtolower($m[1]);
                     if (isset($requiredMap[$role])) {
                         foreach ($requiredMap[$role] as $group) {
-                            $satisfied = array_any($group, fn ($attr): false|int => preg_match('/\b'.preg_quote($attr, '/').'\s*=\s*(?:"|\')/i', $attrs));
+                            $satisfied = array_any($group, fn (string $attr): bool => 1 === preg_match('/\b'.preg_quote($attr, '/').'\s*=\s*(?:"|\')/i', $attrs));
                             if (!$satisfied) {
                                 $tokenRef = $tokens->get(0);
                                 $missing = implode('" or "', $group);
