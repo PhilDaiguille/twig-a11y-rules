@@ -30,8 +30,12 @@ final class FrameTitleRule extends AbstractA11yRule
             return;
         }
 
-        // Collect ahead to get the full tag and distinguish <frame> from <frameset>
-        $tag = $this->collectUntil($tokenIndex, $tokens, '>');
+        // Anchoring on the tag name already excludes <frameset> and <iframe>,
+        // but the explicit checks below stay as a guard for odd markup.
+        $tag = $this->collectOpeningTag($tokenIndex, $tokens, 'frame');
+        if ('' === $tag) {
+            return;
+        }
 
         // Only target <frame>, not <frameset> or <iframe>
         if (!preg_match('/<frame\b/i', $tag) || preg_match('/<frameset\b/i', $tag) || preg_match('/<iframe\b/i', $tag)) {

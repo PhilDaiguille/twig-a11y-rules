@@ -24,7 +24,9 @@ final class AriaLabelRule extends AbstractA11yRule
             return;
         }
 
-        $tag = $this->collectUntil($tokenIndex, $tokens, '>');
+        // role= is an attribute, so the tag may have opened in an earlier token
+        // and carry aria-label before it.
+        $tag = $this->collectEnclosingTag($tokenIndex, $tokens);
 
         // aria-label present and non-empty - OK
         if (preg_match('/aria-label\s*=\s*(?:"|\')([^"\']*)(?:"|\')/i', $tag, $m) && '' !== trim($m[1])) {

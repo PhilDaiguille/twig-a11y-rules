@@ -28,7 +28,10 @@ final class InputImageAltRule extends AbstractA11yRule
             return;
         }
 
-        $tag = $this->collectUntil($tokenIndex, $tokens, '>');
+        $tag = $this->collectOpeningTag($tokenIndex, $tokens, 'input');
+        if ('' === $tag) {
+            return;
+        }
 
         // Only target type="image"
         if (!preg_match('/\btype\s*=\s*(?:"|\')image(?:"|\')/i', $tag)) {

@@ -36,7 +36,10 @@ final class AreaAltRule extends AbstractA11yRule
 
         // Try to collect a full tag around this token. Use a larger limit to
         // handle long attributes and Twig interpolations.
-        $fullTag = $this->collectTag($tokenIndex, $tokens, 200);
+        $fullTag = $this->collectOpeningTag($tokenIndex, $tokens, 'area', 200);
+        if ('' === $fullTag) {
+            return;
+        }
 
         // If collectTag failed to find a closing '>', try scanning adjacent
         // tokens forward to assemble a candidate.

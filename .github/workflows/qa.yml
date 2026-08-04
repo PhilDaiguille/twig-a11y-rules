@@ -45,9 +45,6 @@ jobs:
             - name: Run php-cs-fixer (dry-run)
               run: composer cs-lint
 
-            - name: Run twig-cs-fixer lint
-              run: vendor/bin/twig-cs-fixer lint . --config=.twig-cs-fixer.php --no-cache || true
-
             - name: Run rector (dry-run)
               run: composer rector -- --dry-run
 

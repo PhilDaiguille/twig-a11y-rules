@@ -13,10 +13,14 @@ final class ListStructureRule extends AbstractA11yRule
     {
         $full = $this->getFullContent($tokens);
 
-        // ul/ol children must be li
-        if (preg_match_all('/<ul[^>]*>(.*?)<\/ul>/is', $full, $uls, PREG_SET_ORDER)) {
-            foreach ($uls as $u) {
-                if (preg_match('/<(?!li)[a-z0-9]+\b/i', $u[1])) {
+        // Direct children of ul/ol must be li (plus script/template, which the
+        // HTML spec allows). Content nested inside an <li> is none of our
+        // business, so strip the <li> blocks before looking at what is left.
+        if (preg_match_all('/<(?:ul|ol)[^>]*>(.*?)<\/(?:ul|ol)>/is', $full, $lists, PREG_SET_ORDER)) {
+            foreach ($lists as $list) {
+                $directChildren = preg_replace('/<li\b[^>]*>.*?<\/li>/is', '', $list[1]);
+
+                if (preg_match('/<\s*(?!\/|!|li\b|script\b|template\b)[a-z][a-z0-9]*\b/i', (string) $directChildren)) {
                     $fakeToken = $tokens->get(0);
                     $emit('List (<ul>/<ol>) contains non-<li> child.', $fakeToken, 'ListStructure.InvalidChild');
 

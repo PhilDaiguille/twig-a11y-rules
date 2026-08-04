@@ -30,7 +30,10 @@ final class AudioControlsRule extends AbstractA11yRule
             return;
         }
 
-        $opening = $this->collectUntil($tokenIndex, $tokens, '>');
+        $opening = $this->collectOpeningTag($tokenIndex, $tokens, 'audio');
+        if ('' === $opening) {
+            return;
+        }
 
         // Ignore inline elements that are purely decorative background audio via autoplay+muted
         // (those are caught by AutoplayRule / NoAutoplayAudioRule).

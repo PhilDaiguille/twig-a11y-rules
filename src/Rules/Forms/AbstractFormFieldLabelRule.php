@@ -23,7 +23,10 @@ abstract class AbstractFormFieldLabelRule extends AbstractA11yRule
             return;
         }
 
-        $opening = $this->collectUntil($tokenIndex, $tokens, '>', 50);
+        $opening = $this->collectOpeningTag($tokenIndex, $tokens, $tag, 50);
+        if ('' === $opening) {
+            return;
+        }
 
         if ($this->openingProvidesLabel($opening)) {
             return;

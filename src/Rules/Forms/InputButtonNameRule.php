@@ -22,7 +22,10 @@ final class InputButtonNameRule extends AbstractA11yRule
             return;
         }
 
-        $opening = $this->collectUntil($tokenIndex, $tokens, '>', 200);
+        $opening = $this->collectOpeningTag($tokenIndex, $tokens, 'input', 200);
+        if ('' === $opening) {
+            return;
+        }
 
         // Only look for submit/button inputs
         if (!preg_match('/\btype\s*=\s*["\'](submit|button)["\']/i', $opening)) {
