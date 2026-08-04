@@ -5,12 +5,20 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Ui;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Ui\MouseEventKeyboardEquivalentRuleTest;
 use TwigCsFixer\Token\Tokens;
 
 /**
  * WCAG 2.1.1 — mouse-only event handlers (onmousedown, onmouseover, onmouseout)
  * must have keyboard equivalents (onkeydown/onkeyup/onkeypress, onfocus, onblur)
  * on the same element so that keyboard-only users can trigger the same behaviour.
+ *
+ * @see MouseEventKeyboardEquivalentRuleTest
+ * @see MouseEventKeyboardEquivalentRuleTest
+ * @see MouseEventKeyboardEquivalentRuleTest
+ * @see MouseEventKeyboardEquivalentRuleTest
+ * @see MouseEventKeyboardEquivalentRuleTest
+ * @see MouseEventKeyboardEquivalentRuleTest
  */
 final class MouseEventKeyboardEquivalentRule extends AbstractA11yRule
 {

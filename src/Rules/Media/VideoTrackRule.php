@@ -5,8 +5,17 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Media;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Media\VideoTrackRuleTest;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * @see VideoTrackRuleTest
+ * @see VideoTrackRuleTest
+ * @see VideoTrackRuleTest
+ * @see VideoTrackRuleTest
+ * @see VideoTrackRuleTest
+ * @see VideoTrackRuleTest
+ */
 final class VideoTrackRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

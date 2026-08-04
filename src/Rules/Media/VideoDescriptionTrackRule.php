@@ -5,11 +5,19 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Media;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Media\VideoDescriptionTrackRuleTest;
 use TwigCsFixer\Token\Tokens;
 
 /**
  * WCAG 1.2.5 AA — <video> elements must include an audio description track
  * (<track kind="descriptions">) so that blind users can follow visual-only content.
+ *
+ * @see VideoDescriptionTrackRuleTest
+ * @see VideoDescriptionTrackRuleTest
+ * @see VideoDescriptionTrackRuleTest
+ * @see VideoDescriptionTrackRuleTest
+ * @see VideoDescriptionTrackRuleTest
+ * @see VideoDescriptionTrackRuleTest
  */
 final class VideoDescriptionTrackRule extends AbstractA11yRule
 {

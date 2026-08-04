@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace TwigA11y\Rules\Forms;
 
+use TwigA11y\Tests\Rules\Forms\InputLabelRuleTest;
+
+/**
+ * @see InputLabelRuleTest
+ * @see InputLabelRuleTest
+ * @see InputLabelRuleTest
+ * @see InputLabelRuleTest
+ * @see InputLabelRuleTest
+ * @see InputLabelRuleTest
+ */
 final class InputLabelRule extends AbstractFormFieldLabelRule
 {
     protected function tagName(): string

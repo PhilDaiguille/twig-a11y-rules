@@ -6,11 +6,19 @@ namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
 use TwigA11y\Template\TemplateKind;
+use TwigA11y\Tests\Rules\Structure\MetaCharsetRuleTest;
 use TwigCsFixer\Token\Tokens;
 
 /**
  * RGAA 8.8 / WCAG 4.1.1 — full HTML pages must declare a character encoding via
  * <meta charset="..."> or <meta http-equiv="content-type" content="text/html; charset=...">.
+ *
+ * @see MetaCharsetRuleTest
+ * @see MetaCharsetRuleTest
+ * @see MetaCharsetRuleTest
+ * @see MetaCharsetRuleTest
+ * @see MetaCharsetRuleTest
+ * @see MetaCharsetRuleTest
  */
 final class MetaCharsetRule extends AbstractA11yRule
 {

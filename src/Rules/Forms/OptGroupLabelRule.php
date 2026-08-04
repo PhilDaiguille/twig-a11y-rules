@@ -5,12 +5,20 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Forms;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Forms\OptGroupLabelRuleTest;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
 /**
  * WCAG 1.3.1 — <optgroup> inside a <select> must have a non-empty label attribute
  * so that option groups are announced to assistive technologies.
+ *
+ * @see OptGroupLabelRuleTest
+ * @see OptGroupLabelRuleTest
+ * @see OptGroupLabelRuleTest
+ * @see OptGroupLabelRuleTest
+ * @see OptGroupLabelRuleTest
+ * @see OptGroupLabelRuleTest
  */
 final class OptGroupLabelRule extends AbstractA11yRule
 {

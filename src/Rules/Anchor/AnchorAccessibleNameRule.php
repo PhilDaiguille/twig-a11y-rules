@@ -5,9 +5,18 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Anchor;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Anchor\AnchorAccessibleNameRuleTest;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * @see AnchorAccessibleNameRuleTest
+ * @see AnchorAccessibleNameRuleTest
+ * @see AnchorAccessibleNameRuleTest
+ * @see AnchorAccessibleNameRuleTest
+ * @see AnchorAccessibleNameRuleTest
+ * @see AnchorAccessibleNameRuleTest
+ */
 final class AnchorAccessibleNameRule extends AbstractA11yRule
 {
     // reuses TokenCollectorTrait::firstMatch via $this->firstMatch

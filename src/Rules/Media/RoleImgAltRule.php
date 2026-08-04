@@ -5,8 +5,17 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Media;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Media\RoleImgAltRuleTest;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * @see RoleImgAltRuleTest
+ * @see RoleImgAltRuleTest
+ * @see RoleImgAltRuleTest
+ * @see RoleImgAltRuleTest
+ * @see RoleImgAltRuleTest
+ * @see RoleImgAltRuleTest
+ */
 final class RoleImgAltRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

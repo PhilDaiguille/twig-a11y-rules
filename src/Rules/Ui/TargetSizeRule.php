@@ -5,8 +5,17 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Ui;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Ui\TargetSizeRuleTest;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * @see TargetSizeRuleTest
+ * @see TargetSizeRuleTest
+ * @see TargetSizeRuleTest
+ * @see TargetSizeRuleTest
+ * @see TargetSizeRuleTest
+ * @see TargetSizeRuleTest
+ */
 final class TargetSizeRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

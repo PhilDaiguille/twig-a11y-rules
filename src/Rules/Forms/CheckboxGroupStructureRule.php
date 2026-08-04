@@ -5,12 +5,20 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Forms;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Forms\CheckboxGroupStructureRuleTest;
 use TwigCsFixer\Token\Tokens;
 
 /**
  * WCAG 1.3.1 / RGAA 11.7 — multiple <input type="checkbox"> elements that share the
  * same name attribute must be grouped inside a <fieldset> (with a <legend>) or a
  * container with role="group" so that assistive technologies can convey the grouping.
+ *
+ * @see CheckboxGroupStructureRuleTest
+ * @see CheckboxGroupStructureRuleTest
+ * @see CheckboxGroupStructureRuleTest
+ * @see CheckboxGroupStructureRuleTest
+ * @see CheckboxGroupStructureRuleTest
+ * @see CheckboxGroupStructureRuleTest
  */
 final class CheckboxGroupStructureRule extends AbstractA11yRule
 {

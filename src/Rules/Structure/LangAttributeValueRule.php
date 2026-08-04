@@ -6,6 +6,7 @@ namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
 use TwigA11y\Template\TemplateKind;
+use TwigA11y\Tests\Rules\Structure\LangAttributeValueRuleTest;
 use TwigCsFixer\Token\Tokens;
 
 /**
@@ -13,6 +14,13 @@ use TwigCsFixer\Token\Tokens;
  *
  * WCAG 3.1.1 — Language of Page.
  * axe-core: html-lang-valid
+ *
+ * @see LangAttributeValueRuleTest
+ * @see LangAttributeValueRuleTest
+ * @see LangAttributeValueRuleTest
+ * @see LangAttributeValueRuleTest
+ * @see LangAttributeValueRuleTest
+ * @see LangAttributeValueRuleTest
  */
 final class LangAttributeValueRule extends AbstractA11yRule
 {

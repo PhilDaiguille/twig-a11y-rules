@@ -5,8 +5,17 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Forms;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Forms\AutocompleteValidRuleTest;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * @see AutocompleteValidRuleTest
+ * @see AutocompleteValidRuleTest
+ * @see AutocompleteValidRuleTest
+ * @see AutocompleteValidRuleTest
+ * @see AutocompleteValidRuleTest
+ * @see AutocompleteValidRuleTest
+ */
 final class AutocompleteValidRule extends AbstractA11yRule
 {
     /**

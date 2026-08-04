@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Structure\DuplicateAccessKeyRuleTest;
 use TwigCsFixer\Token\Tokens;
 
 /**
@@ -15,6 +16,13 @@ use TwigCsFixer\Token\Tokens;
  *
  * WCAG 4.1.1 — Parsing.
  * axe-core: accesskeys
+ *
+ * @see DuplicateAccessKeyRuleTest
+ * @see DuplicateAccessKeyRuleTest
+ * @see DuplicateAccessKeyRuleTest
+ * @see DuplicateAccessKeyRuleTest
+ * @see DuplicateAccessKeyRuleTest
+ * @see DuplicateAccessKeyRuleTest
  */
 final class DuplicateAccessKeyRule extends AbstractA11yRule
 {
