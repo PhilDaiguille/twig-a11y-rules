@@ -5,20 +5,12 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Ui;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Ui\ClickableNonInteractiveRuleTest;
 use TwigCsFixer\Token\Tokens;
 
 /**
  * WCAG 4.1.2 / 2.1.1 — non-interactive elements (div, span, p, li, …) with an onclick
  * handler but without a tabindex attribute are not keyboard-reachable.
  * Use a <button> or add tabindex="0" and an appropriate role.
- *
- * @see ClickableNonInteractiveRuleTest
- * @see ClickableNonInteractiveRuleTest
- * @see ClickableNonInteractiveRuleTest
- * @see ClickableNonInteractiveRuleTest
- * @see ClickableNonInteractiveRuleTest
- * @see ClickableNonInteractiveRuleTest
  */
 final class ClickableNonInteractiveRule extends AbstractA11yRule
 {

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Media;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Media\SvgAccessibilityRuleTest;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
@@ -18,12 +17,6 @@ use TwigCsFixer\Token\Tokens;
  *
  * @see https://www.w3.org/WAI/WCAG22/Techniques/html/H90.html
  * @see https://axe-core.github.io/rules/svg-img-alt/
- * @see SvgAccessibilityRuleTest
- * @see SvgAccessibilityRuleTest
- * @see SvgAccessibilityRuleTest
- * @see SvgAccessibilityRuleTest
- * @see SvgAccessibilityRuleTest
- * @see SvgAccessibilityRuleTest
  */
 final class SvgAccessibilityRule extends AbstractA11yRule
 {

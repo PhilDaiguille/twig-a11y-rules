@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TwigA11y\Standard;
 
-use TwigA11y\Tests\Standard\A11yStandardTest;
 use TwigCsFixer\Rules\RuleInterface;
 use TwigCsFixer\Standard\StandardInterface;
 
@@ -17,13 +16,6 @@ use TwigCsFixer\Standard\StandardInterface;
  *
  * Usage:
  *   $ruleset->addStandard(new A11yStandard());
- *
- * @see A11yStandardTest
- * @see A11yStandardTest
- * @see A11yStandardTest
- * @see A11yStandardTest
- * @see A11yStandardTest
- * @see A11yStandardTest
  */
 final class A11yStandard implements StandardInterface
 {

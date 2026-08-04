@@ -5,18 +5,9 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Media;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Media\ImgAltRuleTest;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
-/**
- * @see ImgAltRuleTest
- * @see ImgAltRuleTest
- * @see ImgAltRuleTest
- * @see ImgAltRuleTest
- * @see ImgAltRuleTest
- * @see ImgAltRuleTest
- */
 final class ImgAltRule extends AbstractA11yRule
 {
     /**

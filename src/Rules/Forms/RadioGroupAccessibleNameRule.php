@@ -5,17 +5,8 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Forms;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Forms\RadioGroupAccessibleNameRuleTest;
 use TwigCsFixer\Token\Tokens;
 
-/**
- * @see RadioGroupAccessibleNameRuleTest
- * @see RadioGroupAccessibleNameRuleTest
- * @see RadioGroupAccessibleNameRuleTest
- * @see RadioGroupAccessibleNameRuleTest
- * @see RadioGroupAccessibleNameRuleTest
- * @see RadioGroupAccessibleNameRuleTest
- */
 final class RadioGroupAccessibleNameRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

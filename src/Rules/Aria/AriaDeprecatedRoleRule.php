@@ -5,17 +5,8 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Aria;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Aria\AriaDeprecatedRoleRuleTest;
 use TwigCsFixer\Token\Tokens;
 
-/**
- * @see AriaDeprecatedRoleRuleTest
- * @see AriaDeprecatedRoleRuleTest
- * @see AriaDeprecatedRoleRuleTest
- * @see AriaDeprecatedRoleRuleTest
- * @see AriaDeprecatedRoleRuleTest
- * @see AriaDeprecatedRoleRuleTest
- */
 final class AriaDeprecatedRoleRule extends AbstractA11yRule
 {
     private const DEPRECATED = [

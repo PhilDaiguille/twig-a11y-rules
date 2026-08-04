@@ -5,18 +5,9 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Forms;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Forms\InputButtonNameRuleTest;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
-/**
- * @see InputButtonNameRuleTest
- * @see InputButtonNameRuleTest
- * @see InputButtonNameRuleTest
- * @see InputButtonNameRuleTest
- * @see InputButtonNameRuleTest
- * @see InputButtonNameRuleTest
- */
 final class InputButtonNameRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

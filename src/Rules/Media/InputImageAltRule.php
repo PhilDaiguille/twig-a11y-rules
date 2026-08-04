@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Media;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Media\InputImageAltRuleTest;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
@@ -14,13 +13,6 @@ use TwigCsFixer\Token\Tokens;
  *
  * Axe-core rule: input-image-alt (Critical)
  * WCAG 1.1.1 — Non-text Content
- *
- * @see InputImageAltRuleTest
- * @see InputImageAltRuleTest
- * @see InputImageAltRuleTest
- * @see InputImageAltRuleTest
- * @see InputImageAltRuleTest
- * @see InputImageAltRuleTest
  */
 final class InputImageAltRule extends AbstractA11yRule
 {

@@ -6,17 +6,8 @@ namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
 use TwigA11y\Template\TemplateKind;
-use TwigA11y\Tests\Rules\Structure\PageHeadingOneRuleTest;
 use TwigCsFixer\Token\Tokens;
 
-/**
- * @see PageHeadingOneRuleTest
- * @see PageHeadingOneRuleTest
- * @see PageHeadingOneRuleTest
- * @see PageHeadingOneRuleTest
- * @see PageHeadingOneRuleTest
- * @see PageHeadingOneRuleTest
- */
 final class PageHeadingOneRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

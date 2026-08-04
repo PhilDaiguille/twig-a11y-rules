@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Structure\GenericLinkTextRuleTest;
 use TwigCsFixer\Token\Tokens;
 
 /**
@@ -18,13 +17,6 @@ use TwigCsFixer\Token\Tokens;
  * Reported as a warning because the rule cannot reliably evaluate context-
  * dependent scenarios (e.g. a "Read more" link that is immediately preceded
  * by a descriptive heading may be acceptable).
- *
- * @see GenericLinkTextRuleTest
- * @see GenericLinkTextRuleTest
- * @see GenericLinkTextRuleTest
- * @see GenericLinkTextRuleTest
- * @see GenericLinkTextRuleTest
- * @see GenericLinkTextRuleTest
  */
 final class GenericLinkTextRule extends AbstractA11yRule
 {

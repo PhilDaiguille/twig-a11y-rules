@@ -5,17 +5,8 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Structure\TableCaptionMissingRuleTest;
 use TwigCsFixer\Token\Tokens;
 
-/**
- * @see TableCaptionMissingRuleTest
- * @see TableCaptionMissingRuleTest
- * @see TableCaptionMissingRuleTest
- * @see TableCaptionMissingRuleTest
- * @see TableCaptionMissingRuleTest
- * @see TableCaptionMissingRuleTest
- */
 final class TableCaptionMissingRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

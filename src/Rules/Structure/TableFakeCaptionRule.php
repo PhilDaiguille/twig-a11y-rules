@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Structure\TableFakeCaptionRuleTest;
 use TwigCsFixer\Token\Tokens;
 
 /**
@@ -18,13 +17,6 @@ use TwigCsFixer\Token\Tokens;
  * first row, is flagged as likely using a fake caption.
  *
  * WCAG 1.3.1 — Info and Relationships, Level A.
- *
- * @see TableFakeCaptionRuleTest
- * @see TableFakeCaptionRuleTest
- * @see TableFakeCaptionRuleTest
- * @see TableFakeCaptionRuleTest
- * @see TableFakeCaptionRuleTest
- * @see TableFakeCaptionRuleTest
  */
 final class TableFakeCaptionRule extends AbstractA11yRule
 {

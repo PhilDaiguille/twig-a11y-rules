@@ -5,18 +5,9 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Structure\ButtonContentRuleTest;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
-/**
- * @see ButtonContentRuleTest
- * @see ButtonContentRuleTest
- * @see ButtonContentRuleTest
- * @see ButtonContentRuleTest
- * @see ButtonContentRuleTest
- * @see ButtonContentRuleTest
- */
 final class ButtonContentRule extends AbstractA11yRule
 {
     private int $idx = 0;

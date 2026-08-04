@@ -5,17 +5,8 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Aria;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Aria\AriaRoleRuleTest;
 use TwigCsFixer\Token\Tokens;
 
-/**
- * @see AriaRoleRuleTest
- * @see AriaRoleRuleTest
- * @see AriaRoleRuleTest
- * @see AriaRoleRuleTest
- * @see AriaRoleRuleTest
- * @see AriaRoleRuleTest
- */
 final class AriaRoleRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

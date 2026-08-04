@@ -5,17 +5,8 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Aria;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Aria\AriaAllowedAttrRuleTest;
 use TwigCsFixer\Token\Tokens;
 
-/**
- * @see AriaAllowedAttrRuleTest
- * @see AriaAllowedAttrRuleTest
- * @see AriaAllowedAttrRuleTest
- * @see AriaAllowedAttrRuleTest
- * @see AriaAllowedAttrRuleTest
- * @see AriaAllowedAttrRuleTest
- */
 final class AriaAllowedAttrRule extends AbstractA11yRule
 {
     /**

@@ -5,20 +5,12 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Media;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Media\AudioControlsRuleTest;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
 /**
  * WCAG 1.2.1 A — <audio> elements must have a controls attribute so that
  * keyboard users can operate them without relying on custom scripts.
- *
- * @see AudioControlsRuleTest
- * @see AudioControlsRuleTest
- * @see AudioControlsRuleTest
- * @see AudioControlsRuleTest
- * @see AudioControlsRuleTest
- * @see AudioControlsRuleTest
  */
 final class AudioControlsRule extends AbstractA11yRule
 {

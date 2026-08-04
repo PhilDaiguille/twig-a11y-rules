@@ -6,18 +6,9 @@ namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
 use TwigA11y\Template\TemplateKind;
-use TwigA11y\Tests\Rules\Structure\LangAttributeRuleTest;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
-/**
- * @see LangAttributeRuleTest
- * @see LangAttributeRuleTest
- * @see LangAttributeRuleTest
- * @see LangAttributeRuleTest
- * @see LangAttributeRuleTest
- * @see LangAttributeRuleTest
- */
 final class LangAttributeRule extends AbstractA11yRule
 {
     private int $idx = 0;

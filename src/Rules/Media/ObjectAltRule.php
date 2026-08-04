@@ -5,18 +5,9 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Media;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Media\ObjectAltRuleTest;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
-/**
- * @see ObjectAltRuleTest
- * @see ObjectAltRuleTest
- * @see ObjectAltRuleTest
- * @see ObjectAltRuleTest
- * @see ObjectAltRuleTest
- * @see ObjectAltRuleTest
- */
 final class ObjectAltRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

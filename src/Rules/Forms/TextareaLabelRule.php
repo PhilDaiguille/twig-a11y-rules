@@ -4,16 +4,6 @@ declare(strict_types=1);
 
 namespace TwigA11y\Rules\Forms;
 
-use TwigA11y\Tests\Rules\Forms\TextareaLabelRuleTest;
-
-/**
- * @see TextareaLabelRuleTest
- * @see TextareaLabelRuleTest
- * @see TextareaLabelRuleTest
- * @see TextareaLabelRuleTest
- * @see TextareaLabelRuleTest
- * @see TextareaLabelRuleTest
- */
 final class TextareaLabelRule extends AbstractFormFieldLabelRule
 {
     protected function tagName(): string

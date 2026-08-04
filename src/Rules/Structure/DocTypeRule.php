@@ -6,18 +6,10 @@ namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
 use TwigA11y\Template\TemplateKind;
-use TwigA11y\Tests\Rules\Structure\DocTypeRuleTest;
 use TwigCsFixer\Token\Tokens;
 
 /**
  * RGAA 8.1 — full HTML pages must declare a DOCTYPE.
- *
- * @see DocTypeRuleTest
- * @see DocTypeRuleTest
- * @see DocTypeRuleTest
- * @see DocTypeRuleTest
- * @see DocTypeRuleTest
- * @see DocTypeRuleTest
  */
 final class DocTypeRule extends AbstractA11yRule
 {
