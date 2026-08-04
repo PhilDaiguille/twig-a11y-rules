@@ -47,7 +47,7 @@ use TwigA11y\Rules\Structure\BannedTagsRule;
 
 $config = new Config();
 
-// getRuleset() keeps the default twig-cs-fixer standard in place.
+// getRuleset() conserve le standard twig-cs-fixer par défaut.
 $config->getRuleset()
     ->addRule(new ImgAltRule())
     ->addRule(new BannedTagsRule());
@@ -55,10 +55,11 @@ $config->getRuleset()
 return $config;
 ```
 
-> Use `$config->getRuleset()` rather than `$config->setRuleset(new Ruleset())`:
-> `Config` already loads the `TwigCsFixer` standard into its ruleset, and replacing
-> it with an empty `Ruleset` disables all Twig formatting lint. Only pass a fresh
-> ruleset to `setRuleset()` if you explicitly want the a11y rules *only*.
+> Utilisez `$config->getRuleset()` et non `$config->setRuleset(new Ruleset())` :
+> `Config` charge déjà le standard `TwigCsFixer` dans son ruleset, et le remplacer
+> par un `Ruleset` vide désactive tout le lint de formatage Twig. Passez un ruleset
+> neuf à `setRuleset()` seulement si vous voulez explicitement *uniquement* les
+> règles a11y.
 
 ### Standards
 
