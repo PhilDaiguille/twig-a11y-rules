@@ -5,8 +5,17 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Structure\TableDuplicateNameRuleTest;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * @see TableDuplicateNameRuleTest
+ * @see TableDuplicateNameRuleTest
+ * @see TableDuplicateNameRuleTest
+ * @see TableDuplicateNameRuleTest
+ * @see TableDuplicateNameRuleTest
+ * @see TableDuplicateNameRuleTest
+ */
 final class TableDuplicateNameRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

@@ -5,8 +5,17 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Forms;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Forms\LabelForTargetExistsRuleTest;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * @see LabelForTargetExistsRuleTest
+ * @see LabelForTargetExistsRuleTest
+ * @see LabelForTargetExistsRuleTest
+ * @see LabelForTargetExistsRuleTest
+ * @see LabelForTargetExistsRuleTest
+ * @see LabelForTargetExistsRuleTest
+ */
 final class LabelForTargetExistsRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

@@ -5,8 +5,17 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Aria;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Aria\AriaRequiredParentRuleTest;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * @see AriaRequiredParentRuleTest
+ * @see AriaRequiredParentRuleTest
+ * @see AriaRequiredParentRuleTest
+ * @see AriaRequiredParentRuleTest
+ * @see AriaRequiredParentRuleTest
+ * @see AriaRequiredParentRuleTest
+ */
 final class AriaRequiredParentRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

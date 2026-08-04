@@ -5,9 +5,18 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Structure\TdHeadersAttrRuleTest;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * @see TdHeadersAttrRuleTest
+ * @see TdHeadersAttrRuleTest
+ * @see TdHeadersAttrRuleTest
+ * @see TdHeadersAttrRuleTest
+ * @see TdHeadersAttrRuleTest
+ * @see TdHeadersAttrRuleTest
+ */
 final class TdHeadersAttrRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

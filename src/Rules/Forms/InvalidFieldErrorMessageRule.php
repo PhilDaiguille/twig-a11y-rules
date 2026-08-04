@@ -5,8 +5,17 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Forms;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Forms\InvalidFieldErrorMessageRuleTest;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * @see InvalidFieldErrorMessageRuleTest
+ * @see InvalidFieldErrorMessageRuleTest
+ * @see InvalidFieldErrorMessageRuleTest
+ * @see InvalidFieldErrorMessageRuleTest
+ * @see InvalidFieldErrorMessageRuleTest
+ * @see InvalidFieldErrorMessageRuleTest
+ */
 final class InvalidFieldErrorMessageRule extends AbstractA11yRule
 {
     private const array CUSTOM_FIELD_ROLES = [

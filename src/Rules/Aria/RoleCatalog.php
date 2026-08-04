@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace TwigA11y\Rules\Aria;
 
+use TwigA11y\Tests\Rules\Aria\RoleCatalogTest;
+
+/**
+ * @see RoleCatalogTest
+ * @see RoleCatalogTest
+ * @see RoleCatalogTest
+ * @see RoleCatalogTest
+ * @see RoleCatalogTest
+ * @see RoleCatalogTest
+ */
 final class RoleCatalog
 {
     /**

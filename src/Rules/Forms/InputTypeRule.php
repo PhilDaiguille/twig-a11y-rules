@@ -5,8 +5,17 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Forms;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Forms\InputTypeRuleTest;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * @see InputTypeRuleTest
+ * @see InputTypeRuleTest
+ * @see InputTypeRuleTest
+ * @see InputTypeRuleTest
+ * @see InputTypeRuleTest
+ * @see InputTypeRuleTest
+ */
 final class InputTypeRule extends AbstractA11yRule
 {
     /**

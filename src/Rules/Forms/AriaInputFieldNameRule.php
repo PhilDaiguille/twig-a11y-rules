@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Forms;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Forms\AriaInputFieldNameRuleTest;
 use TwigCsFixer\Token\Tokens;
 
 /**
@@ -15,6 +16,13 @@ use TwigCsFixer\Token\Tokens;
  * because the role and id attributes may be spread across token boundaries.
  * It cannot extend AbstractFormFieldLabelRule which is token-by-token and
  * targets native HTML form elements.
+ *
+ * @see AriaInputFieldNameRuleTest
+ * @see AriaInputFieldNameRuleTest
+ * @see AriaInputFieldNameRuleTest
+ * @see AriaInputFieldNameRuleTest
+ * @see AriaInputFieldNameRuleTest
+ * @see AriaInputFieldNameRuleTest
  */
 final class AriaInputFieldNameRule extends AbstractA11yRule
 {

@@ -91,8 +91,17 @@ use TwigA11y\Rules\Ui\MouseEventKeyboardEquivalentRule;
 use TwigA11y\Rules\Ui\OutlineNoneWithoutFocusVisibleRule;
 use TwigA11y\Rules\Ui\ScrollableRegionFocusableRule;
 use TwigA11y\Rules\Ui\TargetSizeRule;
+use TwigA11y\Tests\Standard\StandardRuleSetsTest;
 use TwigCsFixer\Rules\RuleInterface;
 
+/**
+ * @see StandardRuleSetsTest
+ * @see StandardRuleSetsTest
+ * @see StandardRuleSetsTest
+ * @see StandardRuleSetsTest
+ * @see StandardRuleSetsTest
+ * @see StandardRuleSetsTest
+ */
 final class StandardRuleSets
 {
     /**

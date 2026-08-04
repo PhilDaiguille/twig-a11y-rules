@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Forms;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Forms\FormLabelRuleTest;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
@@ -16,6 +17,13 @@ use TwigCsFixer\Token\Tokens;
  * This rule targets the <label> element itself — the inverse of
  * AbstractFormFieldLabelRule which checks fields for their labels.
  * The two concerns are distinct and cannot share the same abstraction.
+ *
+ * @see FormLabelRuleTest
+ * @see FormLabelRuleTest
+ * @see FormLabelRuleTest
+ * @see FormLabelRuleTest
+ * @see FormLabelRuleTest
+ * @see FormLabelRuleTest
  */
 final class FormLabelRule extends AbstractA11yRule
 {

@@ -5,12 +5,20 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Aria;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Aria\RoleButtonTabindexRuleTest;
 use TwigCsFixer\Token\Tokens;
 
 /**
  * WCAG 4.1.2 / 2.1.1 — non-native interactive elements using an interactive ARIA role
  * (button, link, checkbox, radio, tab, menuitem, …) must have tabindex="0" so that
  * keyboard users can reach them via Tab navigation.
+ *
+ * @see RoleButtonTabindexRuleTest
+ * @see RoleButtonTabindexRuleTest
+ * @see RoleButtonTabindexRuleTest
+ * @see RoleButtonTabindexRuleTest
+ * @see RoleButtonTabindexRuleTest
+ * @see RoleButtonTabindexRuleTest
  */
 final class RoleButtonTabindexRule extends AbstractA11yRule
 {

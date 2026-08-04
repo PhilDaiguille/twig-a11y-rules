@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace TwigA11y\Template;
 
+use TwigA11y\Tests\Template\TemplateClassifierTest;
+
+/**
+ * @see TemplateClassifierTest
+ * @see TemplateClassifierTest
+ * @see TemplateClassifierTest
+ * @see TemplateClassifierTest
+ * @see TemplateClassifierTest
+ * @see TemplateClassifierTest
+ */
 final class TemplateClassifier
 {
     public static function classify(string $content): TemplateKind

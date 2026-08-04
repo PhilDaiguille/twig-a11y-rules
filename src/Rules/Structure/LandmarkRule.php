@@ -6,8 +6,17 @@ namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
 use TwigA11y\Template\TemplateKind;
+use TwigA11y\Tests\Rules\Structure\LandmarkRuleTest;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * @see LandmarkRuleTest
+ * @see LandmarkRuleTest
+ * @see LandmarkRuleTest
+ * @see LandmarkRuleTest
+ * @see LandmarkRuleTest
+ * @see LandmarkRuleTest
+ */
 final class LandmarkRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

@@ -5,8 +5,17 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Aria;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Aria\AriaErrorMessageIdExistsRuleTest;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * @see AriaErrorMessageIdExistsRuleTest
+ * @see AriaErrorMessageIdExistsRuleTest
+ * @see AriaErrorMessageIdExistsRuleTest
+ * @see AriaErrorMessageIdExistsRuleTest
+ * @see AriaErrorMessageIdExistsRuleTest
+ * @see AriaErrorMessageIdExistsRuleTest
+ */
 final class AriaErrorMessageIdExistsRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

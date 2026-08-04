@@ -5,8 +5,17 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Forms;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Forms\PlaceholderOnlyLabelRuleTest;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * @see PlaceholderOnlyLabelRuleTest
+ * @see PlaceholderOnlyLabelRuleTest
+ * @see PlaceholderOnlyLabelRuleTest
+ * @see PlaceholderOnlyLabelRuleTest
+ * @see PlaceholderOnlyLabelRuleTest
+ * @see PlaceholderOnlyLabelRuleTest
+ */
 final class PlaceholderOnlyLabelRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

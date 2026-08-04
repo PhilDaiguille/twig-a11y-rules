@@ -5,8 +5,17 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Forms;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Forms\RadioGroupStructureRuleTest;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * @see RadioGroupStructureRuleTest
+ * @see RadioGroupStructureRuleTest
+ * @see RadioGroupStructureRuleTest
+ * @see RadioGroupStructureRuleTest
+ * @see RadioGroupStructureRuleTest
+ * @see RadioGroupStructureRuleTest
+ */
 final class RadioGroupStructureRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

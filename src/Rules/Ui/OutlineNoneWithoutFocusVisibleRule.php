@@ -5,9 +5,18 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Ui;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Ui\OutlineNoneWithoutFocusVisibleRuleTest;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * @see OutlineNoneWithoutFocusVisibleRuleTest
+ * @see OutlineNoneWithoutFocusVisibleRuleTest
+ * @see OutlineNoneWithoutFocusVisibleRuleTest
+ * @see OutlineNoneWithoutFocusVisibleRuleTest
+ * @see OutlineNoneWithoutFocusVisibleRuleTest
+ * @see OutlineNoneWithoutFocusVisibleRuleTest
+ */
 final class OutlineNoneWithoutFocusVisibleRule extends AbstractA11yRule
 {
     public function __construct()

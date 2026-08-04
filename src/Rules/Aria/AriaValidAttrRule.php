@@ -5,8 +5,17 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Aria;
 
 use TwigA11y\Rules\AbstractA11yRule;
+use TwigA11y\Tests\Rules\Aria\AriaValidAttrRuleTest;
 use TwigCsFixer\Token\Tokens;
 
+/**
+ * @see AriaValidAttrRuleTest
+ * @see AriaValidAttrRuleTest
+ * @see AriaValidAttrRuleTest
+ * @see AriaValidAttrRuleTest
+ * @see AriaValidAttrRuleTest
+ * @see AriaValidAttrRuleTest
+ */
 final class AriaValidAttrRule extends AbstractA11yRule
 {
     private const array WHITELIST = [
