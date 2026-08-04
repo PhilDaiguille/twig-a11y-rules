@@ -5,19 +5,11 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Structure\TableLayoutRoleRuleTest;
 use TwigCsFixer\Token\Tokens;
 
 /**
  * RGAA 5.3 / WCAG 1.3.1 — a <table> used for layout (no <th> inside) must declare
  * role="presentation" or role="none" so assistive technologies ignore its structure.
- *
- * @see TableLayoutRoleRuleTest
- * @see TableLayoutRoleRuleTest
- * @see TableLayoutRoleRuleTest
- * @see TableLayoutRoleRuleTest
- * @see TableLayoutRoleRuleTest
- * @see TableLayoutRoleRuleTest
  */
 final class TableLayoutRoleRule extends AbstractA11yRule
 {

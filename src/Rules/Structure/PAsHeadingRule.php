@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Structure\PAsHeadingRuleTest;
 use TwigCsFixer\Token\Tokens;
 
 /**
@@ -18,13 +17,6 @@ use TwigCsFixer\Token\Tokens;
  *    (>= 1.5em or >= 20px as a simple heuristic)
  *
  * WCAG 1.3.1 — Info and Relationships, Level A.
- *
- * @see PAsHeadingRuleTest
- * @see PAsHeadingRuleTest
- * @see PAsHeadingRuleTest
- * @see PAsHeadingRuleTest
- * @see PAsHeadingRuleTest
- * @see PAsHeadingRuleTest
  */
 final class PAsHeadingRule extends AbstractA11yRule
 {

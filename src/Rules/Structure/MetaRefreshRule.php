@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Structure\MetaRefreshRuleTest;
 use TwigCsFixer\Token\Tokens;
 
 /**
@@ -14,13 +13,6 @@ use TwigCsFixer\Token\Tokens;
  *
  * Axe-core rule: meta-refresh (Serious)
  * WCAG 2.2.1 — Timing Adjustable
- *
- * @see MetaRefreshRuleTest
- * @see MetaRefreshRuleTest
- * @see MetaRefreshRuleTest
- * @see MetaRefreshRuleTest
- * @see MetaRefreshRuleTest
- * @see MetaRefreshRuleTest
  */
 final class MetaRefreshRule extends AbstractA11yRule
 {

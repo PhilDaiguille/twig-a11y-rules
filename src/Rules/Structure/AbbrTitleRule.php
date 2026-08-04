@@ -5,20 +5,12 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Structure\AbbrTitleRuleTest;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
 /**
  * RGAA 9.4 / WCAG 3.1.4 — every <abbr> must have a non-empty title attribute
  * providing the expansion of the abbreviation.
- *
- * @see AbbrTitleRuleTest
- * @see AbbrTitleRuleTest
- * @see AbbrTitleRuleTest
- * @see AbbrTitleRuleTest
- * @see AbbrTitleRuleTest
- * @see AbbrTitleRuleTest
  */
 final class AbbrTitleRule extends AbstractA11yRule
 {

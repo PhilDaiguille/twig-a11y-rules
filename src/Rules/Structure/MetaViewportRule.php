@@ -6,17 +6,8 @@ namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
 use TwigA11y\Template\TemplateKind;
-use TwigA11y\Tests\Rules\Structure\MetaViewportRuleTest;
 use TwigCsFixer\Token\Tokens;
 
-/**
- * @see MetaViewportRuleTest
- * @see MetaViewportRuleTest
- * @see MetaViewportRuleTest
- * @see MetaViewportRuleTest
- * @see MetaViewportRuleTest
- * @see MetaViewportRuleTest
- */
 final class MetaViewportRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

@@ -5,17 +5,8 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Structure\FieldsetLegendRuleTest;
 use TwigCsFixer\Token\Tokens;
 
-/**
- * @see FieldsetLegendRuleTest
- * @see FieldsetLegendRuleTest
- * @see FieldsetLegendRuleTest
- * @see FieldsetLegendRuleTest
- * @see FieldsetLegendRuleTest
- * @see FieldsetLegendRuleTest
- */
 final class FieldsetLegendRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

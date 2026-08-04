@@ -6,17 +6,8 @@ namespace TwigA11y\Rules\Aria;
 
 use TwigA11y\Rules\AbstractA11yRule;
 use TwigA11y\Template\TemplateKind;
-use TwigA11y\Tests\Rules\Aria\AriaHiddenBodyRuleTest;
 use TwigCsFixer\Token\Tokens;
 
-/**
- * @see AriaHiddenBodyRuleTest
- * @see AriaHiddenBodyRuleTest
- * @see AriaHiddenBodyRuleTest
- * @see AriaHiddenBodyRuleTest
- * @see AriaHiddenBodyRuleTest
- * @see AriaHiddenBodyRuleTest
- */
 final class AriaHiddenBodyRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
+use Rector\PHPUnit\CodeQuality\Rector\Class_\AddSeeTestAnnotationRector;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -22,4 +23,6 @@ return RectorConfig::configure()
         phpunitCodeQuality: true,
     )
     ->withComposerBased(phpunit: true)
+    // ponytail: non-idempotent, il empile un @see par run et couple src/ à tests/
+    ->withSkip([AddSeeTestAnnotationRector::class])
 ;

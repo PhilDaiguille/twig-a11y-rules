@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Structure\NestedInteractiveRuleTest;
 use TwigCsFixer\Token\Tokens;
 
 /**
@@ -19,13 +18,6 @@ use TwigCsFixer\Token\Tokens;
  *
  * WCAG 4.1.1 — Parsing.
  * axe-core: nested-interactive
- *
- * @see NestedInteractiveRuleTest
- * @see NestedInteractiveRuleTest
- * @see NestedInteractiveRuleTest
- * @see NestedInteractiveRuleTest
- * @see NestedInteractiveRuleTest
- * @see NestedInteractiveRuleTest
  */
 final class NestedInteractiveRule extends AbstractA11yRule
 {

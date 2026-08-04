@@ -5,17 +5,8 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Aria;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Aria\AriaValidAttrValueRuleTest;
 use TwigCsFixer\Token\Tokens;
 
-/**
- * @see AriaValidAttrValueRuleTest
- * @see AriaValidAttrValueRuleTest
- * @see AriaValidAttrValueRuleTest
- * @see AriaValidAttrValueRuleTest
- * @see AriaValidAttrValueRuleTest
- * @see AriaValidAttrValueRuleTest
- */
 final class AriaValidAttrValueRule extends AbstractA11yRule
 {
     private const array ENUM_MAP = [

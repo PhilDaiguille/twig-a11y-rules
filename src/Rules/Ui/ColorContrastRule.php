@@ -5,17 +5,8 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Ui;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Ui\ColorContrastRuleTest;
 use TwigCsFixer\Token\Tokens;
 
-/**
- * @see ColorContrastRuleTest
- * @see ColorContrastRuleTest
- * @see ColorContrastRuleTest
- * @see ColorContrastRuleTest
- * @see ColorContrastRuleTest
- * @see ColorContrastRuleTest
- */
 final class ColorContrastRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Structure;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigA11y\Tests\Rules\Structure\FrameTitleRuleTest;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
@@ -14,13 +13,6 @@ use TwigCsFixer\Token\Tokens;
  *
  * Axe-core rule: frame-title (Critical)
  * WCAG 2.4.1 — Bypass Blocks; 4.1.2 — Name, Role, Value
- *
- * @see FrameTitleRuleTest
- * @see FrameTitleRuleTest
- * @see FrameTitleRuleTest
- * @see FrameTitleRuleTest
- * @see FrameTitleRuleTest
- * @see FrameTitleRuleTest
  */
 final class FrameTitleRule extends AbstractA11yRule
 {
