@@ -1,5 +1,7 @@
 # Security Policy
 
-If you discover a security vulnerability, please report it privately by opening an issue and prefacing the title with "SECURITY:" or by contacting the repository owner.
+Please report vulnerabilities privately through
+[GitHub Security Advisories](https://github.com/PhilDaiguille/twig-a11y-rules/security/advisories/new).
+Do not open a public issue.
 
-Do not disclose vulnerabilities publicly until they have been addressed.
+Only the latest release receives security fixes.

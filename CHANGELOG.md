@@ -7,11 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## Unreleased
 
-## 1.0.0 - 2026-08-04
+### Fixed
 
-First stable release. The rule identifiers and the standards under
-`TwigA11y\Standard\` are now covered by the backward-compatibility policy
-documented in the README.
+- `FormLabelRule` no longer misses an empty or orphan `<label>` that follows a
+  valid one, and accepts labels whose text is wrapped in inline elements such as
+  `<span>` (#22, thanks @Simbiat).
+
+## 0.9.0 - 2026-08-04
+
+Release candidate for 1.0.0. The rule identifiers and the standards under
+`TwigA11y\Standard\` follow the backward-compatibility policy documented in the
+README.
 
 ### Added
 

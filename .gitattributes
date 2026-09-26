@@ -1,2 +1,19 @@
-/* linguist-generated
-/.github/* linguist-vendored
+* text=auto eol=lf
+
+/.agents export-ignore
+/.editorconfig export-ignore
+/.gitattributes export-ignore
+/.github export-ignore
+/.gitignore export-ignore
+/.php-cs-fixer.dist.php export-ignore
+/.twig-cs-fixer.php export-ignore
+/AGENTS.md export-ignore
+/CLAUDE.md export-ignore
+/CODE_OF_CONDUCT.md export-ignore
+/CONTRIBUTING.md export-ignore
+/Makefile export-ignore
+/infection.json5 export-ignore
+/phpstan.dist.neon export-ignore
+/phpunit.xml export-ignore
+/rector.php export-ignore
+/tests export-ignore
