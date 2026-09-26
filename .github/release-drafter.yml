@@ -42,17 +42,26 @@ categories:
 exclude-labels:
   - 'skip-changelog'
 
+# Labels come from the conventional PR title (feat:, fix:, docs:, ...).
 autolabeler:
-  - label: 'documentation'
-    files:
-      - '*.md'
-      - 'docs/**'
-  - label: 'tests'
-    files:
-      - 'tests/**'
+  - label: 'breaking'
+    title:
+      - '/^\w+(\(.+\))?!:/'
   - label: 'feature'
-    files:
-      - 'src/**'
+    title:
+      - '/^feat/i'
+  - label: 'bug'
+    title:
+      - '/^fix/i'
+  - label: 'documentation'
+    title:
+      - '/^docs/i'
+  - label: 'chore'
+    title:
+      - '/^(chore|ci|build|refactor|test)/i'
+  - label: 'dependencies'
+    title:
+      - '/^(deps|chore\(deps\))/i'
 
 sort-by: 'merged_at'
 sort-direction: 'descending'

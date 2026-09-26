@@ -36,8 +36,11 @@ jobs:
                   key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
                   restore-keys: ${{ runner.os }}-composer-
 
+            - name: Validate composer.json
+              run: composer validate --strict --no-check-lock
+
             - name: Install dependencies
-              run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+              run: composer install --prefer-dist --no-progress --optimize-autoloader
 
             - name: Run PHPStan
               run: composer phpstan -- --no-progress
@@ -46,7 +49,7 @@ jobs:
               run: composer cs-lint
 
             - name: Run rector (dry-run)
-              run: composer rector -- --dry-run
+              run: composer rector
 
             - name: Run tests with coverage
               env:
@@ -74,3 +77,23 @@ jobs:
                   files: build/coverage/junit.xml
                   report_type: test_results
                   fail_ci_if_error: false
+
+    # Oldest versions allowed by composer.json (twig-cs-fixer 4.0.0, ...).
+    lowest:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v6
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.4'
+                  extensions: mbstring, dom, intl
+                  coverage: none
+
+            - name: Install lowest dependencies
+              run: composer update --prefer-lowest --prefer-stable --prefer-dist --no-progress
+
+            - name: Run tests
+              run: vendor/bin/phpunit
