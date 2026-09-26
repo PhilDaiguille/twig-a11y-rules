@@ -18,7 +18,7 @@ final class InputLabelRule extends AbstractFormFieldLabelRule
 
     protected function messageId(): string
     {
-        return 'InputLabel.MissingLabel';
+        return 'MissingLabel';
     }
 
     /**

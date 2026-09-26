@@ -33,7 +33,7 @@ final class MetaViewportRuleTest extends AbstractRuleTestCase
 
         yield 'maximum-scale too low' => [
             __DIR__.'/Fixtures/invalid/meta_viewport_max_scale.html.twig',
-            ['MetaViewport.MetaViewport.MaximumScale:1:1' => 'Avoid setting maximum-scale below 2 in the viewport meta (WCAG 1.4.4).'],
+            ['MetaViewport.MaximumScale:1:1' => 'Avoid setting maximum-scale below 2 in the viewport meta (WCAG 1.4.4).'],
         ];
 
         yield 'maximum-scale acceptable' => [__DIR__.'/Fixtures/valid/meta_viewport_max_scale_ok.html.twig', []];

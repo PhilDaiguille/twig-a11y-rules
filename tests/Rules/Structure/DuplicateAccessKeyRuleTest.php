@@ -36,7 +36,7 @@ final class DuplicateAccessKeyRuleTest extends AbstractRuleTestCase
 
         yield 'duplicate accesskeys' => [
             __DIR__.'/Fixtures/invalid/accesskey_duplicate.html.twig',
-            ['DuplicateAccessKey.DuplicateAccessKey.Duplicate:1:1' => 'Duplicate accesskey value "h" found. Each accesskey must be unique within a page.'],
+            ['DuplicateAccessKey.Duplicate:1:1' => 'Duplicate accesskey value "h" found. Each accesskey must be unique within a page.'],
         ];
     }
 }

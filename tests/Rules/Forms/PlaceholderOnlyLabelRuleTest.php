@@ -30,11 +30,11 @@ final class PlaceholderOnlyLabelRuleTest extends AbstractRuleTestCase
         yield 'placeholder with aria label' => [__DIR__.'/Fixtures/valid/placeholder_with_aria_label.html.twig', []];
 
         yield 'placeholder only input' => [__DIR__.'/Fixtures/invalid/placeholder_only_input.html.twig', [
-            'PlaceholderOnlyLabel.PlaceholderOnlyLabel.MissingLabel:2:1' => 'Form field appears to rely on placeholder text instead of a proper label.',
+            'PlaceholderOnlyLabel.MissingLabel:2:1' => 'Form field appears to rely on placeholder text instead of a proper label.',
         ]];
 
         yield 'placeholder only textarea' => [__DIR__.'/Fixtures/invalid/placeholder_only_textarea.html.twig', [
-            'PlaceholderOnlyLabel.PlaceholderOnlyLabel.MissingLabel:2:1' => 'Form field appears to rely on placeholder text instead of a proper label.',
+            'PlaceholderOnlyLabel.MissingLabel:2:1' => 'Form field appears to rely on placeholder text instead of a proper label.',
         ]];
     }
 }

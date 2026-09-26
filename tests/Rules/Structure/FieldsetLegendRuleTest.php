@@ -30,7 +30,7 @@ final class FieldsetLegendRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'fieldset without legend' => [__DIR__.'/Fixtures/invalid/fieldset_no_legend.html.twig', [
-            'FieldsetLegend.Fieldset.LegendMissing:1:1' => 'Fieldset must contain a non-empty <legend>.',
+            'FieldsetLegend.LegendMissing:1:1' => 'Fieldset must contain a non-empty <legend>.',
         ]];
     }
 }

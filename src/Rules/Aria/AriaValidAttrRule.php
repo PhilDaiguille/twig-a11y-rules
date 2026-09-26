@@ -74,7 +74,7 @@ final class AriaValidAttrRule extends AbstractA11yRule
                 $n = strtolower($name);
                 if (!in_array('aria-'.$n, self::WHITELIST, true)) {
                     $token = $tokens->get(0);
-                    $emit(sprintf('Attribute aria-%s is not a valid ARIA attribute.', $n), $token, 'AriaValidAttr.InvalidAttr');
+                    $emit(sprintf('Attribute aria-%s is not a valid ARIA attribute.', $n), $token, 'InvalidAttr');
                 }
             }
         }

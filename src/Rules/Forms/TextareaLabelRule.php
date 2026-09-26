@@ -18,6 +18,6 @@ final class TextareaLabelRule extends AbstractFormFieldLabelRule
 
     protected function messageId(): string
     {
-        return 'TextareaLabel.Missing';
+        return 'Missing';
     }
 }

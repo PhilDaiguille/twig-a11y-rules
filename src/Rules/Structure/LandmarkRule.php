@@ -19,7 +19,7 @@ final class LandmarkRule extends AbstractA11yRule
         }
 
         $first = $tokens->get(0);
-        $emit('Page should include a main landmark', $first, 'Landmark.MissingMain');
+        $emit('Page should include a main landmark', $first, 'MissingMain');
     }
 
     /**

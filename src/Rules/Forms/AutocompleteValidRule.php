@@ -58,7 +58,7 @@ final class AutocompleteValidRule extends AbstractA11yRule
 
                     if (!in_array($token, $this->allowed, true)) {
                         $fakeToken = $tokens->get(0);
-                        $emit(sprintf('Invalid autocomplete value "%s".', $token), $fakeToken, 'Autocomplete.Invalid');
+                        $emit(sprintf('Invalid autocomplete value "%s".', $token), $fakeToken, 'Invalid');
 
                         return;
                     }

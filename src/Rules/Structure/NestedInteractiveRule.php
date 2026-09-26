@@ -34,7 +34,7 @@ final class NestedInteractiveRule extends AbstractA11yRule
                     $emit(
                         sprintf('Interactive element <%s> must not be nested inside an <a>.', strtolower($nested[1])),
                         $fakeToken,
-                        'NestedInteractive.InsideAnchor'
+                        'InsideAnchor'
                     );
 
                     return;
@@ -51,7 +51,7 @@ final class NestedInteractiveRule extends AbstractA11yRule
                     $emit(
                         'Interactive element <a> must not be nested inside a <button>.',
                         $fakeToken,
-                        'NestedInteractive.InsideButton'
+                        'InsideButton'
                     );
 
                     return;

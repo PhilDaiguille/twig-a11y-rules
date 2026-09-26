@@ -26,7 +26,7 @@ final class TargetSizeRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'small interactive' => [__DIR__.'/Fixtures/invalid/button_small_inline.html.twig', [
-            'TargetSize.TargetSize.Small:1:1' => 'Interactive element has inline size < 24px; this may fail target-size (WCAG 2.5.8).',
+            'TargetSize.Small:1:1' => 'Interactive element has inline size < 24px; this may fail target-size (WCAG 2.5.8).',
         ]];
     }
 }

@@ -34,7 +34,7 @@ final class AriaValidAttrValueRuleTest extends AbstractRuleTestCase
         yield 'invalid value' => [
             __DIR__.'/Fixtures/invalid/aria_invalid_value.html.twig',
             [
-                'AriaValidAttrValue.AriaValidAttrValue.InvalidValue:1:1' => 'Attribute aria-hidden has invalid value "maybe".',
+                'AriaValidAttrValue.InvalidValue:1:1' => 'Attribute aria-hidden has invalid value "maybe".',
             ],
         ];
     }

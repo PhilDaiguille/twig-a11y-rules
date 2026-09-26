@@ -51,7 +51,7 @@ final class TargetSizeRule extends AbstractA11yRule
 
             if ($small) {
                 $fake = $tokens->get(0);
-                $emit('Interactive element has inline size < 24px; this may fail target-size (WCAG 2.5.8).', $fake, 'TargetSize.Small');
+                $emit('Interactive element has inline size < 24px; this may fail target-size (WCAG 2.5.8).', $fake, 'Small');
 
                 return; // emit only once per file
             }

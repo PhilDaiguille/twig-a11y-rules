@@ -25,7 +25,7 @@ final class HeadingEmptyRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'empty heading' => [__DIR__.'/Fixtures/invalid/heading_empty.html.twig', ['HeadingEmpty.HeadingEmpty.Empty:1:1' => 'Heading element should not be empty.']];
+        yield 'empty heading' => [__DIR__.'/Fixtures/invalid/heading_empty.html.twig', ['HeadingEmpty.Empty:1:1' => 'Heading element should not be empty.']];
 
         yield 'non empty' => [__DIR__.'/Fixtures/valid/headings_ok.html.twig', []];
     }

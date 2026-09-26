@@ -1,0 +1,5 @@
+<ul>
+    {% for item in menu %}
+        <li><a href="{{ path(item.route) }}" {% if item.active %}aria-current="page"{% endif %}>{{ item.label|trans }}</a></li>
+    {% endfor %}
+</ul>

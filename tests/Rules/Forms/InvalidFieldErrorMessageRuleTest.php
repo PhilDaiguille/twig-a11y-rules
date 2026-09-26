@@ -30,7 +30,7 @@ final class InvalidFieldErrorMessageRuleTest extends AbstractRuleTestCase
         yield 'invalid field with errormessage' => [__DIR__.'/Fixtures/valid/invalid_field_with_errormessage.html.twig', []];
 
         yield 'invalid field missing message reference' => [__DIR__.'/Fixtures/invalid/invalid_field_missing_message_reference.html.twig', [
-            'InvalidFieldErrorMessage.InvalidFieldErrorMessage.MissingReference:2:1' => 'Invalid form fields should reference help or error text via aria-describedby or aria-errormessage.',
+            'InvalidFieldErrorMessage.MissingReference:2:1' => 'Invalid form fields should reference help or error text via aria-describedby or aria-errormessage.',
         ]];
     }
 }

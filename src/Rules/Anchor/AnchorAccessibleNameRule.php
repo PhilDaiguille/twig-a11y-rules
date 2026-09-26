@@ -38,7 +38,7 @@ final class AnchorAccessibleNameRule extends AbstractA11yRule
             $name = $this->firstMatch($mm, 1, 2);
 
             if ('' === trim($name)) {
-                $emit('Anchor has empty aria-label.', $token, 'Anchor.AccessibleNameEmpty');
+                $emit('Anchor has empty aria-label.', $token, 'AccessibleNameEmpty');
             }
 
             return;
@@ -88,6 +88,6 @@ final class AnchorAccessibleNameRule extends AbstractA11yRule
             }
         }
 
-        $emit('Anchor element without accessible name (axe-core: link-name).', $token, 'Anchor.AccessibleName');
+        $emit('Anchor element without accessible name (axe-core: link-name).', $token, 'AccessibleName');
     }
 }

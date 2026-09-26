@@ -37,7 +37,7 @@ final class TableCaptionMissingRule extends AbstractA11yRule
             $line = 1 + substr_count(substr($full, 0, $offset), "\n");
             $fakeToken = $this->fakeTokenForLine($tokens, $line, $tableBlock);
 
-            $emit('Data tables should include a non-empty <caption> element.', $fakeToken, 'TableCaption.MissingCaption');
+            $emit('Data tables should include a non-empty <caption> element.', $fakeToken, 'MissingCaption');
 
             return;
         }

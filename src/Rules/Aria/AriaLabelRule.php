@@ -41,7 +41,7 @@ final class AriaLabelRule extends AbstractA11yRule
         $emit(
             'Landmark elements should have a non-empty aria-label.',
             $token,
-            'AriaLabel.MissingOrEmpty'
+            'MissingOrEmpty'
         );
     }
 }

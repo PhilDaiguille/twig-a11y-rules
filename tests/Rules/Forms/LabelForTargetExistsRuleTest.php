@@ -28,7 +28,7 @@ final class LabelForTargetExistsRuleTest extends AbstractRuleTestCase
         yield 'label target exists' => [__DIR__.'/Fixtures/valid/label_target_exists.html.twig', []];
 
         yield 'label target missing' => [__DIR__.'/Fixtures/invalid/label_target_missing.html.twig', [
-            'LabelForTargetExists.LabelFor.MissingTarget:2:1' => 'Label for="email" does not reference any existing id in template.',
+            'LabelForTargetExists.MissingTarget:2:1' => 'Label for="email" does not reference any existing id in template.',
         ]];
     }
 }

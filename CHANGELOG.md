@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## Unreleased
 
+### Changed (BC break)
+
+- Violation identifiers are now `<Rule>.<MessageId>`, e.g. `InputLabel.MissingLabel`,
+  as the README always documented. They used to be reported as
+  `InputLabel.InputLabel.MissingLabel`, which `{# twig-cs-fixer-disable-line … #}`
+  comments could not target. Update any disable comment or baseline that used
+  the old three-part form. Where the old middle part differed from the rule
+  name, the new id uses the rule name: `Anchor.AccessibleName` →
+  `AnchorAccessibleName.AccessibleName`, `LinkHref.MissingHref` →
+  `LinkHrefValidity.MissingHref`, etc.
+- Ids no longer get a `#2`, `#3`… suffix for repeated violations.
+- `DuplicateIdRule` reports every repeated occurrence of an id, at its position.
+- Removed `AbstractA11yRule::shouldSkipByTokenIndex()` (deprecated no-op).
+
+### Added
+
+- `AbstractA11yRule` implements twig-cs-fixer's `ConfigurableRuleInterface`, so
+  `emitAsWarning` invalidates the cache and the same rule can be registered as
+  warning and as error.
+- `AbstractA11yRule::tokenAtOffset()`; `fakeTokenForLine()` accepts a column.
+- README sections for Symfony projects and for silencing a violation.
+
+### Fixed
+
+- Two identical violations in one file (e.g. two `<img>` without `alt`) were
+  reported once; each is now reported.
+- Page-level scans (`AriaRole`, `AriaAllowedAttr`, `DuplicateId`, `HeadingOrder`,
+  `EmptyTableHeader`, `GenericLinkText`, `PAsHeading`, `TableFakeCaption`,
+  `TableHeader`, …) reported every violation at line 1; they now point to the
+  offending element's line and column.
+- `PageHeadingOneRule` no longer requires an `<h1>` in a layout
+  (`base.html.twig`) whose content comes from child blocks.
+
 ## 0.9.1 - 2026-09-26
 
 ### Fixed

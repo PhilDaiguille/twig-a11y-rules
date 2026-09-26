@@ -34,7 +34,7 @@ final class RadioGroupAccessibleNameRule extends AbstractA11yRule
 
                 $line = 1 + substr_count(substr($full, 0, $offset), "\n");
                 $fakeToken = $this->fakeTokenForLine($tokens, $line, $fieldsetBlock);
-                $emit('Fieldsets containing radio groups should provide a non-empty <legend>.', $fakeToken, 'RadioGroupAccessibleName.MissingLegend');
+                $emit('Fieldsets containing radio groups should provide a non-empty <legend>.', $fakeToken, 'MissingLegend');
 
                 return;
             }
@@ -64,7 +64,7 @@ final class RadioGroupAccessibleNameRule extends AbstractA11yRule
 
             $line = 1 + substr_count(substr($full, 0, $offset), "\n");
             $fakeToken = $this->fakeTokenForLine($tokens, $line, $groupBlock);
-            $emit('Containers with role="radiogroup" should have an accessible name via aria-label or aria-labelledby.', $fakeToken, 'RadioGroupAccessibleName.MissingName');
+            $emit('Containers with role="radiogroup" should have an accessible name via aria-label or aria-labelledby.', $fakeToken, 'MissingName');
 
             return;
         }

@@ -30,7 +30,7 @@ final class TableCaptionMissingRuleTest extends AbstractRuleTestCase
         yield 'layout table without caption' => [__DIR__.'/Fixtures/valid/layout_table_without_caption.html.twig', []];
 
         yield 'data table missing caption' => [__DIR__.'/Fixtures/invalid/data_table_missing_caption.html.twig', [
-            'TableCaptionMissing.TableCaption.MissingCaption:2:1' => 'Data tables should include a non-empty <caption> element.',
+            'TableCaptionMissing.MissingCaption:2:1' => 'Data tables should include a non-empty <caption> element.',
         ]];
     }
 }

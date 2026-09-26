@@ -85,7 +85,7 @@ final class LangAttributeValueRule extends AbstractA11yRule
             $emit(
                 sprintf('The lang attribute value "%s" is not a valid BCP 47 language tag (invalid primary subtag "%s").', $m[1], $parts[0]),
                 $token,
-                'LangAttributeValue.InvalidLang'
+                'InvalidLang'
             );
         }
     }

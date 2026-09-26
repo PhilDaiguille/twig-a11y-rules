@@ -19,13 +19,12 @@ final class EmptyTableHeaderRule extends AbstractA11yRule
 
         // Match <th ...>...</th> blocks and check whether the inner content
         // is empty (after stripping tags and Twig expressions).
-        if (!preg_match_all('/<th\b[^>]*>(.*?)<\/th>/is', $full, $m, PREG_SET_ORDER)) {
+        if (!preg_match_all('/<th\b[^>]*>(.*?)<\/th>/is', $full, $m, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
             return;
         }
 
-        $idx = 0;
         foreach ($m as $set) {
-            $inner = $set[1];
+            $inner = $set[1][0];
             // Strip Twig expressions — a dynamic value counts as present.
             if (str_contains($inner, '{{')) {
                 continue;
@@ -37,13 +36,7 @@ final class EmptyTableHeaderRule extends AbstractA11yRule
 
             $text = trim(strip_tags($inner));
             if ('' === $text) {
-                ++$idx;
-                $id = 'EmptyTableHeader.Empty';
-                if ($idx > 1) {
-                    $id .= '#'.$idx;
-                }
-
-                $emit('Table header <th> must not be empty.', $tokens->get(0), $id);
+                $emit('Table header <th> must not be empty.', $this->tokenAtOffset($tokens, $set[0][1], $set[0][0]), 'Empty');
             }
         }
     }

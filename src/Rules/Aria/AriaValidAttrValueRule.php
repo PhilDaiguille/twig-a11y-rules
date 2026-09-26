@@ -59,7 +59,7 @@ final class AriaValidAttrValueRule extends AbstractA11yRule
 
             if (!in_array(strtolower($value), self::ENUM_MAP[$attr], true)) {
                 $token = $tokens->get(0);
-                $emit(sprintf('Attribute %s has invalid value "%s".', $attr, $value), $token, 'AriaValidAttrValue.InvalidValue');
+                $emit(sprintf('Attribute %s has invalid value "%s".', $attr, $value), $token, 'InvalidValue');
             }
         }
     }

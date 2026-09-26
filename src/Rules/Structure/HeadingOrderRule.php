@@ -11,40 +11,25 @@ final class HeadingOrderRule extends AbstractA11yRule
 {
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
-        $token = $tokens->get($tokenIndex);
-
         $full = $this->getFullContent($tokens);
 
         if (!str_contains($full, '<h')) {
             return;
         }
 
-        // Use PREG_SET_ORDER to get predictable structure and avoid PHPStan type issues
-        $levels = [];
-        if (preg_match_all('/<h([1-6])[^>]*>/i', $full, $m, PREG_SET_ORDER)) {
-            foreach ($m as $set) {
-                $levels[] = (int) $set[1];
-            }
+        if (!preg_match_all('/<h([1-6])[^>]*>/i', $full, $m, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
+            return;
         }
 
         $prev = 0;
-        $errorIndex = 0;
-        foreach ($levels as $lvl) {
+        foreach ($m as $set) {
+            $lvl = (int) $set[1][0];
             if (0 !== $prev && $lvl > $prev + 1) {
-                ++$errorIndex;
-                $id = 'HeadingOrder.Invalid';
-                if ($errorIndex > 1) {
-                    // append an index so each violation identifier is unique for tests
-                    $id .= '#'.$errorIndex;
-                }
-
                 $emit(
                     sprintf('Heading level jumped from h%d to h%d.', $prev, $lvl),
-                    $token,
-                    $id
+                    $this->tokenAtOffset($tokens, $set[0][1], $set[0][0]),
+                    'Invalid'
                 );
-
-                // continue scanning to collect all jumps in the file
             }
 
             $prev = $lvl;

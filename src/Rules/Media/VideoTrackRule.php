@@ -32,7 +32,7 @@ final class VideoTrackRule extends AbstractA11yRule
 
             // No captions found — report error at token 0 for determinism
             $token = $tokens->get(0);
-            $emit('Video should have captions (track kind="captions").', $token, 'VideoTrack.MissingCaptions');
+            $emit('Video should have captions (track kind="captions").', $token, 'MissingCaptions');
 
             return;
         }

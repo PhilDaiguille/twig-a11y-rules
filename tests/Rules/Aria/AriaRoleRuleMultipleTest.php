@@ -17,8 +17,8 @@ final class AriaRoleRuleMultipleTest extends AbstractRuleTestCase
     public function testMultipleInvalidRolesAreReported(): void
     {
         $this->checkRule(new AriaRoleRule(), [
-            'AriaRole.AriaRole.InvalidRole:1:1' => 'Invalid ARIA role "foo".',
-            'AriaRole.AriaRole.InvalidRole#2:1:1' => 'Invalid ARIA role "bar".',
+            'AriaRole.InvalidRole:2:12' => 'Invalid ARIA role "foo".',
+            'AriaRole.InvalidRole:3:13' => 'Invalid ARIA role "bar".',
         ], __DIR__.'/Fixtures/invalid/role_multiple_invalid.html.twig');
     }
 }

@@ -31,12 +31,12 @@ final class InputTypeRuleTest extends AbstractRuleTestCase
 
         yield 'missing autocomplete' => [
             __DIR__.'/Fixtures/invalid/input_missing_autocomplete.html.twig',
-            ['InputType.InputType.MissingAutocomplete:1:1' => 'Input of type "email" should include an autocomplete attribute (WCAG 1.3.5).'],
+            ['InputType.MissingAutocomplete:1:1' => 'Input of type "email" should include an autocomplete attribute (WCAG 1.3.5).'],
         ];
 
         yield 'tel missing autocomplete' => [
             __DIR__.'/Fixtures/invalid/input_tel_missing_autocomplete.html.twig',
-            ['InputType.InputType.MissingAutocomplete:1:1' => 'Input of type "tel" should include an autocomplete attribute (WCAG 1.3.5).'],
+            ['InputType.MissingAutocomplete:1:1' => 'Input of type "tel" should include an autocomplete attribute (WCAG 1.3.5).'],
         ];
     }
 }

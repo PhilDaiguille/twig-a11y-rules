@@ -56,7 +56,10 @@ Single test: `vendor/bin/phpunit tests/Rules/Structure/HeadingOrderRuleTest.php 
    - `TokenCollectorTrait` (`collectTag`, `collectUntil`, `safePregMatch`)
      rebuilds HTML from the Twig token stream. Work at that regex level, don't
      add a DOM parser.
-   - `fakeTokenForLine()` when the line comes from a regex offset.
+   - Report each violation where it is: `tokenAtOffset()` for a regex offset
+     (`PREG_OFFSET_CAPTURE`) on `getFullContent()`, not `$tokens->get(0)`.
+     Never make ids unique with suffixes (`Invalid#2`): `$emit` dedups by
+     message + id + position, so distinct positions are enough.
 2. **`src/Template/`**: `TemplateClassifier` labels each file with a
    `TemplateKind` (`FullPage`, `ChildTemplate`, `ParentTemplate`, `Partial`,
    `MixedTemplate`, `TwigUxComponent`). Page-level rules override

@@ -22,7 +22,7 @@ final class ListStructureRule extends AbstractA11yRule
 
                 if (preg_match('/<\s*(?!\/|!|li\b|script\b|template\b)[a-z][a-z0-9]*\b/i', (string) $directChildren)) {
                     $fakeToken = $tokens->get(0);
-                    $emit('List (<ul>/<ol>) contains non-<li> child.', $fakeToken, 'ListStructure.InvalidChild');
+                    $emit('List (<ul>/<ol>) contains non-<li> child.', $fakeToken, 'InvalidChild');
 
                     return;
                 }
@@ -34,7 +34,7 @@ final class ListStructureRule extends AbstractA11yRule
             foreach ($dls as $d) {
                 if (!preg_match('/<dt\b/i', $d[1]) || !preg_match('/<dd\b/i', $d[1])) {
                     $fakeToken = $tokens->get(0);
-                    $emit('Description list <dl> must contain <dt> and <dd>.', $fakeToken, 'ListStructure.DlMissing');
+                    $emit('Description list <dl> must contain <dt> and <dd>.', $fakeToken, 'DlMissing');
 
                     return;
                 }
@@ -45,7 +45,7 @@ final class ListStructureRule extends AbstractA11yRule
         $withoutDl = preg_replace('/<dl[^>]*>.*?<\/dl>/is', '', $full);
         if (preg_match('/<\s*(dt|dd)\b/i', (string) $withoutDl)) {
             $fakeToken = $tokens->get(0);
-            $emit('Orphan <dt> or <dd> found outside of a <dl>.', $fakeToken, 'ListStructure.OrphanDtDd');
+            $emit('Orphan <dt> or <dd> found outside of a <dl>.', $fakeToken, 'OrphanDtDd');
 
             return;
         }

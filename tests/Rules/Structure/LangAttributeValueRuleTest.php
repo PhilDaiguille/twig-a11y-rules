@@ -46,12 +46,12 @@ final class LangAttributeValueRuleTest extends AbstractRuleTestCase
 
         yield 'invalid lang xx' => [
             __DIR__.'/Fixtures/invalid/lang_invalid_value.html.twig',
-            ['LangAttributeValue.LangAttributeValue.InvalidLang:1:1' => 'The lang attribute value "xx" is not a valid BCP 47 language tag (invalid primary subtag "xx").'],
+            ['LangAttributeValue.InvalidLang:1:1' => 'The lang attribute value "xx" is not a valid BCP 47 language tag (invalid primary subtag "xx").'],
         ];
 
         yield 'invalid primary subtag' => [
             __DIR__.'/Fixtures/invalid/lang_invalid_primary_subtag.html.twig',
-            ['LangAttributeValue.LangAttributeValue.InvalidLang:1:1' => 'The lang attribute value "not-a-language" is not a valid BCP 47 language tag (invalid primary subtag "not").'],
+            ['LangAttributeValue.InvalidLang:1:1' => 'The lang attribute value "not-a-language" is not a valid BCP 47 language tag (invalid primary subtag "not").'],
         ];
     }
 }

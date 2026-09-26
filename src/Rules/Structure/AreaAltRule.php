@@ -83,7 +83,7 @@ final class AreaAltRule extends AbstractA11yRule
         $attrs = $m[1];
 
         if (!preg_match('/\balt\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $attrs, $am)) {
-            $emit('Missing alt attribute on <area> tag.', $token, 'AreaAlt.MissingAlt');
+            $emit('Missing alt attribute on <area> tag.', $token, 'MissingAlt');
 
             return;
         }
@@ -93,7 +93,7 @@ final class AreaAltRule extends AbstractA11yRule
         if ('' === $alt) {
             $hasDecorativeRole = preg_match('/\brole\s*=\s*(["\'])(?:presentation|none)\1/i', $attrs);
             if (!$hasDecorativeRole) {
-                $emit('Empty alt on <area> requires role="presentation" or role="none".', $token, 'AreaAlt.EmptyAlt');
+                $emit('Empty alt on <area> requires role="presentation" or role="none".', $token, 'EmptyAlt');
             }
         }
     }

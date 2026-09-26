@@ -28,7 +28,7 @@ final class AutoplayRule extends AbstractA11yRule
         }
 
         if (preg_match('/autoplay\b/i', $tag) && !preg_match('/\bmuted\b/i', $tag)) {
-            $emit('Autoplaying media should be muted.', $token, 'Autoplay.NotMuted');
+            $emit('Autoplaying media should be muted.', $token, 'NotMuted');
         }
     }
 }

@@ -58,7 +58,7 @@ final class InvalidFieldErrorMessageRule extends AbstractA11yRule
             $line = 1 + substr_count(substr($full, 0, $offset), "\n");
             $fakeToken = $this->fakeTokenForLine($tokens, $line, $tag);
 
-            $emit('Invalid form fields should reference help or error text via aria-describedby or aria-errormessage.', $fakeToken, 'InvalidFieldErrorMessage.MissingReference');
+            $emit('Invalid form fields should reference help or error text via aria-describedby or aria-errormessage.', $fakeToken, 'MissingReference');
 
             return;
         }

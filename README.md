@@ -94,6 +94,28 @@ vendor/bin/twig-cs-fixer lint /path/to/templates
 vendor/bin/twig-cs-fixer fix /path/to/templates
 ```
 
+### Symfony
+
+Put `.twig-cs-fixer.php` next to `composer.json` and lint the `templates/`
+directory:
+
+```bash
+vendor/bin/twig-cs-fixer lint templates/
+```
+
+Layouts (`base.html.twig`), child templates, partials, form themes and Twig UX
+components are recognised: page-level rules only run on complete pages (see
+[Template classification](#template-classification-and-rule-scoping)).
+
+### Silencing a violation
+
+Each violation has an identifier `<Rule>.<MessageId>`. Use it in a
+twig-cs-fixer comment, or the rule name alone to silence the whole rule:
+
+```twig
+<img src="{{ asset('spacer.gif') }}">{# twig-cs-fixer-disable-line ImgAlt.MissingAlt #}
+```
+
 ---
 
 
@@ -286,7 +308,7 @@ This package follows [Semantic Versioning](https://semver.org/).
 **Public API** (breaking changes only in a major release):
 
 - Rule class names and namespaces under `TwigA11y\Rules\`
-- Rule identifiers (`Domain.ShortId`, e.g. `InputLabel.MissingLabel`) — used in
+- Violation identifiers (`<Rule>.<MessageId>`, e.g. `InputLabel.MissingLabel`) — used in
   `{# twig-cs-fixer-disable-line ... #}` comments and in your own baselines
 - The four standards under `TwigA11y\Standard\` and their constructors
 

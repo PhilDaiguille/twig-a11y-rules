@@ -34,7 +34,7 @@ final class AriaInputFieldNameRuleTest extends AbstractRuleTestCase
         yield 'invalid textbox no name' => [
             __DIR__.'/Fixtures/invalid/div_textbox_no_label.html.twig',
             [
-                'AriaInputFieldName.AriaInputFieldName.MissingName:1:1' => 'role="textbox" element must have an accessible name (aria-label or aria-labelledby).',
+                'AriaInputFieldName.MissingName:1:1' => 'role="textbox" element must have an accessible name (aria-label or aria-labelledby).',
             ],
         ];
     }

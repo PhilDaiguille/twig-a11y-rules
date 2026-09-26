@@ -18,6 +18,6 @@ final class SelectLabelRule extends AbstractFormFieldLabelRule
 
     protected function messageId(): string
     {
-        return 'SelectLabel.Missing';
+        return 'Missing';
     }
 }

@@ -51,7 +51,7 @@ final class ButtonTypeRule extends AbstractA11yRule
             return;
         }
 
-        $emit('Button inside a form should declare an explicit type attribute.', $token, 'ButtonType.MissingType');
+        $emit('Button inside a form should declare an explicit type attribute.', $token, 'MissingType');
     }
 
     #[\Override]

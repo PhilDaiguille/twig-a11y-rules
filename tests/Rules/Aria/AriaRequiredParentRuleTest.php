@@ -34,7 +34,7 @@ final class AriaRequiredParentRuleTest extends AbstractRuleTestCase
         yield 'missing parent' => [
             __DIR__.'/Fixtures/invalid/menuitem_missing_parent.html.twig',
             [
-                'AriaRequiredParent.AriaRequiredParent.MissingParent:1:1' => 'Role menuitem must be contained in one of: menu, menubar.',
+                'AriaRequiredParent.MissingParent:1:1' => 'Role menuitem must be contained in one of: menu, menubar.',
             ],
         ];
     }

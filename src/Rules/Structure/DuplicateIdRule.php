@@ -19,29 +19,18 @@ final class DuplicateIdRule extends AbstractA11yRule
         }
 
         // find all id attributes
-        if (!preg_match_all('/\bid\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $full, $m)) {
+        if (!preg_match_all('/\bid\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $full, $m, PREG_OFFSET_CAPTURE)) {
             return;
         }
 
-        $ids = $m[1];
-        $counts = [];
-        foreach ($ids as $id) {
-            $counts[$id] = ($counts[$id] ?? 0) + 1;
-        }
-
-        $token = $tokens->get(0);
-        $idx = 0;
-        foreach ($counts as $id => $cnt) {
-            if ($cnt > 1) {
-                ++$idx;
-                $ident = 'DuplicateId.Duplicate';
-                if ($idx > 1) {
-                    $ident .= '#'.$idx;
-                }
-
-                $emit(sprintf('Duplicate id "%s" found in document.', $id), $token, $ident);
-                // continue to report other duplicates
+        // Report every occurrence after the first, where the duplicate is.
+        $seen = [];
+        foreach ($m[1] as [$id, $offset]) {
+            if (isset($seen[$id])) {
+                $emit(sprintf('Duplicate id "%s" found in document.', $id), $this->tokenAtOffset($tokens, $offset, $id), 'Duplicate');
             }
+
+            $seen[$id] = true;
         }
     }
 

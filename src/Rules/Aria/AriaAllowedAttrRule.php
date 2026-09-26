@@ -174,28 +174,26 @@ final class AriaAllowedAttrRule extends AbstractA11yRule
             return;
         }
 
-        $idx = 0;
-
-        if (preg_match_all('/<([a-z0-9]+)([^>]*)\srole\s*=\s*(?:"|\')([^"\']+)(?:"|\')([^>]*)>/i', $full, $matches, PREG_SET_ORDER)) {
+        if (preg_match_all('/<([a-z0-9]+)([^>]*)\srole\s*=\s*(?:"|\')([^"\']+)(?:"|\')([^>]*)>/i', $full, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
             foreach ($matches as $m) {
-                $role = strtolower($m[3]);
-                $attrs = $m[2].' '.$m[4];
+                $role = strtolower($m[3][0]);
                 if (!isset($this->allowed[$role])) {
                     continue;
                 }
 
                 // naive check: find any aria- attribute not in allowed list
-                if (preg_match_all('/\baria-[a-z0-9-]+\s*=\s*(?:"|\')[^"\']*(?:"|\')/i', $attrs, $am)) {
-                    foreach ($am[0] as $ariaRaw) {
-                        if (preg_match('/\baria-([a-z0-9-]+)/i', $ariaRaw, $an)) {
-                            $name = strtolower($an[1]);
-                            if (!in_array('aria-'.$name, $this->allowed[$role], true)) {
-                                ++$idx;
-                                $fakeToken = $tokens->get(0);
-                                $id = 1 === $idx ? 'AriaAllowed.Invalid' : sprintf('AriaAllowed.Invalid#%d', $idx);
-                                $emit(sprintf('Attribute aria-%s is not allowed on role %s.', $name, $role), $fakeToken, $id);
-                            }
+                if (preg_match_all('/\baria-([a-z0-9-]+)\s*=\s*(?:"|\')[^"\']*(?:"|\')/i', $m[0][0], $am, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
+                    foreach ($am as $a) {
+                        $name = strtolower($a[1][0]);
+                        if (in_array('aria-'.$name, $this->allowed[$role], true)) {
+                            continue;
                         }
+
+                        $emit(
+                            sprintf('Attribute aria-%s is not allowed on role %s.', $name, $role),
+                            $this->tokenAtOffset($tokens, $m[0][1] + $a[0][1], $a[0][0]),
+                            'Invalid'
+                        );
                     }
                 }
             }

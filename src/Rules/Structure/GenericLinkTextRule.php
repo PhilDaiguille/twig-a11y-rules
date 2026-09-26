@@ -49,13 +49,12 @@ final class GenericLinkTextRule extends AbstractA11yRule
         }
 
         // Match <a ...>...</a> blocks.
-        if (!preg_match_all('/<a\b[^>]*>(.*?)<\/a>/is', $full, $m, PREG_SET_ORDER)) {
+        if (!preg_match_all('/<a\b[^>]*>(.*?)<\/a>/is', $full, $m, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
             return;
         }
 
-        $idx = 0;
         foreach ($m as $set) {
-            $inner = $set[1];
+            $inner = $set[1][0];
             // Skip links that contain Twig expressions — the runtime text may
             // be descriptive.
             if (str_contains($inner, '{{')) {
@@ -72,16 +71,10 @@ final class GenericLinkTextRule extends AbstractA11yRule
             }
 
             if (in_array(strtolower($text), $this->genericPhrases, true)) {
-                ++$idx;
-                $id = 'GenericLinkText.Generic';
-                if ($idx > 1) {
-                    $id .= '#'.$idx;
-                }
-
                 $emit(
                     sprintf('Avoid generic link text "%s"; use descriptive text that explains the link destination.', $text),
-                    $tokens->get(0),
-                    $id
+                    $this->tokenAtOffset($tokens, $set[0][1], $set[0][0]),
+                    'Generic'
                 );
             }
         }

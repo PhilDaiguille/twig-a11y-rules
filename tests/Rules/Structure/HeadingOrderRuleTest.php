@@ -29,15 +29,15 @@ final class HeadingOrderRuleTest extends AbstractRuleTestCase
 
         yield 'valid headings (more)' => [__DIR__.'/Fixtures/valid/headings_ok_more.html.twig', []];
 
-        yield 'invalid headings (simple jump)' => [__DIR__.'/Fixtures/invalid/headings_jump.html.twig', ['HeadingOrder.HeadingOrder.Invalid:1:1' => 'Heading level jumped from h1 to h3.']];
+        yield 'invalid headings (simple jump)' => [__DIR__.'/Fixtures/invalid/headings_jump.html.twig', ['HeadingOrder.Invalid:3:1' => 'Heading level jumped from h1 to h3.']];
 
-        yield 'invalid headings (with attrs)' => [__DIR__.'/Fixtures/invalid/headings_jump_attr.html.twig', ['HeadingOrder.HeadingOrder.Invalid:1:1' => 'Heading level jumped from h1 to h3.']];
+        yield 'invalid headings (with attrs)' => [__DIR__.'/Fixtures/invalid/headings_jump_attr.html.twig', ['HeadingOrder.Invalid:3:1' => 'Heading level jumped from h1 to h3.']];
 
         yield 'invalid headings (multiple jumps)' => [
             __DIR__.'/Fixtures/invalid/headings_multiple_jumps.html.twig',
             [
-                'HeadingOrder.HeadingOrder.Invalid:1:1' => 'Heading level jumped from h1 to h3.',
-                'HeadingOrder.HeadingOrder.Invalid#2:1:1' => 'Heading level jumped from h4 to h6.',
+                'HeadingOrder.Invalid:3:1' => 'Heading level jumped from h1 to h3.',
+                'HeadingOrder.Invalid:5:1' => 'Heading level jumped from h4 to h6.',
             ],
         ];
     }

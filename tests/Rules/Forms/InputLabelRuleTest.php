@@ -36,7 +36,7 @@ final class InputLabelRuleTest extends AbstractRuleTestCase
 
         yield 'input without label or aria' => [
             __DIR__.'/Fixtures/invalid/input_no_label.html.twig',
-            ['InputLabel.InputLabel.MissingLabel:4:1' => 'Input element must have an associated <label> or an aria-label.'],
+            ['InputLabel.MissingLabel:4:1' => 'Input element must have an associated <label> or an aria-label.'],
         ];
 
         // Hidden inputs should not trigger the rule
@@ -48,7 +48,7 @@ final class InputLabelRuleTest extends AbstractRuleTestCase
         // Empty aria-label must NOT bypass the label check
         yield 'input with empty aria-label' => [
             __DIR__.'/Fixtures/invalid/input_empty_aria_label.html.twig',
-            ['InputLabel.InputLabel.MissingLabel:4:1' => 'Input element must have an associated <label> or an aria-label.'],
+            ['InputLabel.MissingLabel:4:1' => 'Input element must have an associated <label> or an aria-label.'],
         ];
     }
 }

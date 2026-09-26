@@ -29,13 +29,12 @@ final class TableFakeCaptionRule extends AbstractA11yRule
         }
 
         // Extract each <table>...</table> block.
-        if (!preg_match_all('/<table\b[^>]*>(.*?)<\/table>/is', $full, $tables, PREG_SET_ORDER)) {
+        if (!preg_match_all('/<table\b[^>]*>(.*?)<\/table>/is', $full, $tables, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
             return;
         }
 
-        $idx = 0;
         foreach ($tables as $tableSet) {
-            $tableContent = $tableSet[1];
+            $tableContent = $tableSet[1][0];
 
             // If a proper <caption> element is present, the table is fine.
             if (preg_match('/<caption\b/i', $tableContent)) {
@@ -55,16 +54,10 @@ final class TableFakeCaptionRule extends AbstractA11yRule
             // Flag when the first row contains exactly one <td> (sole cell),
             // which is the classic fake-caption pattern.
             if (1 === $cellCount && preg_match('/<td\b/i', $rowContent)) {
-                ++$idx;
-                $id = 'TableFakeCaption.FakeCaption';
-                if ($idx > 1) {
-                    $id .= '#'.$idx;
-                }
-
                 $emit(
                     'Avoid using a <td> as a table caption; use the <caption> element instead.',
-                    $tokens->get(0),
-                    $id
+                    $this->tokenAtOffset($tokens, $tableSet[0][1], $tableSet[0][0]),
+                    'FakeCaption'
                 );
             }
         }

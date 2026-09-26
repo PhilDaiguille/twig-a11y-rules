@@ -51,7 +51,7 @@ final class AriaReferencedIdExistsRule extends AbstractA11yRule
                             $fakeToken->getFilename(),
                             $r[0]
                         );
-                        $emit(sprintf('Referenced id "%s" in aria attribute does not exist in template.', $refId), $fakeToken, 'AriaRef.MissingId');
+                        $emit(sprintf('Referenced id "%s" in aria attribute does not exist in template.', $refId), $fakeToken, 'MissingId');
 
                         // Report first missing id for determinism
                         return;

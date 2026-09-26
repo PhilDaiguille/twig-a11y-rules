@@ -41,7 +41,7 @@ final class IframeFocusableContentRule extends AbstractA11yRule
                         $m[0]
                     );
 
-                    $emit('Iframe has tabindex="-1" but contains focusable content.', $fakeToken, 'Iframe.FocusableContent');
+                    $emit('Iframe has tabindex="-1" but contains focusable content.', $fakeToken, 'FocusableContent');
 
                     return; // emit only once per file
                 }

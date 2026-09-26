@@ -31,7 +31,7 @@ final class ColorContrastRule extends AbstractA11yRule
 
             $ratio = $this->contrastRatio($fg, $bg);
             if ($ratio < 4.5) {
-                $emit('Insufficient color contrast', $firstToken, 'ColorContrast.Insufficient');
+                $emit('Insufficient color contrast', $firstToken, 'Insufficient');
 
                 return;
             }

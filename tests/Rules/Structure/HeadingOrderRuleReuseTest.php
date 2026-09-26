@@ -19,6 +19,6 @@ final class HeadingOrderRuleReuseTest extends AbstractRuleTestCase
         $rule = new HeadingOrderRule();
 
         $this->checkRule($rule, [], __DIR__.'/Fixtures/valid/headings_ok_more.html.twig');
-        $this->checkRule($rule, ['HeadingOrder.HeadingOrder.Invalid:1:1' => 'Heading level jumped from h1 to h3.'], __DIR__.'/Fixtures/invalid/headings_jump.html.twig');
+        $this->checkRule($rule, ['HeadingOrder.Invalid:3:1' => 'Heading level jumped from h1 to h3.'], __DIR__.'/Fixtures/invalid/headings_jump.html.twig');
     }
 }

@@ -29,7 +29,7 @@ final class EmptyTableHeaderRuleTest extends AbstractRuleTestCase
 
         yield 'invalid empty th' => [
             __DIR__.'/Fixtures/invalid/table_th_empty.html.twig',
-            ['EmptyTableHeader.EmptyTableHeader.Empty:1:1' => 'Table header <th> must not be empty.'],
+            ['EmptyTableHeader.Empty:3:7' => 'Table header <th> must not be empty.'],
         ];
     }
 }

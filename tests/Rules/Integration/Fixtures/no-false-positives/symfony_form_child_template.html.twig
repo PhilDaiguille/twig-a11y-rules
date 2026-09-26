@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+    <h1>Contact</h1>
+    {{ form_start(form) }}
+        {{ form_row(form.email) }}
+        {{ form_label(form.message) }}
+        {{ form_widget(form.message, {attr: {rows: 5}}) }}
+        {{ form_errors(form.message) }}
+        <twig:Button type="submit" variant="primary">Send</twig:Button>
+    {{ form_end(form) }}
+    {{ include('_footer_links.html.twig') }}
+    <a href="{{ path('app_home') }}">{{ 'nav.home'|trans }}</a>
+    <twig:Alert type="success" message="{{ flash }}" />
+{% endblock %}

@@ -14,8 +14,6 @@ use TwigCsFixer\Token\Tokens;
  */
 final class OptGroupLabelRule extends AbstractA11yRule
 {
-    private int $idx = 0;
-
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -42,21 +40,12 @@ final class OptGroupLabelRule extends AbstractA11yRule
             }
         }
 
-        ++$this->idx;
         $id = 'MissingLabel';
-        if ($this->idx > 1) {
-            $id .= '#'.$this->idx;
-        }
 
         $emit(
             '<optgroup> must have a non-empty label attribute to identify the group (WCAG 1.3.1).',
             $token,
             $id
         );
-    }
-
-    protected function evaluateStart(Tokens $tokens): void
-    {
-        $this->idx = 0;
     }
 }

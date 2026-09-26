@@ -29,7 +29,7 @@ final class VideoTrackRuleTest extends AbstractRuleTestCase
 
         yield 'video without captions' => [
             __DIR__.'/Fixtures/invalid/video_no_captions.html.twig',
-            ['VideoTrack.VideoTrack.MissingCaptions:1:1' => 'Video should have captions (track kind="captions").'],
+            ['VideoTrack.MissingCaptions:1:1' => 'Video should have captions (track kind="captions").'],
         ];
     }
 }

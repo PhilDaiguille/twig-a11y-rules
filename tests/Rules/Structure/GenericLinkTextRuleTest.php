@@ -29,7 +29,7 @@ final class GenericLinkTextRuleTest extends AbstractRuleTestCase
 
         yield 'invalid generic link text' => [
             __DIR__.'/Fixtures/invalid/link_generic_text.html.twig',
-            ['GenericLinkText.GenericLinkText.Generic:1:1' => 'Avoid generic link text "click here"; use descriptive text that explains the link destination.'],
+            ['GenericLinkText.Generic:2:23' => 'Avoid generic link text "click here"; use descriptive text that explains the link destination.'],
         ];
     }
 }
