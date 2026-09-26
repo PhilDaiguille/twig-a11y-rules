@@ -1,0 +1,28 @@
+name: False positive / false negative
+description: A rule reports valid markup, or misses invalid markup
+labels: [bug]
+body:
+  - type: input
+    id: rule
+    attributes:
+      label: Rule identifier
+      placeholder: InputLabel.MissingLabel
+    validations:
+      required: true
+  - type: textarea
+    id: template
+    attributes:
+      label: Minimal Twig template
+      render: twig
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions (twig-a11y-rules, twig-cs-fixer, PHP)

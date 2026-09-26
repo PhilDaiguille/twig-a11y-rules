@@ -287,7 +287,7 @@ This package follows [Semantic Versioning](https://semver.org/).
 
 - Rule class names and namespaces under `TwigA11y\Rules\`
 - Rule identifiers (`Domain.ShortId`, e.g. `InputLabel.MissingLabel`) — used in
-  `// twig-cs-fixer-disable` comments and in your own baselines
+  `{# twig-cs-fixer-disable-line ... #}` comments and in your own baselines
 - The four standards under `TwigA11y\Standard\` and their constructors
 
 **Not covered** (may change in any release):
