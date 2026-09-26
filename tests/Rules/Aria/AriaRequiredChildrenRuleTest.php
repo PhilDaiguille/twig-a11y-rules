@@ -34,7 +34,7 @@ final class AriaRequiredChildrenRuleTest extends AbstractRuleTestCase
         yield 'missing children' => [
             __DIR__.'/Fixtures/invalid/list_missing_items.html.twig',
             [
-                'AriaRequiredChildren.AriaRequiredChildren.MissingChild:1:1' => 'Role list must contain at least one of: listitem.',
+                'AriaRequiredChildren.MissingChild:1:1' => 'Role list must contain at least one of: listitem.',
             ],
         ];
     }

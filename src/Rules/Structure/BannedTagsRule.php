@@ -19,7 +19,7 @@ final class BannedTagsRule extends AbstractA11yRule
 
         $value = strtolower($token->getValue());
         if (str_contains($value, '<marquee') || str_contains($value, '<blink')) {
-            $emit('Banned tag used (e.g. <marquee> or <blink>).', $token, 'BannedTags.Used');
+            $emit('Banned tag used (e.g. <marquee> or <blink>).', $token, 'Used');
         }
     }
 }

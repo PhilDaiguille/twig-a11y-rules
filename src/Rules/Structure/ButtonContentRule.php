@@ -10,8 +10,6 @@ use TwigCsFixer\Token\Tokens;
 
 final class ButtonContentRule extends AbstractA11yRule
 {
-    private int $idx = 0;
-
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -38,19 +36,10 @@ final class ButtonContentRule extends AbstractA11yRule
             }
 
             if ('' === $textOnly && !preg_match('/\baria-label\s*=\s*("|\')/i', $opening)) {
-                ++$this->idx;
-                $id = 'ButtonContent.MissingContent';
-                if ($this->idx > 1) {
-                    $id .= '#'.$this->idx;
-                }
+                $id = 'MissingContent';
 
                 $emit('Button element without textual content must have an aria-label.', $token, $id);
             }
         }
-    }
-
-    protected function evaluateStart(Tokens $tokens): void
-    {
-        $this->idx = 0;
     }
 }

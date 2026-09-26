@@ -24,7 +24,6 @@ final class TableHeaderRule extends AbstractA11yRule
             return;
         }
 
-        $idx = 0;
         foreach ($m as $set) {
             // $set[0] is the full match [text, offset], $set[1] is the attrs
             // With PREG_OFFSET_CAPTURE these offsets always exist.
@@ -33,54 +32,13 @@ final class TableHeaderRule extends AbstractA11yRule
 
             // Capture scope attribute value if present
             if (!preg_match('/\bscope\b\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))/i', $attrs, $scopeMatch)) {
-                ++$idx;
-
-                // Map the match offset back to a token index so the emitted
-                // error points to the token containing the <th>.
-                $tokenForMatch = null;
-                $pos = 0;
-                foreach ($tokens->toArray() as $tIdx => $tok) {
-                    $val = $tok->getValue();
-                    $len = strlen($val);
-                    if ($pos + $len > $matchOffset) {
-                        $tokenForMatch = $tokens->get($tIdx);
-
-                        break;
-                    }
-
-                    $pos += $len;
-                }
-
-                $token = $tokenForMatch ?? $tokens->get(0);
-                $id = 'TableHeader.MissingScope';
-                if ($idx > 1) {
-                    $id .= '#'.$idx;
-                }
-
-                $emit('Table header <th> elements should include a scope attribute.', $token, $id);
+                $emit('Table header <th> elements should include a scope attribute.', $this->tokenAtOffset($tokens, $matchOffset, $set[0][0]), 'MissingScope');
             } else {
                 // Validate scope value
                 $value = $this->firstMatch($scopeMatch, 1, 2, 3);
                 $allowed = ['col', 'row', 'colgroup', 'rowgroup'];
                 if (!in_array(strtolower($value), $allowed, true)) {
-                    // Map the match offset back to a token index so the emitted
-                    // error points to the token containing the <th>.
-                    $tokenForMatch = null;
-                    $pos = 0;
-                    foreach ($tokens->toArray() as $tIdx => $tok) {
-                        $val = $tok->getValue();
-                        $len = strlen($val);
-                        if ($pos + $len > $matchOffset) {
-                            $tokenForMatch = $tokens->get($tIdx);
-
-                            break;
-                        }
-
-                        $pos += $len;
-                    }
-
-                    $token = $tokenForMatch ?? $tokens->get(0);
-                    $emit(sprintf('Table header <th> has invalid scope value "%s".', $value), $token, 'TableHeader.InvalidScope');
+                    $emit(sprintf('Table header <th> has invalid scope value "%s".', $value), $this->tokenAtOffset($tokens, $matchOffset, $set[0][0]), 'InvalidScope');
                 }
             }
         }

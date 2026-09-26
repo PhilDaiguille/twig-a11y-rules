@@ -37,7 +37,7 @@ final class AriaRequiredParentRule extends AbstractA11yRule
                 $found = array_any($parents, fn (string $parent): bool => 1 === preg_match('/<([a-z0-9]+)[^>]*role\s*=\s*(?:"|\')'.preg_quote($parent, '/').'(?:(?:"|\'))[^>]*>.*?'.preg_quote($occ[0], '/').'.*?<\/\1>/is', $full));
                 if (!$found) {
                     $token = $tokens->get(0);
-                    $emit(sprintf('Role %s must be contained in one of: %s.', $childRole, implode(', ', $parents)), $token, 'AriaRequiredParent.MissingParent');
+                    $emit(sprintf('Role %s must be contained in one of: %s.', $childRole, implode(', ', $parents)), $token, 'MissingParent');
                 }
             }
         }

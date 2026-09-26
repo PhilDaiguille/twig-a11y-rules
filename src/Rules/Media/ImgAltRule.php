@@ -68,7 +68,7 @@ final class ImgAltRule extends AbstractA11yRule
         $this->seenTagHashes[$tagKey] = true;
 
         if (!preg_match('/\balt\s*=/i', $fullTag)) {
-            $emit('Missing alt attribute on <img> tag.', $token, 'ImgAlt.MissingAlt');
+            $emit('Missing alt attribute on <img> tag.', $token, 'MissingAlt');
 
             return;
         }
@@ -83,7 +83,7 @@ final class ImgAltRule extends AbstractA11yRule
             $hasTwig = $this->containsTwigExpressions($attrValue);
 
             if ($hasTwig) {
-                $emit('Alt attribute contains template expression; verify it is non-empty at runtime.', $token, 'ImgAlt.DynamicAlt');
+                $emit('Alt attribute contains template expression; verify it is non-empty at runtime.', $token, 'DynamicAlt');
 
                 return;
             }
@@ -95,7 +95,7 @@ final class ImgAltRule extends AbstractA11yRule
                 $fullTag
             );
             if (!$hasDecorativeRole) {
-                $emit('Empty alt on <img> requires role="presentation" or role="none".', $token, 'ImgAlt.EmptyAlt');
+                $emit('Empty alt on <img> requires role="presentation" or role="none".', $token, 'EmptyAlt');
             }
         }
     }

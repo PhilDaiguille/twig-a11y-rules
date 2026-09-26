@@ -55,7 +55,7 @@ final class AriaInputFieldNameRule extends AbstractA11yRule
             }
 
             $fakeToken = $tokens->get(0);
-            $emit(sprintf('role="%s" element must have an accessible name (aria-label or aria-labelledby).', $role), $fakeToken, 'AriaInputFieldName.MissingName');
+            $emit(sprintf('role="%s" element must have an accessible name (aria-label or aria-labelledby).', $role), $fakeToken, 'MissingName');
         }
     }
 

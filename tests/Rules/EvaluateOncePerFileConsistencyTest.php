@@ -24,8 +24,8 @@ use TwigA11y\Rules\Structure\AreaAltRule;
  * runs on every single token, which wastes CPU on large templates.
  *
  * A rule is flagged when:
- *  - it calls $this->getFullContent($tokens) or $this->shouldSkipByTokenIndex
- *    as the first meaningful statement in evaluate(), AND
+ *  - it calls $this->getFullContent($tokens) as the first meaningful
+ *    statement in evaluate(), AND
  *  - it does NOT override evaluateOncePerFile().
  *
  * This is a heuristic source-level check; false positives are possible for
@@ -73,9 +73,7 @@ final class EvaluateOncePerFileConsistencyTest extends TestCase
 
             $content = file_get_contents($file->getPathname());
             assert(is_string($content));
-            // Only care about files that have both getFullContent AND evaluate()
-            // without an early per-token guard that is separate from
-            // shouldSkipByTokenIndex.
+            // Only care about files that have both getFullContent AND evaluate().
             if (!str_contains($content, 'getFullContent')) {
                 continue;
             }

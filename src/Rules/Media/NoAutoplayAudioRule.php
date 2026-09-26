@@ -22,7 +22,7 @@ final class NoAutoplayAudioRule extends AbstractA11yRule
                 $attrs = $match[1];
                 if (preg_match('/\bautoplay\b/i', $attrs) && !preg_match('/\bcontrols\b/i', $attrs)) {
                     $fake = $tokens->get(0);
-                    $emit('Audio with autoplay must expose controls.', $fake, 'AutoplayAudio.NoControls');
+                    $emit('Audio with autoplay must expose controls.', $fake, 'NoControls');
 
                     return; // emit only once per file
                 }

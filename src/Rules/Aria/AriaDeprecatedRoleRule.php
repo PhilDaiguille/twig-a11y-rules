@@ -32,7 +32,7 @@ final class AriaDeprecatedRoleRule extends AbstractA11yRule
         foreach ($roles as $role) {
             if (in_array($role, self::DEPRECATED, true)) {
                 $token = $tokens->get(0);
-                $emit(sprintf('ARIA role "%s" is deprecated.', $role), $token, 'AriaDeprecated.Deprecated');
+                $emit(sprintf('ARIA role "%s" is deprecated.', $role), $token, 'Deprecated');
             }
         }
     }

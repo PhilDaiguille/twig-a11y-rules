@@ -28,7 +28,7 @@ final class TableDuplicateNameRuleTest extends AbstractRuleTestCase
         yield 'valid different summary and caption' => [__DIR__.'/Fixtures/valid/table_caption_and_summary_different.html.twig', []];
 
         yield 'duplicate summary and caption' => [__DIR__.'/Fixtures/invalid/table_duplicate_name.html.twig', [
-            'TableDuplicateName.TableDuplicate.Duplicate:1:1' => 'Table summary duplicates caption content; provide distinct descriptions.',
+            'TableDuplicateName.Duplicate:1:1' => 'Table summary duplicates caption content; provide distinct descriptions.',
         ]];
     }
 }

@@ -33,7 +33,7 @@ final class OptGroupLabelRuleTest extends AbstractRuleTestCase
 
         yield 'multiple optgroups missing labels' => [__DIR__.'/Fixtures/invalid/optgroup_multiple_missing_labels.html.twig', [
             'OptGroupLabel.MissingLabel:3:5' => '<optgroup> must have a non-empty label attribute to identify the group (WCAG 1.3.1).',
-            'OptGroupLabel.MissingLabel#2:6:5' => '<optgroup> must have a non-empty label attribute to identify the group (WCAG 1.3.1).',
+            'OptGroupLabel.MissingLabel:6:5' => '<optgroup> must have a non-empty label attribute to identify the group (WCAG 1.3.1).',
         ]];
     }
 }

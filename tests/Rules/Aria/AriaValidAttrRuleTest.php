@@ -34,7 +34,7 @@ final class AriaValidAttrRuleTest extends AbstractRuleTestCase
         yield 'invalid aria attr' => [
             __DIR__.'/Fixtures/invalid/aria_invalid_attr.html.twig',
             [
-                'AriaValidAttr.AriaValidAttr.InvalidAttr:1:1' => 'Attribute aria-foo is not a valid ARIA attribute.',
+                'AriaValidAttr.InvalidAttr:1:1' => 'Attribute aria-foo is not a valid ARIA attribute.',
             ],
         ];
     }

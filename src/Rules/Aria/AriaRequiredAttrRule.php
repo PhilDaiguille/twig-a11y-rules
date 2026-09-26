@@ -43,7 +43,7 @@ final class AriaRequiredAttrRule extends AbstractA11yRule
                             if (!$satisfied) {
                                 $tokenRef = $tokens->get(0);
                                 $missing = implode('" or "', $group);
-                                $emit(sprintf('Role "%s" requires attribute "%s".', $role, $missing), $tokenRef, 'AriaRequired.Missing');
+                                $emit(sprintf('Role "%s" requires attribute "%s".', $role, $missing), $tokenRef, 'Missing');
 
                                 // stop after first missing group found for test determinism
                                 return;

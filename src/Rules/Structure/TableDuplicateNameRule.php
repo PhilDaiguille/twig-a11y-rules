@@ -42,7 +42,7 @@ final class TableDuplicateNameRule extends AbstractA11yRule
 
                 if ($n1 === $n2) {
                     $token = $tokens->get(0);
-                    $emit('Table summary duplicates caption content; provide distinct descriptions.', $token, 'TableDuplicate.Duplicate');
+                    $emit('Table summary duplicates caption content; provide distinct descriptions.', $token, 'Duplicate');
 
                     return;
                 }

@@ -65,12 +65,12 @@ final class SvgAccessibilityRuleTest extends AbstractRuleTestCase
         // Invalid cases
         yield 'svg without accessible name' => [
             __DIR__.'/Fixtures/invalid/svg_no_accessible_name.html.twig',
-            ['SvgAccessibility.SvgA11y.MissingAccessibleName:2:1' => 'SVG element is missing an accessible name. Add <title>, aria-label, aria-labelledby, or aria-hidden="true" if decorative.'],
+            ['SvgAccessibility.MissingAccessibleName:2:1' => 'SVG element is missing an accessible name. Add <title>, aria-label, aria-labelledby, or aria-hidden="true" if decorative.'],
         ];
 
         yield 'svg with role=img but no accessible name' => [
             __DIR__.'/Fixtures/invalid/svg_role_img_no_accessible_name.html.twig',
-            ['SvgAccessibility.SvgA11y.MissingNameForRoleImg:2:1' => 'SVG with role="img" is missing an accessible name (<title>, aria-label, or aria-labelledby).'],
+            ['SvgAccessibility.MissingNameForRoleImg:2:1' => 'SVG with role="img" is missing an accessible name (<title>, aria-label, or aria-labelledby).'],
         ];
     }
 }

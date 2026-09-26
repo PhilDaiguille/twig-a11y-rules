@@ -30,7 +30,7 @@ final class TdHeadersAttrRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'td headers missing id' => [__DIR__.'/Fixtures/invalid/td_headers_missing_id.html.twig', [
-            'TdHeadersAttr.TdHeaders.MissingId:5:1' => 'Referenced id "missing" in headers attribute does not exist in template.',
+            'TdHeadersAttr.MissingId:5:1' => 'Referenced id "missing" in headers attribute does not exist in template.',
         ]];
     }
 }

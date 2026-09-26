@@ -32,11 +32,11 @@ final class DialogAccessibleNameRuleTest extends AbstractRuleTestCase
         yield 'role dialog with aria labelledby' => [__DIR__.'/Fixtures/valid/role_dialog_with_aria_labelledby.html.twig', []];
 
         yield 'dialog without name' => [__DIR__.'/Fixtures/invalid/dialog_without_name.html.twig', [
-            'DialogAccessibleName.DialogAccessibleName.Missing:2:1' => 'Dialog element must have an accessible name via aria-label or aria-labelledby.',
+            'DialogAccessibleName.Missing:2:1' => 'Dialog element must have an accessible name via aria-label or aria-labelledby.',
         ]];
 
         yield 'role alertdialog without name' => [__DIR__.'/Fixtures/invalid/alertdialog_without_name.html.twig', [
-            'DialogAccessibleName.DialogAccessibleName.Missing:2:1' => 'Dialog element must have an accessible name via aria-label or aria-labelledby.',
+            'DialogAccessibleName.Missing:2:1' => 'Dialog element must have an accessible name via aria-label or aria-labelledby.',
         ]];
     }
 }

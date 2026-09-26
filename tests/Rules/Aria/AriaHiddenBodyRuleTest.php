@@ -34,7 +34,7 @@ final class AriaHiddenBodyRuleTest extends AbstractRuleTestCase
         yield 'body aria hidden' => [
             __DIR__.'/Fixtures/invalid/body_aria_hidden.html.twig',
             [
-                'AriaHiddenBody.AriaHiddenBody.HiddenOnBody:1:1' => 'Do not set aria-hidden="true" on the <body> element.',
+                'AriaHiddenBody.HiddenOnBody:1:1' => 'Do not set aria-hidden="true" on the <body> element.',
             ],
         ];
     }

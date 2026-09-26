@@ -16,8 +16,6 @@ use TwigCsFixer\Token\Tokens;
  */
 final class FrameTitleRule extends AbstractA11yRule
 {
-    private int $idx = 0;
-
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -43,18 +41,9 @@ final class FrameTitleRule extends AbstractA11yRule
         }
 
         if (!preg_match('/\btitle\s*=\s*(?:"|\')([^"\']*)(?:"|\')/i', $tag, $m) || '' === trim($m[1])) {
-            ++$this->idx;
-            $id = 'FrameTitle.Missing';
-            if ($this->idx > 1) {
-                $id .= '#'.$this->idx;
-            }
+            $id = 'Missing';
 
             $emit('Frame element must have a non-empty title attribute.', $token, $id);
         }
-    }
-
-    protected function evaluateStart(Tokens $tokens): void
-    {
-        $this->idx = 0;
     }
 }

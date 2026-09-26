@@ -30,12 +30,12 @@ final class AriaAllowedAttrRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'aria attr not allowed' => [__DIR__.'/Fixtures/invalid/aria_attr_not_allowed.html.twig', [
-            'AriaAllowedAttr.AriaAllowed.Invalid:1:1' => 'Attribute aria-checked is not allowed on role button.',
+            'AriaAllowedAttr.Invalid:2:20' => 'Attribute aria-checked is not allowed on role button.',
         ]];
 
         yield 'multiple aria attrs not allowed — all reported' => [__DIR__.'/Fixtures/invalid/aria_multiple_attrs_not_allowed.html.twig', [
-            'AriaAllowedAttr.AriaAllowed.Invalid:1:1' => 'Attribute aria-checked is not allowed on role button.',
-            'AriaAllowedAttr.AriaAllowed.Invalid#2:1:1' => 'Attribute aria-selected is not allowed on role button.',
+            'AriaAllowedAttr.Invalid:2:20' => 'Attribute aria-checked is not allowed on role button.',
+            'AriaAllowedAttr.Invalid:2:40' => 'Attribute aria-selected is not allowed on role button.',
         ]];
     }
 }

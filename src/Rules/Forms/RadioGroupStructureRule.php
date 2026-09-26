@@ -49,7 +49,7 @@ final class RadioGroupStructureRule extends AbstractA11yRule
             $line = 1 + substr_count(substr($full, 0, $items[0]['offset']), "\n");
             $fakeToken = $this->fakeTokenForLine($tokens, $line, $items[0]['tag']);
 
-            $emit(sprintf('Radio inputs sharing name "%s" should be grouped inside a <fieldset> or a container with role="radiogroup".', $name), $fakeToken, 'RadioGroupStructure.MissingGroup');
+            $emit(sprintf('Radio inputs sharing name "%s" should be grouped inside a <fieldset> or a container with role="radiogroup".', $name), $fakeToken, 'MissingGroup');
 
             return;
         }

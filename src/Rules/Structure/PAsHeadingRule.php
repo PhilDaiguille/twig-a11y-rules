@@ -29,13 +29,12 @@ final class PAsHeadingRule extends AbstractA11yRule
         }
 
         // Find <p ...> opening tags that have a style attribute.
-        if (!preg_match_all('/<p\b([^>]*style\s*=\s*(?:"[^"]*"|\'[^\']*\')[^>]*)>/i', $full, $m, PREG_SET_ORDER)) {
+        if (!preg_match_all('/<p\b([^>]*style\s*=\s*(?:"[^"]*"|\'[^\']*\')[^>]*)>/i', $full, $m, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
             return;
         }
 
-        $idx = 0;
         foreach ($m as $set) {
-            $attrs = $set[1];
+            $attrs = $set[1][0];
 
             // Extract the style attribute value.
             if (!preg_match('/\bstyle\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $attrs, $styleMatch)) {
@@ -63,16 +62,10 @@ final class PAsHeadingRule extends AbstractA11yRule
             }
 
             if ($isFakeHeading) {
-                ++$idx;
-                $id = 'PAsHeading.FakeHeading';
-                if ($idx > 1) {
-                    $id .= '#'.$idx;
-                }
-
                 $emit(
                     'Avoid using a <p> with bold/large-font styling as a heading; use a semantic heading element (<h1>–<h6>) instead.',
-                    $tokens->get(0),
-                    $id
+                    $this->tokenAtOffset($tokens, $set[0][1], $set[0][0]),
+                    'FakeHeading'
                 );
             }
         }

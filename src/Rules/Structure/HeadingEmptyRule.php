@@ -19,7 +19,7 @@ final class HeadingEmptyRule extends AbstractA11yRule
         foreach ($m as $set) {
             $content = trim(strip_tags($set[2]));
             if ('' === $content) {
-                $emit('Heading element should not be empty.', $token, 'HeadingEmpty.Empty');
+                $emit('Heading element should not be empty.', $token, 'Empty');
 
                 return;
             }

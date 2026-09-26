@@ -30,7 +30,7 @@ final class AriaReferencedIdExistsRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'missing referenced id' => [__DIR__.'/Fixtures/invalid/aria_labelledby_missing_id.html.twig', [
-            'AriaReferencedIdExists.AriaRef.MissingId:2:1' => 'Referenced id "missing-id" in aria attribute does not exist in template.',
+            'AriaReferencedIdExists.MissingId:2:1' => 'Referenced id "missing-id" in aria attribute does not exist in template.',
         ]];
     }
 }

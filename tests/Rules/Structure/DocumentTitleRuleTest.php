@@ -41,7 +41,7 @@ final class DocumentTitleRuleTest extends AbstractRuleTestCase
 
         yield 'no title' => [
             __DIR__.'/Fixtures/invalid/no_title.html.twig',
-            ['DocumentTitle.DocumentTitle.Missing:1:1' => 'Document should include a non-empty <title> element.'],
+            ['DocumentTitle.Missing:1:1' => 'Document should include a non-empty <title> element.'],
         ];
     }
 }

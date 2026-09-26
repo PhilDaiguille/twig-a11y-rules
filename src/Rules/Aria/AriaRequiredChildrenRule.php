@@ -33,7 +33,7 @@ final class AriaRequiredChildrenRule extends AbstractA11yRule
 
                 if (!$found) {
                     $token = $tokens->get(0);
-                    $emit(sprintf('Role %s must contain at least one of: %s.', $role, implode(', ', $info['required_children'])), $token, 'AriaRequiredChildren.MissingChild');
+                    $emit(sprintf('Role %s must contain at least one of: %s.', $role, implode(', ', $info['required_children'])), $token, 'MissingChild');
                 }
             }
         }

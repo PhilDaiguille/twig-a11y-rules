@@ -22,7 +22,7 @@ final class FieldsetLegendRule extends AbstractA11yRule
                 $inner = trim(strip_tags($block[1]));
                 if ('' === $inner || !preg_match('/<legend[^>]*>\s*([^<]+?)\s*<\/legend>/i', $block[0])) {
                     $fakeToken = $tokens->get(0);
-                    $emit('Fieldset must contain a non-empty <legend>.', $fakeToken, 'Fieldset.LegendMissing');
+                    $emit('Fieldset must contain a non-empty <legend>.', $fakeToken, 'LegendMissing');
 
                     return;
                 }

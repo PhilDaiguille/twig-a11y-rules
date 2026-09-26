@@ -37,7 +37,7 @@ final class LinkHrefValidityRule extends AbstractA11yRule
         }
 
         if (!preg_match('/\bhref\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $tag, $hrefMatch)) {
-            $emit('Anchor elements should include a valid href attribute.', $token, 'LinkHref.MissingHref');
+            $emit('Anchor elements should include a valid href attribute.', $token, 'MissingHref');
 
             return;
         }
@@ -46,13 +46,13 @@ final class LinkHrefValidityRule extends AbstractA11yRule
         $normalized = strtolower(trim($href));
 
         if ('' === $normalized) {
-            $emit('Anchor elements should not use an empty href attribute.', $token, 'LinkHref.EmptyHref');
+            $emit('Anchor elements should not use an empty href attribute.', $token, 'EmptyHref');
 
             return;
         }
 
         if ('#' === $normalized || 'javascript:void(0)' === $normalized || 'javascript:void(0);' === $normalized) {
-            $emit('Anchor elements should use a real destination href instead of placeholder links.', $token, 'LinkHref.PlaceholderHref');
+            $emit('Anchor elements should use a real destination href instead of placeholder links.', $token, 'PlaceholderHref');
         }
     }
 }

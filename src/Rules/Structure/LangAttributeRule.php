@@ -11,8 +11,6 @@ use TwigCsFixer\Token\Tokens;
 
 final class LangAttributeRule extends AbstractA11yRule
 {
-    private int $idx = 0;
-
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -32,19 +30,10 @@ final class LangAttributeRule extends AbstractA11yRule
         }
 
         if (!preg_match('/\blang\s*=\s*("|\')([^"\']*)("|\')/i', $opening, $m) || '' === trim($m[2])) {
-            ++$this->idx;
-            $id = 'LangAttribute.MissingLang';
-            if ($this->idx > 1) {
-                $id .= '#'.$this->idx;
-            }
+            $id = 'MissingLang';
 
             $emit('The <html> element should have a non-empty lang attribute.', $token, $id);
         }
-    }
-
-    protected function evaluateStart(Tokens $tokens): void
-    {
-        $this->idx = 0;
     }
 
     /**

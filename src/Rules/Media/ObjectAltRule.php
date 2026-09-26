@@ -44,6 +44,6 @@ final class ObjectAltRule extends AbstractA11yRule
             }
         }
 
-        $emit('Object element should have alternative text.', $token, 'ObjectAlt.Missing');
+        $emit('Object element should have alternative text.', $token, 'Missing');
     }
 }

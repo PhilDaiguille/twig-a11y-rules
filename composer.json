@@ -33,7 +33,7 @@
     "require-dev": {
         "brianium/paratest": "^7.23.1",
         "friendsofphp/php-cs-fixer": "^3.95",
-        "infection/infection": "^0.34.1",
+        "infection/infection": "^0.35.4",
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^13.2.6",
         "rector/rector": "^2.4"

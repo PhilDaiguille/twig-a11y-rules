@@ -30,11 +30,11 @@ final class AreaAltRuleTest extends AbstractRuleTestCase
         yield 'area decorative with empty alt and role' => [__DIR__.'/Fixtures/valid/area_empty_alt_decorative.html.twig', []];
 
         yield 'area without alt' => [__DIR__.'/Fixtures/invalid/area_no_alt.html.twig', [
-            'AreaAlt.AreaAlt.MissingAlt:2:1' => 'Missing alt attribute on <area> tag.',
+            'AreaAlt.MissingAlt:2:1' => 'Missing alt attribute on <area> tag.',
         ]];
 
         yield 'area empty alt without role' => [__DIR__.'/Fixtures/invalid/area_empty_alt_no_role.html.twig', [
-            'AreaAlt.AreaAlt.EmptyAlt:2:1' => 'Empty alt on <area> requires role="presentation" or role="none".',
+            'AreaAlt.EmptyAlt:2:1' => 'Empty alt on <area> requires role="presentation" or role="none".',
         ]];
     }
 }

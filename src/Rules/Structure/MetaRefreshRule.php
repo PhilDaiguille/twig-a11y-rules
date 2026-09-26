@@ -48,7 +48,7 @@ final class MetaRefreshRule extends AbstractA11yRule
                         $timeout
                     ),
                     $token,
-                    'MetaRefresh.NonZeroTimeout'
+                    'NonZeroTimeout'
                 );
             }
         }

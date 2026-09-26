@@ -30,7 +30,7 @@ final class InputButtonNameRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'invalid submit without name' => [__DIR__.'/Fixtures/invalid/input_submit_no_value_or_aria.html.twig', [
-            'InputButtonName.InputButton.MissingName:2:1' => 'Submit/button input must have a visible name via value or aria-label.',
+            'InputButtonName.MissingName:2:1' => 'Submit/button input must have a visible name via value or aria-label.',
         ]];
     }
 }

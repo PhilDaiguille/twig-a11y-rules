@@ -41,6 +41,6 @@ final class InputButtonNameRule extends AbstractA11yRule
             return;
         }
 
-        $emit('Submit/button input must have a visible name via value or aria-label.', $token, 'InputButton.MissingName');
+        $emit('Submit/button input must have a visible name via value or aria-label.', $token, 'MissingName');
     }
 }

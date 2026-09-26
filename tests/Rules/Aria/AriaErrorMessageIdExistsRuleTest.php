@@ -28,7 +28,7 @@ final class AriaErrorMessageIdExistsRuleTest extends AbstractRuleTestCase
         yield 'aria errormessage existing id' => [__DIR__.'/Fixtures/valid/aria_errormessage_existing_id.html.twig', []];
 
         yield 'aria errormessage missing id' => [__DIR__.'/Fixtures/invalid/aria_errormessage_missing_id.html.twig', [
-            'AriaErrorMessageIdExists.AriaErrorMessage.MissingId:2:1' => 'Referenced id "email-error" in aria-errormessage does not exist in template.',
+            'AriaErrorMessageIdExists.MissingId:2:1' => 'Referenced id "email-error" in aria-errormessage does not exist in template.',
         ]];
     }
 }

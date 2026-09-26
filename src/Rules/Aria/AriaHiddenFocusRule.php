@@ -38,7 +38,7 @@ final class AriaHiddenFocusRule extends AbstractA11yRule
                     if ($isFocusable) {
                         // add a generic token (first text token) for location
                         $token = $tokens->get(0);
-                        $emit('Focusable element should not be aria-hidden.', $token, 'AriaHiddenFocus.HiddenFocusable');
+                        $emit('Focusable element should not be aria-hidden.', $token, 'HiddenFocusable');
 
                         // one error is enough for the test fixtures
                         return;

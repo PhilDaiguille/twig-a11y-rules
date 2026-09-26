@@ -37,7 +37,7 @@ final class AbbrTitleRuleTest extends AbstractRuleTestCase
 
         yield 'multiple abbr missing titles' => [__DIR__.'/Fixtures/invalid/abbr_multiple_missing_titles.html.twig', [
             'AbbrTitle.MissingTitle:2:8' => '<abbr> element must have a non-empty title attribute providing the expansion (RGAA 9.4).',
-            'AbbrTitle.MissingTitle#2:3:8' => '<abbr> element must have a non-empty title attribute providing the expansion (RGAA 9.4).',
+            'AbbrTitle.MissingTitle:3:8' => '<abbr> element must have a non-empty title attribute providing the expansion (RGAA 9.4).',
         ]];
     }
 }

@@ -30,7 +30,7 @@ final class ButtonTypeRuleTest extends AbstractRuleTestCase
         yield 'button outside a form needs no type' => [__DIR__.'/Fixtures/valid/button_outside_form_without_type.html.twig', []];
 
         yield 'button without type' => [__DIR__.'/Fixtures/invalid/button_without_type.html.twig', [
-            'ButtonType.ButtonType.MissingType:3:3' => 'Button inside a form should declare an explicit type attribute.',
+            'ButtonType.MissingType:3:3' => 'Button inside a form should declare an explicit type attribute.',
         ]];
     }
 }

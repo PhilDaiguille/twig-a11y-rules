@@ -28,7 +28,7 @@ final class ColorContrastRuleTest extends AbstractRuleTestCase
         yield 'good contrast' => [__DIR__.'/Fixtures/valid/good_contrast.html.twig', []];
 
         yield 'bad contrast' => [__DIR__.'/Fixtures/invalid/bad_contrast.html.twig', [
-            'ColorContrast.ColorContrast.Insufficient:1:1' => 'Insufficient color contrast',
+            'ColorContrast.Insufficient:1:1' => 'Insufficient color contrast',
         ]];
     }
 }

@@ -30,7 +30,7 @@ final class AutocompleteValidRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'invalid autocomplete' => [__DIR__.'/Fixtures/invalid/input_autocomplete_invalid.html.twig', [
-            'AutocompleteValid.Autocomplete.Invalid:1:1' => 'Invalid autocomplete value "foo".',
+            'AutocompleteValid.Invalid:1:1' => 'Invalid autocomplete value "foo".',
         ]];
 
         yield 'dynamic autocomplete ignored' => [__DIR__.'/Fixtures/valid/input_autocomplete_dynamic.html.twig', []];

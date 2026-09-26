@@ -29,7 +29,7 @@ final class TableFakeCaptionRuleTest extends AbstractRuleTestCase
 
         yield 'invalid table fake caption' => [
             __DIR__.'/Fixtures/invalid/table_fake_caption.html.twig',
-            ['TableFakeCaption.TableFakeCaption.FakeCaption:1:1' => 'Avoid using a <td> as a table caption; use the <caption> element instead.'],
+            ['TableFakeCaption.FakeCaption:2:1' => 'Avoid using a <td> as a table caption; use the <caption> element instead.'],
         ];
     }
 }

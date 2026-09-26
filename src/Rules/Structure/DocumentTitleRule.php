@@ -19,7 +19,7 @@ final class DocumentTitleRule extends AbstractA11yRule
         // The [^<]+ pattern (instead of [^<\n]+) allows multi-line title values.
         if (!preg_match('/<head[\s>].*?<title\s*>\s*([^<]+?)\s*<\/title>/is', $content)) {
             $tokenRef = $tokens->get(0);
-            $emit('Document should include a non-empty <title> element.', $tokenRef, 'DocumentTitle.Missing');
+            $emit('Document should include a non-empty <title> element.', $tokenRef, 'Missing');
         }
     }
 

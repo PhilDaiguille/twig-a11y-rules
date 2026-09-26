@@ -41,7 +41,7 @@ final class AriaErrorMessageIdExistsRule extends AbstractA11yRule
 
             $fakeToken = $this->fakeTokenForLine($tokens, $line, $ref[0]);
 
-            $emit(sprintf('Referenced id "%s" in aria-errormessage does not exist in template.', $refId), $fakeToken, 'AriaErrorMessage.MissingId');
+            $emit(sprintf('Referenced id "%s" in aria-errormessage does not exist in template.', $refId), $fakeToken, 'MissingId');
 
             return;
         }

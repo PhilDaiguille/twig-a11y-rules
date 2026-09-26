@@ -42,7 +42,7 @@ final class DialogAccessibleNameRule extends AbstractA11yRule
             $line = 1 + substr_count(substr($full, 0, $offset), "\n");
             $fakeToken = $this->fakeTokenForLine($tokens, $line, $tag);
 
-            $emit('Dialog element must have an accessible name via aria-label or aria-labelledby.', $fakeToken, 'DialogAccessibleName.Missing');
+            $emit('Dialog element must have an accessible name via aria-label or aria-labelledby.', $fakeToken, 'Missing');
 
             return;
         }

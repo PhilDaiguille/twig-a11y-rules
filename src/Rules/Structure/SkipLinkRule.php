@@ -30,7 +30,7 @@ final class SkipLinkRule extends AbstractA11yRule
         }
 
         $first = $tokens->get(0);
-        $emit('Page should include a skip link to bypass navigation', $first, 'SkipLink.Missing');
+        $emit('Page should include a skip link to bypass navigation', $first, 'Missing');
     }
 
     /**

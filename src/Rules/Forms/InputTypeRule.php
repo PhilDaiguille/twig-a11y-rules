@@ -43,7 +43,7 @@ final class InputTypeRule extends AbstractA11yRule
                 $type = $tm[1] ?? 'unknown';
 
                 $token = $tokens->get(0);
-                $emit(sprintf('Input of type "%s" should include an autocomplete attribute (WCAG 1.3.5).', $type), $token, 'InputType.MissingAutocomplete');
+                $emit(sprintf('Input of type "%s" should include an autocomplete attribute (WCAG 1.3.5).', $type), $token, 'MissingAutocomplete');
 
                 return;
             }

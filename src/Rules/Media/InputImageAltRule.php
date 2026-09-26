@@ -47,6 +47,6 @@ final class InputImageAltRule extends AbstractA11yRule
             return;
         }
 
-        $emit('<input type="image"> must have a non-empty alt attribute.', $token, 'InputImageAlt.Missing');
+        $emit('<input type="image"> must have a non-empty alt attribute.', $token, 'Missing');
     }
 }

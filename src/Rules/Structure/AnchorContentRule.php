@@ -10,8 +10,6 @@ use TwigCsFixer\Token\Tokens;
 
 final class AnchorContentRule extends AbstractA11yRule
 {
-    private int $idx = 0;
-
     public function __construct()
     {
         parent::__construct(emitAsWarning: true);
@@ -48,19 +46,10 @@ final class AnchorContentRule extends AbstractA11yRule
                 && !preg_match('/\btitle\s*=\s*("|\')/i', $opening)
             ) {
                 // Axe-core rule reference: link-name
-                ++$this->idx;
                 $id = 'LinkName';
-                if ($this->idx > 1) {
-                    $id .= '#'.$this->idx;
-                }
 
                 $emit('Anchor element without accessible name (axe-core: link-name) should have an aria-label or title.', $token, $id);
             }
         }
-    }
-
-    protected function evaluateStart(Tokens $tokens): void
-    {
-        $this->idx = 0;
     }
 }

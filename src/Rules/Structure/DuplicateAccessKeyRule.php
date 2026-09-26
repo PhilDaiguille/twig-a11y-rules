@@ -49,7 +49,7 @@ final class DuplicateAccessKeyRule extends AbstractA11yRule
                 $emit(
                     sprintf('Duplicate accesskey value "%s" found. Each accesskey must be unique within a page.', $key),
                     $fakeToken,
-                    'DuplicateAccessKey.Duplicate'
+                    'Duplicate'
                 );
 
                 return;

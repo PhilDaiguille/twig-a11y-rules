@@ -49,7 +49,7 @@ final class AriaControlsIdExistsRule extends AbstractA11yRule
                 $line = 1 + substr_count(substr($full, 0, $offset), "\n");
                 $fakeToken = $this->fakeTokenForLine($tokens, $line, $attr);
 
-                $emit(sprintf('Referenced id "%s" in aria-controls does not exist in template.', $refId), $fakeToken, 'AriaControls.MissingId');
+                $emit(sprintf('Referenced id "%s" in aria-controls does not exist in template.', $refId), $fakeToken, 'MissingId');
 
                 return;
             }

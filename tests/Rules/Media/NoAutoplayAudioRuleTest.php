@@ -26,7 +26,7 @@ final class NoAutoplayAudioRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'audio autoplay no controls' => [__DIR__.'/Fixtures/invalid/audio_autoplay_no_controls.html.twig', [
-            'NoAutoplayAudio.AutoplayAudio.NoControls:1:1' => 'Audio with autoplay must expose controls.',
+            'NoAutoplayAudio.NoControls:1:1' => 'Audio with autoplay must expose controls.',
         ]];
     }
 }

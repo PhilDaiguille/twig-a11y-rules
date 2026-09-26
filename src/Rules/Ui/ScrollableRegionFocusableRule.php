@@ -21,7 +21,7 @@ final class ScrollableRegionFocusableRule extends AbstractA11yRule
                 // if no tabindex on the element, flag
                 if (!preg_match('/tabindex\s*=\s*["\'][0-9-]+["\']/', $match[0])) {
                     $fakeToken = $tokens->get(0);
-                    $emit('Scrollable region with overflow must be keyboard-focusable via tabindex.', $fakeToken, 'Scrollable.Focusable');
+                    $emit('Scrollable region with overflow must be keyboard-focusable via tabindex.', $fakeToken, 'Focusable');
 
                     return;
                 }

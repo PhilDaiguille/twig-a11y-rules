@@ -28,11 +28,11 @@ final class DetailsSummaryRuleTest extends AbstractRuleTestCase
         yield 'details with summary' => [__DIR__.'/Fixtures/valid/details_with_summary.html.twig', []];
 
         yield 'details without summary' => [__DIR__.'/Fixtures/invalid/details_without_summary.html.twig', [
-            'DetailsSummary.DetailsSummary.MissingSummary:2:1' => 'Details element must contain a non-empty <summary>.',
+            'DetailsSummary.MissingSummary:2:1' => 'Details element must contain a non-empty <summary>.',
         ]];
 
         yield 'details with empty summary' => [__DIR__.'/Fixtures/invalid/details_with_empty_summary.html.twig', [
-            'DetailsSummary.DetailsSummary.EmptySummary:2:1' => 'Summary element inside <details> must have non-empty content.',
+            'DetailsSummary.EmptySummary:2:1' => 'Summary element inside <details> must have non-empty content.',
         ]];
     }
 }

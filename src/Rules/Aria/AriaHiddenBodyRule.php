@@ -16,7 +16,7 @@ final class AriaHiddenBodyRule extends AbstractA11yRule
 
         if (preg_match('/<body[^>]*aria-hidden\s*=\s*(?:"|\')true(?:"|\')/i', $full)) {
             $first = $tokens->get(0);
-            $emit('Do not set aria-hidden="true" on the <body> element.', $first, 'AriaHiddenBody.HiddenOnBody');
+            $emit('Do not set aria-hidden="true" on the <body> element.', $first, 'HiddenOnBody');
         }
     }
 

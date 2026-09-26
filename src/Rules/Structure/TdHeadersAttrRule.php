@@ -51,7 +51,7 @@ final class TdHeadersAttrRule extends AbstractA11yRule
                             $r[0]
                         );
 
-                        $emit(sprintf('Referenced id "%s" in headers attribute does not exist in template.', $refId), $fakeToken, 'TdHeaders.MissingId');
+                        $emit(sprintf('Referenced id "%s" in headers attribute does not exist in template.', $refId), $fakeToken, 'MissingId');
 
                         return; // emit only once per file
                     }

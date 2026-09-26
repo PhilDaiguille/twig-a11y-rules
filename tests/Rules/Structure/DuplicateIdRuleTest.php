@@ -30,7 +30,7 @@ final class DuplicateIdRuleTest extends AbstractRuleTestCase
         yield 'duplicate ids' => [
             __DIR__.'/Fixtures/invalid/duplicate_ids.html.twig',
             [
-                'DuplicateId.DuplicateId.Duplicate:1:1' => 'Duplicate id "foo" found in document.',
+                'DuplicateId.Duplicate:4:8' => 'Duplicate id "foo" found in document.',
             ],
         ];
     }

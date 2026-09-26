@@ -46,7 +46,7 @@ final class PlaceholderOnlyLabelRule extends AbstractA11yRule
             $line = 1 + substr_count(substr($full, 0, $offset), "\n");
             $fakeToken = $this->fakeTokenForLine($tokens, $line, $tag);
 
-            $emit('Form field appears to rely on placeholder text instead of a proper label.', $fakeToken, 'PlaceholderOnlyLabel.MissingLabel');
+            $emit('Form field appears to rely on placeholder text instead of a proper label.', $fakeToken, 'MissingLabel');
 
             return;
         }

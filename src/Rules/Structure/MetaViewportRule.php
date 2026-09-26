@@ -21,12 +21,12 @@ final class MetaViewportRule extends AbstractA11yRule
         }
 
         if (preg_match('/user-scalable\s*=\s*no/i', $fullLower)) {
-            $emit('Avoid using user-scalable=no in the viewport meta.', $tokens->get(0), 'MetaViewport.UserScalable');
+            $emit('Avoid using user-scalable=no in the viewport meta.', $tokens->get(0), 'UserScalable');
         }
 
         // WCAG 1.4.4: maximum-scale must be >= 2 to allow users to zoom text.
         if (preg_match('/maximum-scale\s*=\s*([0-9]*\.?[0-9]+)/i', $fullLower, $m) && (float) $m[1] < 2.0) {
-            $emit('Avoid setting maximum-scale below 2 in the viewport meta (WCAG 1.4.4).', $tokens->get(0), 'MetaViewport.MaximumScale');
+            $emit('Avoid setting maximum-scale below 2 in the viewport meta (WCAG 1.4.4).', $tokens->get(0), 'MaximumScale');
         }
     }
 

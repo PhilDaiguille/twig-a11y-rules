@@ -121,7 +121,7 @@ final class LandmarkUniqueRule extends AbstractA11yRule
             // main landmark is allowed on a page regardless of labels.
             if ('main' === $tag) {
                 $fake = $tokens->get(0);
-                $emit(sprintf('Landmark role="%s" appears %d times; landmarks should be unique.', $role, $count), $fake, 'Landmark.Unique');
+                $emit(sprintf('Landmark role="%s" appears %d times; landmarks should be unique.', $role, $count), $fake, 'Unique');
 
                 return;
             }
@@ -135,7 +135,7 @@ final class LandmarkUniqueRule extends AbstractA11yRule
 
             if ($hasEmpty || $unique < $count) {
                 $fake = $tokens->get(0);
-                $emit(sprintf('Multiple %s landmarks found; ensure each has a distinct aria-label or aria-labelledby.', $tag), $fake, 'Landmark.Unique');
+                $emit(sprintf('Multiple %s landmarks found; ensure each has a distinct aria-label or aria-labelledby.', $tag), $fake, 'Unique');
 
                 return;
             }

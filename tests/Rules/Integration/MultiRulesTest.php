@@ -34,12 +34,12 @@ final class MultiRulesTest extends AbstractRuleTestCase
 
         $expects = [
             // heading jump
-            'HeadingOrder.HeadingOrder.Invalid:1:1' => 'Heading level jumped from h1 to h3.',
+            'HeadingOrder.Invalid:2:1' => 'Heading level jumped from h1 to h3.',
             // duplicate id (identifier includes rule prefix + provided id)
-            'DuplicateId.DuplicateId.Duplicate:1:1' => 'Duplicate id "dup" found in document.',
+            'DuplicateId.Duplicate:5:11' => 'Duplicate id "dup" found in document.',
             // aria roles (two invalid roles)
-            'AriaRole.AriaRole.InvalidRole:1:1' => 'Invalid ARIA role "foo".',
-            'AriaRole.AriaRole.InvalidRole#2:1:1' => 'Invalid ARIA role "bar".',
+            'AriaRole.InvalidRole:10:12' => 'Invalid ARIA role "foo".',
+            'AriaRole.InvalidRole:11:12' => 'Invalid ARIA role "bar".',
         ];
 
         $this->checkRule($rules, $expects, __DIR__.'/Fixtures/multi_issues.html.twig');

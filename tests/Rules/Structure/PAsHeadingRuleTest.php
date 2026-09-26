@@ -29,12 +29,12 @@ final class PAsHeadingRuleTest extends AbstractRuleTestCase
 
         yield 'invalid bold paragraph' => [
             __DIR__.'/Fixtures/invalid/p_as_heading_bold.html.twig',
-            ['PAsHeading.PAsHeading.FakeHeading:1:1' => 'Avoid using a <p> with bold/large-font styling as a heading; use a semantic heading element (<h1>–<h6>) instead.'],
+            ['PAsHeading.FakeHeading:2:1' => 'Avoid using a <p> with bold/large-font styling as a heading; use a semantic heading element (<h1>–<h6>) instead.'],
         ];
 
         yield 'invalid large font paragraph' => [
             __DIR__.'/Fixtures/invalid/p_as_heading_large_font.html.twig',
-            ['PAsHeading.PAsHeading.FakeHeading:1:1' => 'Avoid using a <p> with bold/large-font styling as a heading; use a semantic heading element (<h1>–<h6>) instead.'],
+            ['PAsHeading.FakeHeading:2:1' => 'Avoid using a <p> with bold/large-font styling as a heading; use a semantic heading element (<h1>–<h6>) instead.'],
         ];
     }
 }

@@ -7,10 +7,11 @@ namespace TwigA11y\Rules;
 use TwigA11y\Template\TemplateClassifier;
 use TwigA11y\Template\TemplateKind;
 use TwigCsFixer\Rules\AbstractRule;
+use TwigCsFixer\Rules\ConfigurableRuleInterface;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
-abstract class AbstractA11yRule extends AbstractRule
+abstract class AbstractA11yRule extends AbstractRule implements ConfigurableRuleInterface
 {
     use TokenCollectorTrait;
 
@@ -59,6 +60,17 @@ abstract class AbstractA11yRule extends AbstractRule
     public function __construct(private bool $emitAsWarning = false) {}
 
     /**
+     * Lets twig-cs-fixer's cache and Ruleset tell apart the same rule
+     * configured as warning vs error.
+     *
+     * @return array{emitAsWarning: bool}
+     */
+    public function getConfiguration(): array
+    {
+        return ['emitAsWarning' => $this->emitAsWarning];
+    }
+
+    /**
      * Implement this method to perform the actual accessibility check.
      *
      * Called for each token (or once per file when evaluateOncePerFile()
@@ -95,29 +107,34 @@ abstract class AbstractA11yRule extends AbstractRule
      * has already computed the correct line number from a full-content regex
      * offset and wants to report the error at that precise line.
      */
-    protected function fakeTokenForLine(Tokens $tokens, int $line, string $value): Token
+    protected function fakeTokenForLine(Tokens $tokens, int $line, string $value, int $linePosition = 1): Token
     {
         $token = $tokens->get(0);
 
         return new Token(
             $token->getType(),
             $line,
-            1,
+            $linePosition,
             $token->getFilename(),
             $value
         );
     }
 
-    #[\Deprecated(message: <<<'TXT'
-        This guard is a no-op when evaluateOncePerFile() returns true
-                     because AbstractA11yRule::process() already skips subsequent
-                     tokens before calling evaluate(). Remove the call from
-                     evaluate() in concrete rules — no behaviour change results.
-                     This method will be removed in a future major version.
-        TXT)]
-    protected function shouldSkipByTokenIndex(int $tokenIndex): bool
+    /**
+     * Build a synthetic Token at the line and column of a byte offset in
+     * getFullContent(), e.g. from preg_match_all(..., PREG_OFFSET_CAPTURE).
+     */
+    protected function tokenAtOffset(Tokens $tokens, int $offset, string $value): Token
     {
-        return $this->evaluateOncePerFile() && 0 !== $tokenIndex;
+        $before = substr($this->getFullContent($tokens), 0, $offset);
+        $lineStart = strrpos($before, "\n");
+
+        return $this->fakeTokenForLine(
+            $tokens,
+            substr_count($before, "\n") + 1,
+            $value,
+            $offset - (false === $lineStart ? -1 : $lineStart),
+        );
     }
 
     final protected function process(int $tokenIndex, Tokens $tokens): void
@@ -201,7 +218,7 @@ abstract class AbstractA11yRule extends AbstractRule
         };
 
         return function (string $message, Token $token, ?string $id = null) use ($ruleFileKey, $reporter): void {
-            $key = $message.'|'.($id ?? '');
+            $key = $message.'|'.($id ?? '').'|'.$token->getLine().':'.$token->getLinePosition();
             if (isset($this->emitted[$ruleFileKey][$key])) {
                 return;
             }

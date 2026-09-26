@@ -37,7 +37,7 @@ final class MouseEventKeyboardEquivalentRuleTest extends AbstractRuleTestCase
 
         yield 'multiple mouse-only violations' => [__DIR__.'/Fixtures/invalid/mouse_multiple_violations.html.twig', [
             'MouseEventKeyboardEquivalent.MouseOnlyEvent:2:1' => 'Mouse event handler "onmouseover" has no keyboard equivalent (onfocus) (WCAG 2.1.1).',
-            'MouseEventKeyboardEquivalent.MouseOnlyEvent#2:3:1' => 'Mouse event handler "onmouseover" has no keyboard equivalent (onfocus) (WCAG 2.1.1).',
+            'MouseEventKeyboardEquivalent.MouseOnlyEvent:3:1' => 'Mouse event handler "onmouseover" has no keyboard equivalent (onfocus) (WCAG 2.1.1).',
         ]];
     }
 }

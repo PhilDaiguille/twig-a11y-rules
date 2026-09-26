@@ -39,7 +39,7 @@ final class LabelForTargetExistsRule extends AbstractA11yRule
             $line = 1 + substr_count(substr($full, 0, $offset), "\n");
             $fakeToken = $this->fakeTokenForLine($tokens, $line, $tag);
 
-            $emit(sprintf('Label for="%s" does not reference any existing id in template.', $forId), $fakeToken, 'LabelFor.MissingTarget');
+            $emit(sprintf('Label for="%s" does not reference any existing id in template.', $forId), $fakeToken, 'MissingTarget');
 
             return;
         }

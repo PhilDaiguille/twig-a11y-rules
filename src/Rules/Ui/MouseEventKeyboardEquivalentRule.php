@@ -49,7 +49,6 @@ final class MouseEventKeyboardEquivalentRule extends AbstractA11yRule
             return;
         }
 
-        $idx = 0;
         foreach ($matches as $match) {
             $attrs = $match[1][0];
             $attrsLower = strtolower($attrs);
@@ -66,14 +65,9 @@ final class MouseEventKeyboardEquivalentRule extends AbstractA11yRule
                     continue;
                 }
 
-                ++$idx;
                 $id = 'MouseOnlyEvent';
-                if ($idx > 1) {
-                    $id .= '#'.$idx;
-                }
 
-                $line = 1 + substr_count(substr($full, 0, $offset), "\n");
-                $fakeToken = $this->fakeTokenForLine($tokens, $line, $match[0][0]);
+                $fakeToken = $this->tokenAtOffset($tokens, $offset, $match[0][0]);
 
                 $emit(
                     sprintf(
