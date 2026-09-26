@@ -2,28 +2,28 @@ name: Release Drafter
 
 on:
     push:
-        branches:
-            - main
+        branches: [ main ]
+    # pull_request_target so fork PRs get labelled too; no PR code is checked out.
     pull_request_target:
-        types:
-            - opened
-            - reopened
-            - synchronize
-            - labeled
-            - unlabeled
+        types: [ opened, reopened, synchronize, edited ]
 
 permissions:
-    contents: write
-    pull-requests: write
+    contents: read
 
 jobs:
     update_release_draft:
+        if: github.event_name == 'push'
         runs-on: ubuntu-latest
-
+        permissions:
+            contents: write
+            pull-requests: read
         steps:
-            - name: Draft next release
-              uses: release-drafter/release-drafter@v7
-              with:
-                  config-name: release-drafter.yml
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - uses: release-drafter/release-drafter@v7
+
+    autolabel:
+        if: github.event_name == 'pull_request_target'
+        runs-on: ubuntu-latest
+        permissions:
+            pull-requests: write
+        steps:
+            - uses: release-drafter/release-drafter/autolabeler@v7

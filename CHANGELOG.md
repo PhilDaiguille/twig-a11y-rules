@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## Unreleased
 
+## 0.9.1 - 2026-09-26
+
 ### Fixed
 
 - `FormLabelRule` no longer misses an empty or orphan `<label>` that follows a
