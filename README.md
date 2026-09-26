@@ -276,7 +276,8 @@ Each rule lives in `src/Rules/{Category}/` and must have:
 - A test class in `tests/Rules/{Category}/`
 - Valid and invalid `.html.twig` fixtures in `tests/Rules/{Category}/Fixtures/`
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full conventions.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full conventions, and
+[`ROADMAP.md`](ROADMAP.md) for what is planned next.
 
 ## Template classification and rule scoping
 

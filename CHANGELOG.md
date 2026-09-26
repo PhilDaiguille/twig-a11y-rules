@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## Unreleased
 
+## 1.0.0 - 2026-09-26
+
 ### Changed (BC break)
 
 - Violation identifiers are now `<Rule>.<MessageId>`, e.g. `InputLabel.MissingLabel`,
