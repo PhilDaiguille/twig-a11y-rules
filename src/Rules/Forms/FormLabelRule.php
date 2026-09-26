@@ -39,20 +39,19 @@ final class FormLabelRule extends AbstractA11yRule
             return;
         }
 
-        $full = $this->getFullContent($tokens);
+        $label = $this->getLabelScope($tokens, $tokenIndex);
+        $inner = substr($label, strlen($opening));
 
-        // Check for for attribute + ensure that the referenced <label for="id"> has non-empty content
-        $forId = '';
-        if (preg_match('/\bfor\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $opening, $m)) {
-            $forId = $m[1];
-        }
+        $forId = 1 === preg_match('/\sfor\s*=\s*(["\'])(.+?)\1/is', $opening, $m) ? $m[2] : '';
 
-        if ('' !== $forId && preg_match('/<label[^>]*for\s*=\s*["\']'.preg_quote($forId, '/').'["\'][^>]*>\s*[^<]+\s*<\/label>/i', $full)) {
+        $hasContent = '' !== trim(strip_tags($inner));
+        $wrapsControl = 1 === preg_match('/<(?:input|select|textarea)\b/i', $inner);
+
+        if ('' !== $forId && $hasContent) {
             return;
         }
 
-        // If label wraps content and contains input/select/textarea
-        if (preg_match('/<label[^>]*>\s*(?:<input|<select|<textarea)/i', $full)) {
+        if ($wrapsControl) {
             return;
         }
 
@@ -63,7 +62,7 @@ final class FormLabelRule extends AbstractA11yRule
         }
 
         $emit(
-            '<label> must have a for attribute or non-empty content.',
+            '<label> must have a for attribute or wrap the related element.',
             $token,
             $id
         );
@@ -72,5 +71,21 @@ final class FormLabelRule extends AbstractA11yRule
     protected function evaluateStart(Tokens $tokens): void
     {
         $this->idx = 0;
+    }
+
+    private function getLabelScope(Tokens $tokens, int $start): string
+    {
+        $scope = '';
+        for ($i = $start; $tokens->has($i); ++$i) {
+            $scope .= $tokens->get($i)->getValue();
+            if (false !== stripos($scope, '</label>')) {
+                break;
+            }
+        }
+
+        $from = stripos($scope, '<label');
+        $to = stripos($scope, '</label>', (int) $from);
+
+        return false === $from || false === $to ? '' : substr($scope, $from, $to - $from);
     }
 }

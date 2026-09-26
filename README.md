@@ -166,7 +166,7 @@ Rules are grouped by category for easier discovery. The **Preset** column indica
 | Rule | Description | Preset |
 |---|---|---|
 | `InputLabelRule` | `<input>` without an associated `<label>` or `aria-label` | Basic |
-| `FormLabelRule` | `<label>` without `for` or without non-empty content | Recommended |
+| `FormLabelRule` | `<label>` without `for` and not wrapping the related element | Recommended |
 | `SelectLabelRule` | `<select>` without an associated `<label>`, `aria-label`, or `aria-labelledby` | Recommended |
 | `TextareaLabelRule` | `<textarea>` without an associated `<label>` | Recommended |
 | `InputTypeRule` | `<input>` with personal-data type (`email`, `tel`, `name`, `username`, `new-password`, `current-password`) without `autocomplete` (WCAG 1.3.5) | Standard |
