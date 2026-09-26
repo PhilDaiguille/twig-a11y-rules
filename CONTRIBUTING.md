@@ -4,6 +4,8 @@ Thanks for helping! Bug reports about **false positives** are the most useful
 contribution: please open an issue with the smallest Twig template that
 triggers the wrong error.
 
+Looking for something to work on? See [`ROADMAP.md`](ROADMAP.md).
+
 ## Setup
 
 ```bash
