@@ -29,8 +29,6 @@ final class OutlineNoneWithoutFocusVisibleRule extends AbstractA11yRule
         }
 
         foreach ($matches as $match) {
-            $tag = $match[1];
-            $attrs = $match[2];
             $styleVal = $match[3];
             if (preg_match('/outline\s*:\s*(none|0)/i', $styleVal)) {
                 $hasCompensation = false;

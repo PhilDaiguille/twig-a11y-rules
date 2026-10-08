@@ -27,7 +27,6 @@ final class IframeFocusableContentRule extends AbstractA11yRule
             PREG_SET_ORDER,
         )) {
             foreach ($matches as $m) {
-                $attrs = $m[1];
                 $inner = $m[2];
 
                 // If inner content contains focusable element, emit
