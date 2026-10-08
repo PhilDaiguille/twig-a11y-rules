@@ -25,10 +25,13 @@ final class DocTypeRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<string,string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'doctype present' => [__DIR__.'/Fixtures/valid/doctype_present.html.twig', []];
+        yield 'doctype present' => [__DIR__ . '/Fixtures/valid/doctype_present.html.twig', []];
 
-        yield 'doctype missing' => [__DIR__.'/Fixtures/invalid/doctype_missing.html.twig', [
-            'DocType.MissingDoctype:1:1' => 'Full-page document is missing a <!DOCTYPE html> declaration (RGAA 8.1).',
-        ]];
+        yield 'doctype missing' => [
+            __DIR__ . '/Fixtures/invalid/doctype_missing.html.twig',
+            [
+                'DocType.MissingDoctype:1:1' => 'Full-page document is missing a <!DOCTYPE html> declaration (RGAA 8.1).',
+            ],
+        ];
     }
 }

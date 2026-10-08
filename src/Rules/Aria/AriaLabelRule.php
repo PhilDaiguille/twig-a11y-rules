@@ -10,6 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class AriaLabelRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -41,7 +42,7 @@ final class AriaLabelRule extends AbstractA11yRule
         $emit(
             'Landmark elements should have a non-empty aria-label.',
             $token,
-            'MissingOrEmpty'
+            'MissingOrEmpty',
         );
     }
 }

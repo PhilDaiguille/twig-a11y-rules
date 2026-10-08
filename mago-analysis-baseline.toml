@@ -1,0 +1,985 @@
+variant = "loose"
+
+[[issues]]
+file = "src/Rules/AbstractA11yRule.php"
+code = "unused-parameter"
+message = "Parameter `$tokens` is never used."
+count = 1
+
+[[issues]]
+file = "src/Rules/Anchor/AnchorAccessibleNameRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$imgM`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Anchor/AnchorAccessibleNameRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Anchor/AnchorAccessibleNameRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$mm`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Anchor/LinkHrefValidityRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$hrefMatch`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaAllowedAttrRule.php"
+code = "invalid-operand"
+message = "Invalid type for left operand."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaAllowedAttrRule.php"
+code = "invalid-operand"
+message = "Invalid type for right operand."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaAllowedAttrRule.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #2 of `TwigA11y\Rules\AbstractA11yRule::tokenAtOffset`: expected `int`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaAllowedAttrRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$am` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaAllowedAttrRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$matches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaControlsIdExistsRule.php"
+code = "invalid-argument"
+message = "Invalid argument type for argument #3 of `substr`: expected `int|null`, but found `string`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaControlsIdExistsRule.php"
+code = "possibly-false-operand"
+message = "Left operand in `>` comparison might be `false` (type `false|non-negative-int`)."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaControlsIdExistsRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$idMatches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaControlsIdExistsRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$refs`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaDeprecatedRoleRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaErrorMessageIdExistsRule.php"
+code = "possibly-false-operand"
+message = "Left operand in `>` comparison might be `false` (type `false|non-negative-int`)."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaErrorMessageIdExistsRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$idMatches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaErrorMessageIdExistsRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$refs`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaHiddenFocusRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaHiddenFocusRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$ti`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaLabelRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaReferencedIdExistsRule.php"
+code = "possibly-false-operand"
+message = "Left operand in `>` comparison might be `false` (type `false|non-negative-int`)."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaReferencedIdExistsRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$idMatches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaReferencedIdExistsRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$refs`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaRequiredAttrRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$m` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaRequiredAttrRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$tags`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaRequiredChildrenRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$m` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaRequiredParentRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$matches` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaRoleRule.php"
+code = "invalid-destructuring-source"
+message = "Invalid destructuring assignment: Cannot unpack type `string` into variables."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaRoleRule.php"
+code = "mixed-argument"
+message = "Invalid argument type for argument #1 of `strtolower`: expected `string`, but found `mixed`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaRoleRule.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #2 of `TwigA11y\Rules\AbstractA11yRule::tokenAtOffset`: expected `int`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaRoleRule.php"
+code = "mixed-assignment"
+message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
+count = 2
+
+[[issues]]
+file = "src/Rules/Aria/AriaRoleRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaValidAttrRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaValidAttrValueRule.php"
+code = "mixed-argument"
+message = "Invalid argument type for argument #2 of `in_array`: expected `array<array-key, ('V.in_array() extends mixed)>`, but found `nonnull`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/AriaValidAttrValueRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/RoleButtonTabindexRule.php"
+code = "invalid-argument"
+message = 'Invalid argument type for argument #2 of `TwigA11y\Rules\AbstractA11yRule::tokenAtOffset`: expected `int`, but found `string`.'
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/RoleButtonTabindexRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$roleMatch` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/RoleButtonTabindexRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$matches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Aria/TabIndexRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/AbstractFormFieldLabelRule.php"
+code = "unused-parameter"
+message = "Parameter `$opening` is never used."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/AriaInputFieldNameRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$idm` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/AriaInputFieldNameRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/AutocompleteValidRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/ButtonTypeRule.php"
+code = "possibly-false-operand"
+message = "Right operand in arithmetic operation might be `false` (type `false|non-negative-int`)."
+count = 2
+
+[[issues]]
+file = "src/Rules/Forms/CheckboxGroupStructureRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$m` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/CheckboxGroupStructureRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$inputs`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/FormLabelRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/InputTypeRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/InputTypeRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$tm`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/InvalidFieldErrorMessageRule.php"
+code = "invalid-argument"
+message = "Invalid argument type for argument #3 of `substr`: expected `int|null`, but found `string`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/InvalidFieldErrorMessageRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$match`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/InvalidFieldErrorMessageRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$matches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/InvalidFieldErrorMessageRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$roleMatch`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/LabelForTargetExistsRule.php"
+code = "invalid-argument"
+message = "Invalid argument type for argument #3 of `substr`: expected `int|null`, but found `string`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/LabelForTargetExistsRule.php"
+code = "possibly-false-operand"
+message = "Left operand in `>` comparison might be `false` (type `false|non-negative-int`)."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/LabelForTargetExistsRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$idMatches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/LabelForTargetExistsRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$labels`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/OptGroupLabelRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/PlaceholderOnlyLabelRule.php"
+code = "invalid-argument"
+message = "Invalid argument type for argument #3 of `substr`: expected `int|null`, but found `string`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/PlaceholderOnlyLabelRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$matches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/RadioGroupAccessibleNameRule.php"
+code = "invalid-argument"
+message = "Invalid argument type for argument #3 of `substr`: expected `int|null`, but found `string`."
+count = 2
+
+[[issues]]
+file = "src/Rules/Forms/RadioGroupAccessibleNameRule.php"
+code = "possibly-false-operand"
+message = "Left operand in `<` comparison might be `false` (type `false|non-negative-int`)."
+count = 2
+
+[[issues]]
+file = "src/Rules/Forms/RadioGroupAccessibleNameRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$legendMatch` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/RadioGroupAccessibleNameRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$fieldsets`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/RadioGroupAccessibleNameRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$groups`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/RadioGroupAccessibleNameRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$match`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/RadioGroupStructureRule.php"
+code = "invalid-argument"
+message = "Invalid argument type for argument #3 of `substr`: expected `int|null`, but found `string`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/RadioGroupStructureRule.php"
+code = "possibly-false-operand"
+message = "Left operand in `>=` comparison might be `false` (type `false|non-negative-int`)."
+count = 2
+
+[[issues]]
+file = "src/Rules/Forms/RadioGroupStructureRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$fieldsets`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/RadioGroupStructureRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$groups`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Forms/RadioGroupStructureRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$radios`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Media/ImgAltRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$matches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Media/InputImageAltRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Media/NoAutoplayAudioRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Media/ObjectAltRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Media/VideoDescriptionTrackRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$matches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Media/VideoTrackRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/AbbrTitleRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/AnchorContentRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/AnchorContentRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$o`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/AreaAltRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$am`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/AreaAltRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/ButtonContentRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/ButtonContentRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$o`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/DetailsSummaryRule.php"
+code = "invalid-argument"
+message = "Invalid argument type for argument #3 of `substr`: expected `int|null`, but found `string`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/DetailsSummaryRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$summaryMatch` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/DetailsSummaryRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$matches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/DialogAccessibleNameRule.php"
+code = "invalid-argument"
+message = "Invalid argument type for argument #3 of `substr`: expected `int|null`, but found `string`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/DialogAccessibleNameRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$ariaLabelMatch` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/DialogAccessibleNameRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$ariaLabelledByMatch` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/DialogAccessibleNameRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$matches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/DuplicateAccessKeyRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/DuplicateIdRule.php"
+code = "invalid-destructuring-source"
+message = "Invalid destructuring assignment: Cannot unpack type `string` into variables."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/DuplicateIdRule.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #2 of `TwigA11y\Rules\AbstractA11yRule::tokenAtOffset`: expected `int`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/DuplicateIdRule.php"
+code = "mixed-argument"
+message = "Invalid argument type for argument #2 of `sprintf`: expected `Stringable|null|scalar`, but found `mixed`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/DuplicateIdRule.php"
+code = "mixed-argument"
+message = 'Invalid argument type for argument #3 of `TwigA11y\Rules\AbstractA11yRule::tokenAtOffset`: expected `string`, but found `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/DuplicateIdRule.php"
+code = "mixed-assignment"
+message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
+count = 2
+
+[[issues]]
+file = "src/Rules/Structure/DuplicateIdRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/EmptyTableHeaderRule.php"
+code = "invalid-argument"
+message = 'Invalid argument type for argument #2 of `TwigA11y\Rules\AbstractA11yRule::tokenAtOffset`: expected `int`, but found `string`.'
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/EmptyTableHeaderRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/FieldsetLegendRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/GenericLinkTextRule.php"
+code = "invalid-argument"
+message = 'Invalid argument type for argument #2 of `TwigA11y\Rules\AbstractA11yRule::tokenAtOffset`: expected `int`, but found `string`.'
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/GenericLinkTextRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/HeadingEmptyRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/HeadingOrderRule.php"
+code = "invalid-argument"
+message = 'Invalid argument type for argument #2 of `TwigA11y\Rules\AbstractA11yRule::tokenAtOffset`: expected `int`, but found `string`.'
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/HeadingOrderRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/IframeFocusableContentRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$matches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/LandmarkUniqueRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$m` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/LandmarkUniqueRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$mr` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/LangAttributeValueRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/ListStructureRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$dls`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/ListStructureRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$lists`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/MetaRefreshRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$m` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/MetaRefreshRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$tags`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/MetaViewportRule.php"
+code = "invalid-type-cast"
+message = "Non numeric string of type `string` implicitly cast to `float`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/MetaViewportRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/NestedInteractiveRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$nested` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/NestedInteractiveRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$anchors`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/NestedInteractiveRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$buttons`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/PAsHeadingRule.php"
+code = "invalid-argument"
+message = 'Invalid argument type for argument #2 of `TwigA11y\Rules\AbstractA11yRule::tokenAtOffset`: expected `int`, but found `string`.'
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/PAsHeadingRule.php"
+code = "invalid-type-cast"
+message = "Non numeric string of type `string` implicitly cast to `float`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/PAsHeadingRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$styleMatch` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/PAsHeadingRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/PAsHeadingRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$sizeMatch`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/TableCaptionMissingRule.php"
+code = "invalid-argument"
+message = "Invalid argument type for argument #3 of `substr`: expected `int|null`, but found `string`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/TableCaptionMissingRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$captionMatch` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/TableCaptionMissingRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$tables`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/TableDuplicateNameRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$c` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/TableDuplicateNameRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$m` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/TableDuplicateNameRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$tables`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/TableFakeCaptionRule.php"
+code = "invalid-argument"
+message = 'Invalid argument type for argument #2 of `TwigA11y\Rules\AbstractA11yRule::tokenAtOffset`: expected `int`, but found `string`.'
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/TableFakeCaptionRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$firstRow` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/TableFakeCaptionRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$tables`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/TableHeaderRule.php"
+code = "invalid-argument"
+message = 'Invalid argument type for argument #2 of `TwigA11y\Rules\AbstractA11yRule::tokenAtOffset`: expected `int`, but found `string`.'
+count = 2
+
+[[issues]]
+file = "src/Rules/Structure/TableHeaderRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$scopeMatch` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/TableHeaderRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/TableLayoutRoleRule.php"
+code = "invalid-argument"
+message = "Invalid argument type for argument #3 of `substr`: expected `int|null`, but found `string`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/TableLayoutRoleRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$matches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/TdHeadersAttrRule.php"
+code = "possibly-false-operand"
+message = "Left operand in `>` comparison might be `false` (type `false|non-negative-int`)."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/TdHeadersAttrRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$idMatches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Structure/TdHeadersAttrRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$refs`."
+count = 1
+
+[[issues]]
+file = "src/Rules/TokenCollectorTrait.php"
+code = "invalid-destructuring-source"
+message = "Invalid destructuring assignment: Cannot unpack type `string` into variables."
+count = 1
+
+[[issues]]
+file = "src/Rules/TokenCollectorTrait.php"
+code = "mixed-assignment"
+message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
+count = 3
+
+[[issues]]
+file = "src/Rules/TokenCollectorTrait.php"
+code = "mixed-operand"
+message = "Left operand in `<` comparison has `mixed` type."
+count = 1
+
+[[issues]]
+file = "src/Rules/TokenCollectorTrait.php"
+code = "mixed-return-statement"
+message = 'Could not infer a precise return type for function `TwigA11y\Rules\TokenCollectorTrait::collectOpeningTag`. Saw type `mixed`.'
+count = 1
+
+[[issues]]
+file = "src/Rules/TokenCollectorTrait.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 3
+
+[[issues]]
+file = "src/Rules/Ui/ClickableNonInteractiveRule.php"
+code = "invalid-argument"
+message = 'Invalid argument type for argument #2 of `TwigA11y\Rules\AbstractA11yRule::tokenAtOffset`: expected `int`, but found `string`.'
+count = 1
+
+[[issues]]
+file = "src/Rules/Ui/ClickableNonInteractiveRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$matches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Ui/ColorContrastRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Ui/ColorContrastRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$matches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Ui/ColorContrastRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$mm`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Ui/MouseEventKeyboardEquivalentRule.php"
+code = "invalid-argument"
+message = 'Invalid argument type for argument #2 of `TwigA11y\Rules\AbstractA11yRule::tokenAtOffset`: expected `int`, but found `string`.'
+count = 1
+
+[[issues]]
+file = "src/Rules/Ui/MouseEventKeyboardEquivalentRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$matches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Ui/OutlineNoneWithoutFocusVisibleRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$classMatch` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Ui/OutlineNoneWithoutFocusVisibleRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$matches`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Ui/ScrollableRegionFocusableRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Rules/Ui/TargetSizeRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$sMatch` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Ui/TargetSizeRule.php"
+code = "possibly-undefined-variable"
+message = "Variable `$sizeMatches` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "src/Rules/Ui/TargetSizeRule.php"
+code = "reference-to-undefined-variable"
+message = "Reference created from a previously undefined variable `$m`."
+count = 1
+
+[[issues]]
+file = "src/Standard/StandardRuleSets.php"
+code = "unsafe-instantiation"
+message = 'Potentially unsafe instantiation: `class-string<TwigCsFixer\Rules\RuleInterface>` may contain the interface `TwigCsFixer\Rules\RuleInterface` itself, which cannot be instantiated.'
+count = 1
+
+[[issues]]
+file = "tests/ConfigExampleTest.php"
+code = "mixed-assignment"
+message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
+count = 1
+
+[[issues]]
+file = "tests/Rules/EvaluateOncePerFileConsistencyTest.php"
+code = "possibly-undefined-variable"
+message = "Variable `$classMatch` might not have been defined on all execution paths leading to this point."
+count = 1
+
+[[issues]]
+file = "tests/Rules/EvaluateOncePerFileConsistencyTest.php"
+code = "possibly-undefined-variable"
+message = "Variable `$nsMatch` might not have been defined on all execution paths leading to this point."
+count = 1

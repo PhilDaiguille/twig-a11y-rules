@@ -25,8 +25,11 @@ final class FormLabelRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'valid label with for' => [__DIR__.'/Fixtures/valid/label_with_for.html.twig', []];
+        yield 'valid label with for' => [__DIR__ . '/Fixtures/valid/label_with_for.html.twig', []];
 
-        yield 'invalid empty label' => [__DIR__.'/Fixtures/invalid/label_empty.html.twig', ['FormLabel.InvalidLabel:2:1' => '<label> must have a for attribute or wrap the related element.']];
+        yield 'invalid empty label' => [
+            __DIR__ . '/Fixtures/invalid/label_empty.html.twig',
+            ['FormLabel.InvalidLabel:2:1' => '<label> must have a for attribute or wrap the related element.'],
+        ];
     }
 }

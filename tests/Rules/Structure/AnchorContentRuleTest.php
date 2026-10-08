@@ -30,13 +30,15 @@ final class AnchorContentRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'anchor with text' => [
-            __DIR__.'/Fixtures/valid/anchor_with_text.html.twig',
+            __DIR__ . '/Fixtures/valid/anchor_with_text.html.twig',
             [],
         ];
 
         yield 'anchor empty without accessible name' => [
-            __DIR__.'/Fixtures/invalid/anchor_empty.html.twig',
-            ['AnchorContent.LinkName:4:1' => 'Anchor element without accessible name (axe-core: link-name) should have an aria-label or title.'],
+            __DIR__ . '/Fixtures/invalid/anchor_empty.html.twig',
+            [
+                'AnchorContent.LinkName:4:1' => 'Anchor element without accessible name (axe-core: link-name) should have an aria-label or title.',
+            ],
         ];
     }
 }

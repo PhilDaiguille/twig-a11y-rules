@@ -18,7 +18,11 @@ final class AriaRoleRuleReuseTest extends AbstractRuleTestCase
     {
         $rule = new AriaRoleRule();
 
-        $this->checkRule($rule, [], __DIR__.'/Fixtures/valid/role_valid.html.twig');
-        $this->checkRule($rule, ['AriaRole.InvalidRole:2:12' => 'Invalid ARIA role "marquee".'], __DIR__.'/Fixtures/invalid/role_invalid.html.twig');
+        $this->checkRule($rule, [], __DIR__ . '/Fixtures/valid/role_valid.html.twig');
+        $this->checkRule(
+            $rule,
+            ['AriaRole.InvalidRole:2:12' => 'Invalid ARIA role "marquee".'],
+            __DIR__ . '/Fixtures/invalid/role_invalid.html.twig',
+        );
     }
 }

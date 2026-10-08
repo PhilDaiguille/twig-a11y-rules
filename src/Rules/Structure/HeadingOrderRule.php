@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class HeadingOrderRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -24,11 +25,11 @@ final class HeadingOrderRule extends AbstractA11yRule
         $prev = 0;
         foreach ($m as $set) {
             $lvl = (int) $set[1][0];
-            if (0 !== $prev && $lvl > $prev + 1) {
+            if (0 !== $prev && $lvl > ($prev + 1)) {
                 $emit(
                     sprintf('Heading level jumped from h%d to h%d.', $prev, $lvl),
                     $this->tokenAtOffset($tokens, $set[0][1], $set[0][0]),
-                    'Invalid'
+                    'Invalid',
                 );
             }
 

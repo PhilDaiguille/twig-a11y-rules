@@ -13,6 +13,7 @@ use TwigCsFixer\Token\Tokens;
  */
 final class TableLayoutRoleRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -21,7 +22,12 @@ final class TableLayoutRoleRule extends AbstractA11yRule
             return;
         }
 
-        if (!preg_match_all('/<table\b([^>]*)>(.*?)<\/table>/is', $full, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
+        if (!preg_match_all(
+            '/<table\b([^>]*)>(.*?)<\/table>/is',
+            $full,
+            $matches,
+            PREG_SET_ORDER | PREG_OFFSET_CAPTURE,
+        )) {
             return;
         }
 
@@ -46,7 +52,7 @@ final class TableLayoutRoleRule extends AbstractA11yRule
             $emit(
                 '<table> without <th> appears to be a layout table and should have role="presentation" or role="none" (RGAA 5.3, WCAG 1.3.1).',
                 $fakeToken,
-                'LayoutTableMissingRole'
+                'LayoutTableMissingRole',
             );
         }
     }

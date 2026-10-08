@@ -42,6 +42,6 @@ final class MultiRulesTest extends AbstractRuleTestCase
             'AriaRole.InvalidRole:11:12' => 'Invalid ARIA role "bar".',
         ];
 
-        $this->checkRule($rules, $expects, __DIR__.'/Fixtures/multi_issues.html.twig');
+        $this->checkRule($rules, $expects, __DIR__ . '/Fixtures/multi_issues.html.twig');
     }
 }

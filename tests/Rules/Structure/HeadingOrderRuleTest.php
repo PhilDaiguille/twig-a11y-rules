@@ -25,16 +25,22 @@ final class HeadingOrderRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'valid headings' => [__DIR__.'/Fixtures/valid/headings_ok.html.twig', []];
+        yield 'valid headings' => [__DIR__ . '/Fixtures/valid/headings_ok.html.twig', []];
 
-        yield 'valid headings (more)' => [__DIR__.'/Fixtures/valid/headings_ok_more.html.twig', []];
+        yield 'valid headings (more)' => [__DIR__ . '/Fixtures/valid/headings_ok_more.html.twig', []];
 
-        yield 'invalid headings (simple jump)' => [__DIR__.'/Fixtures/invalid/headings_jump.html.twig', ['HeadingOrder.Invalid:3:1' => 'Heading level jumped from h1 to h3.']];
+        yield 'invalid headings (simple jump)' => [
+            __DIR__ . '/Fixtures/invalid/headings_jump.html.twig',
+            ['HeadingOrder.Invalid:3:1' => 'Heading level jumped from h1 to h3.'],
+        ];
 
-        yield 'invalid headings (with attrs)' => [__DIR__.'/Fixtures/invalid/headings_jump_attr.html.twig', ['HeadingOrder.Invalid:3:1' => 'Heading level jumped from h1 to h3.']];
+        yield 'invalid headings (with attrs)' => [
+            __DIR__ . '/Fixtures/invalid/headings_jump_attr.html.twig',
+            ['HeadingOrder.Invalid:3:1' => 'Heading level jumped from h1 to h3.'],
+        ];
 
         yield 'invalid headings (multiple jumps)' => [
-            __DIR__.'/Fixtures/invalid/headings_multiple_jumps.html.twig',
+            __DIR__ . '/Fixtures/invalid/headings_multiple_jumps.html.twig',
             [
                 'HeadingOrder.Invalid:3:1' => 'Heading level jumped from h1 to h3.',
                 'HeadingOrder.Invalid:5:1' => 'Heading level jumped from h4 to h6.',

@@ -25,11 +25,13 @@ final class GenericLinkTextRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'valid descriptive link' => [__DIR__.'/Fixtures/valid/link_descriptive_text.html.twig', []];
+        yield 'valid descriptive link' => [__DIR__ . '/Fixtures/valid/link_descriptive_text.html.twig', []];
 
         yield 'invalid generic link text' => [
-            __DIR__.'/Fixtures/invalid/link_generic_text.html.twig',
-            ['GenericLinkText.Generic:2:23' => 'Avoid generic link text "click here"; use descriptive text that explains the link destination.'],
+            __DIR__ . '/Fixtures/invalid/link_generic_text.html.twig',
+            [
+                'GenericLinkText.Generic:2:23' => 'Avoid generic link text "click here"; use descriptive text that explains the link destination.',
+            ],
         ];
     }
 }

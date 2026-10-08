@@ -30,17 +30,17 @@ final class DocumentTitleRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'with title' => [
-            __DIR__.'/Fixtures/valid/with_title.html.twig',
+            __DIR__ . '/Fixtures/valid/with_title.html.twig',
             [],
         ];
 
         yield 'with multiline title' => [
-            __DIR__.'/Fixtures/valid/with_multiline_title.html.twig',
+            __DIR__ . '/Fixtures/valid/with_multiline_title.html.twig',
             [],
         ];
 
         yield 'no title' => [
-            __DIR__.'/Fixtures/invalid/no_title.html.twig',
+            __DIR__ . '/Fixtures/invalid/no_title.html.twig',
             ['DocumentTitle.Missing:1:1' => 'Document should include a non-empty <title> element.'],
         ];
     }

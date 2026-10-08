@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class DialogAccessibleNameRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -17,7 +18,12 @@ final class DialogAccessibleNameRule extends AbstractA11yRule
             return;
         }
 
-        if (!preg_match_all('/<(dialog)\b[^>]*>|<([a-z0-9:-]+)\b[^>]*\brole\s*=\s*["\'](alertdialog|dialog)["\'][^>]*>/i', $full, $matches, PREG_OFFSET_CAPTURE)) {
+        if (!preg_match_all(
+            '/<(dialog)\b[^>]*>|<([a-z0-9:-]+)\b[^>]*\brole\s*=\s*["\'](alertdialog|dialog)["\'][^>]*>/i',
+            $full,
+            $matches,
+            PREG_OFFSET_CAPTURE,
+        )) {
             return;
         }
 
@@ -42,7 +48,11 @@ final class DialogAccessibleNameRule extends AbstractA11yRule
             $line = 1 + substr_count(substr($full, 0, $offset), "\n");
             $fakeToken = $this->fakeTokenForLine($tokens, $line, $tag);
 
-            $emit('Dialog element must have an accessible name via aria-label or aria-labelledby.', $fakeToken, 'Missing');
+            $emit(
+                'Dialog element must have an accessible name via aria-label or aria-labelledby.',
+                $fakeToken,
+                'Missing',
+            );
 
             return;
         }

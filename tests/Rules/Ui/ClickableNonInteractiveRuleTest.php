@@ -25,19 +25,28 @@ final class ClickableNonInteractiveRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<string,string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'no onclick handlers' => [__DIR__.'/Fixtures/valid/clickable_no_onclick.html.twig', []];
+        yield 'no onclick handlers' => [__DIR__ . '/Fixtures/valid/clickable_no_onclick.html.twig', []];
 
-        yield 'onclick keyword in twig — no html tags' => [__DIR__.'/Fixtures/valid/clickable_onclick_in_twig_no_tags.html.twig', []];
+        yield 'onclick keyword in twig — no html tags' => [
+            __DIR__ . '/Fixtures/valid/clickable_onclick_in_twig_no_tags.html.twig',
+            [],
+        ];
 
-        yield 'native interactive elements' => [__DIR__.'/Fixtures/valid/clickable_native_interactive.html.twig', []];
+        yield 'native interactive elements' => [__DIR__ . '/Fixtures/valid/clickable_native_interactive.html.twig', []];
 
-        yield 'div onclick without tabindex' => [__DIR__.'/Fixtures/invalid/clickable_div_no_tabindex.html.twig', [
-            'ClickableNonInteractive.NonInteractiveOnclick:2:1' => '<div onclick="..."> is not keyboard-reachable. Use a <button>, or add tabindex="0" and a role (WCAG 4.1.2, 2.1.1).',
-        ]];
+        yield 'div onclick without tabindex' => [
+            __DIR__ . '/Fixtures/invalid/clickable_div_no_tabindex.html.twig',
+            [
+                'ClickableNonInteractive.NonInteractiveOnclick:2:1' => '<div onclick="..."> is not keyboard-reachable. Use a <button>, or add tabindex="0" and a role (WCAG 4.1.2, 2.1.1).',
+            ],
+        ];
 
-        yield 'multiple clickable violations' => [__DIR__.'/Fixtures/invalid/clickable_multiple_violations.html.twig', [
-            'ClickableNonInteractive.NonInteractiveOnclick:3:1' => '<div onclick="..."> is not keyboard-reachable. Use a <button>, or add tabindex="0" and a role (WCAG 4.1.2, 2.1.1).',
-            'ClickableNonInteractive.NonInteractiveOnclick:4:1' => '<div onclick="..."> is not keyboard-reachable. Use a <button>, or add tabindex="0" and a role (WCAG 4.1.2, 2.1.1).',
-        ]];
+        yield 'multiple clickable violations' => [
+            __DIR__ . '/Fixtures/invalid/clickable_multiple_violations.html.twig',
+            [
+                'ClickableNonInteractive.NonInteractiveOnclick:3:1' => '<div onclick="..."> is not keyboard-reachable. Use a <button>, or add tabindex="0" and a role (WCAG 4.1.2, 2.1.1).',
+                'ClickableNonInteractive.NonInteractiveOnclick:4:1' => '<div onclick="..."> is not keyboard-reachable. Use a <button>, or add tabindex="0" and a role (WCAG 4.1.2, 2.1.1).',
+            ],
+        ];
     }
 }

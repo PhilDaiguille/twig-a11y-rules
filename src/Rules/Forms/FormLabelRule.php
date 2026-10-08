@@ -19,6 +19,7 @@ use TwigCsFixer\Token\Tokens;
  */
 final class FormLabelRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -58,7 +59,7 @@ final class FormLabelRule extends AbstractA11yRule
         $emit(
             '<label> must have a for attribute or wrap the related element.',
             $token,
-            $id
+            $id,
         );
     }
 

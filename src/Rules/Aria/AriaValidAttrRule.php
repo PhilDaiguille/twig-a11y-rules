@@ -62,6 +62,7 @@ final class AriaValidAttrRule extends AbstractA11yRule
         'aria-valuetext',
     ];
 
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -72,7 +73,7 @@ final class AriaValidAttrRule extends AbstractA11yRule
         if (preg_match_all('/\baria-([a-z-]+)\b/i', $full, $m)) {
             foreach ($m[1] as $name) {
                 $n = strtolower($name);
-                if (!in_array('aria-'.$n, self::WHITELIST, true)) {
+                if (!in_array('aria-' . $n, self::WHITELIST, true)) {
                     $token = $tokens->get(0);
                     $emit(sprintf('Attribute aria-%s is not a valid ARIA attribute.', $n), $token, 'InvalidAttr');
                 }

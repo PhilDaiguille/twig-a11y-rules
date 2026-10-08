@@ -30,22 +30,22 @@ final class PageHeadingOneRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'has h1' => [
-            __DIR__.'/Fixtures/valid/with_title.html.twig',
+            __DIR__ . '/Fixtures/valid/with_title.html.twig',
             [],
         ];
 
         yield 'h1 with child element is valid' => [
-            __DIR__.'/Fixtures/valid/h1_with_child_element.html.twig',
+            __DIR__ . '/Fixtures/valid/h1_with_child_element.html.twig',
             [],
         ];
 
         yield 'symfony base layout gets its h1 from child blocks' => [
-            __DIR__.'/Fixtures/valid/symfony_base_layout.html.twig',
+            __DIR__ . '/Fixtures/valid/symfony_base_layout.html.twig',
             [],
         ];
 
         yield 'no h1' => [
-            __DIR__.'/Fixtures/invalid/no_h1.html.twig',
+            __DIR__ . '/Fixtures/invalid/no_h1.html.twig',
             ['PageHeadingOne.Missing:1:1' => 'Document should include at least one non-empty <h1> heading.'],
         ];
     }

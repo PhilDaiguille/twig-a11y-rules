@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class LandmarkUniqueRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Page-level rule: only evaluate once per file. Use the helper for
@@ -29,7 +30,7 @@ final class LandmarkUniqueRule extends AbstractA11yRule
             $occurrences = [];
 
             // Small helper to extract an attribute value from an opening tag
-            $extractAttr = function (string $opening, string $attr): string {
+            $extractAttr = static function (string $opening, string $attr): string {
                 $pos = stripos($opening, $attr);
                 if (false === $pos) {
                     return '';
@@ -91,7 +92,11 @@ final class LandmarkUniqueRule extends AbstractA11yRule
 
             // Find elements using role="..." for the equivalent landmark role.
             $roleEsc = preg_quote($role, '/');
-            $patternRole = sprintf('/<\s*([a-zA-Z0-9:_-]+)\b[^>]*role\s*=\s*(?:"%s"|\'%s\')[^>]*>/i', $roleEsc, $roleEsc);
+            $patternRole = sprintf(
+                '/<\s*([a-zA-Z0-9:_-]+)\b[^>]*role\s*=\s*(?:"%s"|\'%s\')[^>]*>/i',
+                $roleEsc,
+                $roleEsc,
+            );
             if (preg_match_all($patternRole, $full, $mr, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
                 foreach ($mr as $match) {
                     // $match[0] is the full tag, $match[1] is the tag name
@@ -121,7 +126,11 @@ final class LandmarkUniqueRule extends AbstractA11yRule
             // main landmark is allowed on a page regardless of labels.
             if ('main' === $tag) {
                 $fake = $tokens->get(0);
-                $emit(sprintf('Landmark role="%s" appears %d times; landmarks should be unique.', $role, $count), $fake, 'Unique');
+                $emit(
+                    sprintf('Landmark role="%s" appears %d times; landmarks should be unique.', $role, $count),
+                    $fake,
+                    'Unique',
+                );
 
                 return;
             }
@@ -129,13 +138,20 @@ final class LandmarkUniqueRule extends AbstractA11yRule
             // For other landmark types, warn when multiple occurrences lack
             // distinct labels (aria-label / aria-labelledby).
             // Each $occurrence has a 'label' key (possibly empty string).
-            $labels = array_map(fn (array $o): string => $o['label'], $occurrences);
+            $labels = array_map(static fn(array $o): string => $o['label'], $occurrences);
             $hasEmpty = in_array('', $labels, true);
             $unique = count(array_unique($labels));
 
             if ($hasEmpty || $unique < $count) {
                 $fake = $tokens->get(0);
-                $emit(sprintf('Multiple %s landmarks found; ensure each has a distinct aria-label or aria-labelledby.', $tag), $fake, 'Unique');
+                $emit(
+                    sprintf(
+                        'Multiple %s landmarks found; ensure each has a distinct aria-label or aria-labelledby.',
+                        $tag,
+                    ),
+                    $fake,
+                    'Unique',
+                );
 
                 return;
             }

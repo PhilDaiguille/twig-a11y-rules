@@ -25,12 +25,18 @@ final class TableCaptionMissingRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<string,string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'data table with caption' => [__DIR__.'/Fixtures/valid/table_with_caption.html.twig', []];
+        yield 'data table with caption' => [__DIR__ . '/Fixtures/valid/table_with_caption.html.twig', []];
 
-        yield 'layout table without caption' => [__DIR__.'/Fixtures/valid/layout_table_without_caption.html.twig', []];
+        yield 'layout table without caption' => [
+            __DIR__ . '/Fixtures/valid/layout_table_without_caption.html.twig',
+            [],
+        ];
 
-        yield 'data table missing caption' => [__DIR__.'/Fixtures/invalid/data_table_missing_caption.html.twig', [
-            'TableCaptionMissing.MissingCaption:2:1' => 'Data tables should include a non-empty <caption> element.',
-        ]];
+        yield 'data table missing caption' => [
+            __DIR__ . '/Fixtures/invalid/data_table_missing_caption.html.twig',
+            [
+                'TableCaptionMissing.MissingCaption:2:1' => 'Data tables should include a non-empty <caption> element.',
+            ],
+        ];
     }
 }

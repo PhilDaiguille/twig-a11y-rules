@@ -26,10 +26,10 @@ final class InputImageAltRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'no alt' => [
-            __DIR__.'/Fixtures/invalid/input_image_no_alt.html.twig',
+            __DIR__ . '/Fixtures/invalid/input_image_no_alt.html.twig',
             ['InputImageAlt.Missing:2:1' => '<input type="image"> must have a non-empty alt attribute.'],
         ];
 
-        yield 'with alt' => [__DIR__.'/Fixtures/valid/input_image_with_alt.html.twig', []];
+        yield 'with alt' => [__DIR__ . '/Fixtures/valid/input_image_with_alt.html.twig', []];
     }
 }

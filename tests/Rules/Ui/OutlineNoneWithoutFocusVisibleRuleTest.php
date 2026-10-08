@@ -30,12 +30,12 @@ final class OutlineNoneWithoutFocusVisibleRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'valide avec focus-visible' => [
-            __DIR__.'/Fixtures/valid/outline_none_with_focus_visible.html.twig',
+            __DIR__ . '/Fixtures/valid/outline_none_with_focus_visible.html.twig',
             [],
         ];
 
         yield 'invalide, pas de focus-visible' => [
-            __DIR__.'/Fixtures/invalid/outline_none_no_focus_visible.html.twig',
+            __DIR__ . '/Fixtures/invalid/outline_none_no_focus_visible.html.twig',
             [
                 'OutlineNoneWithoutFocusVisible.NoFocusVisible:2:1' => 'Using outline:none/0 without focus-visible compensation.',
             ],

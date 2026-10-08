@@ -25,10 +25,16 @@ final class AriaLabelRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'valid landmark' => [__DIR__.'/Fixtures/valid/landmark_with_label.html.twig', []];
+        yield 'valid landmark' => [__DIR__ . '/Fixtures/valid/landmark_with_label.html.twig', []];
 
-        yield 'valid landmark with aria-labelledby' => [__DIR__.'/Fixtures/valid/landmark_with_labelledby.html.twig', []];
+        yield 'valid landmark with aria-labelledby' => [
+            __DIR__ . '/Fixtures/valid/landmark_with_labelledby.html.twig',
+            [],
+        ];
 
-        yield 'invalid landmark' => [__DIR__.'/Fixtures/invalid/landmark_missing_label.html.twig', ['AriaLabel.MissingOrEmpty:2:7' => 'Landmark elements should have a non-empty aria-label.']];
+        yield 'invalid landmark' => [
+            __DIR__ . '/Fixtures/invalid/landmark_missing_label.html.twig',
+            ['AriaLabel.MissingOrEmpty:2:7' => 'Landmark elements should have a non-empty aria-label.'],
+        ];
     }
 }

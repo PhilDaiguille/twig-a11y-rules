@@ -72,7 +72,7 @@ trait TokenCollectorTrait
             $collected .= $tokens->get($i)->getValue();
         }
 
-        if (!preg_match('/<\s*'.preg_quote($tagName, '/').'\b[^>]*>/i', $collected, $m, \PREG_OFFSET_CAPTURE)) {
+        if (!preg_match('/<\s*' . preg_quote($tagName, '/') . '\b[^>]*>/i', $collected, $m, \PREG_OFFSET_CAPTURE)) {
             return '';
         }
 
@@ -163,16 +163,18 @@ trait TokenCollectorTrait
     /**
      * Return the first non-empty capture from $matches for given indexes.
      *
-     * @param array<int, mixed> $matches
+     * @param array<array-key, mixed> $matches
      */
     protected function firstMatch(array $matches, int ...$indexes): string
     {
         foreach ($indexes as $i) {
-            if (array_key_exists($i, $matches)) {
-                $value = $matches[$i];
-                if (is_string($value) && '' !== $value) {
-                    return $value;
-                }
+            if (!array_key_exists($i, $matches)) {
+                continue;
+            }
+
+            $value = $matches[$i];
+            if (is_string($value) && '' !== $value) {
+                return $value;
             }
         }
 
@@ -189,7 +191,7 @@ trait TokenCollectorTrait
             return false;
         }
 
-        return (bool) preg_match('/<label[^>]*for\s*=\s*["\']'.preg_quote($id, '/').'["\']/i', $content);
+        return (bool) preg_match('/<label[^>]*for\s*=\s*["\']' . preg_quote($id, '/') . '["\']/i', $content);
     }
 
     /**
@@ -211,14 +213,14 @@ trait TokenCollectorTrait
     protected function openingProvidesLabel(string $opening): bool
     {
         if (preg_match('/\baria-labelledby\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $opening, $m)) {
-            $value = '' !== $m[1] ? $m[1] : ($m[2] ?? '');
+            $value = '' !== $m[1] ? $m[1] : $m[2] ?? '';
             if ('' !== trim($value)) {
                 return true;
             }
         }
 
         if (preg_match('/\baria-label\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $opening, $m)) {
-            $value = '' !== $m[1] ? $m[1] : ($m[2] ?? '');
+            $value = '' !== $m[1] ? $m[1] : $m[2] ?? '';
             if ('' !== trim($value)) {
                 return true;
             }

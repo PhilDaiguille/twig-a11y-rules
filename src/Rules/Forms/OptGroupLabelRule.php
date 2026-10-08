@@ -14,6 +14,7 @@ use TwigCsFixer\Token\Tokens;
  */
 final class OptGroupLabelRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -34,7 +35,7 @@ final class OptGroupLabelRule extends AbstractA11yRule
         }
 
         if (preg_match('/\blabel\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $opening, $m)) {
-            $labelValue = '' !== $m[1] ? $m[1] : ($m[2] ?? '');
+            $labelValue = '' !== $m[1] ? $m[1] : $m[2] ?? '';
             if ('' !== trim($labelValue)) {
                 return;
             }
@@ -45,7 +46,7 @@ final class OptGroupLabelRule extends AbstractA11yRule
         $emit(
             '<optgroup> must have a non-empty label attribute to identify the group (WCAG 1.3.1).',
             $token,
-            $id
+            $id,
         );
     }
 }

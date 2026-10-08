@@ -25,16 +25,22 @@ final class PlaceholderOnlyLabelRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<string,string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'placeholder with label' => [__DIR__.'/Fixtures/valid/placeholder_with_label.html.twig', []];
+        yield 'placeholder with label' => [__DIR__ . '/Fixtures/valid/placeholder_with_label.html.twig', []];
 
-        yield 'placeholder with aria label' => [__DIR__.'/Fixtures/valid/placeholder_with_aria_label.html.twig', []];
+        yield 'placeholder with aria label' => [__DIR__ . '/Fixtures/valid/placeholder_with_aria_label.html.twig', []];
 
-        yield 'placeholder only input' => [__DIR__.'/Fixtures/invalid/placeholder_only_input.html.twig', [
-            'PlaceholderOnlyLabel.MissingLabel:2:1' => 'Form field appears to rely on placeholder text instead of a proper label.',
-        ]];
+        yield 'placeholder only input' => [
+            __DIR__ . '/Fixtures/invalid/placeholder_only_input.html.twig',
+            [
+                'PlaceholderOnlyLabel.MissingLabel:2:1' => 'Form field appears to rely on placeholder text instead of a proper label.',
+            ],
+        ];
 
-        yield 'placeholder only textarea' => [__DIR__.'/Fixtures/invalid/placeholder_only_textarea.html.twig', [
-            'PlaceholderOnlyLabel.MissingLabel:2:1' => 'Form field appears to rely on placeholder text instead of a proper label.',
-        ]];
+        yield 'placeholder only textarea' => [
+            __DIR__ . '/Fixtures/invalid/placeholder_only_textarea.html.twig',
+            [
+                'PlaceholderOnlyLabel.MissingLabel:2:1' => 'Form field appears to rely on placeholder text instead of a proper label.',
+            ],
+        ];
     }
 }

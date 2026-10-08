@@ -5,7 +5,6 @@
 /.gitattributes export-ignore
 /.github export-ignore
 /.gitignore export-ignore
-/.php-cs-fixer.dist.php export-ignore
 /.twig-cs-fixer.php export-ignore
 /AGENTS.md export-ignore
 /CLAUDE.md export-ignore
@@ -14,6 +13,8 @@
 /Makefile export-ignore
 /ROADMAP.md export-ignore
 /infection.json5 export-ignore
+/mago-analysis-baseline.toml export-ignore
+/mago.toml export-ignore
 /phpstan.dist.neon export-ignore
 /phpunit.xml export-ignore
 /rector.php export-ignore

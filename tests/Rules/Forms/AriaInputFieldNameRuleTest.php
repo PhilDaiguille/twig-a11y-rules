@@ -29,10 +29,10 @@ final class AriaInputFieldNameRuleTest extends AbstractRuleTestCase
      */
     public static function provideFixtures(): iterable
     {
-        yield 'valid textbox with aria-label' => [__DIR__.'/Fixtures/valid/div_textbox_with_label.html.twig', []];
+        yield 'valid textbox with aria-label' => [__DIR__ . '/Fixtures/valid/div_textbox_with_label.html.twig', []];
 
         yield 'invalid textbox no name' => [
-            __DIR__.'/Fixtures/invalid/div_textbox_no_label.html.twig',
+            __DIR__ . '/Fixtures/invalid/div_textbox_no_label.html.twig',
             [
                 'AriaInputFieldName.MissingName:1:1' => 'role="textbox" element must have an accessible name (aria-label or aria-labelledby).',
             ],

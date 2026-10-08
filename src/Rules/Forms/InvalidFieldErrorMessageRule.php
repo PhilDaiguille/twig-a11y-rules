@@ -18,6 +18,7 @@ final class InvalidFieldErrorMessageRule extends AbstractA11yRule
         'radiogroup',
     ];
 
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -26,7 +27,12 @@ final class InvalidFieldErrorMessageRule extends AbstractA11yRule
             return;
         }
 
-        if (!preg_match_all('/<(input|select|textarea|div|span)\b[^>]*\baria-invalid\s*=\s*(?:"([^"]*)"|\'([^\']*)\')[^>]*>/i', $full, $matches, PREG_OFFSET_CAPTURE)) {
+        if (!preg_match_all(
+            '/<(input|select|textarea|div|span)\b[^>]*\baria-invalid\s*=\s*(?:"([^"]*)"|\'([^\']*)\')[^>]*>/i',
+            $full,
+            $matches,
+            PREG_OFFSET_CAPTURE,
+        )) {
             return;
         }
 
@@ -34,10 +40,14 @@ final class InvalidFieldErrorMessageRule extends AbstractA11yRule
             $tag = $match[0];
             $offset = $match[1];
             $tagName = strtolower($matches[1][$index][0]);
-            $ariaInvalid = strtolower(trim($this->firstMatch([
-                1 => $matches[2][$index][0],
-                2 => $matches[3][$index][0],
-            ], 1, 2)));
+            $ariaInvalid = strtolower(trim($this->firstMatch(
+                [
+                    1 => $matches[2][$index][0],
+                    2 => $matches[3][$index][0],
+                ],
+                1,
+                2,
+            )));
 
             if (!in_array($ariaInvalid, ['true', 'grammar', 'spelling'], true)) {
                 continue;
@@ -58,7 +68,11 @@ final class InvalidFieldErrorMessageRule extends AbstractA11yRule
             $line = 1 + substr_count(substr($full, 0, $offset), "\n");
             $fakeToken = $this->fakeTokenForLine($tokens, $line, $tag);
 
-            $emit('Invalid form fields should reference help or error text via aria-describedby or aria-errormessage.', $fakeToken, 'MissingReference');
+            $emit(
+                'Invalid form fields should reference help or error text via aria-describedby or aria-errormessage.',
+                $fakeToken,
+                'MissingReference',
+            );
 
             return;
         }
@@ -87,7 +101,7 @@ final class InvalidFieldErrorMessageRule extends AbstractA11yRule
 
     private function hasNonEmptyReference(string $tag, string $attribute): bool
     {
-        if (!preg_match('/\b'.preg_quote($attribute, '/').'\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $tag, $match)) {
+        if (!preg_match('/\b' . preg_quote($attribute, '/') . '\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $tag, $match)) {
             return false;
         }
 

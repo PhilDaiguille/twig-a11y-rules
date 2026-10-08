@@ -21,6 +21,7 @@ final class InputTypeRule extends AbstractA11yRule
     /**
      * Check inputs with personal-data types have an autocomplete attribute (WCAG 1.3.5).
      */
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -31,7 +32,12 @@ final class InputTypeRule extends AbstractA11yRule
 
         $typePattern = implode('|', array_map(preg_quote(...), self::AUTOCOMPLETE_REQUIRED_TYPES));
 
-        if (!preg_match_all('/<input\b([^>]*\btype\s*=\s*(?:"|\')(?:'.$typePattern.')(?:"|\')[^>]*)>/i', $full, $m, PREG_SET_ORDER)) {
+        if (!preg_match_all(
+            '/<input\b([^>]*\btype\s*=\s*(?:"|\')(?:' . $typePattern . ')(?:"|\')[^>]*)>/i',
+            $full,
+            $m,
+            PREG_SET_ORDER,
+        )) {
             return;
         }
 
@@ -43,7 +49,11 @@ final class InputTypeRule extends AbstractA11yRule
                 $type = $tm[1] ?? 'unknown';
 
                 $token = $tokens->get(0);
-                $emit(sprintf('Input of type "%s" should include an autocomplete attribute (WCAG 1.3.5).', $type), $token, 'MissingAutocomplete');
+                $emit(
+                    sprintf('Input of type "%s" should include an autocomplete attribute (WCAG 1.3.5).', $type),
+                    $token,
+                    'MissingAutocomplete',
+                );
 
                 return;
             }

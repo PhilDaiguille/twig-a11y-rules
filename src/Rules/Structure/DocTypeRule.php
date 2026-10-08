@@ -13,6 +13,7 @@ use TwigCsFixer\Token\Tokens;
  */
 final class DocTypeRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -21,7 +22,7 @@ final class DocTypeRule extends AbstractA11yRule
             $emit(
                 'Full-page document is missing a <!DOCTYPE html> declaration (RGAA 8.1).',
                 $tokens->get(0),
-                'MissingDoctype'
+                'MissingDoctype',
             );
         }
     }

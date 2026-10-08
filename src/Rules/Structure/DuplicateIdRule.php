@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class DuplicateIdRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Only run once per file
@@ -27,7 +28,11 @@ final class DuplicateIdRule extends AbstractA11yRule
         $seen = [];
         foreach ($m[1] as [$id, $offset]) {
             if (isset($seen[$id])) {
-                $emit(sprintf('Duplicate id "%s" found in document.', $id), $this->tokenAtOffset($tokens, $offset, $id), 'Duplicate');
+                $emit(
+                    sprintf('Duplicate id "%s" found in document.', $id),
+                    $this->tokenAtOffset($tokens, $offset, $id),
+                    'Duplicate',
+                );
             }
 
             $seen[$id] = true;

@@ -10,8 +10,8 @@ Looking for something to work on? See [`ROADMAP.md`](ROADMAP.md).
 
 ```bash
 composer install
-composer lint      # cs-lint + phpstan + tests + rector, read-only
-composer lint:fix  # applies rector + php-cs-fixer
+composer lint      # mago fmt/lint/analyze + phpstan + tests + rector, read-only
+composer lint:fix  # applies rector + mago lint --fix + mago fmt
 ```
 
 ## Writing a rule

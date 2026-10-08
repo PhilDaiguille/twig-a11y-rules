@@ -25,10 +25,13 @@ final class ColorContrastRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'good contrast' => [__DIR__.'/Fixtures/valid/good_contrast.html.twig', []];
+        yield 'good contrast' => [__DIR__ . '/Fixtures/valid/good_contrast.html.twig', []];
 
-        yield 'bad contrast' => [__DIR__.'/Fixtures/invalid/bad_contrast.html.twig', [
-            'ColorContrast.Insufficient:1:1' => 'Insufficient color contrast',
-        ]];
+        yield 'bad contrast' => [
+            __DIR__ . '/Fixtures/invalid/bad_contrast.html.twig',
+            [
+                'ColorContrast.Insufficient:1:1' => 'Insufficient color contrast',
+            ],
+        ];
     }
 }

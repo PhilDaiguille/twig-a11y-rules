@@ -25,10 +25,16 @@ final class AriaErrorMessageIdExistsRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<string,string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'aria errormessage existing id' => [__DIR__.'/Fixtures/valid/aria_errormessage_existing_id.html.twig', []];
+        yield 'aria errormessage existing id' => [
+            __DIR__ . '/Fixtures/valid/aria_errormessage_existing_id.html.twig',
+            [],
+        ];
 
-        yield 'aria errormessage missing id' => [__DIR__.'/Fixtures/invalid/aria_errormessage_missing_id.html.twig', [
-            'AriaErrorMessageIdExists.MissingId:2:1' => 'Referenced id "email-error" in aria-errormessage does not exist in template.',
-        ]];
+        yield 'aria errormessage missing id' => [
+            __DIR__ . '/Fixtures/invalid/aria_errormessage_missing_id.html.twig',
+            [
+                'AriaErrorMessageIdExists.MissingId:2:1' => 'Referenced id "email-error" in aria-errormessage does not exist in template.',
+            ],
+        ];
     }
 }

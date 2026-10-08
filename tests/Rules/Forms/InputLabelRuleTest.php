@@ -30,24 +30,24 @@ final class InputLabelRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'input with label for' => [
-            __DIR__.'/Fixtures/valid/input_with_label.html.twig',
+            __DIR__ . '/Fixtures/valid/input_with_label.html.twig',
             [],
         ];
 
         yield 'input without label or aria' => [
-            __DIR__.'/Fixtures/invalid/input_no_label.html.twig',
+            __DIR__ . '/Fixtures/invalid/input_no_label.html.twig',
             ['InputLabel.MissingLabel:4:1' => 'Input element must have an associated <label> or an aria-label.'],
         ];
 
         // Hidden inputs should not trigger the rule
-        yield 'input hidden' => [__DIR__.'/Fixtures/valid/input_hidden.html.twig', []];
+        yield 'input hidden' => [__DIR__ . '/Fixtures/valid/input_hidden.html.twig', []];
 
         // Dynamic aria-label (Twig var) should be considered present
-        yield 'input with aria variable' => [__DIR__.'/Fixtures/valid/input_with_aria_variable.html.twig', []];
+        yield 'input with aria variable' => [__DIR__ . '/Fixtures/valid/input_with_aria_variable.html.twig', []];
 
         // Empty aria-label must NOT bypass the label check
         yield 'input with empty aria-label' => [
-            __DIR__.'/Fixtures/invalid/input_empty_aria_label.html.twig',
+            __DIR__ . '/Fixtures/invalid/input_empty_aria_label.html.twig',
             ['InputLabel.MissingLabel:4:1' => 'Input element must have an associated <label> or an aria-label.'],
         ];
     }

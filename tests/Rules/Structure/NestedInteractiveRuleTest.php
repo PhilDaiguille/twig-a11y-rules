@@ -30,22 +30,22 @@ final class NestedInteractiveRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'anchor without nested interactive' => [
-            __DIR__.'/Fixtures/valid/anchor_no_nested_interactive.html.twig',
+            __DIR__ . '/Fixtures/valid/anchor_no_nested_interactive.html.twig',
             [],
         ];
 
         yield 'button without nested interactive' => [
-            __DIR__.'/Fixtures/valid/button_no_nested_interactive.html.twig',
+            __DIR__ . '/Fixtures/valid/button_no_nested_interactive.html.twig',
             [],
         ];
 
         yield 'button inside anchor' => [
-            __DIR__.'/Fixtures/invalid/button_inside_anchor.html.twig',
+            __DIR__ . '/Fixtures/invalid/button_inside_anchor.html.twig',
             ['NestedInteractive.InsideAnchor:1:1' => 'Interactive element <button> must not be nested inside an <a>.'],
         ];
 
         yield 'anchor inside button' => [
-            __DIR__.'/Fixtures/invalid/anchor_inside_button.html.twig',
+            __DIR__ . '/Fixtures/invalid/anchor_inside_button.html.twig',
             ['NestedInteractive.InsideButton:1:1' => 'Interactive element <a> must not be nested inside a <button>.'],
         ];
     }

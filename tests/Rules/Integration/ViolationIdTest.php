@@ -22,15 +22,19 @@ final class ViolationIdTest extends AbstractRuleTestCase
 {
     public function testDocumentedDisableCommentSilencesTheViolation(): void
     {
-        $this->checkRule(new InputLabelRule(), [], __DIR__.'/Fixtures/disable_by_message_id.html.twig');
+        $this->checkRule(new InputLabelRule(), [], __DIR__ . '/Fixtures/disable_by_message_id.html.twig');
     }
 
     public function testIdenticalViolationsAreEachReportedAtTheirOwnLine(): void
     {
-        $this->checkRule(new ImgAltRule(), [
-            'ImgAlt.MissingAlt:2:5' => 'Missing alt attribute on <img> tag.',
-            'ImgAlt.MissingAlt:3:5' => 'Missing alt attribute on <img> tag.',
-        ], __DIR__.'/Fixtures/two_images_without_alt.html.twig');
+        $this->checkRule(
+            new ImgAltRule(),
+            [
+                'ImgAlt.MissingAlt:2:5' => 'Missing alt attribute on <img> tag.',
+                'ImgAlt.MissingAlt:3:5' => 'Missing alt attribute on <img> tag.',
+            ],
+            __DIR__ . '/Fixtures/two_images_without_alt.html.twig',
+        );
     }
 
     public function testEmitAsWarningIsPartOfTheRuleConfiguration(): void

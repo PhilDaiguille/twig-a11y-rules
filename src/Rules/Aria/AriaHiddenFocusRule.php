@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace TwigA11y\Rules\Aria;
 
 use TwigA11y\Rules\AbstractA11yRule;
-use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
 final class AriaHiddenFocusRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Page-level rule: defer to helper which respects evaluateOncePerFile().
@@ -29,9 +29,10 @@ final class AriaHiddenFocusRule extends AbstractA11yRule
                     // tabindex="-1" removes an element from tab order, so it is NOT considered
                     // tab-focusable. Only tabindex >= 0 creates a keyboard-focusable element.
                     $focusableTags = ['button', 'input', 'select', 'textarea', 'a'];
-                    $hasPositiveTabindex = (bool) preg_match('/tabindex\s*=\s*(?:"|\')?\s*(\d+)/i', $attrs, $ti)
-                        && (int) $ti[1] >= 0;
-                    $isFocusable = in_array($tagName, $focusableTags, true)
+                    $hasPositiveTabindex =
+                        (bool) preg_match('/tabindex\s*=\s*(?:"|\')?\s*(\d+)/i', $attrs, $ti) && (int) $ti[1] >= 0;
+                    $isFocusable =
+                        in_array($tagName, $focusableTags, true)
                         || preg_match('/href\s*=/i', $attrs)
                         || $hasPositiveTabindex;
 

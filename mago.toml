@@ -1,0 +1,129 @@
+#:schema vendor/carthage-software/mago/schema.json
+# Docs: https://mago.carthage.software/
+version = "1"
+php-version = "8.4.0"
+
+[source]
+workspace = "."
+paths = ["src/", "tests/"]
+includes = ["vendor"]
+
+[formatter]
+preset = "default"
+preserve-breaking-member-access-chain = true
+preserve-breaking-member-access-chain-first-method-on-same-line = true
+preserve-breaking-argument-list = true
+preserve-breaking-array-like = true
+preserve-breaking-parameter-list = true
+preserve-breaking-attribute-list = true
+preserve-breaking-conditional-expression = true
+preserve-breaking-condition-expression = true
+preserve-redundant-logical-binary-expression-parentheses = true
+
+[linter]
+integrations = ["phpunit"]
+
+[linter.rules]
+# Noise for a library that calls native functions unqualified.
+ambiguous-function-call = { enabled = false }
+literal-named-argument = { enabled = false }
+# The test suite uses $this->assert*().
+assertion-style = { style = "this" }
+# Style choices, not quality issues, in regex-heavy rule classes.
+no-isset = { enabled = false }
+no-else-clause = { enabled = false }
+# Growth alarms: thresholds sit just above today's maximum
+# (TokenCollectorTrait, LandmarkUniqueRule). A warning means "split it",
+# not "raise the threshold".
+cyclomatic-complexity = { level = "warning", threshold = 30 }
+kan-defect = { level = "warning", threshold = 2.5 }
+halstead = { level = "warning", volume-threshold = 1700.0, difficulty-threshold = 12.0, effort-threshold = 13000.0 }
+too-many-methods = { level = "warning", threshold = 12 }
+
+[analyzer]
+baseline = "mago-analysis-baseline.toml"
+find-unused-definitions = true
+find-unused-expressions = true
+memoize-properties = true
+# PHPStan max is the typing reference; twig-cs-fixer exceptions are noise here.
+check-throws = false
+check-missing-override = true
+find-unused-parameters = true
+strict-list-index-checks = true
+register-super-globals = true
+
+# Architecture, enforced by `mago guard`. Source of truth for AGENTS.md "Architecture".
+# Layers point inwards only: Template <- Rules <- Standard.
+[guard.perimeter]
+layering = ["TwigA11y\\Template", "TwigA11y\\Rules", "TwigA11y\\Standard"]
+
+[guard.perimeter.layers]
+twig-cs-fixer = ["TwigCsFixer\\**"]
+
+[[guard.perimeter.rules]]
+namespace = "TwigA11y\\Template"
+permit = ["@native", "TwigA11y\\Template\\**"]
+
+[[guard.perimeter.rules]]
+namespace = "TwigA11y\\Rules"
+permit = ["@native", "@layer:twig-cs-fixer", "TwigA11y\\Template\\**", "TwigA11y\\Rules\\**"]
+
+[[guard.perimeter.rules]]
+namespace = "TwigA11y\\Standard"
+permit = ["@native", "@layer:twig-cs-fixer", "TwigA11y\\Rules\\**", "TwigA11y\\Standard\\**"]
+
+[[guard.perimeter.rules]]
+namespace = "TwigA11y\\Tests"
+permit = ["@all"]
+
+# Rule domains are independent: shared code goes to the TwigA11y\Rules root.
+
+[[guard.perimeter.restrictions]]
+dependency = "TwigA11y\\Rules\\Anchor\\**"
+allow-from = ["TwigA11y\\Rules\\Anchor\\", "TwigA11y\\Standard\\", "TwigA11y\\Tests\\"]
+
+[[guard.perimeter.restrictions]]
+dependency = "TwigA11y\\Rules\\Aria\\**"
+allow-from = ["TwigA11y\\Rules\\Aria\\", "TwigA11y\\Standard\\", "TwigA11y\\Tests\\"]
+
+[[guard.perimeter.restrictions]]
+dependency = "TwigA11y\\Rules\\Forms\\**"
+allow-from = ["TwigA11y\\Rules\\Forms\\", "TwigA11y\\Standard\\", "TwigA11y\\Tests\\"]
+
+[[guard.perimeter.restrictions]]
+dependency = "TwigA11y\\Rules\\Media\\**"
+allow-from = ["TwigA11y\\Rules\\Media\\", "TwigA11y\\Standard\\", "TwigA11y\\Tests\\"]
+
+[[guard.perimeter.restrictions]]
+dependency = "TwigA11y\\Rules\\Structure\\**"
+allow-from = ["TwigA11y\\Rules\\Structure\\", "TwigA11y\\Standard\\", "TwigA11y\\Tests\\"]
+
+[[guard.perimeter.restrictions]]
+dependency = "TwigA11y\\Rules\\Ui\\**"
+allow-from = ["TwigA11y\\Rules\\Ui\\", "TwigA11y\\Standard\\", "TwigA11y\\Tests\\"]
+
+[[guard.structural.rules]]
+on = "TwigA11y\\Rules\\**"
+not-on = "TwigA11y\\Rules\\**\\Abstract*"
+target = "class"
+must-be-final = true
+reason = "Rule classes are final; share code via AbstractA11yRule or TokenCollectorTrait (AGENTS.md)."
+
+[[guard.structural.rules]]
+on = "TwigA11y\\Rules\\*\\*Rule"
+target = "class"
+must-extend = [["TwigA11y\\Rules\\AbstractA11yRule"], ["TwigA11y\\Rules\\Forms\\AbstractFormFieldLabelRule"]]
+reason = "Rules extend AbstractA11yRule and report through $emit (AGENTS.md)."
+
+[[guard.structural.rules]]
+on = "TwigA11y\\Rules\\**\\Abstract*"
+target = "class"
+must-be-abstract = true
+reason = "Abstract* classes are base classes, not rules."
+
+[[guard.structural.rules]]
+on = "TwigA11y\\Standard\\A11y*"
+target = "class"
+must-be-final = true
+must-implement = "TwigCsFixer\\Standard\\StandardInterface"
+reason = "Presets are final StandardInterface implementations backed by StandardRuleSets."

@@ -14,6 +14,7 @@ use TwigCsFixer\Token\Tokens;
  */
 final class SummaryAttributeObsoleteRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -42,7 +43,7 @@ final class SummaryAttributeObsoleteRule extends AbstractA11yRule
         $emit(
             'The summary attribute on <table> is obsolete in HTML5. Use <caption> to describe the table (WCAG 4.1.1).',
             $token,
-            $id
+            $id,
         );
     }
 }

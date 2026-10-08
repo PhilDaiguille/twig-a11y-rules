@@ -229,8 +229,9 @@ final class StandardRuleSets
     private static function instantiate(array $classes): array
     {
         return array_map(
-            static fn (string $class): RuleInterface => new $class(),
-            $classes
+            /** @param class-string<RuleInterface> $class */
+            static fn(string $class): RuleInterface => new $class(),
+            $classes,
         );
     }
 
@@ -249,7 +250,7 @@ final class StandardRuleSets
         foreach ($rules as $rule) {
             if (is_string($rule)) {
                 if (!is_a($rule, RuleInterface::class, true)) {
-                    throw new \InvalidArgumentException($rule.' does not implement RuleInterface');
+                    throw new \InvalidArgumentException($rule . ' does not implement RuleInterface');
                 }
 
                 $out[] = $rule;

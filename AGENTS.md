@@ -35,13 +35,38 @@ Follow the conventions of the ecosystem we plug into:
 | Command | What it does |
 |---|---|
 | `composer test` | PHPUnit with `--testdox` |
-| `composer phpstan` / `composer cs-lint` / `composer rector` | static analysis / CS dry-run / Rector dry-run |
-| `composer lint` | cs-lint + phpstan + test + rector (all read-only) |
-| `composer lint:fix` | `rector:apply && cs-fix` (writes files) |
+| `composer fmt` / `composer fmt:check` | Mago formatter (write / check) |
+| `composer mago:lint` / `composer mago:guard` / `composer mago:analyze` | Mago linter / architecture guard / analyzer |
+| `composer mago:baseline` | drop fixed entries from `mago-analysis-baseline.toml` (never adds any) |
+| `composer phpstan` / `composer rector` | PHPStan (level max) / Rector dry-run |
+| `composer lint` | fmt:check + mago:lint + mago:guard + mago:analyze + phpstan + test + rector (all read-only) |
+| `composer lint:fix` | `rector:apply && mago fix` (writes files) |
 | `composer infection` | mutation testing |
-| `make ci` | `composer lint && composer test` |
+| `make ci` | `composer lint` |
 
 Single test: `vendor/bin/phpunit tests/Rules/Structure/HeadingOrderRuleTest.php --testdox`
+
+## Tooling
+
+- [Mago](https://mago.carthage.software/) (`mago.toml`) is the formatter, the
+  linter and a second analyzer. There is no php-cs-fixer: never reformat by hand,
+  run `composer fmt`.
+- PHPStan level max stays the typing reference. Mago's analyzer cannot follow
+  `preg_match(..., PREG_OFFSET_CAPTURE)` captures, so those known false positives
+  live in `mago-analysis-baseline.toml`. The baseline can only shrink:
+  `mago:analyze` fails when an entry is stale, run `composer mago:baseline` to
+  drop it. Fix new issues instead of baselining them.
+- `[guard]` in `mago.toml` is the source of truth for the architecture below:
+  layers `Template` <- `Rules` <- `Standard`, rule domains independent from each
+  other, `*Rule` classes final and extending `AbstractA11yRule`, presets final.
+  A guard error is a design problem: fix the code, don't loosen `[guard]`.
+  Adding a domain under `src/Rules/` means adding its
+  `[[guard.perimeter.restrictions]]` entry.
+- Complexity metrics (`cyclomatic-complexity`, `halstead`, `kan-defect`,
+  `too-many-methods`) are warnings set just above today's maximum: a warning
+  means split the class, not raise the threshold. `no-isset` / `no-else-clause`
+  are off on purpose.
+- PHPUnit assertions use `$this->assert*()` (enforced by `assertion-style`).
 
 ## Architecture
 
@@ -51,6 +76,8 @@ Single test: `vendor/bin/phpunit tests/Rules/Structure/HeadingOrderRuleTest.php 
    handles template-kind filtering, per-file caching, message dedup (bounded
    maps) and warning-vs-error routing (`$emitAsWarning`). Always report
    through `$emit`, never `addError`/`addWarning`.
+   - Domains never import each other (enforced by `mago guard`); shared helpers
+     go to the `TwigA11y\Rules` root.
    - Page-level scans: `evaluateOncePerFile(): true`, reset per-file state in
      `evaluateStart()`.
    - `TokenCollectorTrait` (`collectTag`, `collectUntil`, `safePregMatch`)

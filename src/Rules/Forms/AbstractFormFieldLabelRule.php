@@ -10,6 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 abstract class AbstractFormFieldLabelRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -19,7 +20,7 @@ abstract class AbstractFormFieldLabelRule extends AbstractA11yRule
 
         $value = $token->getValue();
         $tag = $this->tagName();
-        if (!str_contains($value, '<'.$tag)) {
+        if (!str_contains($value, '<' . $tag)) {
             return;
         }
 
@@ -44,7 +45,7 @@ abstract class AbstractFormFieldLabelRule extends AbstractA11yRule
         }
 
         // Label wrapping the field
-        if (preg_match('/<label[^>]*>\s*<'.preg_quote($tag, '/').'[^>]*>/i', $full)) {
+        if (preg_match('/<label[^>]*>\s*<' . preg_quote($tag, '/') . '[^>]*>/i', $full)) {
             return;
         }
 

@@ -25,16 +25,22 @@ final class RadioGroupAccessibleNameRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<string,string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'fieldset radio group with legend' => [__DIR__.'/Fixtures/valid/radio_group_in_fieldset.html.twig', []];
+        yield 'fieldset radio group with legend' => [__DIR__ . '/Fixtures/valid/radio_group_in_fieldset.html.twig', []];
 
-        yield 'radiogroup with aria label' => [__DIR__.'/Fixtures/valid/radiogroup_with_aria_label.html.twig', []];
+        yield 'radiogroup with aria label' => [__DIR__ . '/Fixtures/valid/radiogroup_with_aria_label.html.twig', []];
 
-        yield 'fieldset radio group missing legend' => [__DIR__.'/Fixtures/invalid/radio_group_fieldset_missing_legend.html.twig', [
-            'RadioGroupAccessibleName.MissingLegend:2:1' => 'Fieldsets containing radio groups should provide a non-empty <legend>.',
-        ]];
+        yield 'fieldset radio group missing legend' => [
+            __DIR__ . '/Fixtures/invalid/radio_group_fieldset_missing_legend.html.twig',
+            [
+                'RadioGroupAccessibleName.MissingLegend:2:1' => 'Fieldsets containing radio groups should provide a non-empty <legend>.',
+            ],
+        ];
 
-        yield 'radiogroup missing accessible name' => [__DIR__.'/Fixtures/invalid/radiogroup_missing_accessible_name.html.twig', [
-            'RadioGroupAccessibleName.MissingName:2:1' => 'Containers with role="radiogroup" should have an accessible name via aria-label or aria-labelledby.',
-        ]];
+        yield 'radiogroup missing accessible name' => [
+            __DIR__ . '/Fixtures/invalid/radiogroup_missing_accessible_name.html.twig',
+            [
+                'RadioGroupAccessibleName.MissingName:2:1' => 'Containers with role="radiogroup" should have an accessible name via aria-label or aria-labelledby.',
+            ],
+        ];
     }
 }

@@ -30,13 +30,15 @@ final class DuplicateAccessKeyRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'unique accesskeys' => [
-            __DIR__.'/Fixtures/valid/accesskey_unique.html.twig',
+            __DIR__ . '/Fixtures/valid/accesskey_unique.html.twig',
             [],
         ];
 
         yield 'duplicate accesskeys' => [
-            __DIR__.'/Fixtures/invalid/accesskey_duplicate.html.twig',
-            ['DuplicateAccessKey.Duplicate:1:1' => 'Duplicate accesskey value "h" found. Each accesskey must be unique within a page.'],
+            __DIR__ . '/Fixtures/invalid/accesskey_duplicate.html.twig',
+            [
+                'DuplicateAccessKey.Duplicate:1:1' => 'Duplicate accesskey value "h" found. Each accesskey must be unique within a page.',
+            ],
         ];
     }
 }

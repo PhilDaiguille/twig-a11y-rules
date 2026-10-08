@@ -29,10 +29,10 @@ final class AriaDeprecatedRoleRuleTest extends AbstractRuleTestCase
      */
     public static function provideFixtures(): iterable
     {
-        yield 'valid role' => [__DIR__.'/Fixtures/valid/role_valid.html.twig', []];
+        yield 'valid role' => [__DIR__ . '/Fixtures/valid/role_valid.html.twig', []];
 
         yield 'deprecated role' => [
-            __DIR__.'/Fixtures/invalid/role_deprecated.html.twig',
+            __DIR__ . '/Fixtures/invalid/role_deprecated.html.twig',
             [
                 // Warning keys are still produced via the test harness; use the
                 // expected key format combining rule shortname + provided id

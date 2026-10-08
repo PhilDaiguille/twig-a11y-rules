@@ -1,25 +1,23 @@
-/vendor/
-/var/
-/.phpunit.result.cache
-/.php-cs-fixer.cache
-.idea/
-/.opcache
-
-vendor
-.agents
-.php-cs-fixer.cache
-.phpunit.result.cache
-
 .DS_Store
+.idea/
+.agents
 
 ## Composer
+/vendor/
 # This is a library: do NOT commit composer.lock to avoid locking consumers.
 composer.lock
 
-## Phpunit
-.coverage/
-.phpunit.xml
+## Caches
+/var/
+/.opcache
+.twig-cs-fixer.cache
+.castor.stub.php
+
+## PHPUnit
+.phpunit.result.cache
 .phpunit.cache
+.phpunit.xml
+.coverage/
 
 ## Infection
 infection.log
@@ -27,6 +25,3 @@ infection.html
 
 ## Box
 bin/twig-cs-fixer.phar
-.twig-cs-fixer.cache
-
-.castor.stub.php

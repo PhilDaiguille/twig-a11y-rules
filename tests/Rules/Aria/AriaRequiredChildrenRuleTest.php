@@ -29,10 +29,10 @@ final class AriaRequiredChildrenRuleTest extends AbstractRuleTestCase
      */
     public static function provideFixtures(): iterable
     {
-        yield 'valid list' => [__DIR__.'/Fixtures/valid/list_with_items.html.twig', []];
+        yield 'valid list' => [__DIR__ . '/Fixtures/valid/list_with_items.html.twig', []];
 
         yield 'missing children' => [
-            __DIR__.'/Fixtures/invalid/list_missing_items.html.twig',
+            __DIR__ . '/Fixtures/invalid/list_missing_items.html.twig',
             [
                 'AriaRequiredChildren.MissingChild:1:1' => 'Role list must contain at least one of: listitem.',
             ],

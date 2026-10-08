@@ -57,7 +57,9 @@ abstract class AbstractA11yRule extends AbstractRule implements ConfigurableRule
      *                            accessibility hints as warnings rather than
      *                            hard errors (e.g. AnchorContentRule).
      */
-    public function __construct(private bool $emitAsWarning = false) {}
+    public function __construct(
+        private bool $emitAsWarning = false,
+    ) {}
 
     /**
      * Lets twig-cs-fixer's cache and Ruleset tell apart the same rule
@@ -65,6 +67,7 @@ abstract class AbstractA11yRule extends AbstractRule implements ConfigurableRule
      *
      * @return array{emitAsWarning: bool}
      */
+    #[\Override]
     public function getConfiguration(): array
     {
         return ['emitAsWarning' => $this->emitAsWarning];
@@ -116,7 +119,7 @@ abstract class AbstractA11yRule extends AbstractRule implements ConfigurableRule
             $line,
             $linePosition,
             $token->getFilename(),
-            $value
+            $value,
         );
     }
 
@@ -137,6 +140,7 @@ abstract class AbstractA11yRule extends AbstractRule implements ConfigurableRule
         );
     }
 
+    #[\Override]
     final protected function process(int $tokenIndex, Tokens $tokens): void
     {
         // On the first token, determine the template kind and record whether
@@ -200,7 +204,7 @@ abstract class AbstractA11yRule extends AbstractRule implements ConfigurableRule
         // template content.
         $hash = md5($this->getFullContent($tokens));
 
-        $ruleFileKey = static::class.'::'.$hash;
+        $ruleFileKey = static::class . '::' . $hash;
         if (!isset($this->emitted[$ruleFileKey])) {
             if (count($this->emitted) >= self::EMITTED_MAX) {
                 $this->emitted = [];
@@ -210,15 +214,18 @@ abstract class AbstractA11yRule extends AbstractRule implements ConfigurableRule
         }
 
         $reporter = $this->emitAsWarning
-            ? function (string $message, Token $token, ?string $id): void {
+            ? function (string $message, #[\SensitiveParameter] Token $token, ?string $id): void {
                 $this->addWarning($message, $token, $id);
             }
-        : function (string $message, Token $token, ?string $id): void {
-            $this->addError($message, $token, $id);
-        };
+            : function (string $message, #[\SensitiveParameter] Token $token, ?string $id): void {
+                $this->addError($message, $token, $id);
+            };
 
-        return function (string $message, Token $token, ?string $id = null) use ($ruleFileKey, $reporter): void {
-            $key = $message.'|'.($id ?? '').'|'.$token->getLine().':'.$token->getLinePosition();
+        return function (string $message, #[\SensitiveParameter] Token $token, ?string $id = null) use (
+            $ruleFileKey,
+            $reporter,
+        ): void {
+            $key = $message . '|' . ($id ?? '') . '|' . $token->getLine() . ':' . $token->getLinePosition();
             if (isset($this->emitted[$ruleFileKey][$key])) {
                 return;
             }

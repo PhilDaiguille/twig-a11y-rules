@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class TargetSizeRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = strtolower($this->getFullContent($tokens));
@@ -23,7 +24,8 @@ final class TargetSizeRule extends AbstractA11yRule
             $attrs = $match[2];
 
             // cheap interactive detection: tag is a native interactive OR has role/buttonish attributes
-            $isInteractive = in_array($tag, ['a', 'button', 'input'], true)
+            $isInteractive =
+                in_array($tag, ['a', 'button', 'input'], true)
                 || preg_match('/\bonclick\b/i', $attrs)
                 || preg_match('/\brole=(?:"|\')?button(?:"|\')?/i', $attrs)
                 || preg_match('/\btabindex\s*=\s*\d+/i', $attrs);
@@ -41,17 +43,23 @@ final class TargetSizeRule extends AbstractA11yRule
             $small = false;
             if (preg_match_all('/(?:width|height)\s*:\s*(\d+)px/', $style, $sizeMatches, PREG_SET_ORDER)) {
                 foreach ($sizeMatches as $sm) {
-                    if ((int) $sm[1] < 24) {
-                        $small = true;
-
-                        break;
+                    if ((int) $sm[1] >= 24) {
+                        continue;
                     }
+
+                    $small = true;
+
+                    break;
                 }
             }
 
             if ($small) {
                 $fake = $tokens->get(0);
-                $emit('Interactive element has inline size < 24px; this may fail target-size (WCAG 2.5.8).', $fake, 'Small');
+                $emit(
+                    'Interactive element has inline size < 24px; this may fail target-size (WCAG 2.5.8).',
+                    $fake,
+                    'Small',
+                );
 
                 return; // emit only once per file
             }

@@ -30,13 +30,15 @@ final class TabIndexRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'tabindex zero' => [
-            __DIR__.'/Fixtures/valid/tabindex_zero.html.twig',
+            __DIR__ . '/Fixtures/valid/tabindex_zero.html.twig',
             [],
         ];
 
         yield 'tabindex positive' => [
-            __DIR__.'/Fixtures/invalid/tabindex_positive.html.twig',
-            ['TabIndex.PositiveTabindex:4:6' => 'Avoid positive tabindex values — use 0 or manage focus order differently.'],
+            __DIR__ . '/Fixtures/invalid/tabindex_positive.html.twig',
+            [
+                'TabIndex.PositiveTabindex:4:6' => 'Avoid positive tabindex values — use 0 or manage focus order differently.',
+            ],
         ];
     }
 }

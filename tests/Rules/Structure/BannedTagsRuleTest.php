@@ -25,8 +25,11 @@ final class BannedTagsRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'valid content' => [__DIR__.'/Fixtures/valid/no_banned.html.twig', []];
+        yield 'valid content' => [__DIR__ . '/Fixtures/valid/no_banned.html.twig', []];
 
-        yield 'invalid marquee' => [__DIR__.'/Fixtures/invalid/has_marquee.html.twig', ['BannedTags.Used:2:1' => 'Banned tag used (e.g. <marquee> or <blink>).']];
+        yield 'invalid marquee' => [
+            __DIR__ . '/Fixtures/invalid/has_marquee.html.twig',
+            ['BannedTags.Used:2:1' => 'Banned tag used (e.g. <marquee> or <blink>).'],
+        ];
     }
 }

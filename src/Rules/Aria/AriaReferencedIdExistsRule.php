@@ -10,6 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class AriaReferencedIdExistsRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -22,7 +23,12 @@ final class AriaReferencedIdExistsRule extends AbstractA11yRule
         }
 
         // Find aria-labelledby / aria-describedby usages
-        if (preg_match_all('/\baria-(?:labelledby|describedby)\s*=\s*(?:"([^"]+)"|\'([^\']+)\')/i', $full, $refs, PREG_SET_ORDER)) {
+        if (preg_match_all(
+            '/\baria-(?:labelledby|describedby)\s*=\s*(?:"([^"]+)"|\'([^\']+)\')/i',
+            $full,
+            $refs,
+            PREG_SET_ORDER,
+        )) {
             foreach ($refs as $r) {
                 $value = $r[1] ?? $r[2] ?? '';
                 $pieces = preg_split('/\s+/', trim($value));
@@ -49,9 +55,13 @@ final class AriaReferencedIdExistsRule extends AbstractA11yRule
                             $line,
                             1,
                             $fakeToken->getFilename(),
-                            $r[0]
+                            $r[0],
                         );
-                        $emit(sprintf('Referenced id "%s" in aria attribute does not exist in template.', $refId), $fakeToken, 'MissingId');
+                        $emit(
+                            sprintf('Referenced id "%s" in aria attribute does not exist in template.', $refId),
+                            $fakeToken,
+                            'MissingId',
+                        );
 
                         // Report first missing id for determinism
                         return;

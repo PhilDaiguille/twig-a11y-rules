@@ -12,6 +12,7 @@ final class AnchorAccessibleNameRule extends AbstractA11yRule
 {
     // reuses TokenCollectorTrait::firstMatch via $this->firstMatch
 
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -68,7 +69,10 @@ final class AnchorAccessibleNameRule extends AbstractA11yRule
                     continue;
                 }
 
-                if (preg_match('/id\s*=\s*(?:"'.preg_quote($id, '/').'"|\''.preg_quote($id, '/')."')/i", $doc)) {
+                if (preg_match(
+                    '/id\s*=\s*(?:"' . preg_quote($id, '/') . '"|\'' . preg_quote($id, '/') . "')/i",
+                    $doc,
+                )) {
                     return;
                 }
             }

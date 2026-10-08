@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class AriaRequiredChildrenRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -16,12 +17,17 @@ final class AriaRequiredChildrenRule extends AbstractA11yRule
         $catalog = RoleCatalog::getCatalog();
 
         foreach ($catalog as $role => $info) {
-            if (empty($info['required_children'])) {
+            if ([] === $info['required_children']) {
                 continue;
             }
 
             // Find elements with this role and inspect their inner HTML for required child roles
-            if (!preg_match_all('/<([a-z0-9]+)[^>]*role\s*=\s*(?:"|\')'.preg_quote($role, '/').'(?:(?:"|\')[^>]*)>(.*?)<\/\1>/is', $full, $m, PREG_SET_ORDER)) {
+            if (!preg_match_all(
+                '/<([a-z0-9]+)[^>]*role\s*=\s*(?:"|\')' . preg_quote($role, '/') . '(?:(?:"|\')[^>]*)>(.*?)<\/\1>/is',
+                $full,
+                $m,
+                PREG_SET_ORDER,
+            )) {
                 continue;
             }
 
@@ -29,11 +35,25 @@ final class AriaRequiredChildrenRule extends AbstractA11yRule
                 // PREG_SET_ORDER with the regex above guarantees group 2 exists
                 // for each match, so access it directly.
                 $inner = $set[2];
-                $found = array_any($info['required_children'], fn (string $childRole): bool => 1 === preg_match('/role\s*=\s*(?:"|\')'.preg_quote($childRole, '/').'(?:(?:"|\'))/i', $inner));
+                $found = array_any(
+                    $info['required_children'],
+                    static fn(string $childRole): bool => 1 === preg_match(
+                        '/role\s*=\s*(?:"|\')' . preg_quote($childRole, '/') . '(?:(?:"|\'))/i',
+                        $inner,
+                    ),
+                );
 
                 if (!$found) {
                     $token = $tokens->get(0);
-                    $emit(sprintf('Role %s must contain at least one of: %s.', $role, implode(', ', $info['required_children'])), $token, 'MissingChild');
+                    $emit(
+                        sprintf(
+                            'Role %s must contain at least one of: %s.',
+                            $role,
+                            implode(', ', $info['required_children']),
+                        ),
+                        $token,
+                        'MissingChild',
+                    );
                 }
             }
         }

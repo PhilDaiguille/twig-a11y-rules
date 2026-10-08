@@ -26,10 +26,10 @@ final class FrameTitleRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'no title' => [
-            __DIR__.'/Fixtures/invalid/frame_no_title.html.twig',
+            __DIR__ . '/Fixtures/invalid/frame_no_title.html.twig',
             ['FrameTitle.Missing:2:1' => 'Frame element must have a non-empty title attribute.'],
         ];
 
-        yield 'with title' => [__DIR__.'/Fixtures/valid/frame_with_title.html.twig', []];
+        yield 'with title' => [__DIR__ . '/Fixtures/valid/frame_with_title.html.twig', []];
     }
 }

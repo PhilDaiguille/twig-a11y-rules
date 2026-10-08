@@ -25,10 +25,13 @@ final class LabelForTargetExistsRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<string,string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'label target exists' => [__DIR__.'/Fixtures/valid/label_target_exists.html.twig', []];
+        yield 'label target exists' => [__DIR__ . '/Fixtures/valid/label_target_exists.html.twig', []];
 
-        yield 'label target missing' => [__DIR__.'/Fixtures/invalid/label_target_missing.html.twig', [
-            'LabelForTargetExists.MissingTarget:2:1' => 'Label for="email" does not reference any existing id in template.',
-        ]];
+        yield 'label target missing' => [
+            __DIR__ . '/Fixtures/invalid/label_target_missing.html.twig',
+            [
+                'LabelForTargetExists.MissingTarget:2:1' => 'Label for="email" does not reference any existing id in template.',
+            ],
+        ];
     }
 }

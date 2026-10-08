@@ -25,10 +25,13 @@ final class AriaControlsIdExistsRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<string,string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'aria controls existing id' => [__DIR__.'/Fixtures/valid/aria_controls_existing_id.html.twig', []];
+        yield 'aria controls existing id' => [__DIR__ . '/Fixtures/valid/aria_controls_existing_id.html.twig', []];
 
-        yield 'aria controls missing id' => [__DIR__.'/Fixtures/invalid/aria_controls_missing_id.html.twig', [
-            'AriaControlsIdExists.MissingId:2:1' => 'Referenced id "panel-1" in aria-controls does not exist in template.',
-        ]];
+        yield 'aria controls missing id' => [
+            __DIR__ . '/Fixtures/invalid/aria_controls_missing_id.html.twig',
+            [
+                'AriaControlsIdExists.MissingId:2:1' => 'Referenced id "panel-1" in aria-controls does not exist in template.',
+            ],
+        ];
     }
 }

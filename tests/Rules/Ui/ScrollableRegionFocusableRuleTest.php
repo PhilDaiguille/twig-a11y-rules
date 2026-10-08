@@ -25,12 +25,15 @@ final class ScrollableRegionFocusableRuleTest extends AbstractRuleTestCase
     }
 
     /**
-     * @return \Iterator<(array<int, array<string, string>>|array<int, string>)>
+     * @return iterable<string, array{string, array<string, string>}>
      */
     public static function provideFixtures(): iterable
     {
-        yield 'scrollable without tabindex' => [__DIR__.'/Fixtures/invalid/scrollable_no_tabindex.html.twig', [
-            'ScrollableRegionFocusable.Focusable:1:1' => 'Scrollable region with overflow must be keyboard-focusable via tabindex.',
-        ]];
+        yield 'scrollable without tabindex' => [
+            __DIR__ . '/Fixtures/invalid/scrollable_no_tabindex.html.twig',
+            [
+                'ScrollableRegionFocusable.Focusable:1:1' => 'Scrollable region with overflow must be keyboard-focusable via tabindex.',
+            ],
+        ];
     }
 }

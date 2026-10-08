@@ -25,8 +25,11 @@ final class AutoplayRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'autoplay not muted' => [__DIR__.'/Fixtures/invalid/autoplay_no_muted.html.twig', ['Autoplay.NotMuted:2:1' => 'Autoplaying media should be muted.']];
+        yield 'autoplay not muted' => [
+            __DIR__ . '/Fixtures/invalid/autoplay_no_muted.html.twig',
+            ['Autoplay.NotMuted:2:1' => 'Autoplaying media should be muted.'],
+        ];
 
-        yield 'ok' => [__DIR__.'/Fixtures/valid/img_with_alt.html.twig', []];
+        yield 'ok' => [__DIR__ . '/Fixtures/valid/img_with_alt.html.twig', []];
     }
 }

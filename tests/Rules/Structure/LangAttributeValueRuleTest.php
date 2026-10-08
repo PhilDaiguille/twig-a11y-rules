@@ -30,28 +30,32 @@ final class LangAttributeValueRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'valid lang en' => [
-            __DIR__.'/Fixtures/valid/lang_valid_en.html.twig',
+            __DIR__ . '/Fixtures/valid/lang_valid_en.html.twig',
             [],
         ];
 
         yield 'valid lang fr-CA' => [
-            __DIR__.'/Fixtures/valid/lang_valid_fr_ca.html.twig',
+            __DIR__ . '/Fixtures/valid/lang_valid_fr_ca.html.twig',
             [],
         ];
 
         yield 'valid lang zh-Hant-TW' => [
-            __DIR__.'/Fixtures/valid/lang_valid_zh_hant_tw.html.twig',
+            __DIR__ . '/Fixtures/valid/lang_valid_zh_hant_tw.html.twig',
             [],
         ];
 
         yield 'invalid lang xx' => [
-            __DIR__.'/Fixtures/invalid/lang_invalid_value.html.twig',
-            ['LangAttributeValue.InvalidLang:1:1' => 'The lang attribute value "xx" is not a valid BCP 47 language tag (invalid primary subtag "xx").'],
+            __DIR__ . '/Fixtures/invalid/lang_invalid_value.html.twig',
+            [
+                'LangAttributeValue.InvalidLang:1:1' => 'The lang attribute value "xx" is not a valid BCP 47 language tag (invalid primary subtag "xx").',
+            ],
         ];
 
         yield 'invalid primary subtag' => [
-            __DIR__.'/Fixtures/invalid/lang_invalid_primary_subtag.html.twig',
-            ['LangAttributeValue.InvalidLang:1:1' => 'The lang attribute value "not-a-language" is not a valid BCP 47 language tag (invalid primary subtag "not").'],
+            __DIR__ . '/Fixtures/invalid/lang_invalid_primary_subtag.html.twig',
+            [
+                'LangAttributeValue.InvalidLang:1:1' => 'The lang attribute value "not-a-language" is not a valid BCP 47 language tag (invalid primary subtag "not").',
+            ],
         ];
     }
 }

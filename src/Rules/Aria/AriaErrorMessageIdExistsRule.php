@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class AriaErrorMessageIdExistsRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -41,7 +42,11 @@ final class AriaErrorMessageIdExistsRule extends AbstractA11yRule
 
             $fakeToken = $this->fakeTokenForLine($tokens, $line, $ref[0]);
 
-            $emit(sprintf('Referenced id "%s" in aria-errormessage does not exist in template.', $refId), $fakeToken, 'MissingId');
+            $emit(
+                sprintf('Referenced id "%s" in aria-errormessage does not exist in template.', $refId),
+                $fakeToken,
+                'MissingId',
+            );
 
             return;
         }

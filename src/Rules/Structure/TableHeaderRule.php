@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class TableHeaderRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -32,13 +33,21 @@ final class TableHeaderRule extends AbstractA11yRule
 
             // Capture scope attribute value if present
             if (!preg_match('/\bscope\b\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))/i', $attrs, $scopeMatch)) {
-                $emit('Table header <th> elements should include a scope attribute.', $this->tokenAtOffset($tokens, $matchOffset, $set[0][0]), 'MissingScope');
+                $emit(
+                    'Table header <th> elements should include a scope attribute.',
+                    $this->tokenAtOffset($tokens, $matchOffset, $set[0][0]),
+                    'MissingScope',
+                );
             } else {
                 // Validate scope value
                 $value = $this->firstMatch($scopeMatch, 1, 2, 3);
                 $allowed = ['col', 'row', 'colgroup', 'rowgroup'];
                 if (!in_array(strtolower($value), $allowed, true)) {
-                    $emit(sprintf('Table header <th> has invalid scope value "%s".', $value), $this->tokenAtOffset($tokens, $matchOffset, $set[0][0]), 'InvalidScope');
+                    $emit(
+                        sprintf('Table header <th> has invalid scope value "%s".', $value),
+                        $this->tokenAtOffset($tokens, $matchOffset, $set[0][0]),
+                        'InvalidScope',
+                    );
                 }
             }
         }

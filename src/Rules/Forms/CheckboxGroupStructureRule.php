@@ -14,6 +14,7 @@ use TwigCsFixer\Token\Tokens;
  */
 final class CheckboxGroupStructureRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -41,7 +42,7 @@ final class CheckboxGroupStructureRule extends AbstractA11yRule
                 continue;
             }
 
-            $name = '' !== $m[1] ? $m[1] : ($m[2] ?? '');
+            $name = '' !== $m[1] ? $m[1] : $m[2] ?? '';
             if ('' === $name) {
                 continue;
             }
@@ -60,18 +61,20 @@ final class CheckboxGroupStructureRule extends AbstractA11yRule
 
             // Check if all occurrences of this name appear inside a fieldset or role="group".
             $isGrouped = preg_match(
-                '/<(?:fieldset\b|[^>]+\brole\s*=\s*["\']group["\'])[^>]*>.*?<input\b[^>]*\bname\s*=\s*["\']'.$escapedName.'["\'][^>]*>.*?<\/(?:fieldset|[^>]+)>/is',
-                $full
+                '/<(?:fieldset\b|[^>]+\brole\s*=\s*["\']group["\'])[^>]*>.*?<input\b[^>]*\bname\s*=\s*["\']'
+                . $escapedName
+                . '["\'][^>]*>.*?<\/(?:fieldset|[^>]+)>/is',
+                $full,
             );
 
             if (!$isGrouped) {
                 $emit(
                     sprintf(
                         'Checkbox inputs sharing name "%s" should be grouped inside a <fieldset> or a container with role="group" (WCAG 1.3.1, RGAA 11.7).',
-                        $name
+                        $name,
                     ),
                     $tokens->get(0),
-                    'MissingGroup'
+                    'MissingGroup',
                 );
             }
         }

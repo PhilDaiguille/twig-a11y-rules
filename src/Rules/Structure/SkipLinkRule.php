@@ -11,6 +11,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class SkipLinkRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);

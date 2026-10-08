@@ -25,10 +25,10 @@ final class VideoTrackRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'video with captions' => [__DIR__.'/Fixtures/valid/video_with_captions.html.twig', []];
+        yield 'video with captions' => [__DIR__ . '/Fixtures/valid/video_with_captions.html.twig', []];
 
         yield 'video without captions' => [
-            __DIR__.'/Fixtures/invalid/video_no_captions.html.twig',
+            __DIR__ . '/Fixtures/invalid/video_no_captions.html.twig',
             ['VideoTrack.MissingCaptions:1:1' => 'Video should have captions (track kind="captions").'],
         ];
     }

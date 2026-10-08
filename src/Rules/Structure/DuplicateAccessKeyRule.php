@@ -18,6 +18,7 @@ use TwigCsFixer\Token\Tokens;
  */
 final class DuplicateAccessKeyRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -49,7 +50,7 @@ final class DuplicateAccessKeyRule extends AbstractA11yRule
                 $emit(
                     sprintf('Duplicate accesskey value "%s" found. Each accesskey must be unique within a page.', $key),
                     $fakeToken,
-                    'Duplicate'
+                    'Duplicate',
                 );
 
                 return;

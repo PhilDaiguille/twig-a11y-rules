@@ -18,6 +18,6 @@ final class AnchorContentExprTest extends AbstractRuleTestCase
     {
         // Both anchors include a title attribute (one via Twig expression), so
         // no warning should be emitted by the rule.
-        $this->checkRule(new AnchorContentRule(), [], __DIR__.'/Fixtures/valid/expr_in_attr_anchor.html.twig');
+        $this->checkRule(new AnchorContentRule(), [], __DIR__ . '/Fixtures/valid/expr_in_attr_anchor.html.twig');
     }
 }
