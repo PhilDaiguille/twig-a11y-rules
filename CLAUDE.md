@@ -9,3 +9,5 @@
   docs with `ctx7` (`/carthage-software/mago`) or run
   `vendor/bin/mago lint --explain <rule>`; config lives in `mago.toml`.
 - After editing PHP, run `composer fmt` then `composer lint` before reporting done.
+- Never relax `[guard]`, raise a metric threshold or grow the analyzer baseline
+  in `mago.toml` to make `composer lint` pass, unless the user asks: fix the code.

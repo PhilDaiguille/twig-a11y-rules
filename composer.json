@@ -53,13 +53,15 @@
         "fmt": "mago fmt",
         "fmt:check": "mago fmt --check",
         "mago:lint": "mago lint",
-        "mago:analyze": "mago analyze",
+        "mago:guard": "mago guard",
+        "mago:analyze": "mago analyze --fail-on-out-of-sync-baseline",
+        "mago:baseline": "mago analyze --remove-outdated-baseline-entries --baseline mago-analysis-baseline.toml",
         "phpstan": "phpstan analyse",
         "rector": "rector --dry-run",
         "rector:apply": "rector",
         "infection": "infection",
-        "lint": "composer fmt:check && composer mago:lint && composer mago:analyze && vendor/bin/phpstan --memory-limit=2g && composer test && composer rector",
-        "lint:fix": "composer rector:apply && mago lint --fix && composer fmt"
+        "lint": "composer fmt:check && composer mago:lint && composer mago:guard && composer mago:analyze && vendor/bin/phpstan --memory-limit=2g && composer test && composer rector",
+        "lint:fix": "composer rector:apply && mago fix"
     },
     "config": {
         "allow-plugins": {

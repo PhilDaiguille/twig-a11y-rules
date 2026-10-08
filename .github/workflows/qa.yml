@@ -8,6 +8,34 @@ on:
         branches: [ main ]
 
 jobs:
+    # Mago is PHP-version independent: run it once, report as PR annotations.
+    mago:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v6
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.4'
+                  coverage: none
+
+            - name: Install dependencies
+              run: composer install --prefer-dist --no-progress
+
+            - name: Format check
+              run: vendor/bin/mago fmt --check
+
+            - name: Lint
+              run: vendor/bin/mago lint --reporting-format github
+
+            - name: Guard
+              run: vendor/bin/mago guard --reporting-format github
+
+            - name: Analyze
+              run: vendor/bin/mago analyze --fail-on-out-of-sync-baseline --reporting-format github
+
     build:
         runs-on: ubuntu-latest
         strategy:
@@ -44,12 +72,6 @@ jobs:
 
             - name: Run PHPStan
               run: composer phpstan -- --no-progress
-
-            - name: Run Mago (format check, lint, analyze)
-              run: |
-                  composer fmt:check
-                  composer mago:lint
-                  composer mago:analyze
 
             - name: Run rector (dry-run)
               run: composer rector

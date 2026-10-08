@@ -10,7 +10,7 @@ return RectorConfig::configure()
         __DIR__.'/src',
         __DIR__.'/tests',
     ])
-    ->withPhpSets()
+    ->withPhpSets(php84: true)
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,
@@ -22,7 +22,6 @@ return RectorConfig::configure()
         rectorPreset: true,
         phpunitCodeQuality: true,
     )
-    ->withComposerBased(phpunit: true)
-    // Not idempotent: it stacks one @see per run and couples src/ to tests/
+    ->withComposerBased(twig: true, phpunit: true)
     ->withSkip([AddSeeTestAnnotationRector::class])
 ;
