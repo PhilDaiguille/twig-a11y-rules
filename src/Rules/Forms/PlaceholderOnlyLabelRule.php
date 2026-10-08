@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class PlaceholderOnlyLabelRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -17,7 +18,12 @@ final class PlaceholderOnlyLabelRule extends AbstractA11yRule
             return;
         }
 
-        if (!preg_match_all('/<(input|textarea)\b[^>]*\bplaceholder\s*=\s*(?:"[^"]+"|\'[^\']+\')[^>]*>/i', $full, $matches, PREG_OFFSET_CAPTURE)) {
+        if (!preg_match_all(
+            '/<(input|textarea)\b[^>]*\bplaceholder\s*=\s*(?:"[^"]+"|\'[^\']+\')[^>]*>/i',
+            $full,
+            $matches,
+            PREG_OFFSET_CAPTURE,
+        )) {
             return;
         }
 
@@ -25,7 +31,10 @@ final class PlaceholderOnlyLabelRule extends AbstractA11yRule
             $tag = $match[0];
             $offset = $match[1];
 
-            if (preg_match('/<input\b[^>]*\btype\s*=\s*["\'](?:hidden|submit|button|reset|image|checkbox|radio|file)["\']/i', $tag)) {
+            if (preg_match(
+                '/<input\b[^>]*\btype\s*=\s*["\'](?:hidden|submit|button|reset|image|checkbox|radio|file)["\']/i',
+                $tag,
+            )) {
                 continue;
             }
 
@@ -39,14 +48,18 @@ final class PlaceholderOnlyLabelRule extends AbstractA11yRule
             }
 
             $tagName = str_starts_with(strtolower($tag), '<textarea') ? 'textarea' : 'input';
-            if (preg_match('/<label[^>]*>\s*<'.preg_quote($tagName, '/').'\b[^>]*>/i', $full)) {
+            if (preg_match('/<label[^>]*>\s*<' . preg_quote($tagName, '/') . '\b[^>]*>/i', $full)) {
                 continue;
             }
 
             $line = 1 + substr_count(substr($full, 0, $offset), "\n");
             $fakeToken = $this->fakeTokenForLine($tokens, $line, $tag);
 
-            $emit('Form field appears to rely on placeholder text instead of a proper label.', $fakeToken, 'MissingLabel');
+            $emit(
+                'Form field appears to rely on placeholder text instead of a proper label.',
+                $fakeToken,
+                'MissingLabel',
+            );
 
             return;
         }

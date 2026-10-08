@@ -29,10 +29,10 @@ final class AriaHiddenBodyRuleTest extends AbstractRuleTestCase
      */
     public static function provideFixtures(): iterable
     {
-        yield 'valid page' => [__DIR__.'/Fixtures/valid/role_valid.html.twig', []];
+        yield 'valid page' => [__DIR__ . '/Fixtures/valid/role_valid.html.twig', []];
 
         yield 'body aria hidden' => [
-            __DIR__.'/Fixtures/invalid/body_aria_hidden.html.twig',
+            __DIR__ . '/Fixtures/invalid/body_aria_hidden.html.twig',
             [
                 'AriaHiddenBody.HiddenOnBody:1:1' => 'Do not set aria-hidden="true" on the <body> element.',
             ],

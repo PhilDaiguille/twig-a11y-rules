@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class AriaRoleRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $tag = $this->getFullContent($tokens);
@@ -26,7 +27,11 @@ final class AriaRoleRule extends AbstractA11yRule
             }
 
             if (!in_array($role, $allowed, true)) {
-                $emit(sprintf('Invalid ARIA role "%s".', $role), $this->tokenAtOffset($tokens, $offset, $role), 'InvalidRole');
+                $emit(
+                    sprintf('Invalid ARIA role "%s".', $role),
+                    $this->tokenAtOffset($tokens, $offset, $role),
+                    'InvalidRole',
+                );
             }
         }
     }

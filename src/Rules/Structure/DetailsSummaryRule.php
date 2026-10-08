@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class DetailsSummaryRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);

@@ -25,23 +25,38 @@ final class RoleButtonTabindexRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<string,string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'no interactive role attributes' => [__DIR__.'/Fixtures/valid/role_no_interactive_roles.html.twig', []];
+        yield 'no interactive role attributes' => [__DIR__ . '/Fixtures/valid/role_no_interactive_roles.html.twig', []];
 
-        yield 'role keyword in twig expression — no html tags' => [__DIR__.'/Fixtures/valid/role_keyword_in_twig_no_tags.html.twig', []];
+        yield 'role keyword in twig expression — no html tags' => [
+            __DIR__ . '/Fixtures/valid/role_keyword_in_twig_no_tags.html.twig',
+            [],
+        ];
 
-        yield 'interactive roles with tabindex' => [__DIR__.'/Fixtures/valid/role_interactive_with_tabindex.html.twig', []];
+        yield 'interactive roles with tabindex' => [
+            __DIR__ . '/Fixtures/valid/role_interactive_with_tabindex.html.twig',
+            [],
+        ];
 
-        yield 'role button missing tabindex' => [__DIR__.'/Fixtures/invalid/role_button_missing_tabindex.html.twig', [
-            'RoleButtonTabindex.MissingTabindex:2:1' => '<div role="button"> is not natively focusable and must have tabindex="0" to be keyboard-reachable (WCAG 4.1.2, 2.1.1).',
-        ]];
+        yield 'role button missing tabindex' => [
+            __DIR__ . '/Fixtures/invalid/role_button_missing_tabindex.html.twig',
+            [
+                'RoleButtonTabindex.MissingTabindex:2:1' => '<div role="button"> is not natively focusable and must have tabindex="0" to be keyboard-reachable (WCAG 4.1.2, 2.1.1).',
+            ],
+        ];
 
-        yield 'role checkbox missing tabindex' => [__DIR__.'/Fixtures/invalid/role_checkbox_missing_tabindex.html.twig', [
-            'RoleButtonTabindex.MissingTabindex:2:1' => '<span role="checkbox"> is not natively focusable and must have tabindex="0" to be keyboard-reachable (WCAG 4.1.2, 2.1.1).',
-        ]];
+        yield 'role checkbox missing tabindex' => [
+            __DIR__ . '/Fixtures/invalid/role_checkbox_missing_tabindex.html.twig',
+            [
+                'RoleButtonTabindex.MissingTabindex:2:1' => '<span role="checkbox"> is not natively focusable and must have tabindex="0" to be keyboard-reachable (WCAG 4.1.2, 2.1.1).',
+            ],
+        ];
 
-        yield 'multiple elements missing tabindex' => [__DIR__.'/Fixtures/invalid/role_multiple_missing_tabindex.html.twig', [
-            'RoleButtonTabindex.MissingTabindex:2:1' => '<div role="button"> is not natively focusable and must have tabindex="0" to be keyboard-reachable (WCAG 4.1.2, 2.1.1).',
-            'RoleButtonTabindex.MissingTabindex:3:1' => '<span role="link"> is not natively focusable and must have tabindex="0" to be keyboard-reachable (WCAG 4.1.2, 2.1.1).',
-        ]];
+        yield 'multiple elements missing tabindex' => [
+            __DIR__ . '/Fixtures/invalid/role_multiple_missing_tabindex.html.twig',
+            [
+                'RoleButtonTabindex.MissingTabindex:2:1' => '<div role="button"> is not natively focusable and must have tabindex="0" to be keyboard-reachable (WCAG 4.1.2, 2.1.1).',
+                'RoleButtonTabindex.MissingTabindex:3:1' => '<span role="link"> is not natively focusable and must have tabindex="0" to be keyboard-reachable (WCAG 4.1.2, 2.1.1).',
+            ],
+        ];
     }
 }

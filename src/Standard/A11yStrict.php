@@ -23,6 +23,7 @@ final class A11yStrict implements StandardInterface
     /**
      * @return list<RuleInterface>
      */
+    #[\Override]
     public function getRules(): array
     {
         return StandardRuleSets::strict();

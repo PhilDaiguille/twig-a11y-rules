@@ -26,20 +26,69 @@ final class RoleCatalogTest extends TestCase
         $roles = RoleCatalog::getAllowedRoles();
 
         $expected = [
-            'alert', 'alertdialog', 'application', 'article', 'banner',
-            'button', 'checkbox', 'combobox', 'dialog', 'document',
-            'feed', 'figure', 'form', 'grid', 'group', 'heading', 'img',
-            'link', 'list', 'listbox', 'listitem', 'log', 'main', 'menu',
-            'menubar', 'menuitem', 'navigation', 'none', 'option',
-            'presentation', 'progressbar', 'radio', 'radiogroup', 'region',
-            'row', 'rowgroup', 'scrollbar', 'search', 'searchbox',
-            'separator', 'slider', 'spinbutton', 'status', 'switch',
-            'tab', 'table', 'tablist', 'tabpanel', 'textbox', 'timer',
-            'toolbar', 'tooltip', 'tree', 'treegrid', 'treeitem',
+            'alert',
+            'alertdialog',
+            'application',
+            'article',
+            'banner',
+            'button',
+            'checkbox',
+            'combobox',
+            'dialog',
+            'document',
+            'feed',
+            'figure',
+            'form',
+            'grid',
+            'group',
+            'heading',
+            'img',
+            'link',
+            'list',
+            'listbox',
+            'listitem',
+            'log',
+            'main',
+            'menu',
+            'menubar',
+            'menuitem',
+            'navigation',
+            'none',
+            'option',
+            'presentation',
+            'progressbar',
+            'radio',
+            'radiogroup',
+            'region',
+            'row',
+            'rowgroup',
+            'scrollbar',
+            'search',
+            'searchbox',
+            'separator',
+            'slider',
+            'spinbutton',
+            'status',
+            'switch',
+            'tab',
+            'table',
+            'tablist',
+            'tabpanel',
+            'textbox',
+            'timer',
+            'toolbar',
+            'tooltip',
+            'tree',
+            'treegrid',
+            'treeitem',
         ];
 
         foreach ($expected as $role) {
-            $this->assertContains($role, $roles, \sprintf('Expected role "%s" to be in the allowed roles list.', $role));
+            $this->assertContains(
+                $role,
+                $roles,
+                \sprintf('Expected role "%s" to be in the allowed roles list.', $role),
+            );
         }
     }
 
@@ -61,7 +110,11 @@ final class RoleCatalogTest extends TestCase
     {
         foreach (RoleCatalog::getCatalog() as $role => $entry) {
             $this->assertArrayHasKey('required_attrs', $entry, \sprintf('Role "%s" must have required_attrs.', $role));
-            $this->assertArrayHasKey('required_children', $entry, \sprintf('Role "%s" must have required_children.', $role));
+            $this->assertArrayHasKey(
+                'required_children',
+                $entry,
+                \sprintf('Role "%s" must have required_children.', $role),
+            );
         }
     }
 
@@ -117,7 +170,11 @@ final class RoleCatalogTest extends TestCase
 
         foreach (['button', 'table', 'list', 'menu', 'menubar', 'row'] as $role) {
             $this->assertArrayHasKey($role, $catalog);
-            $this->assertSame([], $catalog[$role]['required_attrs'], \sprintf('Role "%s" should have no required_attrs.', $role));
+            $this->assertSame(
+                [],
+                $catalog[$role]['required_attrs'],
+                \sprintf('Role "%s" should have no required_attrs.', $role),
+            );
         }
     }
 }

@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## Unreleased
 
+### Changed
+
+- Tooling: [Mago](https://mago.carthage.software/) replaces php-cs-fixer as
+  formatter and linter, and runs as a second analyzer next to PHPStan
+  (`composer fmt`, `composer mago:lint`, `composer mago:analyze`). Dev-only, no
+  change for users of the library.
+
 ## 1.0.0 - 2026-09-26
 
 ### Changed (BC break)

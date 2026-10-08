@@ -25,10 +25,16 @@ final class TextareaLabelRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'valid textarea' => [__DIR__.'/Fixtures/valid/textarea_with_label.html.twig', []];
+        yield 'valid textarea' => [__DIR__ . '/Fixtures/valid/textarea_with_label.html.twig', []];
 
-        yield 'valid textarea with aria-labelledby' => [__DIR__.'/Fixtures/valid/textarea_aria_labelledby.html.twig', []];
+        yield 'valid textarea with aria-labelledby' => [
+            __DIR__ . '/Fixtures/valid/textarea_aria_labelledby.html.twig',
+            [],
+        ];
 
-        yield 'invalid textarea' => [__DIR__.'/Fixtures/invalid/textarea_no_label.html.twig', ['TextareaLabel.Missing:2:1' => 'Textarea must have an associated <label>.']];
+        yield 'invalid textarea' => [
+            __DIR__ . '/Fixtures/invalid/textarea_no_label.html.twig',
+            ['TextareaLabel.Missing:2:1' => 'Textarea must have an associated <label>.'],
+        ];
     }
 }

@@ -18,8 +18,12 @@ final class DuplicateIdRuleReuseTest extends AbstractRuleTestCase
     {
         $rule = new DuplicateIdRule();
 
-        $this->checkRule($rule, [], __DIR__.'/Fixtures/valid/valid.html.twig');
+        $this->checkRule($rule, [], __DIR__ . '/Fixtures/valid/valid.html.twig');
         // Note: duplicate_ids.html.twig contains duplicate id "foo"
-        $this->checkRule($rule, ['DuplicateId.Duplicate:4:8' => 'Duplicate id "foo" found in document.'], __DIR__.'/Fixtures/invalid/duplicate_ids.html.twig');
+        $this->checkRule(
+            $rule,
+            ['DuplicateId.Duplicate:4:8' => 'Duplicate id "foo" found in document.'],
+            __DIR__ . '/Fixtures/invalid/duplicate_ids.html.twig',
+        );
     }
 }

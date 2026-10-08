@@ -33,6 +33,7 @@ final class AriaValidAttrValueRule extends AbstractA11yRule
         'aria-current' => ['false', 'true', 'page', 'step', 'location', 'date', 'time'],
     ];
 
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);

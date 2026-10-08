@@ -30,16 +30,16 @@ final class LangAttributeRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'html with lang' => [
-            __DIR__.'/Fixtures/valid/html_with_lang.html.twig',
+            __DIR__ . '/Fixtures/valid/html_with_lang.html.twig',
             [],
         ];
 
         yield 'html without lang' => [
-            __DIR__.'/Fixtures/invalid/html_no_lang.html.twig',
+            __DIR__ . '/Fixtures/invalid/html_no_lang.html.twig',
             ['LangAttribute.MissingLang:3:1' => 'The <html> element should have a non-empty lang attribute.'],
         ];
 
         // Partial fragments (no <html>) should not trigger the rule
-        yield 'partial fragment no html' => [__DIR__.'/Fixtures/valid/partial_no_html.html.twig', []];
+        yield 'partial fragment no html' => [__DIR__ . '/Fixtures/valid/partial_no_html.html.twig', []];
     }
 }

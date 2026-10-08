@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class AriaRequiredAttrRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Scan full file for role attributes to be robust against tokenization
@@ -25,7 +26,7 @@ final class AriaRequiredAttrRule extends AbstractA11yRule
         $requiredMap = [
             'img' => [['alt']],
             'link' => [['href']],
-            'textbox' => [['aria-label', 'aria-labelledby']],  // either is acceptable
+            'textbox' => [['aria-label', 'aria-labelledby']], // either is acceptable
             'combobox' => [['aria-controls']],
             'button' => [],
             'checkbox' => [['aria-checked']],
@@ -39,11 +40,21 @@ final class AriaRequiredAttrRule extends AbstractA11yRule
                     $role = strtolower($m[1]);
                     if (isset($requiredMap[$role])) {
                         foreach ($requiredMap[$role] as $group) {
-                            $satisfied = array_any($group, fn (string $attr): bool => 1 === preg_match('/\b'.preg_quote($attr, '/').'\s*=\s*(?:"|\')/i', $attrs));
+                            $satisfied = array_any(
+                                $group,
+                                static fn(string $attr): bool => 1 === preg_match(
+                                    '/\b' . preg_quote($attr, '/') . '\s*=\s*(?:"|\')/i',
+                                    $attrs,
+                                ),
+                            );
                             if (!$satisfied) {
                                 $tokenRef = $tokens->get(0);
                                 $missing = implode('" or "', $group);
-                                $emit(sprintf('Role "%s" requires attribute "%s".', $role, $missing), $tokenRef, 'Missing');
+                                $emit(
+                                    sprintf('Role "%s" requires attribute "%s".', $role, $missing),
+                                    $tokenRef,
+                                    'Missing',
+                                );
 
                                 // stop after first missing group found for test determinism
                                 return;

@@ -25,14 +25,20 @@ final class DetailsSummaryRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<string,string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'details with summary' => [__DIR__.'/Fixtures/valid/details_with_summary.html.twig', []];
+        yield 'details with summary' => [__DIR__ . '/Fixtures/valid/details_with_summary.html.twig', []];
 
-        yield 'details without summary' => [__DIR__.'/Fixtures/invalid/details_without_summary.html.twig', [
-            'DetailsSummary.MissingSummary:2:1' => 'Details element must contain a non-empty <summary>.',
-        ]];
+        yield 'details without summary' => [
+            __DIR__ . '/Fixtures/invalid/details_without_summary.html.twig',
+            [
+                'DetailsSummary.MissingSummary:2:1' => 'Details element must contain a non-empty <summary>.',
+            ],
+        ];
 
-        yield 'details with empty summary' => [__DIR__.'/Fixtures/invalid/details_with_empty_summary.html.twig', [
-            'DetailsSummary.EmptySummary:2:1' => 'Summary element inside <details> must have non-empty content.',
-        ]];
+        yield 'details with empty summary' => [
+            __DIR__ . '/Fixtures/invalid/details_with_empty_summary.html.twig',
+            [
+                'DetailsSummary.EmptySummary:2:1' => 'Summary element inside <details> must have non-empty content.',
+            ],
+        ];
     }
 }

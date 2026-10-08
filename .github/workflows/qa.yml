@@ -45,8 +45,11 @@ jobs:
             - name: Run PHPStan
               run: composer phpstan -- --no-progress
 
-            - name: Run php-cs-fixer (dry-run)
-              run: composer cs-lint
+            - name: Run Mago (format check, lint, analyze)
+              run: |
+                  composer fmt:check
+                  composer mago:lint
+                  composer mago:analyze
 
             - name: Run rector (dry-run)
               run: composer rector

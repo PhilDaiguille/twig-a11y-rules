@@ -16,6 +16,7 @@ use TwigCsFixer\Token\Tokens;
  */
 final class FrameTitleRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -36,7 +37,11 @@ final class FrameTitleRule extends AbstractA11yRule
         }
 
         // Only target <frame>, not <frameset> or <iframe>
-        if (!preg_match('/<frame\b/i', $tag) || preg_match('/<frameset\b/i', $tag) || preg_match('/<iframe\b/i', $tag)) {
+        if (
+            !preg_match('/<frame\b/i', $tag)
+            || preg_match('/<frameset\b/i', $tag)
+            || preg_match('/<iframe\b/i', $tag)
+        ) {
             return;
         }
 

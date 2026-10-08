@@ -25,10 +25,10 @@ final class TableHeaderRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'valid table' => [__DIR__.'/Fixtures/valid/table_with_th_scope.html.twig', []];
+        yield 'valid table' => [__DIR__ . '/Fixtures/valid/table_with_th_scope.html.twig', []];
 
         yield 'missing th scope' => [
-            __DIR__.'/Fixtures/invalid/table_missing_th_scope.html.twig',
+            __DIR__ . '/Fixtures/invalid/table_missing_th_scope.html.twig',
             [
                 'TableHeader.MissingScope:5:7' => 'Table header <th> elements should include a scope attribute.',
                 'TableHeader.MissingScope:6:7' => 'Table header <th> elements should include a scope attribute.',
@@ -36,7 +36,7 @@ final class TableHeaderRuleTest extends AbstractRuleTestCase
         ];
 
         yield 'invalid scope value' => [
-            __DIR__.'/Fixtures/invalid/table_th_scope_invalid_value.html.twig',
+            __DIR__ . '/Fixtures/invalid/table_th_scope_invalid_value.html.twig',
             [
                 'TableHeader.InvalidScope:5:7' => 'Table header <th> has invalid scope value "invalid".',
             ],

@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class EmptyTableHeaderRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -36,7 +37,11 @@ final class EmptyTableHeaderRule extends AbstractA11yRule
 
             $text = trim(strip_tags($inner));
             if ('' === $text) {
-                $emit('Table header <th> must not be empty.', $this->tokenAtOffset($tokens, $set[0][1], $set[0][0]), 'Empty');
+                $emit(
+                    'Table header <th> must not be empty.',
+                    $this->tokenAtOffset($tokens, $set[0][1], $set[0][0]),
+                    'Empty',
+                );
             }
         }
     }

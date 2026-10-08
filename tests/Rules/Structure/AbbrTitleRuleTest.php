@@ -25,19 +25,28 @@ final class AbbrTitleRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<string,string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'abbr with title' => [__DIR__.'/Fixtures/valid/abbr_with_title.html.twig', []];
+        yield 'abbr with title' => [__DIR__ . '/Fixtures/valid/abbr_with_title.html.twig', []];
 
-        yield 'abbr missing title' => [__DIR__.'/Fixtures/invalid/abbr_missing_title.html.twig', [
-            'AbbrTitle.MissingTitle:2:8' => '<abbr> element must have a non-empty title attribute providing the expansion (RGAA 9.4).',
-        ]];
+        yield 'abbr missing title' => [
+            __DIR__ . '/Fixtures/invalid/abbr_missing_title.html.twig',
+            [
+                'AbbrTitle.MissingTitle:2:8' => '<abbr> element must have a non-empty title attribute providing the expansion (RGAA 9.4).',
+            ],
+        ];
 
-        yield 'abbr empty title' => [__DIR__.'/Fixtures/invalid/abbr_empty_title.html.twig', [
-            'AbbrTitle.MissingTitle:2:8' => '<abbr> element must have a non-empty title attribute providing the expansion (RGAA 9.4).',
-        ]];
+        yield 'abbr empty title' => [
+            __DIR__ . '/Fixtures/invalid/abbr_empty_title.html.twig',
+            [
+                'AbbrTitle.MissingTitle:2:8' => '<abbr> element must have a non-empty title attribute providing the expansion (RGAA 9.4).',
+            ],
+        ];
 
-        yield 'multiple abbr missing titles' => [__DIR__.'/Fixtures/invalid/abbr_multiple_missing_titles.html.twig', [
-            'AbbrTitle.MissingTitle:2:8' => '<abbr> element must have a non-empty title attribute providing the expansion (RGAA 9.4).',
-            'AbbrTitle.MissingTitle:3:8' => '<abbr> element must have a non-empty title attribute providing the expansion (RGAA 9.4).',
-        ]];
+        yield 'multiple abbr missing titles' => [
+            __DIR__ . '/Fixtures/invalid/abbr_multiple_missing_titles.html.twig',
+            [
+                'AbbrTitle.MissingTitle:2:8' => '<abbr> element must have a non-empty title attribute providing the expansion (RGAA 9.4).',
+                'AbbrTitle.MissingTitle:3:8' => '<abbr> element must have a non-empty title attribute providing the expansion (RGAA 9.4).',
+            ],
+        ];
     }
 }

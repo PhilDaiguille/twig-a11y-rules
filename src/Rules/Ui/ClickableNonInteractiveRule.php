@@ -28,6 +28,7 @@ final class ClickableNonInteractiveRule extends AbstractA11yRule
         'option',
     ];
 
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -36,7 +37,12 @@ final class ClickableNonInteractiveRule extends AbstractA11yRule
             return;
         }
 
-        if (!preg_match_all('/<([a-z][a-z0-9]*)\b([^>]*)\s*>/is', $full, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
+        if (!preg_match_all(
+            '/<([a-z][a-z0-9]*)\b([^>]*)\s*>/is',
+            $full,
+            $matches,
+            PREG_SET_ORDER | PREG_OFFSET_CAPTURE,
+        )) {
             return;
         }
 
@@ -65,10 +71,10 @@ final class ClickableNonInteractiveRule extends AbstractA11yRule
             $emit(
                 sprintf(
                     '<%s onclick="..."> is not keyboard-reachable. Use a <button>, or add tabindex="0" and a role (WCAG 4.1.2, 2.1.1).',
-                    $tagName
+                    $tagName,
                 ),
                 $fakeToken,
-                $id
+                $id,
             );
         }
     }

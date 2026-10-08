@@ -29,10 +29,10 @@ final class AriaRequiredParentRuleTest extends AbstractRuleTestCase
      */
     public static function provideFixtures(): iterable
     {
-        yield 'valid menu' => [__DIR__.'/Fixtures/valid/menu_with_items.html.twig', []];
+        yield 'valid menu' => [__DIR__ . '/Fixtures/valid/menu_with_items.html.twig', []];
 
         yield 'missing parent' => [
-            __DIR__.'/Fixtures/invalid/menuitem_missing_parent.html.twig',
+            __DIR__ . '/Fixtures/invalid/menuitem_missing_parent.html.twig',
             [
                 'AriaRequiredParent.MissingParent:1:1' => 'Role menuitem must be contained in one of: menu, menubar.',
             ],

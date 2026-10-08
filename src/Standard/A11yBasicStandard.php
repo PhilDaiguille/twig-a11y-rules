@@ -22,6 +22,7 @@ final class A11yBasicStandard implements StandardInterface
     /**
      * @return list<RuleInterface>
      */
+    #[\Override]
     public function getRules(): array
     {
         return StandardRuleSets::basic();

@@ -25,12 +25,15 @@ final class IframeFocusableContentRuleTest extends AbstractRuleTestCase
     }
 
     /**
-     * @return \Iterator<(array<int, array<string, string>>|array<int, string>)>
+     * @return iterable<string, array{string, array<string, string>}>
      */
     public static function provideFixtures(): iterable
     {
-        yield 'iframe tabindex -1 with focusable content' => [__DIR__.'/Fixtures/invalid/iframe_tabindex_focusable.html.twig', [
-            'IframeFocusableContent.FocusableContent:2:1' => 'Iframe has tabindex="-1" but contains focusable content.',
-        ]];
+        yield 'iframe tabindex -1 with focusable content' => [
+            __DIR__ . '/Fixtures/invalid/iframe_tabindex_focusable.html.twig',
+            [
+                'IframeFocusableContent.FocusableContent:2:1' => 'Iframe has tabindex="-1" but contains focusable content.',
+            ],
+        ];
     }
 }

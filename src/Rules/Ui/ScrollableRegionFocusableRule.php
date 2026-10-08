@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class ScrollableRegionFocusableRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -16,15 +17,26 @@ final class ScrollableRegionFocusableRule extends AbstractA11yRule
             return;
         }
 
-        if (preg_match_all('/style\s*=\s*["\']([^"\']*overflow\s*:\s*(scroll|auto)[^"\']*)["\']/i', $full, $m, PREG_SET_ORDER)) {
+        if (preg_match_all(
+            '/style\s*=\s*["\']([^"\']*overflow\s*:\s*(scroll|auto)[^"\']*)["\']/i',
+            $full,
+            $m,
+            PREG_SET_ORDER,
+        )) {
             foreach ($m as $match) {
                 // if no tabindex on the element, flag
-                if (!preg_match('/tabindex\s*=\s*["\'][0-9-]+["\']/', $match[0])) {
-                    $fakeToken = $tokens->get(0);
-                    $emit('Scrollable region with overflow must be keyboard-focusable via tabindex.', $fakeToken, 'Focusable');
-
-                    return;
+                if (preg_match('/tabindex\s*=\s*["\'][0-9-]+["\']/', $match[0])) {
+                    continue;
                 }
+
+                $fakeToken = $tokens->get(0);
+                $emit(
+                    'Scrollable region with overflow must be keyboard-focusable via tabindex.',
+                    $fakeToken,
+                    'Focusable',
+                );
+
+                return;
             }
         }
     }

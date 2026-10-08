@@ -35,13 +35,29 @@ Follow the conventions of the ecosystem we plug into:
 | Command | What it does |
 |---|---|
 | `composer test` | PHPUnit with `--testdox` |
-| `composer phpstan` / `composer cs-lint` / `composer rector` | static analysis / CS dry-run / Rector dry-run |
-| `composer lint` | cs-lint + phpstan + test + rector (all read-only) |
-| `composer lint:fix` | `rector:apply && cs-fix` (writes files) |
+| `composer fmt` / `composer fmt:check` | Mago formatter (write / check) |
+| `composer mago:lint` / `composer mago:analyze` | Mago linter / analyzer |
+| `composer phpstan` / `composer rector` | PHPStan (level max) / Rector dry-run |
+| `composer lint` | fmt:check + mago:lint + mago:analyze + phpstan + test + rector (all read-only) |
+| `composer lint:fix` | `rector:apply && mago lint --fix && fmt` (writes files) |
 | `composer infection` | mutation testing |
-| `make ci` | `composer lint && composer test` |
+| `make ci` | `composer lint` |
 
 Single test: `vendor/bin/phpunit tests/Rules/Structure/HeadingOrderRuleTest.php --testdox`
+
+## Tooling
+
+- [Mago](https://mago.carthage.software/) (`mago.toml`) is the formatter, the
+  linter and a second analyzer. There is no php-cs-fixer: never reformat by hand,
+  run `composer fmt`.
+- PHPStan level max stays the typing reference. Mago's analyzer cannot follow
+  `preg_match(..., PREG_OFFSET_CAPTURE)` captures, so those known false positives
+  live in `mago-analysis-baseline.toml`. Fix new issues instead of baselining
+  them; regenerate the baseline (`vendor/bin/mago analyze --generate-baseline
+  --baseline mago-analysis-baseline.toml`) only when issues go away.
+- Linter rules disabled in `mago.toml` (`no-isset`, complexity metrics, …) are
+  deliberate for regex-heavy rule classes; don't re-enable them in a drive-by.
+- PHPUnit assertions use `$this->assert*()` (enforced by `assertion-style`).
 
 ## Architecture
 

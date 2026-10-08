@@ -29,10 +29,10 @@ final class AriaValidAttrRuleTest extends AbstractRuleTestCase
      */
     public static function provideFixtures(): iterable
     {
-        yield 'valid aria attrs' => [__DIR__.'/Fixtures/valid/aria_valid_attr.html.twig', []];
+        yield 'valid aria attrs' => [__DIR__ . '/Fixtures/valid/aria_valid_attr.html.twig', []];
 
         yield 'invalid aria attr' => [
-            __DIR__.'/Fixtures/invalid/aria_invalid_attr.html.twig',
+            __DIR__ . '/Fixtures/invalid/aria_invalid_attr.html.twig',
             [
                 'AriaValidAttr.InvalidAttr:1:1' => 'Attribute aria-foo is not a valid ARIA attribute.',
             ],

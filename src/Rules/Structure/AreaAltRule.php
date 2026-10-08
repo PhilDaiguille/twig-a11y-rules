@@ -17,6 +17,7 @@ final class AreaAltRule extends AbstractA11yRule
      */
     private array $seenTagHashes = [];
 
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);

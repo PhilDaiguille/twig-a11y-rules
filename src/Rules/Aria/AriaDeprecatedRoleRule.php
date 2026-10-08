@@ -21,6 +21,7 @@ final class AriaDeprecatedRoleRule extends AbstractA11yRule
         parent::__construct(emitAsWarning: true);
     }
 
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -30,10 +31,12 @@ final class AriaDeprecatedRoleRule extends AbstractA11yRule
 
         $roles = array_map(strtolower(...), $m[1]);
         foreach ($roles as $role) {
-            if (in_array($role, self::DEPRECATED, true)) {
-                $token = $tokens->get(0);
-                $emit(sprintf('ARIA role "%s" is deprecated.', $role), $token, 'Deprecated');
+            if (!in_array($role, self::DEPRECATED, true)) {
+                continue;
             }
+
+            $token = $tokens->get(0);
+            $emit(sprintf('ARIA role "%s" is deprecated.', $role), $token, 'Deprecated');
         }
     }
 

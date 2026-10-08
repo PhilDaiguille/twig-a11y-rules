@@ -32,13 +32,22 @@ final class TemplateClassifierTest extends TestCase
     {
         yield 'full page' => ["<!DOCTYPE html>\n<html>\n<body>\n<p>hi</p>\n</body>\n</html>", TemplateKind::FullPage];
 
-        yield 'child template (extends)' => ["{% extends 'base.html.twig' %}\n<div>child content</div>", TemplateKind::ChildTemplate];
+        yield 'child template (extends)' => [
+            "{% extends 'base.html.twig' %}\n<div>child content</div>",
+            TemplateKind::ChildTemplate,
+        ];
 
         yield 'partial fragment' => ['<div>{{ content }}</div>', TemplateKind::Partial];
 
-        yield 'parent template (blocks only)' => ["{% block header %}{% endblock %}\n{% block content %}{% endblock %}", TemplateKind::ParentTemplate];
+        yield 'parent template (blocks only)' => [
+            "{% block header %}{% endblock %}\n{% block content %}{% endblock %}",
+            TemplateKind::ParentTemplate,
+        ];
 
-        yield 'mixed template (extends + blocks)' => ["{% extends 'base.html.twig' %}\n{% block content %}Hi{% endblock %}", TemplateKind::MixedTemplate];
+        yield 'mixed template (extends + blocks)' => [
+            "{% extends 'base.html.twig' %}\n{% block content %}Hi{% endblock %}",
+            TemplateKind::MixedTemplate,
+        ];
 
         yield 'twig ux component' => ["{% props title %}\n<div>{{ title }}</div>", TemplateKind::TwigUxComponent];
     }

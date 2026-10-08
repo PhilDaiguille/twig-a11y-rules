@@ -16,6 +16,7 @@ use TwigCsFixer\Token\Tokens;
  */
 final class MetaRefreshRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -45,10 +46,10 @@ final class MetaRefreshRule extends AbstractA11yRule
                 $emit(
                     sprintf(
                         '<meta http-equiv="refresh"> with a non-zero timeout (%d) causes automatic page refresh (WCAG 2.2.1).',
-                        $timeout
+                        $timeout,
                     ),
                     $token,
-                    'NonZeroTimeout'
+                    'NonZeroTimeout',
                 );
             }
         }

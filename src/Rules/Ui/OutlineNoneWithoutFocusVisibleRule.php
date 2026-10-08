@@ -15,10 +15,16 @@ final class OutlineNoneWithoutFocusVisibleRule extends AbstractA11yRule
         parent::__construct(emitAsWarning: true);
     }
 
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $content = $this->getFullContent($tokens);
-        if (!preg_match_all('/<([a-zA-Z0-9]+)([^>]*)style\s*=\s*[\"\']([^\"\']+)[\"\']/i', $content, $matches, PREG_SET_ORDER)) {
+        if (!preg_match_all(
+            '/<([a-zA-Z0-9]+)([^>]*)style\s*=\s*[\"\']([^\"\']+)[\"\']/i',
+            $content,
+            $matches,
+            PREG_SET_ORDER,
+        )) {
             return;
         }
 
@@ -35,11 +41,13 @@ final class OutlineNoneWithoutFocusVisibleRule extends AbstractA11yRule
                     }
 
                     foreach ($classes as $clazz) {
-                        if ('focus-visible' === $clazz) {
-                            $hasCompensation = true;
-
-                            break;
+                        if ('focus-visible' !== $clazz) {
+                            continue;
                         }
+
+                        $hasCompensation = true;
+
+                        break;
                     }
                 }
 
@@ -57,7 +65,7 @@ final class OutlineNoneWithoutFocusVisibleRule extends AbstractA11yRule
                         $line,
                         1,
                         $fakeToken->getFilename(),
-                        $match[0]
+                        $match[0],
                     );
                     $emit('Using outline:none/0 without focus-visible compensation.', $fakeToken, 'NoFocusVisible');
                 }

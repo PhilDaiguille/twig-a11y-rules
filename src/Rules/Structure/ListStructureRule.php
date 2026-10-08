@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class ListStructureRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -32,12 +33,14 @@ final class ListStructureRule extends AbstractA11yRule
         // dl must have dt/dd
         if (preg_match_all('/<dl[^>]*>(.*?)<\/dl>/is', $full, $dls, PREG_SET_ORDER)) {
             foreach ($dls as $d) {
-                if (!preg_match('/<dt\b/i', $d[1]) || !preg_match('/<dd\b/i', $d[1])) {
-                    $fakeToken = $tokens->get(0);
-                    $emit('Description list <dl> must contain <dt> and <dd>.', $fakeToken, 'DlMissing');
-
-                    return;
+                if (preg_match('/<dt\b/i', $d[1]) && preg_match('/<dd\b/i', $d[1])) {
+                    continue;
                 }
+
+                $fakeToken = $tokens->get(0);
+                $emit('Description list <dl> must contain <dt> and <dd>.', $fakeToken, 'DlMissing');
+
+                return;
             }
         }
 

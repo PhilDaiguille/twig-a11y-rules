@@ -20,6 +20,7 @@ use TwigCsFixer\Token\Tokens;
  */
 final class PAsHeadingRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -29,7 +30,12 @@ final class PAsHeadingRule extends AbstractA11yRule
         }
 
         // Find <p ...> opening tags that have a style attribute.
-        if (!preg_match_all('/<p\b([^>]*style\s*=\s*(?:"[^"]*"|\'[^\']*\')[^>]*)>/i', $full, $m, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
+        if (!preg_match_all(
+            '/<p\b([^>]*style\s*=\s*(?:"[^"]*"|\'[^\']*\')[^>]*)>/i',
+            $full,
+            $m,
+            PREG_SET_ORDER | PREG_OFFSET_CAPTURE,
+        )) {
             return;
         }
 
@@ -41,7 +47,7 @@ final class PAsHeadingRule extends AbstractA11yRule
                 continue;
             }
 
-            $style = strtolower('' !== $styleMatch[1] ? $styleMatch[1] : ($styleMatch[2] ?? ''));
+            $style = strtolower('' !== $styleMatch[1] ? $styleMatch[1] : $styleMatch[2] ?? '');
 
             $isFakeHeading = false;
 
@@ -65,7 +71,7 @@ final class PAsHeadingRule extends AbstractA11yRule
                 $emit(
                     'Avoid using a <p> with bold/large-font styling as a heading; use a semantic heading element (<h1>–<h6>) instead.',
                     $this->tokenAtOffset($tokens, $set[0][1], $set[0][0]),
-                    'FakeHeading'
+                    'FakeHeading',
                 );
             }
         }

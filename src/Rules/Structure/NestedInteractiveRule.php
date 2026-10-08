@@ -21,6 +21,7 @@ use TwigCsFixer\Token\Tokens;
  */
 final class NestedInteractiveRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -34,7 +35,7 @@ final class NestedInteractiveRule extends AbstractA11yRule
                     $emit(
                         sprintf('Interactive element <%s> must not be nested inside an <a>.', strtolower($nested[1])),
                         $fakeToken,
-                        'InsideAnchor'
+                        'InsideAnchor',
                     );
 
                     return;
@@ -51,7 +52,7 @@ final class NestedInteractiveRule extends AbstractA11yRule
                     $emit(
                         'Interactive element <a> must not be nested inside a <button>.',
                         $fakeToken,
-                        'InsideButton'
+                        'InsideButton',
                     );
 
                     return;

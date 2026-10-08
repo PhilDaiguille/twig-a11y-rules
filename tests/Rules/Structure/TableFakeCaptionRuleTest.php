@@ -25,11 +25,13 @@ final class TableFakeCaptionRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'valid table with caption' => [__DIR__.'/Fixtures/valid/table_with_caption.html.twig', []];
+        yield 'valid table with caption' => [__DIR__ . '/Fixtures/valid/table_with_caption.html.twig', []];
 
         yield 'invalid table fake caption' => [
-            __DIR__.'/Fixtures/invalid/table_fake_caption.html.twig',
-            ['TableFakeCaption.FakeCaption:2:1' => 'Avoid using a <td> as a table caption; use the <caption> element instead.'],
+            __DIR__ . '/Fixtures/invalid/table_fake_caption.html.twig',
+            [
+                'TableFakeCaption.FakeCaption:2:1' => 'Avoid using a <td> as a table caption; use the <caption> element instead.',
+            ],
         ];
     }
 }

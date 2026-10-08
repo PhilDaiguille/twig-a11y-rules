@@ -6,16 +6,19 @@ namespace TwigA11y\Rules\Forms;
 
 final class InputLabelRule extends AbstractFormFieldLabelRule
 {
+    #[\Override]
     protected function tagName(): string
     {
         return 'input';
     }
 
+    #[\Override]
     protected function missingMessage(): string
     {
         return 'Input element must have an associated <label> or an aria-label.';
     }
 
+    #[\Override]
     protected function messageId(): string
     {
         return 'MissingLabel';

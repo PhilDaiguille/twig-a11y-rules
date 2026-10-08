@@ -25,12 +25,15 @@ final class RadioGroupStructureRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<string,string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'radio group in fieldset' => [__DIR__.'/Fixtures/valid/radio_group_in_fieldset.html.twig', []];
+        yield 'radio group in fieldset' => [__DIR__ . '/Fixtures/valid/radio_group_in_fieldset.html.twig', []];
 
-        yield 'radio group in radiogroup' => [__DIR__.'/Fixtures/valid/radio_group_in_radiogroup.html.twig', []];
+        yield 'radio group in radiogroup' => [__DIR__ . '/Fixtures/valid/radio_group_in_radiogroup.html.twig', []];
 
-        yield 'radio group missing structure' => [__DIR__.'/Fixtures/invalid/radio_group_missing_structure.html.twig', [
-            'RadioGroupStructure.MissingGroup:2:1' => 'Radio inputs sharing name "contact" should be grouped inside a <fieldset> or a container with role="radiogroup".',
-        ]];
+        yield 'radio group missing structure' => [
+            __DIR__ . '/Fixtures/invalid/radio_group_missing_structure.html.twig',
+            [
+                'RadioGroupStructure.MissingGroup:2:1' => 'Radio inputs sharing name "contact" should be grouped inside a <fieldset> or a container with role="radiogroup".',
+            ],
+        ];
     }
 }

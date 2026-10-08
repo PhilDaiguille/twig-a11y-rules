@@ -30,15 +30,18 @@ final class StandardRuleSetsTest extends TestCase
 
     public function testBasicContainsExpectedClasses(): void
     {
-        $classes = array_map(static fn (RuleInterface $r): string => $r::class, StandardRuleSets::basic());
+        $classes = array_map(static fn(RuleInterface $r): string => $r::class, StandardRuleSets::basic());
 
-        $this->assertSame([
-            ImgAltRule::class,
-            BannedTagsRule::class,
-            ButtonContentRule::class,
-            InputLabelRule::class,
-            LangAttributeRule::class,
-        ], $classes);
+        $this->assertSame(
+            [
+                ImgAltRule::class,
+                BannedTagsRule::class,
+                ButtonContentRule::class,
+                InputLabelRule::class,
+                LangAttributeRule::class,
+            ],
+            $classes,
+        );
     }
 
     public function testRecommendedReturnsRuleInterfaceInstances(): void
@@ -51,11 +54,18 @@ final class StandardRuleSetsTest extends TestCase
 
     public function testRecommendedIsSupersetOfBasic(): void
     {
-        $basicClasses = array_map(static fn (RuleInterface $r): string => $r::class, StandardRuleSets::basic());
-        $recommendedClasses = array_map(static fn (RuleInterface $r): string => $r::class, StandardRuleSets::recommended());
+        $basicClasses = array_map(static fn(RuleInterface $r): string => $r::class, StandardRuleSets::basic());
+        $recommendedClasses = array_map(
+            static fn(RuleInterface $r): string => $r::class,
+            StandardRuleSets::recommended(),
+        );
 
         foreach ($basicClasses as $class) {
-            $this->assertContains($class, $recommendedClasses, \sprintf('Recommended should include basic rule "%s".', $class));
+            $this->assertContains(
+                $class,
+                $recommendedClasses,
+                \sprintf('Recommended should include basic rule "%s".', $class),
+            );
         }
     }
 
@@ -69,11 +79,18 @@ final class StandardRuleSetsTest extends TestCase
 
     public function testStandardIsSupersetOfRecommended(): void
     {
-        $recommendedClasses = array_map(static fn (RuleInterface $r): string => $r::class, StandardRuleSets::recommended());
-        $standardClasses = array_map(static fn (RuleInterface $r): string => $r::class, StandardRuleSets::standard());
+        $recommendedClasses = array_map(
+            static fn(RuleInterface $r): string => $r::class,
+            StandardRuleSets::recommended(),
+        );
+        $standardClasses = array_map(static fn(RuleInterface $r): string => $r::class, StandardRuleSets::standard());
 
         foreach ($recommendedClasses as $class) {
-            $this->assertContains($class, $standardClasses, \sprintf('Standard should include recommended rule "%s".', $class));
+            $this->assertContains(
+                $class,
+                $standardClasses,
+                \sprintf('Standard should include recommended rule "%s".', $class),
+            );
         }
     }
 
@@ -87,11 +104,15 @@ final class StandardRuleSetsTest extends TestCase
 
     public function testStrictIsSupersetOfStandard(): void
     {
-        $standardClasses = array_map(static fn (RuleInterface $r): string => $r::class, StandardRuleSets::standard());
-        $strictClasses = array_map(static fn (RuleInterface $r): string => $r::class, StandardRuleSets::strict());
+        $standardClasses = array_map(static fn(RuleInterface $r): string => $r::class, StandardRuleSets::standard());
+        $strictClasses = array_map(static fn(RuleInterface $r): string => $r::class, StandardRuleSets::strict());
 
         foreach ($standardClasses as $class) {
-            $this->assertContains($class, $strictClasses, \sprintf('Strict should include standard rule "%s".', $class));
+            $this->assertContains(
+                $class,
+                $strictClasses,
+                \sprintf('Strict should include standard rule "%s".', $class),
+            );
         }
     }
 
@@ -103,8 +124,12 @@ final class StandardRuleSetsTest extends TestCase
             'standard' => StandardRuleSets::standard(),
             'strict' => StandardRuleSets::strict(),
         ] as $level => $rules) {
-            $classes = array_map(static fn (RuleInterface $r): string => $r::class, $rules);
-            $this->assertSame(array_unique($classes), $classes, \sprintf('Rule set "%s" should not contain duplicate rule classes.', $level));
+            $classes = array_map(static fn(RuleInterface $r): string => $r::class, $rules);
+            $this->assertSame(
+                array_unique($classes),
+                $classes,
+                \sprintf('Rule set "%s" should not contain duplicate rule classes.', $level),
+            );
         }
     }
 

@@ -25,10 +25,10 @@ final class EmptyTableHeaderRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'valid th with content' => [__DIR__.'/Fixtures/valid/table_th_with_content.html.twig', []];
+        yield 'valid th with content' => [__DIR__ . '/Fixtures/valid/table_th_with_content.html.twig', []];
 
         yield 'invalid empty th' => [
-            __DIR__.'/Fixtures/invalid/table_th_empty.html.twig',
+            __DIR__ . '/Fixtures/invalid/table_th_empty.html.twig',
             ['EmptyTableHeader.Empty:3:7' => 'Table header <th> must not be empty.'],
         ];
     }

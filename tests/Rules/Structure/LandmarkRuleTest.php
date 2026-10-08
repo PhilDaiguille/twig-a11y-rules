@@ -25,20 +25,26 @@ final class LandmarkRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'has main' => [__DIR__.'/Fixtures/valid/has_main.html.twig', []];
+        yield 'has main' => [__DIR__ . '/Fixtures/valid/has_main.html.twig', []];
 
-        yield 'has role main' => [__DIR__.'/Fixtures/valid/has_role_main.html.twig', []];
+        yield 'has role main' => [__DIR__ . '/Fixtures/valid/has_role_main.html.twig', []];
 
-        yield 'missing main' => [__DIR__.'/Fixtures/invalid/no_main.html.twig', [
-            'Landmark.MissingMain:1:1' => 'Page should include a main landmark',
-        ]];
+        yield 'missing main' => [
+            __DIR__ . '/Fixtures/invalid/no_main.html.twig',
+            [
+                'Landmark.MissingMain:1:1' => 'Page should include a main landmark',
+            ],
+        ];
 
         // Partials/fragments without <body> should NOT trigger the page-level rule
-        yield 'partial fragment' => [__DIR__.'/Fixtures/valid/partial_component_fragment.html.twig', []];
+        yield 'partial fragment' => [__DIR__ . '/Fixtures/valid/partial_component_fragment.html.twig', []];
 
         // Ensure only one error is emitted when the document has </head><body>
-        yield 'duplicate trigger check' => [__DIR__.'/Fixtures/invalid/duplicate_landmark_trigger.html.twig', [
-            'Landmark.MissingMain:1:1' => 'Page should include a main landmark',
-        ]];
+        yield 'duplicate trigger check' => [
+            __DIR__ . '/Fixtures/invalid/duplicate_landmark_trigger.html.twig',
+            [
+                'Landmark.MissingMain:1:1' => 'Page should include a main landmark',
+            ],
+        ];
     }
 }

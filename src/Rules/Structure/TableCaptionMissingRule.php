@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class TableCaptionMissingRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -30,7 +31,10 @@ final class TableCaptionMissingRule extends AbstractA11yRule
                 continue;
             }
 
-            if (preg_match('/<caption\b[^>]*>(.*?)<\/caption>/is', $inner, $captionMatch) && '' !== trim(strip_tags($captionMatch[1]))) {
+            if (
+                preg_match('/<caption\b[^>]*>(.*?)<\/caption>/is', $inner, $captionMatch)
+                && '' !== trim(strip_tags($captionMatch[1]))
+            ) {
                 continue;
             }
 
@@ -51,6 +55,9 @@ final class TableCaptionMissingRule extends AbstractA11yRule
 
     private function looksLikeDataTable(string $tableBlock, string $inner): bool
     {
-        return (bool) preg_match('/<th\b|\bscope\s*=|\bheaders\s*=|<thead\b|<tbody\b|<tfoot\b|\bsummary\s*=/i', $tableBlock.$inner);
+        return (bool) preg_match(
+            '/<th\b|\bscope\s*=|\bheaders\s*=|<thead\b|<tbody\b|<tfoot\b|\bsummary\s*=/i',
+            $tableBlock . $inner,
+        );
     }
 }

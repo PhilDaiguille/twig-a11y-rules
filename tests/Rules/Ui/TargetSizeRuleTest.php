@@ -25,8 +25,11 @@ final class TargetSizeRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'small interactive' => [__DIR__.'/Fixtures/invalid/button_small_inline.html.twig', [
-            'TargetSize.Small:1:1' => 'Interactive element has inline size < 24px; this may fail target-size (WCAG 2.5.8).',
-        ]];
+        yield 'small interactive' => [
+            __DIR__ . '/Fixtures/invalid/button_small_inline.html.twig',
+            [
+                'TargetSize.Small:1:1' => 'Interactive element has inline size < 24px; this may fail target-size (WCAG 2.5.8).',
+            ],
+        ];
     }
 }

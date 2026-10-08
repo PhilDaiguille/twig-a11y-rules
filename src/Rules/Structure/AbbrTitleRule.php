@@ -14,6 +14,7 @@ use TwigCsFixer\Token\Tokens;
  */
 final class AbbrTitleRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -34,7 +35,7 @@ final class AbbrTitleRule extends AbstractA11yRule
         }
 
         if (preg_match('/\btitle\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $opening, $m)) {
-            $titleValue = '' !== $m[1] ? $m[1] : ($m[2] ?? '');
+            $titleValue = '' !== $m[1] ? $m[1] : $m[2] ?? '';
             if ('' !== trim($titleValue)) {
                 return;
             }
@@ -45,7 +46,7 @@ final class AbbrTitleRule extends AbstractA11yRule
         $emit(
             '<abbr> element must have a non-empty title attribute providing the expansion (RGAA 9.4).',
             $token,
-            $id
+            $id,
         );
     }
 }

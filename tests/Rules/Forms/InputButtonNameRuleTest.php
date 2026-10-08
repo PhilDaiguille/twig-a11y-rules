@@ -25,12 +25,15 @@ final class InputButtonNameRuleTest extends AbstractRuleTestCase
     }
 
     /**
-     * @return \Iterator<(array<int, array<string, string>>|array<int, string>)>
+     * @return iterable<string, array{string, array<string, string>}>
      */
     public static function provideFixtures(): iterable
     {
-        yield 'invalid submit without name' => [__DIR__.'/Fixtures/invalid/input_submit_no_value_or_aria.html.twig', [
-            'InputButtonName.MissingName:2:1' => 'Submit/button input must have a visible name via value or aria-label.',
-        ]];
+        yield 'invalid submit without name' => [
+            __DIR__ . '/Fixtures/invalid/input_submit_no_value_or_aria.html.twig',
+            [
+                'InputButtonName.MissingName:2:1' => 'Submit/button input must have a visible name via value or aria-label.',
+            ],
+        ];
     }
 }

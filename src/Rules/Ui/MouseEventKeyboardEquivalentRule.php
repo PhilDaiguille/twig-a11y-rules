@@ -26,6 +26,7 @@ final class MouseEventKeyboardEquivalentRule extends AbstractA11yRule
         'onmouseout' => ['onblur'],
     ];
 
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -34,18 +35,25 @@ final class MouseEventKeyboardEquivalentRule extends AbstractA11yRule
         // Quick pre-check: at least one mouse event must be present.
         $hasMouseEvent = false;
         foreach (array_keys(self::PAIRS) as $mouseEvent) {
-            if (str_contains($fullLower, $mouseEvent)) {
-                $hasMouseEvent = true;
-
-                break;
+            if (!str_contains($fullLower, $mouseEvent)) {
+                continue;
             }
+
+            $hasMouseEvent = true;
+
+            break;
         }
 
         if (!$hasMouseEvent) {
             return;
         }
 
-        if (!preg_match_all('/<[a-z][a-z0-9]*\b([^>]*)\s*>/is', $full, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
+        if (!preg_match_all(
+            '/<[a-z][a-z0-9]*\b([^>]*)\s*>/is',
+            $full,
+            $matches,
+            PREG_SET_ORDER | PREG_OFFSET_CAPTURE,
+        )) {
             return;
         }
 
@@ -59,7 +67,10 @@ final class MouseEventKeyboardEquivalentRule extends AbstractA11yRule
                     continue;
                 }
 
-                $hasKeyboard = array_any($keyboardEquivalents, fn ($kbEvent): bool => str_contains($attrsLower, $kbEvent));
+                $hasKeyboard = array_any($keyboardEquivalents, static fn($kbEvent): bool => str_contains(
+                    $attrsLower,
+                    $kbEvent,
+                ));
 
                 if ($hasKeyboard) {
                     continue;
@@ -73,10 +84,10 @@ final class MouseEventKeyboardEquivalentRule extends AbstractA11yRule
                     sprintf(
                         'Mouse event handler "%s" has no keyboard equivalent (%s) (WCAG 2.1.1).',
                         $mouseEvent,
-                        implode(' or ', $keyboardEquivalents)
+                        implode(' or ', $keyboardEquivalents),
                     ),
                     $fakeToken,
-                    $id
+                    $id,
                 );
             }
         }

@@ -10,6 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class DocumentTitleRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // only runs at tokenIndex 0 because evaluateOncePerFile = true

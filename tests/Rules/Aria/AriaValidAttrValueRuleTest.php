@@ -29,10 +29,10 @@ final class AriaValidAttrValueRuleTest extends AbstractRuleTestCase
      */
     public static function provideFixtures(): iterable
     {
-        yield 'valid values' => [__DIR__.'/Fixtures/valid/aria_valid_values.html.twig', []];
+        yield 'valid values' => [__DIR__ . '/Fixtures/valid/aria_valid_values.html.twig', []];
 
         yield 'invalid value' => [
-            __DIR__.'/Fixtures/invalid/aria_invalid_value.html.twig',
+            __DIR__ . '/Fixtures/invalid/aria_invalid_value.html.twig',
             [
                 'AriaValidAttrValue.InvalidValue:1:1' => 'Attribute aria-hidden has invalid value "maybe".',
             ],

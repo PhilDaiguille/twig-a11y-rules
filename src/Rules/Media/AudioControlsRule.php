@@ -14,6 +14,7 @@ use TwigCsFixer\Token\Tokens;
  */
 final class AudioControlsRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -44,7 +45,7 @@ final class AudioControlsRule extends AbstractA11yRule
         $emit(
             '<audio> element must have a controls attribute to be operable by keyboard users (WCAG 1.2.1).',
             $token,
-            $id
+            $id,
         );
     }
 }

@@ -25,16 +25,20 @@ final class PAsHeadingRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'valid normal paragraph' => [__DIR__.'/Fixtures/valid/p_normal_paragraph.html.twig', []];
+        yield 'valid normal paragraph' => [__DIR__ . '/Fixtures/valid/p_normal_paragraph.html.twig', []];
 
         yield 'invalid bold paragraph' => [
-            __DIR__.'/Fixtures/invalid/p_as_heading_bold.html.twig',
-            ['PAsHeading.FakeHeading:2:1' => 'Avoid using a <p> with bold/large-font styling as a heading; use a semantic heading element (<h1>–<h6>) instead.'],
+            __DIR__ . '/Fixtures/invalid/p_as_heading_bold.html.twig',
+            [
+                'PAsHeading.FakeHeading:2:1' => 'Avoid using a <p> with bold/large-font styling as a heading; use a semantic heading element (<h1>–<h6>) instead.',
+            ],
         ];
 
         yield 'invalid large font paragraph' => [
-            __DIR__.'/Fixtures/invalid/p_as_heading_large_font.html.twig',
-            ['PAsHeading.FakeHeading:2:1' => 'Avoid using a <p> with bold/large-font styling as a heading; use a semantic heading element (<h1>–<h6>) instead.'],
+            __DIR__ . '/Fixtures/invalid/p_as_heading_large_font.html.twig',
+            [
+                'PAsHeading.FakeHeading:2:1' => 'Avoid using a <p> with bold/large-font styling as a heading; use a semantic heading element (<h1>–<h6>) instead.',
+            ],
         ];
     }
 }

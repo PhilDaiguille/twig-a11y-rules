@@ -25,12 +25,15 @@ final class AriaReferencedIdExistsRuleTest extends AbstractRuleTestCase
     }
 
     /**
-     * @return \Iterator<(array<int, array<string, string>>|array<int, string>)>
+     * @return iterable<string, array{string, array<string, string>}>
      */
     public static function provideFixtures(): iterable
     {
-        yield 'missing referenced id' => [__DIR__.'/Fixtures/invalid/aria_labelledby_missing_id.html.twig', [
-            'AriaReferencedIdExists.MissingId:2:1' => 'Referenced id "missing-id" in aria attribute does not exist in template.',
-        ]];
+        yield 'missing referenced id' => [
+            __DIR__ . '/Fixtures/invalid/aria_labelledby_missing_id.html.twig',
+            [
+                'AriaReferencedIdExists.MissingId:2:1' => 'Referenced id "missing-id" in aria attribute does not exist in template.',
+            ],
+        ];
     }
 }

@@ -33,44 +33,48 @@ final class SvgAccessibilityRuleTest extends AbstractRuleTestCase
     {
         // Valid cases
         yield 'svg with aria-hidden (decorative)' => [
-            __DIR__.'/Fixtures/valid/svg_decorative_aria_hidden.html.twig',
+            __DIR__ . '/Fixtures/valid/svg_decorative_aria_hidden.html.twig',
             [],
         ];
 
         yield 'svg with title' => [
-            __DIR__.'/Fixtures/valid/svg_with_title.html.twig',
+            __DIR__ . '/Fixtures/valid/svg_with_title.html.twig',
             [],
         ];
 
         yield 'svg with aria-label' => [
-            __DIR__.'/Fixtures/valid/svg_with_aria_label.html.twig',
+            __DIR__ . '/Fixtures/valid/svg_with_aria_label.html.twig',
             [],
         ];
 
         yield 'svg with aria-labelledby' => [
-            __DIR__.'/Fixtures/valid/svg_with_aria_labelledby.html.twig',
+            __DIR__ . '/Fixtures/valid/svg_with_aria_labelledby.html.twig',
             [],
         ];
 
         yield 'svg with role=img and aria-label' => [
-            __DIR__.'/Fixtures/valid/svg_role_img_with_aria_label.html.twig',
+            __DIR__ . '/Fixtures/valid/svg_role_img_with_aria_label.html.twig',
             [],
         ];
 
         yield 'svg with role=img and title' => [
-            __DIR__.'/Fixtures/valid/svg_role_img_with_title.html.twig',
+            __DIR__ . '/Fixtures/valid/svg_role_img_with_title.html.twig',
             [],
         ];
 
         // Invalid cases
         yield 'svg without accessible name' => [
-            __DIR__.'/Fixtures/invalid/svg_no_accessible_name.html.twig',
-            ['SvgAccessibility.MissingAccessibleName:2:1' => 'SVG element is missing an accessible name. Add <title>, aria-label, aria-labelledby, or aria-hidden="true" if decorative.'],
+            __DIR__ . '/Fixtures/invalid/svg_no_accessible_name.html.twig',
+            [
+                'SvgAccessibility.MissingAccessibleName:2:1' => 'SVG element is missing an accessible name. Add <title>, aria-label, aria-labelledby, or aria-hidden="true" if decorative.',
+            ],
         ];
 
         yield 'svg with role=img but no accessible name' => [
-            __DIR__.'/Fixtures/invalid/svg_role_img_no_accessible_name.html.twig',
-            ['SvgAccessibility.MissingNameForRoleImg:2:1' => 'SVG with role="img" is missing an accessible name (<title>, aria-label, or aria-labelledby).'],
+            __DIR__ . '/Fixtures/invalid/svg_role_img_no_accessible_name.html.twig',
+            [
+                'SvgAccessibility.MissingNameForRoleImg:2:1' => 'SVG with role="img" is missing an accessible name (<title>, aria-label, or aria-labelledby).',
+            ],
         ];
     }
 }

@@ -25,10 +25,16 @@ final class AriaRequiredAttrRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'missing required attr' => [__DIR__.'/Fixtures/invalid/required_attr_missing.html.twig', ['AriaRequiredAttr.Missing:1:1' => 'Role "img" requires attribute "alt".']];
+        yield 'missing required attr' => [
+            __DIR__ . '/Fixtures/invalid/required_attr_missing.html.twig',
+            ['AriaRequiredAttr.Missing:1:1' => 'Role "img" requires attribute "alt".'],
+        ];
 
-        yield 'no role' => [__DIR__.'/Fixtures/valid/role_none.html.twig', []];
+        yield 'no role' => [__DIR__ . '/Fixtures/valid/role_none.html.twig', []];
 
-        yield 'textbox with aria-labelledby is valid' => [__DIR__.'/Fixtures/valid/textbox_with_aria_labelledby.html.twig', []];
+        yield 'textbox with aria-labelledby is valid' => [
+            __DIR__ . '/Fixtures/valid/textbox_with_aria_labelledby.html.twig',
+            [],
+        ];
     }
 }

@@ -18,6 +18,7 @@ final class ButtonTypeRule extends AbstractA11yRule
      */
     private int $formDepth = 0;
 
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);

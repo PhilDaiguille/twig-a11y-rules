@@ -32,6 +32,7 @@ final class SvgAccessibilityRule extends AbstractA11yRule
         parent::__construct(emitAsWarning: false);
     }
 
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -82,17 +83,26 @@ final class SvgAccessibilityRule extends AbstractA11yRule
 
         // If role="img", it MUST have an accessible name
         if ($hasRoleImg && !$hasAccessibleName) {
-            $emit('SVG with role="img" is missing an accessible name (<title>, aria-label, or aria-labelledby).', $token, 'MissingNameForRoleImg');
+            $emit(
+                'SVG with role="img" is missing an accessible name (<title>, aria-label, or aria-labelledby).',
+                $token,
+                'MissingNameForRoleImg',
+            );
 
             return;
         }
 
         // If no aria-hidden, no role="img", and no accessible name, it's an informative SVG without a name
         if (!$hasAccessibleName) {
-            $emit('SVG element is missing an accessible name. Add <title>, aria-label, aria-labelledby, or aria-hidden="true" if decorative.', $token, 'MissingAccessibleName');
+            $emit(
+                'SVG element is missing an accessible name. Add <title>, aria-label, aria-labelledby, or aria-hidden="true" if decorative.',
+                $token,
+                'MissingAccessibleName',
+            );
         }
     }
 
+    #[\Override]
     protected function evaluateStart(Tokens $tokens): void
     {
         $this->seenTagHashes = [];

@@ -10,6 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class MetaViewportRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Page-level rule: use the new helper to skip non-zero token indexes.
@@ -26,7 +27,11 @@ final class MetaViewportRule extends AbstractA11yRule
 
         // WCAG 1.4.4: maximum-scale must be >= 2 to allow users to zoom text.
         if (preg_match('/maximum-scale\s*=\s*([0-9]*\.?[0-9]+)/i', $fullLower, $m) && (float) $m[1] < 2.0) {
-            $emit('Avoid setting maximum-scale below 2 in the viewport meta (WCAG 1.4.4).', $tokens->get(0), 'MaximumScale');
+            $emit(
+                'Avoid setting maximum-scale below 2 in the viewport meta (WCAG 1.4.4).',
+                $tokens->get(0),
+                'MaximumScale',
+            );
         }
     }
 

@@ -19,14 +19,23 @@ use TwigCsFixer\Token\Tokens;
 final class AriaInputFieldNameRule extends AbstractA11yRule
 {
     private const array ROLES = [
-        'textbox', 'combobox', 'searchbox', 'spinbutton',
+        'textbox',
+        'combobox',
+        'searchbox',
+        'spinbutton',
     ];
 
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
 
-        if (!preg_match_all('/<(div|span)[^>]*role\s*=\s*(?:"|\')([^"\']+)(?:"|\')[^>]*>/i', $full, $m, PREG_SET_ORDER)) {
+        if (!preg_match_all(
+            '/<(div|span)[^>]*role\s*=\s*(?:"|\')([^"\']+)(?:"|\')[^>]*>/i',
+            $full,
+            $m,
+            PREG_SET_ORDER,
+        )) {
             return;
         }
 
@@ -49,13 +58,17 @@ final class AriaInputFieldNameRule extends AbstractA11yRule
             // id + label[for] in full content
             if (preg_match('/\bid\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $opening, $idm)) {
                 $id = $idm[1];
-                if (preg_match('/<label[^>]*for\s*=\s*(?:"|\')'.preg_quote($id, '/').'(?:(?:"|\'))/i', $full)) {
+                if (preg_match('/<label[^>]*for\s*=\s*(?:"|\')' . preg_quote($id, '/') . '(?:(?:"|\'))/i', $full)) {
                     continue;
                 }
             }
 
             $fakeToken = $tokens->get(0);
-            $emit(sprintf('role="%s" element must have an accessible name (aria-label or aria-labelledby).', $role), $fakeToken, 'MissingName');
+            $emit(
+                sprintf('role="%s" element must have an accessible name (aria-label or aria-labelledby).', $role),
+                $fakeToken,
+                'MissingName',
+            );
         }
     }
 

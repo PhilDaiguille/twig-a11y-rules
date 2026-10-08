@@ -15,6 +15,7 @@ final class AnchorContentRule extends AbstractA11yRule
         parent::__construct(emitAsWarning: true);
     }
 
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         // Respect per-token skip behavior for page-level short-circuits.
@@ -41,14 +42,19 @@ final class AnchorContentRule extends AbstractA11yRule
                 $opening = $o[0];
             }
 
-            if ('' === $textOnly
+            if (
+                '' === $textOnly
                 && !preg_match('/\baria-label\s*=\s*("|\')/i', $opening)
                 && !preg_match('/\btitle\s*=\s*("|\')/i', $opening)
             ) {
                 // Axe-core rule reference: link-name
                 $id = 'LinkName';
 
-                $emit('Anchor element without accessible name (axe-core: link-name) should have an aria-label or title.', $token, $id);
+                $emit(
+                    'Anchor element without accessible name (axe-core: link-name) should have an aria-label or title.',
+                    $token,
+                    $id,
+                );
             }
         }
     }

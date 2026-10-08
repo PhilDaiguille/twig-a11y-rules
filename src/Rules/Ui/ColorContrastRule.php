@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class ColorContrastRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $content = $this->getFullContent($tokens);
@@ -50,7 +51,7 @@ final class ColorContrastRule extends AbstractA11yRule
     private function extractColor(string $style, string $prop): ?array
     {
         // Fix: pass '/' as the delimiter argument to preg_quote
-        if (!preg_match('/'.preg_quote($prop, '/').'\s*:\s*([^;]+)(?:;|$)/i', $style, $m)) {
+        if (!preg_match('/' . preg_quote($prop, '/') . '\s*:\s*([^;]+)(?:;|$)/i', $style, $m)) {
             return null;
         }
 
@@ -74,7 +75,7 @@ final class ColorContrastRule extends AbstractA11yRule
     {
         $hex = ltrim($hex, '#');
         if (3 === strlen($hex)) {
-            $hex = $hex[0].$hex[0].$hex[1].$hex[1].$hex[2].$hex[2];
+            $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
         }
 
         return [
@@ -90,12 +91,12 @@ final class ColorContrastRule extends AbstractA11yRule
     private function lum(array $rgb): float
     {
         // Fix: explicitly cast to float so PHPStan knows the array values are numeric
-        [$r, $g, $b] = array_map(fn (int $v): float => (float) $v / 255.0, $rgb);
+        [$r, $g, $b] = array_map(static fn(int $v): float => (float) $v / 255.0, $rgb);
 
         // Fix: narrow the return type to float only — the ternary always returns float
-        $f = fn (float $c): float => $c <= 0.03928 ? $c / 12.92 : (($c + 0.055) / 1.055) ** 2.4;
+        $f = static fn(float $c): float => $c <= 0.039_28 ? $c / 12.92 : (($c + 0.055) / 1.055) ** 2.4;
 
-        return 0.2126 * $f($r) + 0.7152 * $f($g) + 0.0722 * $f($b);
+        return (0.2126 * $f($r)) + (0.7152 * $f($g)) + (0.0722 * $f($b));
     }
 
     /**

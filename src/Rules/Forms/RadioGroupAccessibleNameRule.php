@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class RadioGroupAccessibleNameRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -17,7 +18,12 @@ final class RadioGroupAccessibleNameRule extends AbstractA11yRule
             return;
         }
 
-        if (preg_match_all('/<fieldset\b[^>]*>(.*?)<\/fieldset>/is', $full, $fieldsets, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
+        if (preg_match_all(
+            '/<fieldset\b[^>]*>(.*?)<\/fieldset>/is',
+            $full,
+            $fieldsets,
+            PREG_SET_ORDER | PREG_OFFSET_CAPTURE,
+        )) {
             foreach ($fieldsets as $fieldset) {
                 $fieldsetBlock = $fieldset[0][0];
                 $offset = $fieldset[0][1];
@@ -28,19 +34,31 @@ final class RadioGroupAccessibleNameRule extends AbstractA11yRule
                     continue;
                 }
 
-                if (preg_match('/<legend\b[^>]*>\s*([^<]+?)\s*<\/legend>/i', $fieldsetBlock, $legendMatch) && '' !== trim($legendMatch[1])) {
+                if (
+                    preg_match('/<legend\b[^>]*>\s*([^<]+?)\s*<\/legend>/i', $fieldsetBlock, $legendMatch)
+                    && '' !== trim($legendMatch[1])
+                ) {
                     continue;
                 }
 
                 $line = 1 + substr_count(substr($full, 0, $offset), "\n");
                 $fakeToken = $this->fakeTokenForLine($tokens, $line, $fieldsetBlock);
-                $emit('Fieldsets containing radio groups should provide a non-empty <legend>.', $fakeToken, 'MissingLegend');
+                $emit(
+                    'Fieldsets containing radio groups should provide a non-empty <legend>.',
+                    $fakeToken,
+                    'MissingLegend',
+                );
 
                 return;
             }
         }
 
-        if (!preg_match_all('/<(div|section|fieldset)\b[^>]*\brole\s*=\s*(?:"radiogroup"|\'radiogroup\')[^>]*>(.*?)<\/\1>/is', $full, $groups, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
+        if (!preg_match_all(
+            '/<(div|section|fieldset)\b[^>]*\brole\s*=\s*(?:"radiogroup"|\'radiogroup\')[^>]*>(.*?)<\/\1>/is',
+            $full,
+            $groups,
+            PREG_SET_ORDER | PREG_OFFSET_CAPTURE,
+        )) {
             return;
         }
 
@@ -64,7 +82,11 @@ final class RadioGroupAccessibleNameRule extends AbstractA11yRule
 
             $line = 1 + substr_count(substr($full, 0, $offset), "\n");
             $fakeToken = $this->fakeTokenForLine($tokens, $line, $groupBlock);
-            $emit('Containers with role="radiogroup" should have an accessible name via aria-label or aria-labelledby.', $fakeToken, 'MissingName');
+            $emit(
+                'Containers with role="radiogroup" should have an accessible name via aria-label or aria-labelledby.',
+                $fakeToken,
+                'MissingName',
+            );
 
             return;
         }
@@ -78,7 +100,7 @@ final class RadioGroupAccessibleNameRule extends AbstractA11yRule
 
     private function hasNonEmptyReference(string $tag, string $attribute): bool
     {
-        if (!preg_match('/\b'.preg_quote($attribute, '/').'\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $tag, $match)) {
+        if (!preg_match('/\b' . preg_quote($attribute, '/') . '\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $tag, $match)) {
             return false;
         }
 

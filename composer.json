@@ -32,7 +32,7 @@
     },
     "require-dev": {
         "brianium/paratest": "^7.23.1",
-        "friendsofphp/php-cs-fixer": "^3.95",
+        "carthage-software/mago": "^1.53.0",
         "infection/infection": "^0.35.4",
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^13.2.6",
@@ -50,14 +50,16 @@
     },
     "scripts": {
         "test": "phpunit tests --testdox",
-        "cs-lint": "php-cs-fixer fix --dry-run",
-        "cs-fix": "php-cs-fixer fix",
+        "fmt": "mago fmt",
+        "fmt:check": "mago fmt --check",
+        "mago:lint": "mago lint",
+        "mago:analyze": "mago analyze",
         "phpstan": "phpstan analyse",
         "rector": "rector --dry-run",
         "rector:apply": "rector",
         "infection": "infection",
-        "lint": "composer cs-lint && vendor/bin/phpstan --memory-limit=2g && composer test && composer rector",
-        "lint:fix": "composer rector:apply && composer cs-fix"
+        "lint": "composer fmt:check && composer mago:lint && composer mago:analyze && vendor/bin/phpstan --memory-limit=2g && composer test && composer rector",
+        "lint:fix": "composer rector:apply && mago lint --fix && composer fmt"
     },
     "config": {
         "allow-plugins": {

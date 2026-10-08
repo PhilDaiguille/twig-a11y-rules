@@ -1,0 +1,48 @@
+#:schema vendor/carthage-software/mago/schema.json
+# Docs: https://mago.carthage.software/
+version = "1"
+php-version = "8.4.0"
+
+[source]
+workspace = "."
+paths = ["src/", "tests/"]
+includes = ["vendor"]
+
+[formatter]
+preset = "default"
+preserve-breaking-member-access-chain = true
+preserve-breaking-member-access-chain-first-method-on-same-line = true
+preserve-breaking-argument-list = true
+preserve-breaking-array-like = true
+preserve-breaking-parameter-list = true
+preserve-breaking-attribute-list = true
+preserve-breaking-conditional-expression = true
+preserve-breaking-condition-expression = true
+preserve-redundant-logical-binary-expression-parentheses = true
+
+[linter]
+integrations = ["phpunit"]
+
+[linter.rules]
+ambiguous-function-call = { enabled = false }
+literal-named-argument = { enabled = false }
+assertion-style = { style = "this" }
+# Regex-heavy rule classes: isset/elseif/complexity are idiomatic here.
+no-isset = { enabled = false }
+no-else-clause = { enabled = false }
+cyclomatic-complexity = { enabled = false }
+kan-defect = { enabled = false }
+halstead = { enabled = false }
+too-many-methods = { enabled = false }
+
+[analyzer]
+baseline = "mago-analysis-baseline.toml"
+find-unused-definitions = true
+find-unused-expressions = true
+memoize-properties = true
+# PHPStan max is the typing reference; twig-cs-fixer exceptions are noise here.
+check-throws = false
+check-missing-override = true
+find-unused-parameters = true
+strict-list-index-checks = true
+register-super-globals = true

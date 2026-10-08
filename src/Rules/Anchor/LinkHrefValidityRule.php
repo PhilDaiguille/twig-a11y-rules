@@ -10,6 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class LinkHrefValidityRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -52,7 +53,11 @@ final class LinkHrefValidityRule extends AbstractA11yRule
         }
 
         if ('#' === $normalized || 'javascript:void(0)' === $normalized || 'javascript:void(0);' === $normalized) {
-            $emit('Anchor elements should use a real destination href instead of placeholder links.', $token, 'PlaceholderHref');
+            $emit(
+                'Anchor elements should use a real destination href instead of placeholder links.',
+                $token,
+                'PlaceholderHref',
+            );
         }
     }
 }

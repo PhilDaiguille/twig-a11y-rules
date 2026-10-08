@@ -58,11 +58,11 @@ final class EvaluateOncePerFileConsistencyTest extends TestCase
 
     public function testRulesThatCallGetFullContentImmediatelyDeclareEvaluateOncePerFile(): void
     {
-        $rulesDir = dirname(__DIR__, 2).'/src/Rules';
+        $rulesDir = dirname(__DIR__, 2) . '/src/Rules';
         $violations = [];
 
         $iterator = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($rulesDir, \FilesystemIterator::SKIP_DOTS)
+            new \RecursiveDirectoryIterator($rulesDir, \FilesystemIterator::SKIP_DOTS),
         );
 
         foreach ($iterator as $file) {
@@ -72,7 +72,7 @@ final class EvaluateOncePerFileConsistencyTest extends TestCase
             }
 
             $content = file_get_contents($file->getPathname());
-            assert(is_string($content));
+            assert(is_string($content), "Cannot read {$file->getPathname()}");
             // Only care about files that have both getFullContent AND evaluate().
             if (!str_contains($content, 'getFullContent')) {
                 continue;
@@ -91,7 +91,7 @@ final class EvaluateOncePerFileConsistencyTest extends TestCase
                 continue;
             }
 
-            $fqcn = $nsMatch[1].'\\'.$classMatch[1];
+            $fqcn = $nsMatch[1] . '\\' . $classMatch[1];
 
             if (in_array($fqcn, self::EXEMPTED, true)) {
                 continue;
@@ -107,8 +107,8 @@ final class EvaluateOncePerFileConsistencyTest extends TestCase
             [],
             $violations,
             "The following rule classes call getFullContent() but do not declare evaluateOncePerFile().\n"
-            ."Add `protected function evaluateOncePerFile(): bool { return true; }` or add the class to the exemption list in this test:\n"
-            .implode("\n", $violations)
+                . "Add `protected function evaluateOncePerFile(): bool { return true; }` or add the class to the exemption list in this test:\n"
+                . implode("\n", $violations),
         );
     }
 }

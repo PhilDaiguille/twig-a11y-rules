@@ -25,18 +25,28 @@ final class AriaHiddenFocusRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'valid non focusable' => [__DIR__.'/Fixtures/valid/aria_hidden_non_focusable.html.twig', []];
+        yield 'valid non focusable' => [__DIR__ . '/Fixtures/valid/aria_hidden_non_focusable.html.twig', []];
 
-        yield 'valid tabindex -1 with aria-hidden — not a focusable violation' => [__DIR__.'/Fixtures/valid/aria_hidden_tabindex_minus_one.html.twig', []];
+        yield 'valid tabindex -1 with aria-hidden — not a focusable violation' => [
+            __DIR__ . '/Fixtures/valid/aria_hidden_tabindex_minus_one.html.twig',
+            [],
+        ];
 
-        yield 'invalid focusable' => [__DIR__.'/Fixtures/invalid/aria_hidden_focus.html.twig', ['AriaHiddenFocus.HiddenFocusable:1:1' => 'Focusable element should not be aria-hidden.']];
+        yield 'invalid focusable' => [
+            __DIR__ . '/Fixtures/invalid/aria_hidden_focus.html.twig',
+            ['AriaHiddenFocus.HiddenFocusable:1:1' => 'Focusable element should not be aria-hidden.'],
+        ];
     }
 
     public function testRuleWorksWhenTheSameInstanceIsReusedAcrossFiles(): void
     {
         $rule = new AriaHiddenFocusRule();
 
-        $this->checkRule($rule, [], __DIR__.'/Fixtures/valid/aria_hidden_non_focusable.html.twig');
-        $this->checkRule($rule, ['AriaHiddenFocus.HiddenFocusable:1:1' => 'Focusable element should not be aria-hidden.'], __DIR__.'/Fixtures/invalid/aria_hidden_focus.html.twig');
+        $this->checkRule($rule, [], __DIR__ . '/Fixtures/valid/aria_hidden_non_focusable.html.twig');
+        $this->checkRule(
+            $rule,
+            ['AriaHiddenFocus.HiddenFocusable:1:1' => 'Focusable element should not be aria-hidden.'],
+            __DIR__ . '/Fixtures/invalid/aria_hidden_focus.html.twig',
+        );
     }
 }

@@ -40,6 +40,7 @@ final class GenericLinkTextRule extends AbstractA11yRule
         parent::__construct(emitAsWarning: true);
     }
 
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -72,9 +73,12 @@ final class GenericLinkTextRule extends AbstractA11yRule
 
             if (in_array(strtolower($text), $this->genericPhrases, true)) {
                 $emit(
-                    sprintf('Avoid generic link text "%s"; use descriptive text that explains the link destination.', $text),
+                    sprintf(
+                        'Avoid generic link text "%s"; use descriptive text that explains the link destination.',
+                        $text,
+                    ),
                     $this->tokenAtOffset($tokens, $set[0][1], $set[0][0]),
-                    'Generic'
+                    'Generic',
                 );
             }
         }

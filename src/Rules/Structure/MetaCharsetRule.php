@@ -14,18 +14,20 @@ use TwigCsFixer\Token\Tokens;
  */
 final class MetaCharsetRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
 
-        $hasCharset = preg_match('/<meta\b[^>]*\bcharset\s*=/i', $full)
+        $hasCharset =
+            preg_match('/<meta\b[^>]*\bcharset\s*=/i', $full)
             || preg_match('/<meta\b[^>]*\bhttp-equiv\s*=\s*["\']content-type["\']/i', $full);
 
         if (!$hasCharset) {
             $emit(
                 'Full-page document is missing a character encoding declaration (<meta charset="utf-8">) (RGAA 8.8, WCAG 4.1.1).',
                 $tokens->get(0),
-                'MissingCharset'
+                'MissingCharset',
             );
         }
     }

@@ -25,8 +25,11 @@ final class AriaRoleRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'valid role' => [__DIR__.'/Fixtures/valid/role_valid.html.twig', []];
+        yield 'valid role' => [__DIR__ . '/Fixtures/valid/role_valid.html.twig', []];
 
-        yield 'invalid role' => [__DIR__.'/Fixtures/invalid/role_invalid.html.twig', ['AriaRole.InvalidRole:2:12' => 'Invalid ARIA role "marquee".']];
+        yield 'invalid role' => [
+            __DIR__ . '/Fixtures/invalid/role_invalid.html.twig',
+            ['AriaRole.InvalidRole:2:12' => 'Invalid ARIA role "marquee".'],
+        ];
     }
 }

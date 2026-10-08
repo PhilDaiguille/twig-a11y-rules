@@ -25,12 +25,15 @@ final class TdHeadersAttrRuleTest extends AbstractRuleTestCase
     }
 
     /**
-     * @return \Iterator<(array<int, array<string, string>>|array<int, string>)>
+     * @return iterable<string, array{string, array<string, string>}>
      */
     public static function provideFixtures(): iterable
     {
-        yield 'td headers missing id' => [__DIR__.'/Fixtures/invalid/td_headers_missing_id.html.twig', [
-            'TdHeadersAttr.MissingId:5:1' => 'Referenced id "missing" in headers attribute does not exist in template.',
-        ]];
+        yield 'td headers missing id' => [
+            __DIR__ . '/Fixtures/invalid/td_headers_missing_id.html.twig',
+            [
+                'TdHeadersAttr.MissingId:5:1' => 'Referenced id "missing" in headers attribute does not exist in template.',
+            ],
+        ];
     }
 }

@@ -10,6 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class TdHeadersAttrRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -48,10 +49,14 @@ final class TdHeadersAttrRule extends AbstractA11yRule
                             $line,
                             1,
                             $fakeToken->getFilename(),
-                            $r[0]
+                            $r[0],
                         );
 
-                        $emit(sprintf('Referenced id "%s" in headers attribute does not exist in template.', $refId), $fakeToken, 'MissingId');
+                        $emit(
+                            sprintf('Referenced id "%s" in headers attribute does not exist in template.', $refId),
+                            $fakeToken,
+                            'MissingId',
+                        );
 
                         return; // emit only once per file
                     }

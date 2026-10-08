@@ -25,10 +25,10 @@ final class DuplicateIdRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<null|string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'no duplicate' => [__DIR__.'/Fixtures/valid/valid.html.twig', []];
+        yield 'no duplicate' => [__DIR__ . '/Fixtures/valid/valid.html.twig', []];
 
         yield 'duplicate ids' => [
-            __DIR__.'/Fixtures/invalid/duplicate_ids.html.twig',
+            __DIR__ . '/Fixtures/invalid/duplicate_ids.html.twig',
             [
                 'DuplicateId.Duplicate:4:8' => 'Duplicate id "foo" found in document.',
             ],

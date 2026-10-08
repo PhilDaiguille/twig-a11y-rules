@@ -25,16 +25,22 @@ final class ListStructureRuleTest extends AbstractRuleTestCase
     }
 
     /**
-     * @return \Iterator<(array<int, array<string, string>>|array<int, string>)>
+     * @return iterable<string, array{string, array<string, string>}>
      */
     public static function provideFixtures(): iterable
     {
-        yield 'ul with non-li child' => [__DIR__.'/Fixtures/invalid/list_non_li.html.twig', [
-            'ListStructure.InvalidChild:1:1' => 'List (<ul>/<ol>) contains non-<li> child.',
-        ]];
+        yield 'ul with non-li child' => [
+            __DIR__ . '/Fixtures/invalid/list_non_li.html.twig',
+            [
+                'ListStructure.InvalidChild:1:1' => 'List (<ul>/<ol>) contains non-<li> child.',
+            ],
+        ];
 
-        yield 'orphan dt dd' => [__DIR__.'/Fixtures/invalid/orphan_dt.html.twig', [
-            'ListStructure.OrphanDtDd:1:1' => 'Orphan <dt> or <dd> found outside of a <dl>.',
-        ]];
+        yield 'orphan dt dd' => [
+            __DIR__ . '/Fixtures/invalid/orphan_dt.html.twig',
+            [
+                'ListStructure.OrphanDtDd:1:1' => 'Orphan <dt> or <dd> found outside of a <dl>.',
+            ],
+        ];
     }
 }

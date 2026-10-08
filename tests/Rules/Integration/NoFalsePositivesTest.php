@@ -33,7 +33,8 @@ final class NoFalsePositivesTest extends AbstractRuleTestCase
      */
     public static function provideFixtures(): iterable
     {
-        foreach (glob(__DIR__.'/Fixtures/no-false-positives/*.html.twig') ?: [] as $fixture) {
+        $fixtures = glob(__DIR__ . '/Fixtures/no-false-positives/*.html.twig');
+        foreach (false === $fixtures ? [] : $fixtures as $fixture) {
             yield basename($fixture, '.html.twig') => [$fixture];
         }
     }

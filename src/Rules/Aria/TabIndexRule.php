@@ -10,6 +10,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class TabIndexRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $token = $tokens->get($tokenIndex);
@@ -28,7 +29,11 @@ final class TabIndexRule extends AbstractA11yRule
         if (preg_match('/tabindex\s*=\s*(?:"|\')?([\-0-9]+)(?:"|\')?/i', $tag, $m)) {
             $num = (int) $m[1];
             if ($num > 0) {
-                $emit('Avoid positive tabindex values — use 0 or manage focus order differently.', $token, 'PositiveTabindex');
+                $emit(
+                    'Avoid positive tabindex values — use 0 or manage focus order differently.',
+                    $token,
+                    'PositiveTabindex',
+                );
             }
         }
     }

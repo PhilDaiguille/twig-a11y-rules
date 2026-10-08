@@ -45,7 +45,7 @@ final class A11yStandardTest extends TestCase
             $this->assertInstanceOf(
                 AbstractA11yRule::class,
                 $rule,
-                sprintf('Expected %s to extend AbstractA11yRule.', $rule::class)
+                sprintf('Expected %s to extend AbstractA11yRule.', $rule::class),
             );
         }
 
@@ -53,13 +53,13 @@ final class A11yStandardTest extends TestCase
         $this->assertSame(
             $classes,
             array_values(array_unique($classes)),
-            'Standard must not contain duplicate rules.'
+            'Standard must not contain duplicate rules.',
         );
 
         $this->assertGreaterThanOrEqual(
             $minCount,
             count($rules),
-            sprintf('Expected at least %d rules, got %d.', $minCount, count($rules))
+            sprintf('Expected at least %d rules, got %d.', $minCount, count($rules)),
         );
     }
 
@@ -101,22 +101,22 @@ final class A11yStandardTest extends TestCase
     {
         $this->assertSame(
             $this->classNames(StandardRuleSets::basic()),
-            $this->classNames(new A11yBasicStandard()->getRules())
+            $this->classNames(new A11yBasicStandard()->getRules()),
         );
 
         $this->assertSame(
             $this->classNames(StandardRuleSets::recommended()),
-            $this->classNames(new A11yRecommendedStandard()->getRules())
+            $this->classNames(new A11yRecommendedStandard()->getRules()),
         );
 
         $this->assertSame(
             $this->classNames(StandardRuleSets::standard()),
-            $this->classNames(new A11yStandard()->getRules())
+            $this->classNames(new A11yStandard()->getRules()),
         );
 
         $this->assertSame(
             $this->classNames(StandardRuleSets::strict()),
-            $this->classNames(new A11yStrict()->getRules())
+            $this->classNames(new A11yStrict()->getRules()),
         );
     }
 
@@ -128,8 +128,8 @@ final class A11yStandardTest extends TestCase
     private function classNames(array $rules): array
     {
         return array_map(
-            static fn (NodeRuleInterface|RuleInterface $rule): string => $rule::class,
-            $rules
+            static fn(NodeRuleInterface|RuleInterface $rule): string => $rule::class,
+            $rules,
         );
     }
 }

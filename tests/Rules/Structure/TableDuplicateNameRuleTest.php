@@ -25,10 +25,16 @@ final class TableDuplicateNameRuleTest extends AbstractRuleTestCase
     /** @return iterable<string, array{0:string,1:array<string,string>}> */
     public static function provideFixtures(): iterable
     {
-        yield 'valid different summary and caption' => [__DIR__.'/Fixtures/valid/table_caption_and_summary_different.html.twig', []];
+        yield 'valid different summary and caption' => [
+            __DIR__ . '/Fixtures/valid/table_caption_and_summary_different.html.twig',
+            [],
+        ];
 
-        yield 'duplicate summary and caption' => [__DIR__.'/Fixtures/invalid/table_duplicate_name.html.twig', [
-            'TableDuplicateName.Duplicate:1:1' => 'Table summary duplicates caption content; provide distinct descriptions.',
-        ]];
+        yield 'duplicate summary and caption' => [
+            __DIR__ . '/Fixtures/invalid/table_duplicate_name.html.twig',
+            [
+                'TableDuplicateName.Duplicate:1:1' => 'Table summary duplicates caption content; provide distinct descriptions.',
+            ],
+        ];
     }
 }

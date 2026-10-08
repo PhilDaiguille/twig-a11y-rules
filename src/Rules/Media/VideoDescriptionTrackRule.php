@@ -13,6 +13,7 @@ use TwigCsFixer\Token\Tokens;
  */
 final class VideoDescriptionTrackRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -35,7 +36,7 @@ final class VideoDescriptionTrackRule extends AbstractA11yRule
             $emit(
                 'Video should have an audio description track (<track kind="descriptions">) (WCAG 1.2.5).',
                 $tokens->get(0),
-                'MissingDescriptions'
+                'MissingDescriptions',
             );
 
             return;

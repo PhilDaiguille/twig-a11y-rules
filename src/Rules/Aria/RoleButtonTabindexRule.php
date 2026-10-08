@@ -45,6 +45,7 @@ final class RoleButtonTabindexRule extends AbstractA11yRule
         'summary',
     ];
 
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -55,7 +56,12 @@ final class RoleButtonTabindexRule extends AbstractA11yRule
 
         $rolePattern = implode('|', array_map(preg_quote(...), self::INTERACTIVE_ROLES));
 
-        if (!preg_match_all('/<([a-z][a-z0-9]*)\b([^>]*)\s*>/is', $full, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
+        if (!preg_match_all(
+            '/<([a-z][a-z0-9]*)\b([^>]*)\s*>/is',
+            $full,
+            $matches,
+            PREG_SET_ORDER | PREG_OFFSET_CAPTURE,
+        )) {
             return;
         }
 
@@ -68,7 +74,7 @@ final class RoleButtonTabindexRule extends AbstractA11yRule
                 continue;
             }
 
-            if (!preg_match('/\brole\s*=\s*["\'\s]*('.$rolePattern.')\s*["\']/i', $attrs, $roleMatch)) {
+            if (!preg_match('/\brole\s*=\s*["\'\s]*(' . $rolePattern . ')\s*["\']/i', $attrs, $roleMatch)) {
                 continue;
             }
 
@@ -84,10 +90,10 @@ final class RoleButtonTabindexRule extends AbstractA11yRule
                 sprintf(
                     '<%s role="%s"> is not natively focusable and must have tabindex="0" to be keyboard-reachable (WCAG 4.1.2, 2.1.1).',
                     $tagName,
-                    $roleMatch[1]
+                    $roleMatch[1],
                 ),
                 $fakeToken,
-                $id
+                $id,
             );
         }
     }

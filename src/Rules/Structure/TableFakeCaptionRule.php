@@ -20,6 +20,7 @@ use TwigCsFixer\Token\Tokens;
  */
 final class TableFakeCaptionRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -57,7 +58,7 @@ final class TableFakeCaptionRule extends AbstractA11yRule
                 $emit(
                     'Avoid using a <td> as a table caption; use the <caption> element instead.',
                     $this->tokenAtOffset($tokens, $tableSet[0][1], $tableSet[0][0]),
-                    'FakeCaption'
+                    'FakeCaption',
                 );
             }
         }

@@ -30,12 +30,12 @@ final class ButtonContentRuleTest extends AbstractRuleTestCase
     public static function provideFixtures(): iterable
     {
         yield 'button with text' => [
-            __DIR__.'/Fixtures/valid/button_with_text.html.twig',
+            __DIR__ . '/Fixtures/valid/button_with_text.html.twig',
             [],
         ];
 
         yield 'button empty without aria' => [
-            __DIR__.'/Fixtures/invalid/button_empty_no_aria.html.twig',
+            __DIR__ . '/Fixtures/invalid/button_empty_no_aria.html.twig',
             ['ButtonContent.MissingContent:4:1' => 'Button element without textual content must have an aria-label.'],
         ];
     }

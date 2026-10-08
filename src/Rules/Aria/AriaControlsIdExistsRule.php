@@ -9,6 +9,7 @@ use TwigCsFixer\Token\Tokens;
 
 final class AriaControlsIdExistsRule extends AbstractA11yRule
 {
+    #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
@@ -30,7 +31,7 @@ final class AriaControlsIdExistsRule extends AbstractA11yRule
         foreach ($refs[0] as $index => $match) {
             $attr = $match[0];
             $offset = $match[1];
-            $value = $refs[1][$index][0] ?: $refs[2][$index][0];
+            $value = '' !== $refs[1][$index][0] ? $refs[1][$index][0] : $refs[2][$index][0];
             $pieces = preg_split('/\s+/', trim($value));
 
             if (false === $pieces) {
@@ -49,7 +50,11 @@ final class AriaControlsIdExistsRule extends AbstractA11yRule
                 $line = 1 + substr_count(substr($full, 0, $offset), "\n");
                 $fakeToken = $this->fakeTokenForLine($tokens, $line, $attr);
 
-                $emit(sprintf('Referenced id "%s" in aria-controls does not exist in template.', $refId), $fakeToken, 'MissingId');
+                $emit(
+                    sprintf('Referenced id "%s" in aria-controls does not exist in template.', $refId),
+                    $fakeToken,
+                    'MissingId',
+                );
 
                 return;
             }
