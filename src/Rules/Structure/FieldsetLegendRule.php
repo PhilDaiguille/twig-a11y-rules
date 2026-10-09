@@ -18,6 +18,7 @@ final class FieldsetLegendRule extends AbstractA11yRule
             return;
         }
 
+        $m = [];
         if (preg_match_all('/<fieldset[^>]*>(.*?)<\/fieldset>/is', $full, $m, PREG_SET_ORDER)) {
             foreach ($m as $block) {
                 $inner = trim(strip_tags($block[1]));

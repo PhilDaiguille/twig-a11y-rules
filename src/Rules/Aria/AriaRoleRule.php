@@ -14,6 +14,7 @@ final class AriaRoleRule extends AbstractA11yRule
     {
         $tag = $this->getFullContent($tokens);
 
+        $m = [];
         if (!preg_match_all('/role\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $tag, $m, PREG_OFFSET_CAPTURE)) {
             return;
         }

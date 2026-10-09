@@ -16,13 +16,15 @@ final class TdHeadersAttrRule extends AbstractA11yRule
         $full = $this->getFullContent($tokens);
 
         // Collect all ids
-        $idCount = preg_match_all('/\bid\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $full, $idMatches);
+        $idMatches = [];
+        $idCount = (int) preg_match_all('/\bid\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $full, $idMatches);
         $ids = [];
         if ($idCount > 0) {
             $ids = array_flip($idMatches[1]);
         }
 
         // Find td headers attributes
+        $refs = [];
         if (preg_match_all('/<td[^>]*\bheaders\s*=\s*(?:"([^"]+)"|\'([^\']+)\')/i', $full, $refs, PREG_SET_ORDER)) {
             foreach ($refs as $r) {
                 $value = $r[1] ?? $r[2] ?? '';

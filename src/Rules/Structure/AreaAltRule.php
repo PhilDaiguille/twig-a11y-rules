@@ -76,6 +76,7 @@ final class AreaAltRule extends AbstractA11yRule
         $this->seenTagHashes[$tagKey] = true;
 
         // Extract attributes portion
+        $m = [];
         if (!preg_match('/<area\b([^>]*)>/i', $fullTag, $m)) {
             return;
         }
@@ -83,6 +84,7 @@ final class AreaAltRule extends AbstractA11yRule
         // preg_match succeeded, so capture index 1 exists.
         $attrs = $m[1];
 
+        $am = [];
         if (!preg_match('/\balt\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $attrs, $am)) {
             $emit('Missing alt attribute on <area> tag.', $token, 'MissingAlt');
 

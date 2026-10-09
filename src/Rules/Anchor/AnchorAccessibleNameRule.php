@@ -27,6 +27,7 @@ final class AnchorAccessibleNameRule extends AbstractA11yRule
 
         $full = $this->collectUntil($tokenIndex, $tokens, '</a>', 200);
 
+        $m = [];
         if (!preg_match('/<\s*a\b([^>]*)>(.*?)<\s*\/\s*a\s*>/is', $full, $m)) {
             return;
         }
@@ -35,6 +36,7 @@ final class AnchorAccessibleNameRule extends AbstractA11yRule
         $inner = strip_tags($m[2]);
 
         // aria-label
+        $mm = [];
         if (preg_match('/aria-label\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $attrs, $mm)) {
             $name = $this->firstMatch($mm, 1, 2);
 
@@ -84,6 +86,7 @@ final class AnchorAccessibleNameRule extends AbstractA11yRule
         }
 
         // img alt inside anchor
+        $imgM = [];
         if (preg_match('/<\s*img\b[^>]*alt\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))/is', $m[2], $imgM)) {
             $alt = $this->firstMatch($imgM, 1, 2, 3);
 

@@ -27,6 +27,7 @@ final class DuplicateAccessKeyRule extends AbstractA11yRule
             return;
         }
 
+        $m = [];
         if (!preg_match_all('/\baccesskey\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $full, $m, PREG_SET_ORDER)) {
             return;
         }

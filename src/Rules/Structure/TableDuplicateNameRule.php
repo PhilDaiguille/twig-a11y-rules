@@ -17,6 +17,7 @@ final class TableDuplicateNameRule extends AbstractA11yRule
             return;
         }
 
+        $tables = [];
         if (!preg_match_all('/<table\b([^>]*)>(.*?)<\/table>/is', $full, $tables, PREG_SET_ORDER)) {
             return;
         }
@@ -28,11 +29,13 @@ final class TableDuplicateNameRule extends AbstractA11yRule
             $content = $tbl[2];
 
             $summary = '';
+            $m = [];
             if (preg_match('/\bsummary\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $attrs, $m)) {
                 $summary = $this->firstMatch($m, 1, 2);
             }
 
             $caption = '';
+            $c = [];
             if (preg_match('/<caption[^>]*>(.*?)<\/caption>/is', $content, $c)) {
                 $caption = trim(strip_tags($c[1]));
             }

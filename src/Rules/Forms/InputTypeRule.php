@@ -32,6 +32,7 @@ final class InputTypeRule extends AbstractA11yRule
 
         $typePattern = implode('|', array_map(preg_quote(...), self::AUTOCOMPLETE_REQUIRED_TYPES));
 
+        $m = [];
         if (!preg_match_all(
             '/<input\b([^>]*\btype\s*=\s*(?:"|\')(?:' . $typePattern . ')(?:"|\')[^>]*)>/i',
             $full,
@@ -45,6 +46,7 @@ final class InputTypeRule extends AbstractA11yRule
             $attrs = $set[1];
             if (!preg_match('/\bautocomplete\b\s*=\s*(?:"|\')/i', $attrs)) {
                 // Extract matched type for a more precise error message
+                $tm = [];
                 preg_match('/\btype\s*=\s*(?:"|\')([^"\']+)(?:"|\')/', $attrs, $tm);
                 $type = $tm[1] ?? 'unknown';
 

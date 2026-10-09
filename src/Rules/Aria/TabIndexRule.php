@@ -26,6 +26,7 @@ final class TabIndexRule extends AbstractA11yRule
 
         $tag = $this->collectUntil($tokenIndex, $tokens, '>', 50);
 
+        $m = [];
         if (preg_match('/tabindex\s*=\s*(?:"|\')?([\-0-9]+)(?:"|\')?/i', $tag, $m)) {
             $num = (int) $m[1];
             if ($num > 0) {

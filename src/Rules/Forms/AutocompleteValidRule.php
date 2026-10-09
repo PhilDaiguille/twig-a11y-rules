@@ -82,6 +82,7 @@ final class AutocompleteValidRule extends AbstractA11yRule
             return;
         }
 
+        $m = [];
         if (preg_match_all('/autocomplete\s*=\s*["\']([^"\']+)["\']/i', $full, $m, PREG_SET_ORDER)) {
             foreach ($m as $match) {
                 $value = trim($match[1]);

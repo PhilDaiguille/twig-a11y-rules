@@ -17,6 +17,7 @@ final class ListStructureRule extends AbstractA11yRule
         // Direct children of ul/ol must be li (plus script/template, which the
         // HTML spec allows). Content nested inside an <li> is none of our
         // business, so strip the <li> blocks before looking at what is left.
+        $lists = [];
         if (preg_match_all('/<(?:ul|ol)[^>]*>(.*?)<\/(?:ul|ol)>/is', $full, $lists, PREG_SET_ORDER)) {
             foreach ($lists as $list) {
                 $directChildren = preg_replace('/<li\b[^>]*>.*?<\/li>/is', '', $list[1]);
@@ -31,6 +32,7 @@ final class ListStructureRule extends AbstractA11yRule
         }
 
         // dl must have dt/dd
+        $dls = [];
         if (preg_match_all('/<dl[^>]*>(.*?)<\/dl>/is', $full, $dls, PREG_SET_ORDER)) {
             foreach ($dls as $d) {
                 if (preg_match('/<dt\b/i', $d[1]) && preg_match('/<dd\b/i', $d[1])) {

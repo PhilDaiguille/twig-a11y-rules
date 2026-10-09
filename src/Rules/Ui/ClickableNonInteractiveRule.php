@@ -37,6 +37,7 @@ final class ClickableNonInteractiveRule extends AbstractA11yRule
             return;
         }
 
+        $matches = [];
         if (!preg_match_all(
             '/<([a-z][a-z0-9]*)\b([^>]*)\s*>/is',
             $full,

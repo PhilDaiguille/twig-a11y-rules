@@ -72,6 +72,7 @@ trait TokenCollectorTrait
             $collected .= $tokens->get($i)->getValue();
         }
 
+        $m = [];
         if (!preg_match('/<\s*' . preg_quote($tagName, '/') . '\b[^>]*>/i', $collected, $m, \PREG_OFFSET_CAPTURE)) {
             return '';
         }
@@ -199,6 +200,7 @@ trait TokenCollectorTrait
      */
     protected function extractFirstId(string $opening): string
     {
+        $m = [];
         if (preg_match('/\bid\s*=\s*["\']([^"\']+)["\']/i', $opening, $m)) {
             return $m[1];
         }
@@ -212,6 +214,7 @@ trait TokenCollectorTrait
      */
     protected function openingProvidesLabel(string $opening): bool
     {
+        $m = [];
         if (preg_match('/\baria-labelledby\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $opening, $m)) {
             $value = '' !== $m[1] ? $m[1] : $m[2] ?? '';
             if ('' !== trim($value)) {

@@ -24,4 +24,6 @@ return RectorConfig::configure()
     )
     ->withComposerBased(twig: true, phpunit: true)
     ->withSkip([AddSeeTestAnnotationRector::class])
+    ->withParallel(8)
+    ->withCache(__DIR__ . '/var/cache/rector')
 ;

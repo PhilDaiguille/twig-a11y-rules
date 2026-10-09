@@ -14,6 +14,7 @@ final class ColorContrastRule extends AbstractA11yRule
     {
         $content = $this->getFullContent($tokens);
 
+        $matches = [];
         if (!preg_match_all('/style\s*=\s*["\']([^"\']+)["\']/i', $content, $matches)) {
             return;
         }
@@ -51,6 +52,7 @@ final class ColorContrastRule extends AbstractA11yRule
     private function extractColor(string $style, string $prop): ?array
     {
         // Fix: pass '/' as the delimiter argument to preg_quote
+        $m = [];
         if (!preg_match('/' . preg_quote($prop, '/') . '\s*:\s*([^;]+)(?:;|$)/i', $style, $m)) {
             return null;
         }
@@ -61,6 +63,7 @@ final class ColorContrastRule extends AbstractA11yRule
             return $this->hexToRgb($c);
         }
 
+        $mm = [];
         if (preg_match('/rgb\s*\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)/i', $c, $mm)) {
             return [(int) $mm[1], (int) $mm[2], (int) $mm[3]];
         }

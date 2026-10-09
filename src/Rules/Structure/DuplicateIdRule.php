@@ -20,6 +20,7 @@ final class DuplicateIdRule extends AbstractA11yRule
         }
 
         // find all id attributes
+        $m = [];
         if (!preg_match_all('/\bid\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $full, $m, PREG_OFFSET_CAPTURE)) {
             return;
         }

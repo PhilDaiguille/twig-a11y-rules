@@ -27,9 +27,11 @@ final class NestedInteractiveRule extends AbstractA11yRule
         $full = $this->getFullContent($tokens);
 
         // <button>, <input> or <select> nested inside <a>
+        $anchors = [];
         if (preg_match_all('/<a\b[^>]*>(.*?)<\/a>/is', $full, $anchors, PREG_SET_ORDER)) {
             foreach ($anchors as $anchor) {
                 $inner = $anchor[1];
+                $nested = [];
                 if (preg_match('/<(button|input|select|textarea)\b/i', $inner, $nested)) {
                     $fakeToken = $tokens->get(0);
                     $emit(
@@ -44,6 +46,7 @@ final class NestedInteractiveRule extends AbstractA11yRule
         }
 
         // <a> nested inside <button>
+        $buttons = [];
         if (preg_match_all('/<button\b[^>]*>(.*?)<\/button>/is', $full, $buttons, PREG_SET_ORDER)) {
             foreach ($buttons as $button) {
                 $inner = $button[1];

@@ -18,6 +18,7 @@ final class DetailsSummaryRule extends AbstractA11yRule
             return;
         }
 
+        $matches = [];
         if (!preg_match_all('/<details\b[^>]*>(.*?)<\/details>/is', $full, $matches, PREG_OFFSET_CAPTURE)) {
             return;
         }
@@ -29,6 +30,7 @@ final class DetailsSummaryRule extends AbstractA11yRule
 
             $fakeToken = $this->fakeTokenForLine($tokens, $line, $detailsBlock);
 
+            $summaryMatch = [];
             if (!preg_match('/<summary\b[^>]*>(.*?)<\/summary>/is', $detailsBlock, $summaryMatch)) {
                 $emit('Details element must contain a non-empty <summary>.', $fakeToken, 'MissingSummary');
 

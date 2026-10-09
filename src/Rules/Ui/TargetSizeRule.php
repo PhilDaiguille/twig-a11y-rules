@@ -15,6 +15,7 @@ final class TargetSizeRule extends AbstractA11yRule
         $full = strtolower($this->getFullContent($tokens));
 
         // look for interactive elements with inline style width/height < 24px
+        $m = [];
         if (!preg_match_all('/<(a|button|input|div|span|label|i|svg)\b([^>]*)>/i', $full, $m, PREG_SET_ORDER)) {
             return;
         }
@@ -34,6 +35,7 @@ final class TargetSizeRule extends AbstractA11yRule
                 continue;
             }
 
+            $sMatch = [];
             if (!preg_match('/style\s*=\s*["\']([^"\']+)["\']/i', $attrs, $sMatch)) {
                 continue;
             }
@@ -41,6 +43,7 @@ final class TargetSizeRule extends AbstractA11yRule
             $style = $sMatch[1];
             // find width/height in px
             $small = false;
+            $sizeMatches = [];
             if (preg_match_all('/(?:width|height)\s*:\s*(\d+)px/', $style, $sizeMatches, PREG_SET_ORDER)) {
                 foreach ($sizeMatches as $sm) {
                     if ((int) $sm[1] >= 24) {

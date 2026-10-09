@@ -28,8 +28,8 @@ final class ButtonTypeRule extends AbstractA11yRule
 
         $value = $token->getValue();
 
-        $this->formDepth += preg_match_all('/<\s*form\b/i', $value);
-        $this->formDepth -= preg_match_all('/<\s*\/\s*form\s*>/i', $value);
+        $this->formDepth += (int) preg_match_all('/<\s*form\b/i', $value);
+        $this->formDepth -= (int) preg_match_all('/<\s*\/\s*form\s*>/i', $value);
         $this->formDepth = max(0, $this->formDepth);
 
         // Outside a form a missing type is harmless: the implicit "submit"

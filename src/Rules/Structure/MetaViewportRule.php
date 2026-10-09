@@ -26,6 +26,7 @@ final class MetaViewportRule extends AbstractA11yRule
         }
 
         // WCAG 1.4.4: maximum-scale must be >= 2 to allow users to zoom text.
+        $m = [];
         if (preg_match('/maximum-scale\s*=\s*([0-9]*\.?[0-9]+)/i', $fullLower, $m) && (float) $m[1] < 2.0) {
             $emit(
                 'Avoid setting maximum-scale below 2 in the viewport meta (WCAG 1.4.4).',

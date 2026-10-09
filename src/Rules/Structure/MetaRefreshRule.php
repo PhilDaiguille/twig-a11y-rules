@@ -26,6 +26,7 @@ final class MetaRefreshRule extends AbstractA11yRule
         }
 
         // Find all <meta http-equiv="refresh" content="..."> tags
+        $tags = [];
         if (!preg_match_all('/<meta[^>]+>/i', $full, $tags)) {
             return;
         }
@@ -36,6 +37,7 @@ final class MetaRefreshRule extends AbstractA11yRule
             }
 
             // Extract the timeout value from content="N;url=..." or content="N"
+            $m = [];
             if (!preg_match('/\bcontent\s*=\s*(?:"|\')(\d+)/i', $tag, $m)) {
                 continue;
             }

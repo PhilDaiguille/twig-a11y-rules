@@ -30,6 +30,7 @@ final class TableFakeCaptionRule extends AbstractA11yRule
         }
 
         // Extract each <table>...</table> block.
+        $tables = [];
         if (!preg_match_all('/<table\b[^>]*>(.*?)<\/table>/is', $full, $tables, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
             return;
         }
@@ -43,6 +44,7 @@ final class TableFakeCaptionRule extends AbstractA11yRule
             }
 
             // Find the first <tr> in the table (may be inside <thead> or <tbody>).
+            $firstRow = [];
             if (!preg_match('/<tr\b[^>]*>(.*?)<\/tr>/is', $tableContent, $firstRow)) {
                 continue;
             }

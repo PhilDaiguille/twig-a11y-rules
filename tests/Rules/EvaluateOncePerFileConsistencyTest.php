@@ -83,10 +83,12 @@ final class EvaluateOncePerFileConsistencyTest extends TestCase
             }
 
             // Extract the FQCN from the file.
+            $nsMatch = [];
             if (!preg_match('/^namespace\s+([\w\\\]+)/m', $content, $nsMatch)) {
                 continue;
             }
 
+            $classMatch = [];
             if (!preg_match('/^(?:final\s+)?(?:abstract\s+)?class\s+(\w+)/m', $content, $classMatch)) {
                 continue;
             }

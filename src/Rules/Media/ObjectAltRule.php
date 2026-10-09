@@ -38,6 +38,7 @@ final class ObjectAltRule extends AbstractA11yRule
         }
 
         // Check for non-empty fallback text content between tags (axe-core: object-alt)
+        $m = [];
         if (preg_match('/<object[^>]*>(.*?)<\/object>/is', $full, $m)) {
             $fallback = trim(strip_tags($m[1]));
             if ('' !== $fallback) {

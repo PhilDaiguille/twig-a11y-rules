@@ -30,6 +30,7 @@ final class AriaRequiredParentRule extends AbstractA11yRule
 
         // For each child role, find occurrences and verify a parent exists
         foreach ($inverse as $childRole => $parents) {
+            $matches = [];
             if (!preg_match_all(
                 '/<([a-z0-9]+)[^>]*role\s*=\s*(?:"|\')' . preg_quote($childRole, '/') . '(?:(?:"|\'))/i',
                 $full,

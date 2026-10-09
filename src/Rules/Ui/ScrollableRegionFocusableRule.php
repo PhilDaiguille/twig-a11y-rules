@@ -17,6 +17,7 @@ final class ScrollableRegionFocusableRule extends AbstractA11yRule
             return;
         }
 
+        $m = [];
         if (preg_match_all(
             '/style\s*=\s*["\']([^"\']*overflow\s*:\s*(scroll|auto)[^"\']*)["\']/i',
             $full,

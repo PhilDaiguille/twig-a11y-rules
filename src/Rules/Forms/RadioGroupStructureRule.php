@@ -18,6 +18,7 @@ final class RadioGroupStructureRule extends AbstractA11yRule
             return;
         }
 
+        $radios = [];
         if (!preg_match_all(
             '/<input\b[^>]*\btype\s*=\s*(?:"radio"|\'radio\')[^>]*\bname\s*=\s*(?:"([^"]+)"|\'([^\']+)\')[^>]*>/i',
             $full,
@@ -80,13 +81,14 @@ final class RadioGroupStructureRule extends AbstractA11yRule
 
     private function isInsideFieldsetGroup(string $full, string $name): bool
     {
+        $fieldsets = [];
         if (!preg_match_all('/<fieldset\b[^>]*>(.*?)<\/fieldset>/is', $full, $fieldsets, PREG_SET_ORDER)) {
             return false;
         }
 
         foreach ($fieldsets as $fieldset) {
             $content = $fieldset[1];
-            $count = preg_match_all(
+            $count = (int) preg_match_all(
                 '/<input\b[^>]*\btype\s*=\s*(?:"radio"|\'radio\')[^>]*\bname\s*=\s*(?:"'
                 . preg_quote($name, '/')
                 . '"|\''
@@ -104,6 +106,7 @@ final class RadioGroupStructureRule extends AbstractA11yRule
 
     private function isInsideAriaRadioGroup(string $full, string $name): bool
     {
+        $groups = [];
         if (!preg_match_all(
             '/<(div|section|fieldset)\b[^>]*\brole\s*=\s*(?:"radiogroup"|\'radiogroup\')[^>]*>(.*?)<\/\1>/is',
             $full,
@@ -115,7 +118,7 @@ final class RadioGroupStructureRule extends AbstractA11yRule
 
         foreach ($groups as $group) {
             $content = $group[2];
-            $count = preg_match_all(
+            $count = (int) preg_match_all(
                 '/<input\b[^>]*\btype\s*=\s*(?:"radio"|\'radio\')[^>]*\bname\s*=\s*(?:"'
                 . preg_quote($name, '/')
                 . '"|\''

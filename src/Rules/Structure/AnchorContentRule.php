@@ -33,11 +33,13 @@ final class AnchorContentRule extends AbstractA11yRule
         // anchor bodies can be large; allow a larger search window
         $full = $this->collectUntil($tokenIndex, $tokens, '/<\/a>/i', 200);
 
+        $m = [];
         if (preg_match('/<a[^>]*>(.*?)<\/a>/is', $full, $m)) {
             $inner = $m[1];
             $textOnly = trim(strip_tags($inner));
 
             $opening = '';
+            $o = [];
             if (preg_match('/<a[^>]*>/i', $full, $o)) {
                 $opening = $o[0];
             }

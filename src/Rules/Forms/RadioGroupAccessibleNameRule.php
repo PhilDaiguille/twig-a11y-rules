@@ -18,6 +18,7 @@ final class RadioGroupAccessibleNameRule extends AbstractA11yRule
             return;
         }
 
+        $fieldsets = [];
         if (preg_match_all(
             '/<fieldset\b[^>]*>(.*?)<\/fieldset>/is',
             $full,
@@ -29,11 +30,15 @@ final class RadioGroupAccessibleNameRule extends AbstractA11yRule
                 $offset = $fieldset[0][1];
                 $content = $fieldset[1][0];
 
-                $radioCount = preg_match_all('/<input\b[^>]*\btype\s*=\s*(?:"radio"|\'radio\')[^>]*>/i', $content);
+                $radioCount = (int) preg_match_all(
+                    '/<input\b[^>]*\btype\s*=\s*(?:"radio"|\'radio\')[^>]*>/i',
+                    $content,
+                );
                 if ($radioCount < 2) {
                     continue;
                 }
 
+                $legendMatch = [];
                 if (
                     preg_match('/<legend\b[^>]*>\s*([^<]+?)\s*<\/legend>/i', $fieldsetBlock, $legendMatch)
                     && '' !== trim($legendMatch[1])
@@ -53,6 +58,7 @@ final class RadioGroupAccessibleNameRule extends AbstractA11yRule
             }
         }
 
+        $groups = [];
         if (!preg_match_all(
             '/<(div|section|fieldset)\b[^>]*\brole\s*=\s*(?:"radiogroup"|\'radiogroup\')[^>]*>(.*?)<\/\1>/is',
             $full,
@@ -67,7 +73,7 @@ final class RadioGroupAccessibleNameRule extends AbstractA11yRule
             $offset = $group[0][1];
             $content = $group[2][0];
 
-            $radioCount = preg_match_all('/<input\b[^>]*\btype\s*=\s*(?:"radio"|\'radio\')[^>]*>/i', $content);
+            $radioCount = (int) preg_match_all('/<input\b[^>]*\btype\s*=\s*(?:"radio"|\'radio\')[^>]*>/i', $content);
             if ($radioCount < 2) {
                 continue;
             }
@@ -100,6 +106,7 @@ final class RadioGroupAccessibleNameRule extends AbstractA11yRule
 
     private function hasNonEmptyReference(string $tag, string $attribute): bool
     {
+        $match = [];
         if (!preg_match('/\b' . preg_quote($attribute, '/') . '\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $tag, $match)) {
             return false;
         }

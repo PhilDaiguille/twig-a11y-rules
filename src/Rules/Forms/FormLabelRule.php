@@ -41,6 +41,7 @@ final class FormLabelRule extends AbstractA11yRule
         $label = $this->getLabelScope($tokens, $tokenIndex);
         $inner = substr($label, strlen($opening));
 
+        $m = [];
         $forId = 1 === preg_match('/\sfor\s*=\s*(["\'])(.+?)\1/is', $opening, $m) ? $m[2] : '';
 
         $hasContent = '' !== trim(strip_tags($inner));

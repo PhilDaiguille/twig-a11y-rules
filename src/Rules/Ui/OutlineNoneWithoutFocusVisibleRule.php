@@ -19,6 +19,7 @@ final class OutlineNoneWithoutFocusVisibleRule extends AbstractA11yRule
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $content = $this->getFullContent($tokens);
+        $matches = [];
         if (!preg_match_all(
             '/<([a-zA-Z0-9]+)([^>]*)style\s*=\s*[\"\']([^\"\']+)[\"\']/i',
             $content,
@@ -32,6 +33,7 @@ final class OutlineNoneWithoutFocusVisibleRule extends AbstractA11yRule
             $styleVal = $match[3];
             if (preg_match('/outline\s*:\s*(none|0)/i', $styleVal)) {
                 $hasCompensation = false;
+                $classMatch = [];
                 if (preg_match('/class\s*=\s*[\"\']([^\"\']*)[\"\']/i', $match[0], $classMatch)) {
                     $classes = preg_split('/\s+/', strtolower(trim($classMatch[1])));
                     if (false === $classes) {

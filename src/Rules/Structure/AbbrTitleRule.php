@@ -34,6 +34,7 @@ final class AbbrTitleRule extends AbstractA11yRule
             return;
         }
 
+        $m = [];
         if (preg_match('/\btitle\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $opening, $m)) {
             $titleValue = '' !== $m[1] ? $m[1] : $m[2] ?? '';
             if ('' !== trim($titleValue)) {

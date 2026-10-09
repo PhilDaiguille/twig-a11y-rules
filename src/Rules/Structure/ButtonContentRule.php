@@ -27,11 +27,13 @@ final class ButtonContentRule extends AbstractA11yRule
         $full = $this->collectUntil($tokenIndex, $tokens, '/<\/button>/i', 200);
 
         // If inner text stripped from tags is empty and no aria-label attribute
+        $m = [];
         if (preg_match('/<button[^>]*>(.*?)<\/button>/is', $full, $m)) {
             $inner = $m[1];
             $textOnly = trim(strip_tags($inner));
 
             $opening = '';
+            $o = [];
             if (preg_match('/<button[^>]*>/i', $full, $o)) {
                 $opening = $o[0];
             }

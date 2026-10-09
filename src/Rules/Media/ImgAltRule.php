@@ -75,6 +75,7 @@ final class ImgAltRule extends AbstractA11yRule
         }
 
         // Extract alt attribute value if present.
+        $matches = [];
         if (preg_match('/\balt\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))/is', $fullTag, $matches)) {
             $attrValue = $this->firstMatch($matches, 1, 2, 3);
 

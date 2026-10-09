@@ -18,6 +18,7 @@ final class PlaceholderOnlyLabelRule extends AbstractA11yRule
             return;
         }
 
+        $matches = [];
         if (!preg_match_all(
             '/<(input|textarea)\b[^>]*\bplaceholder\s*=\s*(?:"[^"]+"|\'[^\']+\')[^>]*>/i',
             $full,

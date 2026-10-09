@@ -21,6 +21,7 @@ final class TableHeaderRule extends AbstractA11yRule
         // Find th elements with offsets so we can emit the error at the
         // token containing the offending <th> rather than at the start of
         // the file (which makes the lint output confusing).
+        $m = [];
         if (!preg_match_all('/<th\b([^>]*)>/i', $full, $m, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
             return;
         }
@@ -32,6 +33,7 @@ final class TableHeaderRule extends AbstractA11yRule
             $matchOffset = $set[0][1];
 
             // Capture scope attribute value if present
+            $scopeMatch = [];
             if (!preg_match('/\bscope\b\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))/i', $attrs, $scopeMatch)) {
                 $emit(
                     'Table header <th> elements should include a scope attribute.',

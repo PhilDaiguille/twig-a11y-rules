@@ -218,6 +218,7 @@ final class LangAttributeValueRule extends AbstractA11yRule
         $content = $this->getFullContent($tokens);
 
         // No lang attribute at all — that is LangAttributeRule's concern, not ours
+        $m = [];
         if (!preg_match('/\blang\s*=\s*(?:"|\')([^"\']+)(?:"|\')/', $content, $m)) {
             return;
         }

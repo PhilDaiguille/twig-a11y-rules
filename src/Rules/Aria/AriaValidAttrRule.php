@@ -70,6 +70,7 @@ final class AriaValidAttrRule extends AbstractA11yRule
             return;
         }
 
+        $m = [];
         if (preg_match_all('/\baria-([a-z-]+)\b/i', $full, $m)) {
             foreach ($m[1] as $name) {
                 $n = strtolower($name);
