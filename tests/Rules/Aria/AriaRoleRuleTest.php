@@ -27,6 +27,8 @@ final class AriaRoleRuleTest extends AbstractRuleTestCase
     {
         yield 'valid role' => [__DIR__ . '/Fixtures/valid/role_valid.html.twig', []];
 
+        yield 'DPUB and Graphics ARIA roles' => [__DIR__ . '/Fixtures/valid/role_dpub_graphics.html.twig', []];
+
         yield 'invalid role' => [
             __DIR__ . '/Fixtures/invalid/role_invalid.html.twig',
             ['AriaRole.InvalidRole:2:12' => 'Invalid ARIA role "marquee".'],
