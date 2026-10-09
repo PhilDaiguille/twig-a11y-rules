@@ -9,6 +9,26 @@ use TwigCsFixer\Token\Tokens;
 
 final class AriaAllowedAttrRule extends AbstractA11yRule
 {
+    /** ARIA 1.2 §6.4 global states and properties, allowed on every role. */
+    private const array GLOBAL_ATTRS = [
+        'aria-atomic',
+        'aria-busy',
+        'aria-controls',
+        'aria-current',
+        'aria-describedby',
+        'aria-description',
+        'aria-details',
+        'aria-flowto',
+        'aria-hidden',
+        'aria-keyshortcuts',
+        'aria-label',
+        'aria-labelledby',
+        'aria-live',
+        'aria-owns',
+        'aria-relevant',
+        'aria-roledescription',
+    ];
+
     /**
      * Allowed WAI-ARIA attributes per explicit role.
      *
@@ -18,9 +38,8 @@ final class AriaAllowedAttrRule extends AbstractA11yRule
      * negative). Expand this map as needed; the authoritative source is
      * https://www.w3.org/TR/wai-aria-1.2/#role_definitions
      *
-     * All roles inherit the global ARIA attributes (aria-label,
-     * aria-labelledby, aria-describedby, aria-hidden, aria-live, etc.), so
-     * those are included for every role in the list.
+     * Global states and properties (GLOBAL_ATTRS) are allowed on every role
+     * on top of this list.
      *
      * @var array<string, string[]>
      */
@@ -390,7 +409,10 @@ final class AriaAllowedAttrRule extends AbstractA11yRule
                 )) {
                     foreach ($am as $a) {
                         $name = strtolower($a[1][0]);
-                        if (in_array('aria-' . $name, $this->allowed[$role], true)) {
+                        if (
+                            in_array('aria-' . $name, self::GLOBAL_ATTRS, true)
+                            || in_array('aria-' . $name, $this->allowed[$role], true)
+                        ) {
                             continue;
                         }
 

@@ -29,6 +29,11 @@ final class AriaAllowedAttrRuleTest extends AbstractRuleTestCase
      */
     public static function provideFixtures(): iterable
     {
+        yield 'global aria attrs allowed on every role' => [
+            __DIR__ . '/Fixtures/valid/aria_global_attributes.html.twig',
+            [],
+        ];
+
         yield 'aria attr not allowed' => [
             __DIR__ . '/Fixtures/invalid/aria_attr_not_allowed.html.twig',
             [
