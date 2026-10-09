@@ -19,6 +19,7 @@ final class VideoTrackRule extends AbstractA11yRule
         }
 
         // Find all <video ...>...</video> blocks
+        $m = [];
         if (!preg_match_all('/<video\b([^>]*)>(.*?)<\/video>/is', $full, $m, PREG_SET_ORDER)) {
             return;
         }

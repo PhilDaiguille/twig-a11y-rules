@@ -20,6 +20,7 @@ final class IframeFocusableContentRule extends AbstractA11yRule
         }
 
         // Find iframes with tabindex="-1"
+        $matches = [];
         if (preg_match_all(
             '/<iframe([^>]*)\btabindex\s*=\s*["\']-1["\'][^>]*>(.*?)<\/iframe>/is',
             $full,

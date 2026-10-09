@@ -18,12 +18,14 @@ final class AriaControlsIdExistsRule extends AbstractA11yRule
             return;
         }
 
-        $idCount = preg_match_all('/\bid\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $full, $idMatches);
+        $idMatches = [];
+        $idCount = (int) preg_match_all('/\bid\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $full, $idMatches);
         $ids = [];
         if ($idCount > 0) {
             $ids = array_flip($idMatches[1]);
         }
 
+        $refs = [];
         if (!preg_match_all('/\baria-controls\s*=\s*(?:"([^"]+)"|\'([^\']+)\')/i', $full, $refs, PREG_OFFSET_CAPTURE)) {
             return;
         }

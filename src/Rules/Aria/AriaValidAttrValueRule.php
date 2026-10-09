@@ -41,6 +41,7 @@ final class AriaValidAttrValueRule extends AbstractA11yRule
             return;
         }
 
+        $m = [];
         if (!preg_match_all('/\b(aria-[a-z-]+)\s*=\s*(?:"|\')([^"\']*)(?:"|\')/i', $full, $m, PREG_SET_ORDER)) {
             return;
         }

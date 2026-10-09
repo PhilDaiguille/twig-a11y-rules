@@ -40,6 +40,7 @@ final class InputImageAltRule extends AbstractA11yRule
         }
 
         // Must have a non-empty alt attribute (or aria-label as fallback)
+        $m = [];
         if (preg_match('/\balt\s*=\s*(?:"|\')([^"\']*)(?:"|\')/i', $tag, $m) && '' !== trim($m[1])) {
             return;
         }

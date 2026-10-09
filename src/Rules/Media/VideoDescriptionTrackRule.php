@@ -22,6 +22,7 @@ final class VideoDescriptionTrackRule extends AbstractA11yRule
             return;
         }
 
+        $matches = [];
         if (!preg_match_all('/<video\b([^>]*)>(.*?)<\/video>/is', $full, $matches, PREG_SET_ORDER)) {
             return;
         }

@@ -29,64 +29,13 @@ final class LandmarkUniqueRule extends AbstractA11yRule
         foreach ($landmarks as $tag => $role) {
             $occurrences = [];
 
-            // Small helper to extract an attribute value from an opening tag
-            $extractAttr = static function (string $opening, string $attr): string {
-                $pos = stripos($opening, $attr);
-                if (false === $pos) {
-                    return '';
-                }
-
-                $eq = strpos($opening, '=', $pos);
-                if (false === $eq) {
-                    return '';
-                }
-
-                $i = $eq + 1;
-                $len = strlen($opening);
-                while ($i < $len && ctype_space($opening[$i])) {
-                    ++$i;
-                }
-
-                if ($i >= $len) {
-                    return '';
-                }
-
-                $quote = $opening[$i];
-                if ('"' === $quote || "'" === $quote) {
-                    $j = $i + 1;
-                    $val = '';
-                    while ($j < $len && $opening[$j] !== $quote) {
-                        $val .= $opening[$j];
-                        ++$j;
-                    }
-
-                    return $val;
-                }
-
-                // Unquoted attr value
-                $j = $i;
-                $val = '';
-                while ($j < $len && !ctype_space($opening[$j]) && '>' !== $opening[$j]) {
-                    $val .= $opening[$j];
-                    ++$j;
-                }
-
-                return $val;
-            };
-
             // Find explicit tag occurrences: <nav ...>, <aside ...> etc.
             $patternTag = sprintf('/<\s*%s\b[^>]*>/i', preg_quote($tag, '/'));
+            $m = [];
             if (preg_match_all($patternTag, $full, $m, PREG_OFFSET_CAPTURE)) {
                 foreach ($m[0] as $match) {
                     $opening = $match[0];
-                    // Extract aria-label / aria-labelledby (use simple parser
-                    // to avoid complex regex quoting in patterns).
-                    $label = $extractAttr($opening, 'aria-label');
-                    if ('' === $label) {
-                        $label = $extractAttr($opening, 'aria-labelledby');
-                    }
-
-                    $occurrences[] = ['opening' => $opening, 'label' => trim($label)];
+                    $occurrences[] = ['opening' => $opening, 'label' => $this->labelOf($opening)];
                 }
             }
 
@@ -97,6 +46,7 @@ final class LandmarkUniqueRule extends AbstractA11yRule
                 $roleEsc,
                 $roleEsc,
             );
+            $mr = [];
             if (preg_match_all($patternRole, $full, $mr, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
                 foreach ($mr as $match) {
                     // $match[0] is the full tag, $match[1] is the tag name
@@ -108,12 +58,7 @@ final class LandmarkUniqueRule extends AbstractA11yRule
                     }
 
                     $opening = $match[0][0];
-                    $label = $extractAttr($opening, 'aria-label');
-                    if ('' === $label) {
-                        $label = $extractAttr($opening, 'aria-labelledby');
-                    }
-
-                    $occurrences[] = ['opening' => $opening, 'label' => trim($label)];
+                    $occurrences[] = ['opening' => $opening, 'label' => $this->labelOf($opening)];
                 }
             }
 
@@ -162,5 +107,63 @@ final class LandmarkUniqueRule extends AbstractA11yRule
     protected function evaluateOncePerFile(): bool
     {
         return true;
+    }
+
+    private function labelOf(string $opening): string
+    {
+        $label = $this->extractAttr($opening, 'aria-label');
+        if ('' === $label) {
+            $label = $this->extractAttr($opening, 'aria-labelledby');
+        }
+
+        return trim($label);
+    }
+
+    /**
+     * Simple attribute parser, avoids complex regex quoting in patterns.
+     */
+    private function extractAttr(string $opening, string $attr): string
+    {
+        $pos = stripos($opening, $attr);
+        if (false === $pos) {
+            return '';
+        }
+
+        $eq = strpos($opening, '=', $pos);
+        if (false === $eq) {
+            return '';
+        }
+
+        $i = $eq + 1;
+        $len = strlen($opening);
+        while ($i < $len && ctype_space($opening[$i])) {
+            ++$i;
+        }
+
+        if ($i >= $len) {
+            return '';
+        }
+
+        $quote = $opening[$i];
+        if ('"' === $quote || "'" === $quote) {
+            $j = $i + 1;
+            $val = '';
+            while ($j < $len && $opening[$j] !== $quote) {
+                $val .= $opening[$j];
+                ++$j;
+            }
+
+            return $val;
+        }
+
+        // Unquoted attr value
+        $j = $i;
+        $val = '';
+        while ($j < $len && !ctype_space($opening[$j]) && '>' !== $opening[$j]) {
+            $val .= $opening[$j];
+            ++$j;
+        }
+
+        return $val;
     }
 }

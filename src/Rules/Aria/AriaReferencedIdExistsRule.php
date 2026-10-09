@@ -16,13 +16,15 @@ final class AriaReferencedIdExistsRule extends AbstractA11yRule
         $full = $this->getFullContent($tokens);
 
         // Collect all ids in the template
-        $idCount = preg_match_all('/\bid\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $full, $idMatches);
+        $idMatches = [];
+        $idCount = (int) preg_match_all('/\bid\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $full, $idMatches);
         $ids = [];
         if ($idCount > 0) {
             $ids = array_flip($idMatches[1]);
         }
 
         // Find aria-labelledby / aria-describedby usages
+        $refs = [];
         if (preg_match_all(
             '/\baria-(?:labelledby|describedby)\s*=\s*(?:"([^"]+)"|\'([^\']+)\')/i',
             $full,

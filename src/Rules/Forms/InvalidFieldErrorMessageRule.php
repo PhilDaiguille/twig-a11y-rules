@@ -27,6 +27,7 @@ final class InvalidFieldErrorMessageRule extends AbstractA11yRule
             return;
         }
 
+        $matches = [];
         if (!preg_match_all(
             '/<(input|select|textarea|div|span)\b[^>]*\baria-invalid\s*=\s*(?:"([^"]*)"|\'([^\']*)\')[^>]*>/i',
             $full,
@@ -90,6 +91,7 @@ final class InvalidFieldErrorMessageRule extends AbstractA11yRule
             return true;
         }
 
+        $roleMatch = [];
         if (preg_match('/\brole\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $tag, $roleMatch)) {
             $role = strtolower(trim($this->firstMatch($roleMatch, 1, 2)));
 
@@ -101,6 +103,7 @@ final class InvalidFieldErrorMessageRule extends AbstractA11yRule
 
     private function hasNonEmptyReference(string $tag, string $attribute): bool
     {
+        $match = [];
         if (!preg_match('/\b' . preg_quote($attribute, '/') . '\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $tag, $match)) {
             return false;
         }

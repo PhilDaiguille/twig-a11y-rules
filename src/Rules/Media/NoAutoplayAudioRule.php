@@ -18,6 +18,7 @@ final class NoAutoplayAudioRule extends AbstractA11yRule
             return;
         }
 
+        $m = [];
         if (preg_match_all('/<audio\b([^>]*)>/i', $full, $m, PREG_SET_ORDER)) {
             foreach ($m as $match) {
                 $attrs = $match[1];

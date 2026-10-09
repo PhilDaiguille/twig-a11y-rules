@@ -30,6 +30,7 @@ final class AriaInputFieldNameRule extends AbstractA11yRule
     {
         $full = $this->getFullContent($tokens);
 
+        $m = [];
         if (!preg_match_all(
             '/<(div|span)[^>]*role\s*=\s*(?:"|\')([^"\']+)(?:"|\')[^>]*>/i',
             $full,
@@ -56,6 +57,7 @@ final class AriaInputFieldNameRule extends AbstractA11yRule
             }
 
             // id + label[for] in full content
+            $idm = [];
             if (preg_match('/\bid\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $opening, $idm)) {
                 $id = $idm[1];
                 if (preg_match('/<label[^>]*for\s*=\s*(?:"|\')' . preg_quote($id, '/') . '(?:(?:"|\'))/i', $full)) {

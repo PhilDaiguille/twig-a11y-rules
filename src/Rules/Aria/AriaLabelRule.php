@@ -30,6 +30,7 @@ final class AriaLabelRule extends AbstractA11yRule
         $tag = $this->collectEnclosingTag($tokenIndex, $tokens);
 
         // aria-label present and non-empty - OK
+        $m = [];
         if (preg_match('/aria-label\s*=\s*(?:"|\')([^"\']*)(?:"|\')/i', $tag, $m) && '' !== trim($m[1])) {
             return;
         }

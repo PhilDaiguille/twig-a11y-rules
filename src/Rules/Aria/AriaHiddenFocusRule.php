@@ -20,6 +20,7 @@ final class AriaHiddenFocusRule extends AbstractA11yRule
         }
 
         // find any tags with aria-hidden="true"
+        $m = [];
         if (preg_match_all('/<([a-z0-9]+)([^>]*)>/i', $full, $m, PREG_SET_ORDER)) {
             foreach ($m as $set) {
                 $tagName = strtolower($set[1]);
@@ -29,6 +30,7 @@ final class AriaHiddenFocusRule extends AbstractA11yRule
                     // tabindex="-1" removes an element from tab order, so it is NOT considered
                     // tab-focusable. Only tabindex >= 0 creates a keyboard-focusable element.
                     $focusableTags = ['button', 'input', 'select', 'textarea', 'a'];
+                    $ti = [];
                     $hasPositiveTabindex =
                         (bool) preg_match('/tabindex\s*=\s*(?:"|\')?\s*(\d+)/i', $attrs, $ti) && (int) $ti[1] >= 0;
                     $isFocusable =

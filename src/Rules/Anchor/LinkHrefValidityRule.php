@@ -37,6 +37,7 @@ final class LinkHrefValidityRule extends AbstractA11yRule
             return;
         }
 
+        $hrefMatch = [];
         if (!preg_match('/\bhref\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $tag, $hrefMatch)) {
             $emit('Anchor elements should include a valid href attribute.', $token, 'MissingHref');
 

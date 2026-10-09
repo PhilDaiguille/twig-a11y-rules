@@ -18,6 +18,7 @@ final class TableCaptionMissingRule extends AbstractA11yRule
             return;
         }
 
+        $tables = [];
         if (!preg_match_all('/<table\b[^>]*>(.*?)<\/table>/is', $full, $tables, PREG_OFFSET_CAPTURE)) {
             return;
         }
@@ -31,6 +32,7 @@ final class TableCaptionMissingRule extends AbstractA11yRule
                 continue;
             }
 
+            $captionMatch = [];
             if (
                 preg_match('/<caption\b[^>]*>(.*?)<\/caption>/is', $inner, $captionMatch)
                 && '' !== trim(strip_tags($captionMatch[1]))

@@ -25,6 +25,7 @@ final class AriaDeprecatedRoleRule extends AbstractA11yRule
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
         $full = $this->getFullContent($tokens);
+        $m = [];
         if (!preg_match_all('/role\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $full, $m)) {
             return;
         }

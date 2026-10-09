@@ -50,6 +50,7 @@ final class GenericLinkTextRule extends AbstractA11yRule
         }
 
         // Match <a ...>...</a> blocks.
+        $m = [];
         if (!preg_match_all('/<a\b[^>]*>(.*?)<\/a>/is', $full, $m, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
             return;
         }

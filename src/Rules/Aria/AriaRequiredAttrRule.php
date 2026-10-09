@@ -33,9 +33,11 @@ final class AriaRequiredAttrRule extends AbstractA11yRule
             'radio' => [['aria-checked']],
         ];
 
+        $tags = [];
         if (preg_match_all('/<([a-z0-9]+)([^>]*)>/i', $full, $tags, PREG_SET_ORDER)) {
             foreach ($tags as $set) {
                 $attrs = $set[2];
+                $m = [];
                 if (preg_match('/role\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $attrs, $m)) {
                     $role = strtolower($m[1]);
                     if (isset($requiredMap[$role])) {

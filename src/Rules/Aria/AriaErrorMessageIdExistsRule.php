@@ -14,12 +14,14 @@ final class AriaErrorMessageIdExistsRule extends AbstractA11yRule
     {
         $full = $this->getFullContent($tokens);
 
-        $idCount = preg_match_all('/\bid\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $full, $idMatches);
+        $idMatches = [];
+        $idCount = (int) preg_match_all('/\bid\s*=\s*(?:"|\')([^"\']+)(?:"|\')/i', $full, $idMatches);
         $ids = [];
         if ($idCount > 0) {
             $ids = array_flip($idMatches[1]);
         }
 
+        $refs = [];
         if (!preg_match_all('/\baria-errormessage\s*=\s*(?:"([^"]+)"|\'([^\']+)\')/i', $full, $refs, PREG_SET_ORDER)) {
             return;
         }

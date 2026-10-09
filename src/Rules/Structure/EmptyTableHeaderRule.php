@@ -20,6 +20,7 @@ final class EmptyTableHeaderRule extends AbstractA11yRule
 
         // Match <th ...>...</th> blocks and check whether the inner content
         // is empty (after stripping tags and Twig expressions).
+        $m = [];
         if (!preg_match_all('/<th\b[^>]*>(.*?)<\/th>/is', $full, $m, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
             return;
         }

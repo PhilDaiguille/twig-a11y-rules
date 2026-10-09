@@ -30,6 +30,7 @@ final class PAsHeadingRule extends AbstractA11yRule
         }
 
         // Find <p ...> opening tags that have a style attribute.
+        $m = [];
         if (!preg_match_all(
             '/<p\b([^>]*style\s*=\s*(?:"[^"]*"|\'[^\']*\')[^>]*)>/i',
             $full,
@@ -43,6 +44,7 @@ final class PAsHeadingRule extends AbstractA11yRule
             $attrs = $set[1][0];
 
             // Extract the style attribute value.
+            $styleMatch = [];
             if (!preg_match('/\bstyle\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $attrs, $styleMatch)) {
                 continue;
             }
@@ -57,6 +59,7 @@ final class PAsHeadingRule extends AbstractA11yRule
             }
 
             // Large font size (>= 1.5em or >= 20px)
+            $sizeMatch = [];
             if (!$isFakeHeading && preg_match('/\bfont-size\s*:\s*(\d*\.?\d+)(em|px)\b/', $style, $sizeMatch)) {
                 $value = (float) $sizeMatch[1];
                 $unit = $sizeMatch[2];

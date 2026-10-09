@@ -24,6 +24,7 @@ final class CheckboxGroupStructureRule extends AbstractA11yRule
         }
 
         // Collect all <input type="checkbox" name="X"> pairs.
+        $inputs = [];
         if (!preg_match_all('/<input\b([^>]*)>/i', $full, $inputs, PREG_SET_ORDER)) {
             return;
         }
@@ -38,6 +39,7 @@ final class CheckboxGroupStructureRule extends AbstractA11yRule
                 continue;
             }
 
+            $m = [];
             if (!preg_match('/\bname\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $attrs, $m)) {
                 continue;
             }

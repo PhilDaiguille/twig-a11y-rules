@@ -34,6 +34,7 @@ final class OptGroupLabelRule extends AbstractA11yRule
             return;
         }
 
+        $m = [];
         if (preg_match('/\blabel\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $opening, $m)) {
             $labelValue = '' !== $m[1] ? $m[1] : $m[2] ?? '';
             if ('' !== trim($labelValue)) {

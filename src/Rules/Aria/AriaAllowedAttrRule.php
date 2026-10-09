@@ -367,6 +367,7 @@ final class AriaAllowedAttrRule extends AbstractA11yRule
             return;
         }
 
+        $matches = [];
         if (preg_match_all(
             '/<([a-z0-9]+)([^>]*)\srole\s*=\s*(?:"|\')([^"\']+)(?:"|\')([^>]*)>/i',
             $full,
@@ -380,6 +381,7 @@ final class AriaAllowedAttrRule extends AbstractA11yRule
                 }
 
                 // naive check: find any aria- attribute not in allowed list
+                $am = [];
                 if (preg_match_all(
                     '/\baria-([a-z0-9-]+)\s*=\s*(?:"|\')[^"\']*(?:"|\')/i',
                     $m[0][0],

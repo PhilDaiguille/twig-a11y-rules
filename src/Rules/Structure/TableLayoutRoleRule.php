@@ -22,6 +22,7 @@ final class TableLayoutRoleRule extends AbstractA11yRule
             return;
         }
 
+        $matches = [];
         if (!preg_match_all(
             '/<table\b([^>]*)>(.*?)<\/table>/is',
             $full,

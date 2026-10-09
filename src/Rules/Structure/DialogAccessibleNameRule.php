@@ -18,6 +18,7 @@ final class DialogAccessibleNameRule extends AbstractA11yRule
             return;
         }
 
+        $matches = [];
         if (!preg_match_all(
             '/<(dialog)\b[^>]*>|<([a-z0-9:-]+)\b[^>]*\brole\s*=\s*["\'](alertdialog|dialog)["\'][^>]*>/i',
             $full,
@@ -31,6 +32,7 @@ final class DialogAccessibleNameRule extends AbstractA11yRule
             $tag = $match[0];
             $offset = $match[1];
 
+            $ariaLabelMatch = [];
             if (preg_match('/\baria-label\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $tag, $ariaLabelMatch)) {
                 $label = $ariaLabelMatch[1];
                 if ('' !== trim($label)) {
@@ -38,6 +40,7 @@ final class DialogAccessibleNameRule extends AbstractA11yRule
                 }
             }
 
+            $ariaLabelledByMatch = [];
             if (preg_match('/\baria-labelledby\s*=\s*(?:"([^"]*)"|\'([^\']*)\')/i', $tag, $ariaLabelledByMatch)) {
                 $labelledBy = $ariaLabelledByMatch[1];
                 if ('' !== trim($labelledBy)) {

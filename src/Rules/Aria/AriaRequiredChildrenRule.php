@@ -22,6 +22,7 @@ final class AriaRequiredChildrenRule extends AbstractA11yRule
             }
 
             // Find elements with this role and inspect their inner HTML for required child roles
+            $m = [];
             if (!preg_match_all(
                 '/<([a-z0-9]+)[^>]*role\s*=\s*(?:"|\')' . preg_quote($role, '/') . '(?:(?:"|\')[^>]*)>(.*?)<\/\1>/is',
                 $full,

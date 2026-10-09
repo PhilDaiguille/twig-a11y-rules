@@ -18,6 +18,7 @@ final class HeadingOrderRule extends AbstractA11yRule
             return;
         }
 
+        $m = [];
         if (!preg_match_all('/<h([1-6])[^>]*>/i', $full, $m, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
             return;
         }

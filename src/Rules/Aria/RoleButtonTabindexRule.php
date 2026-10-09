@@ -56,6 +56,7 @@ final class RoleButtonTabindexRule extends AbstractA11yRule
 
         $rolePattern = implode('|', array_map(preg_quote(...), self::INTERACTIVE_ROLES));
 
+        $matches = [];
         if (!preg_match_all(
             '/<([a-z][a-z0-9]*)\b([^>]*)\s*>/is',
             $full,
@@ -74,6 +75,7 @@ final class RoleButtonTabindexRule extends AbstractA11yRule
                 continue;
             }
 
+            $roleMatch = [];
             if (!preg_match('/\brole\s*=\s*["\'\s]*(' . $rolePattern . ')\s*["\']/i', $attrs, $roleMatch)) {
                 continue;
             }
