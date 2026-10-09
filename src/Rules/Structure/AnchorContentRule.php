@@ -36,6 +36,12 @@ final class AnchorContentRule extends AbstractA11yRule
         $m = [];
         if (preg_match('/<a[^>]*>(.*?)<\/a>/is', $full, $m)) {
             $inner = $m[1];
+            // An <img alt="..."> names the link: keep its alt text.
+            $inner = (string) preg_replace(
+                '/<img\b[^>]*\balt\s*=\s*(?:"([^"]*)"|\'([^\']*)\')[^>]*>/i',
+                ' $1$2 ',
+                $inner,
+            );
             $textOnly = trim(strip_tags($inner));
 
             $opening = '';
