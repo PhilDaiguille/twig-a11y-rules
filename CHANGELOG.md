@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## Unreleased
 
+### Fixed
+
+- `AriaRole` accepts DPUB-ARIA (`doc-*`) and Graphics ARIA (`graphics-*`) roles (#32).
+
 ### Changed
 
 - Tooling: [Mago](https://mago.carthage.software/) replaces php-cs-fixer as

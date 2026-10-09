@@ -7,7 +7,7 @@ namespace TwigA11y\Rules\Aria;
 final class RoleCatalog
 {
     /**
-     * Complete list of valid WAI-ARIA 1.2 role values.
+     * Complete list of valid WAI-ARIA 1.2, DPUB-ARIA 1.1 and Graphics ARIA role values.
      * Used by AriaRoleRule for role validity checks.
      *
      * @return string[]
@@ -89,6 +89,52 @@ final class RoleCatalog
             'tree',
             'treegrid',
             'treeitem',
+            // DPUB-ARIA 1.1 (https://www.w3.org/TR/dpub-aria-1.1/)
+            'doc-abstract',
+            'doc-acknowledgments',
+            'doc-afterword',
+            'doc-appendix',
+            'doc-backlink',
+            'doc-biblioentry',
+            'doc-bibliography',
+            'doc-biblioref',
+            'doc-chapter',
+            'doc-colophon',
+            'doc-conclusion',
+            'doc-cover',
+            'doc-credit',
+            'doc-credits',
+            'doc-dedication',
+            'doc-endnote',
+            'doc-endnotes',
+            'doc-epigraph',
+            'doc-epilogue',
+            'doc-errata',
+            'doc-example',
+            'doc-footnote',
+            'doc-foreword',
+            'doc-glossary',
+            'doc-glossref',
+            'doc-index',
+            'doc-introduction',
+            'doc-noteref',
+            'doc-notice',
+            'doc-pagebreak',
+            'doc-pagefooter',
+            'doc-pageheader',
+            'doc-pagelist',
+            'doc-part',
+            'doc-preface',
+            'doc-prologue',
+            'doc-pullquote',
+            'doc-qna',
+            'doc-subtitle',
+            'doc-tip',
+            'doc-toc',
+            // Graphics ARIA 1.0 (https://www.w3.org/TR/graphics-aria-1.0/)
+            'graphics-document',
+            'graphics-object',
+            'graphics-symbol',
         ];
     }
 
