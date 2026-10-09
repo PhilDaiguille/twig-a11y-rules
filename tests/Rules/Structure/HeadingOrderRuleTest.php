@@ -34,6 +34,11 @@ final class HeadingOrderRuleTest extends AbstractRuleTestCase
             ['HeadingOrder.Invalid:3:1' => 'Heading level jumped from h1 to h3.'],
         ];
 
+        yield 'headings in comments and <style> are ignored, positions kept' => [
+            __DIR__ . '/Fixtures/invalid/heading_order_after_comment.html.twig',
+            ['HeadingOrder.Invalid:4:1' => 'Heading level jumped from h1 to h3.'],
+        ];
+
         yield 'invalid headings (with attrs)' => [
             __DIR__ . '/Fixtures/invalid/headings_jump_attr.html.twig',
             ['HeadingOrder.Invalid:3:1' => 'Heading level jumped from h1 to h3.'],
