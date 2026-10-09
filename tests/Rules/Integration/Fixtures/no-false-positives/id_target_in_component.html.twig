@@ -1,0 +1,9 @@
+<twig:Field:Error id="email-help" />
+{{ form_widget(form.email, {attr: {'aria-describedby': 'email-help', 'aria-errormessage': 'email-error', 'aria-invalid': 'true'}}) }}
+<input type="email" autocomplete="email" aria-labelledby="email-label" aria-errormessage="email-error" aria-invalid="true">
+<table>
+    <caption>Totals</caption>
+    {% block table_head %}{% endblock %}
+    <tr><th scope="col">Total</th></tr>
+    <tr><td headers="total">42</td></tr>
+</table>

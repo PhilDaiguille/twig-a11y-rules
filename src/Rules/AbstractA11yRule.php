@@ -140,6 +140,19 @@ abstract class AbstractA11yRule extends AbstractRule implements ConfigurableRule
         );
     }
 
+    /**
+     * False when the template pulls markup from elsewhere (include, embed,
+     * extends, block, Twig component, form_* helper): an id it references
+     * may then live in another template, so id-reference rules stay silent.
+     */
+    protected function isSelfContained(Tokens $tokens): bool
+    {
+        return !preg_match(
+            '/\b(?:include|component|form_\w+)\s*\(|\{%[-~]?\s*(?:include|embed|extends|block|component)\b|<twig:/i',
+            $this->getFullContent($tokens),
+        );
+    }
+
     #[\Override]
     final protected function process(int $tokenIndex, Tokens $tokens): void
     {
