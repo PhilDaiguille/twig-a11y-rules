@@ -121,30 +121,6 @@ message = "Invalid destructuring assignment: Cannot unpack type `string` into va
 count = 1
 
 [[issues]]
-file = "src/Rules/Structure/DuplicateIdRule.php"
-code = "mixed-argument"
-message = 'Invalid argument type for argument #2 of `TwigA11y\Rules\AbstractA11yRule::tokenAtOffset`: expected `int`, but found `mixed`.'
-count = 1
-
-[[issues]]
-file = "src/Rules/Structure/DuplicateIdRule.php"
-code = "mixed-argument"
-message = "Invalid argument type for argument #2 of `sprintf`: expected `Stringable|null|scalar`, but found `mixed`."
-count = 1
-
-[[issues]]
-file = "src/Rules/Structure/DuplicateIdRule.php"
-code = "mixed-argument"
-message = 'Invalid argument type for argument #3 of `TwigA11y\Rules\AbstractA11yRule::tokenAtOffset`: expected `string`, but found `mixed`.'
-count = 1
-
-[[issues]]
-file = "src/Rules/Structure/DuplicateIdRule.php"
-code = "mixed-assignment"
-message = "Assigning `mixed` type to a variable may lead to unexpected behavior."
-count = 2
-
-[[issues]]
 file = "src/Rules/Structure/EmptyTableHeaderRule.php"
 code = "invalid-argument"
 message = 'Invalid argument type for argument #2 of `TwigA11y\Rules\AbstractA11yRule::tokenAtOffset`: expected `int`, but found `string`.'

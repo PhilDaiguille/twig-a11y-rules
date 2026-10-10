@@ -27,6 +27,16 @@ final class DuplicateIdRuleTest extends AbstractRuleTestCase
     {
         yield 'no duplicate' => [__DIR__ . '/Fixtures/valid/valid.html.twig', []];
 
+        yield 'same id in exclusive if/else branches' => [
+            __DIR__ . '/Fixtures/valid/duplicate_id_exclusive_branches.html.twig',
+            [],
+        ];
+
+        yield 'duplicate id inside the same branch' => [
+            __DIR__ . '/Fixtures/invalid/duplicate_id_same_branch.html.twig',
+            ['DuplicateId.Duplicate:2:41' => 'Duplicate id "box" found in document.'],
+        ];
+
         yield 'duplicate ids' => [
             __DIR__ . '/Fixtures/invalid/duplicate_ids.html.twig',
             [

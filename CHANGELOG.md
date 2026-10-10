@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   pulls markup from elsewhere (`include`, `embed`, `extends`, `block`,
   `<twig:…>`, `component()`, `form_*()`), where the referenced id may live (#29).
 - Rules no longer analyse markup inside Twig comments, HTML comments, `<script>` and `<style>` (#27).
+- `DuplicateId` no longer reports the same id in exclusive `{% if %}` / `{% else %}` / `{% elseif %}` branches (#28).
 - `AnchorContent` no longer reports a link whose only content is an `<img>` with a non-empty `alt` (#31).
 
 ### Changed

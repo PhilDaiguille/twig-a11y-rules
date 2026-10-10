@@ -26,9 +26,18 @@ final class DuplicateIdRule extends AbstractA11yRule
         }
 
         // Report every occurrence after the first, where the duplicate is.
+        // An {% else %}/{% elseif %} between two occurrences means exclusive
+        // branches; this may miss a real duplicate across unrelated ifs.
         $seen = [];
+        /**
+         * @var non-empty-string $id
+         * @var int<-1, max> $offset
+         */
         foreach ($m[1] as [$id, $offset]) {
-            if (isset($seen[$id])) {
+            if (
+                isset($seen[$id])
+                && !preg_match('/\{%[-~]?\s*else/', substr($full, $seen[$id], $offset - $seen[$id]))
+            ) {
                 $emit(
                     sprintf('Duplicate id "%s" found in document.', $id),
                     $this->tokenAtOffset($tokens, $offset, $id),
@@ -36,7 +45,7 @@ final class DuplicateIdRule extends AbstractA11yRule
                 );
             }
 
-            $seen[$id] = true;
+            $seen[$id] = $offset;
         }
     }
 
