@@ -27,6 +27,8 @@ final class TableCaptionMissingRuleTest extends AbstractRuleTestCase
     {
         yield 'data table with caption' => [__DIR__ . '/Fixtures/valid/table_with_caption.html.twig', []];
 
+        yield 'data table named by aria-label' => [__DIR__ . '/Fixtures/valid/table_with_aria_label.html.twig', []];
+
         yield 'layout table without caption' => [
             __DIR__ . '/Fixtures/valid/layout_table_without_caption.html.twig',
             [],
