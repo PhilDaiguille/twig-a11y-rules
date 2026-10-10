@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Rules no longer analyse markup inside Twig comments, HTML comments, `<script>` and `<style>` (#27).
 - `DuplicateId` no longer reports the same id in exclusive `{% if %}` / `{% else %}` / `{% elseif %}` branches (#28).
 - `AnchorContent` no longer reports a link whose only content is an `<img>` with a non-empty `alt` (#31).
+- `AriaAllowedAttr` accepts the ARIA 1.2 global states and properties (`aria-controls`, `aria-current`, `aria-live`…) on every role (#30).
 
 ### Changed
 
