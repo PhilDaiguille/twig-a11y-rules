@@ -204,7 +204,14 @@ abstract class AbstractA11yRule extends AbstractRule implements ConfigurableRule
             $content .= $token->getValue();
         }
 
-        $this->cachedContent = $content;
+        // Blank out Twig/HTML comments and <script>/<style> bodies so rules
+        // don't analyse markup that is never rendered as HTML. Same byte
+        // length and newlines, so offsets and tokenAtOffset() stay correct.
+        $this->cachedContent = (string) preg_replace_callback(
+            '/\{#.*?#\}|<!--.*?-->|<(script|style)\b[^>]*>\K.*?(?=<\/\1)/is',
+            static fn(array $m): string => (string) preg_replace('/[^\n]/', ' ', $m[0]),
+            $content,
+        );
 
         return $this->cachedContent;
     }

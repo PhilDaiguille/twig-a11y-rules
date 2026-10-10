@@ -10,13 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ### Fixed
 
 - `AriaRole` accepts DPUB-ARIA (`doc-*`) and Graphics ARIA (`graphics-*`) roles (#32).
-
-### Fixed
-
 - `LabelForTargetExists`, `AriaControlsIdExists`, `AriaReferencedIdExists`,
   `AriaErrorMessageIdExists` and `TdHeadersAttr` stay silent when the template
   pulls markup from elsewhere (`include`, `embed`, `extends`, `block`,
   `<twig:…>`, `component()`, `form_*()`), where the referenced id may live (#29).
+- Rules no longer analyse markup inside Twig comments, HTML comments, `<script>` and `<style>` (#27).
+
+
 
 ### Changed
 
