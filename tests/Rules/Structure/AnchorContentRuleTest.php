@@ -34,6 +34,18 @@ final class AnchorContentRuleTest extends AbstractRuleTestCase
             [],
         ];
 
+        yield 'anchor named by img alt' => [
+            __DIR__ . '/Fixtures/valid/anchor_img_alt.html.twig',
+            [],
+        ];
+
+        yield 'anchor with img empty alt' => [
+            __DIR__ . '/Fixtures/invalid/anchor_img_empty_alt.html.twig',
+            [
+                'AnchorContent.LinkName:2:1' => 'Anchor element without accessible name (axe-core: link-name) should have an aria-label or title.',
+            ],
+        ];
+
         yield 'anchor empty without accessible name' => [
             __DIR__ . '/Fixtures/invalid/anchor_empty.html.twig',
             [
