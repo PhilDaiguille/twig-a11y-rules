@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Rules no longer analyse markup inside Twig comments, HTML comments, `<script>` and `<style>` (#27).
 - `DuplicateId` no longer reports the same id in exclusive `{% if %}` / `{% else %}` / `{% elseif %}` branches (#28).
 - `AnchorContent` no longer reports a link whose only content is an `<img>` with a non-empty `alt` (#31).
+- `ClickableNonInteractive`, `MouseEventKeyboardEquivalent` and `RoleButtonTabindex` no longer treat `<twig:Component>` tags as HTML elements.
+- `TableHeader` no longer requires `scope` on a `<th>` inside `<thead>`, where it is implicitly a column header.
+- `InputLabel`, `SelectLabel` and `TextareaLabel` stay silent when the field spreads a Twig UX `{{ attributes }}` bag, which may carry the id or `aria-label`.
+- `TableCaptionMissing` accepts a table named with `aria-label` or `aria-labelledby`.
 - `AriaAllowedAttr` accepts the ARIA 1.2 global states and properties (`aria-controls`, `aria-current`, `aria-live`…) on every role (#30).
 
 ### Changed
