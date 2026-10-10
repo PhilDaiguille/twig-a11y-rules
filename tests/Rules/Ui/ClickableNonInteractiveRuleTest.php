@@ -34,6 +34,11 @@ final class ClickableNonInteractiveRuleTest extends AbstractRuleTestCase
 
         yield 'native interactive elements' => [__DIR__ . '/Fixtures/valid/clickable_native_interactive.html.twig', []];
 
+        yield 'twig component with onClick prop' => [
+            __DIR__ . '/Fixtures/valid/clickable_twig_component.html.twig',
+            [],
+        ];
+
         yield 'div onclick without tabindex' => [
             __DIR__ . '/Fixtures/invalid/clickable_div_no_tabindex.html.twig',
             [
