@@ -12,6 +12,10 @@ final class LabelForTargetExistsRule extends AbstractA11yRule
     #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
+        if (!$this->isSelfContained($tokens)) {
+            return;
+        }
+
         $full = $this->getFullContent($tokens);
 
         if (!str_contains($full, '<label')) {

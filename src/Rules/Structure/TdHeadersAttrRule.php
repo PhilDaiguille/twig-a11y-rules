@@ -13,6 +13,10 @@ final class TdHeadersAttrRule extends AbstractA11yRule
     #[\Override]
     public function evaluate(Tokens $tokens, int $tokenIndex, callable $emit): void
     {
+        if (!$this->isSelfContained($tokens)) {
+            return;
+        }
+
         $full = $this->getFullContent($tokens);
 
         // Collect all ids
