@@ -58,7 +58,7 @@ final class RoleButtonTabindexRule extends AbstractA11yRule
 
         $matches = [];
         if (!preg_match_all(
-            '/<([a-z][a-z0-9]*)\b([^>]*)\s*>/is',
+            '/<([a-z][a-z0-9]*)\b(?!:)([^>]*)\s*>/is',
             $full,
             $matches,
             PREG_SET_ORDER | PREG_OFFSET_CAPTURE,

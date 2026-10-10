@@ -32,6 +32,10 @@ final class TableCaptionMissingRule extends AbstractA11yRule
                 continue;
             }
 
+            if ($this->openingProvidesLabel(substr($tableBlock, 0, (int) strpos($tableBlock, '>') + 1))) {
+                continue;
+            }
+
             $captionMatch = [];
             if (
                 preg_match('/<caption\b[^>]*>(.*?)<\/caption>/is', $inner, $captionMatch)

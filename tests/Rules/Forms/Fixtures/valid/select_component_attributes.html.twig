@@ -1,0 +1,8 @@
+{% props name, choices = {} %}
+<span class="select">
+    <select name="{{ name }}" {{ attributes.without('class') }}>
+        {% for option_label, option_value in choices %}
+            <option value="{{ option_value }}">{{ option_label }}</option>
+        {% endfor %}
+    </select>
+</span>

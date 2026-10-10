@@ -33,6 +33,11 @@ abstract class AbstractFormFieldLabelRule extends AbstractA11yRule
             return;
         }
 
+        // Twig UX attribute bag: the caller may pass the id or aria-label.
+        if (preg_match('/\{\{[-~]?\s*attributes\b/', $opening)) {
+            return;
+        }
+
         if ($this->isHidden($opening)) {
             return;
         }
