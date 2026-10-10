@@ -27,6 +27,8 @@ final class TableHeaderRuleTest extends AbstractRuleTestCase
     {
         yield 'valid table' => [__DIR__ . '/Fixtures/valid/table_with_th_scope.html.twig', []];
 
+        yield 'th in thead without scope' => [__DIR__ . '/Fixtures/valid/table_thead_th_without_scope.html.twig', []];
+
         yield 'missing th scope' => [
             __DIR__ . '/Fixtures/invalid/table_missing_th_scope.html.twig',
             [

@@ -22,7 +22,15 @@ final class TableHeaderRule extends AbstractA11yRule
         // token containing the offending <th> rather than at the start of
         // the file (which makes the lint output confusing).
         $m = [];
-        if (!preg_match_all('/<th\b([^>]*)>/i', $full, $m, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
+        // A <th> inside <thead> is implicitly a column header: scope is optional
+        // there. Mask those without a scope, keeping every offset unchanged.
+        $scan = (string) preg_replace_callback(
+            '/<thead\b.*?<\/thead>/is',
+            static fn(array $thead): string => (string) preg_replace('/<th\b(?![^>]*\bscope\b)/i', '<xx', $thead[0]),
+            $full,
+        );
+
+        if (!preg_match_all('/<th\b([^>]*)>/i', $scan, $m, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
             return;
         }
 
