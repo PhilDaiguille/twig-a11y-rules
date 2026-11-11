@@ -1,6 +1,8 @@
 # twig-a11y-rules
 
 > Accessibility linting rules for Twig templates, built on top of [`vincentlanglet/twig-cs-fixer`](https://github.com/VincentLanglet/Twig-CS-Fixer).
+>
+> Case study: [phildaiguille.fr/projets/twig-a11y-rules](https://www.phildaiguille.fr/projets/twig-a11y-rules/)
 
 [![Latest Stable Version](http://poser.pugx.org/phildaiguille/twig-a11y-rules/v)](https://packagist.org/packages/phildaiguille/twig-a11y-rules) [![Total Downloads](http://poser.pugx.org/phildaiguille/twig-a11y-rules/downloads)](https://packagist.org/packages/phildaiguille/twig-a11y-rules) [![Latest Unstable Version](http://poser.pugx.org/phildaiguille/twig-a11y-rules/v/unstable)](https://packagist.org/packages/phildaiguille/twig-a11y-rules) [![License](http://poser.pugx.org/phildaiguille/twig-a11y-rules/license)](https://packagist.org/packages/phildaiguille/twig-a11y-rules) [![PHP Version Require](http://poser.pugx.org/phildaiguille/twig-a11y-rules/require/php)](https://packagist.org/packages/phildaiguille/twig-a11y-rules)
 [![QA](https://github.com/PhilDaiguille/twig-a11y-rules/actions/workflows/qa.yml/badge.svg)](https://github.com/PhilDaiguille/twig-a11y-rules/actions/workflows/qa.yml)
